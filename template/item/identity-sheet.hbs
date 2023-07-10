@@ -1,0 +1,160 @@
+<form class="main-form {{cssClass}}">
+    <div class="upper-content">
+        <img class="portrait" data-edit="img" alt="{{item.name}} portrait" src="{{item.img}}">
+        <div class="upper-content__section">
+            <span class="label">{{localize 'UA.Name'}}:</span>
+            <input type="text" class="name" name="name" data-dtype="String" value="{{item.name}}">
+            <input type="number" name="system.percentage" data-dtype="Number" value="{{item.system.percentage}}" min="0" max="100">
+            <span class="percentage">%</span>
+            <span class="label">{{localize 'UA.Type'}}:</span>
+            <select name="system.type">{{#select item.system.type}}
+                <option value=""></option>
+                <option value="Mundane">{{localize 'UA.Mundane'}}</option>
+                <option value="Supernatural">{{localize 'UA.Supernatural'}}</option>
+                <option value="Avatar">{{localize 'UA.Avatar'}}</option>
+                <option value="Adept">{{localize 'UA.Adept'}}</option>
+            {{/select}}</select>
+            <span class="label">{{localize 'UA.Obsession'}}:</span>
+            <input type="checkbox" name="system.isObsession" data-dtype="Boolean" {{checked item.system.isObsession}}>
+            <span class="label">{{localize 'UA.Experience'}}:</span>
+            <input type="checkbox" name="system.hasExperience" data-dtype="Boolean" {{checked item.system.hasExperience}}>
+        </div>
+    </div>
+    <nav class="tab-buttons">
+        <button data-tab="main">{{localize 'UA.Main'}}</button>
+        <button data-tab="notes">{{localize 'UA.Notes'}}</button>
+    </nav>
+    <div class="tab-panels">
+        <div class="lower-content {{#if (not item.system.type)}}lower-content--details-only{{/if}} tab" data-tab="main">
+            {{#if item.system.type}}<div class="lower-content__section">
+                <div class="stats-features">
+                    {{#if (equals item.system.type 'Mundane')}}<span class="label">{{localize 'UA.OfCourseICan'}}:</span>
+                    {{editor enrichedOfCourseICan target="system.mundane.ofCourseICan" button=true engine="prosemirror"}}
+                    <span class="label">{{localize 'UA.SubstitutesFor'}}:</span>
+                    <select name="system.mundane.substitutesFor">{{#select item.system.mundane.substitutesFor}}
+                        <option value=""></option>
+                        <option value="Connect">{{localize 'UA.Connect'}}</option>
+                        <option value="Dodge">{{localize 'UA.Dodge'}}</option>
+                        <option value="Fitness">{{localize 'UA.Fitness'}}</option>
+                        <option value="Knowledge">{{localize 'UA.Knowledge'}}</option>
+                        <option value="Lie">{{localize 'UA.Lie'}}</option>
+                        <option value="Notice">{{localize 'UA.Notice'}}</option>
+                        <option value="Pursuit">{{localize 'UA.Pursuit'}}</option>
+                        <option value="Secrecy">{{localize 'UA.Secrecy'}}</option>
+                        <option value="Status">{{localize 'UA.Status'}}</option>
+                        <option value="Struggle">{{localize 'UA.Struggle'}}</option>
+                    {{/select}}</select>
+                    <span class="stats-features__details">{{#if item.system.mundane.substitutesFor}}{{localize 'UA.SubstitutesForAbility_Details'}}{{/if}}</span>{{/if}}
+                    {{#if (equals item.system.type 'Supernatural')}}<span class="label">{{localize 'UA.SupernaturalAbility'}}:</span>
+                    <select name="system.supernatural.ability">{{#select item.system.supernatural.ability}}
+                        <option value=""></option>
+                        <option value="Alter Fear">{{localize 'UA.AlterFear'}}</option>
+                        <option value="Alter Noble">{{localize 'UA.AlterNoble'}}</option>
+                        <option value="Alter Rage">{{localize 'UA.AlterRage'}}</option>
+                        <option value="Influence">{{localize 'UA.Influence'}}</option>
+                        <option value="Specific Harm">{{localize 'UA.SpecificHarm'}}</option>
+                        <option value="Specific Information">{{localize 'UA.SpecificInformation'}}</option>
+                        <option value="Specific Protection">{{localize 'UA.SpecificProtection'}}</option>
+                        <option value="Terrorize Helplessness">{{localize 'UA.TerrorizeHelplessness'}}</option>
+                        <option value="Terrorize Isolation">{{localize 'UA.TerrorizeIsolation'}}</option>
+                        <option value="Terrorize Self">{{localize 'UA.TerrorizeSelf'}}</option>
+                        <option value="Terrorize Unnatural">{{localize 'UA.TerrorizeUnnatural'}}</option>
+                        <option value="Terrorize Violence">{{localize 'UA.TerrorizeViolence'}}</option>
+                        <option value="Vague Harm">{{localize 'UA.VagueHarm'}}</option>
+                        <option value="Vague Information">{{localize 'UA.VagueInformation'}}</option>
+                        <option value="Vague Protection">{{localize 'UA.VagueProtection'}}</option>
+                        <option value="Versatility">{{localize 'UA.Versatility'}}</option>
+                    {{/select}}</select>
+                    <span class="stats-features__details">{{#if (includes item.system.supernatural.ability 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{/if}}{{#if (equals item.system.supernatural.ability 'Influence')}}{{localize 'UA.Influence_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Harm')}}{{localize 'UA.Harm_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Information')}}{{localize 'UA.Information_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Protection')}}{{localize 'UA.Protection_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{/if}}{{#if (equals item.system.supernatural.ability 'Versatility')}}{{localize 'UA.Versatility_Details'}}{{/if}}</span>{{/if}}
+                    {{#if (equals item.system.type 'Avatar')}}<span class="label">{{localize 'UA.Attributes'}}:</span>
+                    {{editor enrichedAttributes target="system.avatar.attributes" button=true engine="prosemirror"}}
+                    <span class="label">{{localize 'UA.Symbols'}}:</span>
+                    {{editor enrichedSymbols target="system.avatar.symbols" button=true engine="prosemirror"}}
+                    <span class="label">{{localize 'UA.Taboos'}}:</span>
+                    {{editor enrichedAvatarTaboos target="system.avatar.taboos" button=true engine="prosemirror"}}
+                    {{#if (exceedsOrEquals item.system.percentage 1)}}<span class="label">{{localize 'UA.Channel1-50%'}}:</span>
+                    {{editor enrichedChannel1-50 target="system.avatar.channels.1-50" button=true engine="prosemirror"}}{{/if}}
+                    {{#if (exceedsOrEquals item.system.percentage 51)}}<span class="label">{{localize 'UA.Channel51-70%'}}:</span>
+                    {{editor enrichedChannel51-70 target="system.avatar.channels.51-70" button=true engine="prosemirror"}}{{/if}}
+                    {{#if (exceedsOrEquals item.system.percentage 71)}}<span class="label">{{localize 'UA.Channel71-90%'}}:</span>
+                    {{editor enrichedChannel71-90 target="system.avatar.channels.71-90" button=true engine="prosemirror"}}{{/if}}
+                    {{#if (exceedsOrEquals item.system.percentage 91)}}<span class="label">{{localize 'UA.Channel91-98%'}}:</span>
+                    {{editor enrichedChannel91-98 target="system.avatar.channels.91-98" button=true engine="prosemirror"}}{{/if}}
+                    {{#if (exceedsOrEquals item.system.percentage 99)}}<span class="label">{{localize 'UA.Channel99%'}}:</span>
+                    {{editor enrichedChannel99 target="system.avatar.channels.99-" button=true engine="prosemirror"}}{{/if}}{{/if}}
+                    {{#if (equals item.system.type 'Adept')}}<span class="label">{{localize 'UA.Domain'}}:</span>
+                    {{editor enrichedDomain target="system.adept.domain" button=true engine="prosemirror"}}
+                    <span class="label">{{localize 'UA.Taboos'}}:</span>
+                    {{editor enrichedAdeptTaboos target="system.adept.taboos" button=true engine="prosemirror"}}
+                    <span class="label">{{localize 'UA.GenerateMinorCharge'}}:</span>
+                    {{editor enrichedGenerateMinorCharge target="system.adept.generateCharge.minor" button=true engine="prosemirror"}}
+                    <span class="label">{{localize 'UA.GenerateSignificantCharge'}}:</span>
+                    {{editor enrichedGenerateSignificantCharge target="system.adept.generateCharge.significant" button=true engine="prosemirror"}}
+                    <span class="label">{{localize 'UA.GenerateMajorCharge'}}:</span>
+                    {{editor enrichedGenerateMajorCharge target="system.adept.generateCharge.major" button=true engine="prosemirror"}}{{/if}}
+                    {{#each item.system.features as |feature featureKey|}}<span class="label">{{localize 'UA.Feature'}}:</span>
+                    <select name="system.features.{{featureKey}}">{{#select feature}}
+                        <option value=""></option>
+                        <option value="Casts Rituals">{{localize 'UA.CastsRituals'}}</option>
+                        {{#if (equals ../item.system.type 'Mundane')}}<option value="Coerces Helplessness">{{localize 'UA.CoercesHelplessness'}}</option>
+                        <option value="Coerces Isolation">{{localize 'UA.CoercesIsolation'}}</option>
+                        <option value="Coerces Self">{{localize 'UA.CoercesSelf'}}</option>
+                        <option value="Coerces Unnatural">{{localize 'UA.CoercesUnnatural'}}</option>
+                        <option value="Coerces Violence">{{localize 'UA.CoercesViolence'}}</option>
+                        <option value="Cooperative">{{localize 'UA.Cooperative'}}</option>
+                        <option value="Evaluates Helplessness">{{localize 'UA.EvaluatesHelplessness'}}</option>
+                        <option value="Evaluates Isolation">{{localize 'UA.EvaluatesIsolation'}}</option>
+                        <option value="Evaluates Self">{{localize 'UA.EvaluatesSelf'}}</option>
+                        <option value="Evaluates Unnatural">{{localize 'UA.EvaluatesUnnatural'}}</option>
+                        <option value="Evaluates Violence">{{localize 'UA.EvaluatesViolence'}}</option>
+                        <option value="Medical">{{localize 'UA.Medical'}}</option>
+                        <option value="Provides Firearm Attacks">{{localize 'UA.ProvidesFirearmAttacks'}}</option>
+                        <option value="Provides Initiative">{{localize 'UA.ProvidesInitiative'}}</option>
+                        <option value="Provides Wound Threshold">{{localize 'UA.ProvidesWoundThreshold'}}</option>
+                        <option value="Reads Fear">{{localize 'UA.ReadsFear'}}</option>
+                        <option value="Reads Noble">{{localize 'UA.ReadsNoble'}}</option>
+                        <option value="Reads Obsession">{{localize 'UA.ReadsObsession'}}</option>
+                        <option value="Reads Rage">{{localize 'UA.ReadsRage'}}</option>
+                        <option value="Resists Helplessness">{{localize 'UA.ResistsHelplessness'}}</option>
+                        <option value="Resists Isolation">{{localize 'UA.ResistsIsolation'}}</option>
+                        <option value="Resists Self">{{localize 'UA.ResistsSelf'}}</option>
+                        <option value="Resists Unnatural">{{localize 'UA.ResistsUnnatural'}}</option>
+                        <option value="Resists Violence">{{localize 'UA.ResistsViolence'}}</option>
+                        <option value="Sincere">{{localize 'UA.Sincere'}}</option>
+                        <option value="Substitutes for Connect">{{localize 'UA.SubstitutesforConnect'}}</option>
+                        <option value="Substitutes for Dodge">{{localize 'UA.SubstitutesforDodge'}}</option>
+                        <option value="Substitutes for Fitness">{{localize 'UA.SubstitutesforFitness'}}</option>
+                        <option value="Substitutes for Knowledge">{{localize 'UA.SubstitutesforKnowledge'}}</option>
+                        <option value="Substitutes for Lie">{{localize 'UA.SubstitutesforLie'}}</option>
+                        <option value="Substitutes for Notice">{{localize 'UA.SubstitutesforNotice'}}</option>
+                        <option value="Substitutes for Pursuit">{{localize 'UA.SubstitutesforPursuit'}}</option>
+                        <option value="Substitutes for Secrecy">{{localize 'UA.SubstitutesforSecrecy'}}</option>
+                        <option value="Substitutes for Status">{{localize 'UA.SubstitutesforStatus'}}</option>
+                        <option value="Substitutes for Struggle">{{localize 'UA.SubstitutesforStruggle'}}</option>
+                        <option value="Tactical">{{localize 'UA.Tactical'}}</option>
+                        <option value="Therapeutic">{{localize 'UA.Therapeutic'}}</option>
+                        <option value="Totem">{{localize 'UA.Totem'}}</option>
+                        <option value="Unique">{{localize 'UA.Unique'}}</option>{{/if}}
+                        <option value="Use Gutter Magick">{{localize 'UA.UseGutterMagick'}}</option>
+                        {{#if (equals ../item.system.type 'Mundane')}}<option value="Weaponized Physique">{{localize 'UA.WeaponizedPhysique'}}</option>{{/if}}
+                    {{/select}}</select>
+                    <span class="stats-features__details">{{#if (equals feature 'Casts Rituals')}}{{localize 'UA.CastsRituals_Details'}}{{/if}}{{#if (includes feature 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{/if}}{{#if (equals feature 'Cooperative')}}{{localize 'UA.Cooperative_Details'}}{{/if}}{{#if (includes feature 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{/if}}{{#if (equals feature 'Medical')}}{{localize 'UA.Medical_Details'}}{{/if}}{{#if (equals feature 'Provides Firearm Attacks')}}{{localize 'UA.ProvidesFirearmAttacks_Details'}}{{/if}}{{#if (equals feature 'Provides Initiative')}}{{localize 'UA.ProvidesInitiative_Details'}}{{/if}}{{#if (equals feature 'Provides Wound Threshold')}}{{localize 'UA.ProvidesWoundThreshold_Details'}}{{/if}}{{#if (includes feature 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{/if}}{{#if (includes feature 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{/if}}{{#if (equals feature 'Sincere')}}{{localize 'UA.Sincere_Details'}}{{/if}}{{#if (includes feature 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{/if}}{{#if (equals feature 'Tactical')}}{{localize 'UA.Tactical_Details'}}{{/if}}{{#if (equals feature 'Therapeutic')}}{{localize 'UA.Therapeutic_Details'}}{{/if}}{{#if (equals feature 'Totem')}}{{localize 'UA.Totem_Details'}}{{/if}}{{#if (equals feature 'Unique')}}{{localize 'UA.Unique_Details'}}{{/if}}{{#if (equals feature 'Use Gutter Magick')}}{{localize 'UA.UseGutterMagick_Details'}}{{/if}}{{#if (equals feature 'Weaponized Physique')}}{{localize 'UA.WeaponizedPhysique_Details'}}{{/if}}</span>{{/each}}
+                </div>
+            </div>{{/if}}
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.Details'}}:</h2>
+                {{editor enrichedDetails target="system.details" button=true engine="prosemirror"}}
+            </div>
+        </div>
+        <div class="lower-content tab" data-tab="notes">
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.PublicNotes'}}:</h2>
+                {{editor enrichedPublicNotes target="system.notes.public" button=true class="editor-content--medium" engine="prosemirror"}}
+            </div>
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.PrivateNotes'}}:</h2>
+                {{editor enrichedPrivateNotes target="system.notes.private" button=true class="editor-content--medium" engine="prosemirror"}}
+            </div>
+        </div>
+    </div>
+</form>

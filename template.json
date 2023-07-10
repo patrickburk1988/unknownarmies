@@ -1,0 +1,213 @@
+{
+    "Actor": {
+        "types": [
+            "character",
+            "cabal"
+        ],
+        "templates": {
+            "NOTES": {
+                "notes": {
+                    "public": "",
+                    "private": ""
+                }
+            }
+        },
+        "character": {
+            "templates": [
+                "NOTES"
+            ],
+            "concept": "",
+            "cabal": "",
+            "wounds": {
+                "threshold": 50,
+                "suffered": 0
+            },
+            "obsession": "",
+            "passions": {
+                "rage": {
+                    "name": "",
+                    "isUsed": false
+                },
+                "noble": {
+                    "name": "",
+                    "isUsed": false
+                },
+                "fear": {
+                    "name": "",
+                    "isUsed": false,
+                    "shockMeter": ""
+                }
+            },
+            "relationships": {
+                "protege": {
+                    "name": "",
+                    "percentage": 0
+                },
+                "favorite": {
+                    "name": "",
+                    "percentage": 0
+                },
+                "responsbility": {
+                    "name": "",
+                    "percentage": 0
+                },
+                "guru": {
+                    "name": "",
+                    "percentage": 0
+                },
+                "mentor": {
+                    "name": "",
+                    "percentage": 0
+                }
+            },
+            "shockGauge": {
+                "helplessness": {
+                    "notches": {
+                        "hardened": 1,
+                        "failed": 0
+                    },
+                    "ongoingMadness": ""
+                },
+                "isolation": {
+                    "notches": {
+                        "hardened": 1,
+                        "failed": 0
+                    },
+                    "ongoingMadness": ""
+                },
+                "self": {
+                    "notches": {
+                        "hardened": 1,
+                        "failed": 0
+                    },
+                    "ongoingMadness": ""
+                },
+                "unnatural": {
+                    "notches": {
+                        "hardened": 1,
+                        "failed": 0
+                    },
+                    "ongoingMadness": ""
+                },
+                "violence": {
+                    "notches": {
+                        "hardened": 1,
+                        "failed": 0
+                    },
+                    "ongoingMadness": ""
+                }
+            },
+            "charges": {
+                "minor": 0,
+                "significant": 0,
+                "major": 0
+            },
+            "appearance": "",
+            "personality": "",
+            "background": ""
+        },
+        "cabal": {
+            "templates": [
+                "NOTES"
+            ]
+        }
+    },
+    "Item": {
+        "types": [
+            "artifact",
+            "identity",
+            "item",
+            "ritual",
+            "spell"
+        ],
+        "templates": {
+            "cost": {
+                "amount": 0,
+                "type": ""
+            },
+            "description": "",
+            "effect": "",
+            "NOTES": {
+                "notes": {
+                    "public": "",
+                    "private": ""
+                }
+            }
+        },
+        "artifact": {
+            "templates": [
+                "description",
+                "effect",
+                "NOTES"
+            ],
+            "power": "",
+            "isEternal": false,
+            "charges": 0
+        },
+        "identity": {
+            "templates": [
+                "NOTES"
+            ],
+            "percentage": 0,
+            "type": "",
+            "isObsession": false,
+            "hasExperience": false,
+            "mundane": {
+                "ofCourseICan": "",
+                "substitutesFor": ""
+            },
+            "supernatural": {
+                "ability": ""
+            },
+            "avatar": {
+                "attributes": "",
+                "symbols": "",
+                "taboos": "",
+                "channels": {
+                    "1-50": "",
+                    "51-70": "",
+                    "71-90": "",
+                    "91-98": "",
+                    "99-": ""
+                }
+            },
+            "adept": {
+                "domain": "",
+                "taboos": "",
+                "generateCharge": {
+                    "minor": "",
+                    "significant": "",
+                    "major": ""
+                }
+            },
+            "features": {
+                "one": "",
+                "two": ""
+            },
+            "details": ""
+        },
+        "item": {
+            "templates": [
+                "description",
+                "effect",
+                "NOTES"
+            ]
+        },
+        "ritual": {
+            "templates": [
+                "cost",
+                "effect",
+                "NOTES"
+            ],
+            "action": ""
+        },
+        "spell": {
+            "templates": [
+                "cost",
+                "effect",
+                "NOTES"
+            ],
+            "school": ""
+        }
+    }
+}

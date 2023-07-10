@@ -1,0 +1,31 @@
+{
+    "id": "unknownarmies",
+    "version": "1.0.0",
+    "title": "Unknown Armies",
+    "description": "An occult game about broken people conspiring to fix the world.",
+    "background": "systems/unknownarmies/image/system-background.webp",
+    "manifest": "https://raw.githubusercontent.com/patrickburk1988/unknownarmies/system.json",
+    "download": "https://github.com/patrickburk1988/unknownarmies/releases/latest/download/unknownarmies.zip",
+    "url": "https://github.com/patrickburk1988/unknownarmies",
+    "authors": [{
+        "name": "Patrick Burk",
+        "url": "https://github.com/patrickburk1988",
+        "discord": "partridgebargus"
+    }],
+    "compatibility": {
+        "minimum": 11,
+        "verified": "11.305"
+    },
+    "gridUnits": "ft",
+    "esmodules": [
+        "module/unknown-armies.js"
+    ],
+    "styles": [
+        "style/unknown-armies.css"
+    ],
+    "languages": [{
+        "lang": "en",
+        "name": "English",
+        "path": "language/en.json"
+    }]
+}

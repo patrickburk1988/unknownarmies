@@ -1,0 +1,35 @@
+<form class="main-form {{cssClass}}">
+    <div class="upper-content">
+        <img class="portrait" data-edit="img" alt="{{item.name}} portrait" src="{{item.img}}">
+        <div class="upper-content__section">
+            <span class="label">{{localize 'UA.Name'}}:</span>
+            <input type="text" class="name" name="name" data-dtype="String" value="{{item.name}}">
+        </div>
+    </div>
+    <nav class="tab-buttons">
+        <button data-tab="main">{{localize 'UA.Main'}}</button>
+        <button data-tab="notes">{{localize 'UA.Notes'}}</button>
+    </nav>
+    <div class="tab-panels">
+        <div class="lower-content tab" data-tab="main">
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.Description'}}:</h2>
+                {{editor enrichedDescription target="system.description" button=true class="editor-content--extra-small" engine="prosemirror"}}
+            </div>
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.Effect'}}:</h2>
+                {{editor enrichedEffect target="system.effect" button=true class="editor-content--extra-small" engine="prosemirror"}}
+            </div>
+        </div>
+        <div class="lower-content tab" data-tab="notes">
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.PublicNotes'}}:</h2>
+                {{editor enrichedPublicNotes target="system.notes.public" button=true class="editor-content--extra-small" engine="prosemirror"}}
+            </div>
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.PrivateNotes'}}:</h2>
+                {{editor enrichedPrivateNotes target="system.notes.private" button=true class="editor-content--extra-small" engine="prosemirror"}}
+            </div>
+        </div>
+    </div>
+</form>

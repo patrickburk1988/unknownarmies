@@ -1,0 +1,8 @@
+<form class="main-form main-form--limited {{cssClass}}">
+    <img class="portrait" alt="{{actor.name}} portrait" src="{{actor.img}}">
+    <h2>{{actor.name}}</h2>
+    {{#if actor.system.concept}}<h3>{{actor.system.concept}}</h3>{{/if}}
+    <div class="editor-wrapper">
+        {{editor enrichedPublicNotes target="system.notes.public"}}
+    </div>
+</form>

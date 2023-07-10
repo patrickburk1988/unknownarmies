@@ -1,0 +1,46 @@
+<form class="main-form {{cssClass}}">
+    <div class="upper-content">
+        <img class="portrait" data-edit="img" alt="{{item.name}} portrait" src="{{item.img}}">
+        <div class="upper-content__section">
+            <span class="label">{{localize 'UA.Name'}}:</span>
+            <input type="text" class="name" name="name" data-dtype="String" value="{{item.name}}">
+            <span class="label">{{localize 'UA.Power'}}:</span>
+            <select name="system.power">{{#select item.system.power}}
+                <option value=""></option>
+                <option value="Minor">{{localize 'UA.Minor'}}</option>
+                <option value="Significant">{{localize 'UA.Significant'}}</option>
+                <option value="Major">{{localize 'UA.Major'}}</option>
+            {{/select}}</select>
+            <span class="label">{{localize 'UA.Eternal'}}:</span>
+            <input type="checkbox" name="system.isEternal" data-dtype="Boolean" {{checked item.system.isEternal}}>
+            <span class="label">{{localize 'UA.Charges'}}:</span>
+            {{#if item.system.isEternal}}<input type="text" data-dtype="String" value="&infin;" disabled>{{else}}<input type="number" name="system.charges" data-dtype="Number" value="{{item.system.charges}}" min="0">{{/if}}
+        </div>
+    </div>
+    <nav class="tab-buttons">
+        <button data-tab="main">{{localize 'UA.Main'}}</button>
+        <button data-tab="notes">{{localize 'UA.Notes'}}</button>
+    </nav>
+    <div class="tab-panels">
+        <div class="lower-content tab" data-tab="main">
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.Description'}}:</h2>
+                {{editor enrichedDescription target="system.description" button=true class="editor-content--extra-small" engine="prosemirror"}}
+            </div>
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.Effect'}}:</h2>
+                {{editor enrichedEffect target="system.effect" button=true class="editor-content--extra-small" engine="prosemirror"}}
+            </div>
+        </div>
+        <div class="lower-content tab" data-tab="notes">
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.PublicNotes'}}:</h2>
+                {{editor enrichedPublicNotes target="system.notes.public" button=true class="editor-content--extra-small" engine="prosemirror"}}
+            </div>
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.PrivateNotes'}}:</h2>
+                {{editor enrichedPrivateNotes target="system.notes.private" button=true class="editor-content--extra-small" engine="prosemirror"}}
+            </div>
+        </div>
+    </div>
+</form>

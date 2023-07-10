@@ -1,0 +1,763 @@
+.unknownarmies.sheet.artifact input[type=text]:last-of-type{
+  font-size:30px;
+  font-size:1.875rem;
+  text-align:center;
+}
+.unknownarmies.sheet.artifact .upper-content__section{
+  grid-template-columns:repeat(2, min-content) 1fr repeat(3, min-content);
+}
+.unknownarmies.sheet.artifact .name{
+  grid-column:2 /  7;
+}
+.unknownarmies.sheet.character .shock-meter__abilities-hardened-notches:before,.unknownarmies.sheet.character .shock-meter__failed-notches-ongoing-madness:before{
+  background-color:rgba(12,13,15,.25);
+  content:"";
+  height:.0625rem;
+  position:absolute;
+}
+
+.unknownarmies.sheet.character [data-action=reset-failed-notches]{
+  transition:text-shadow .1s;
+}
+.unknownarmies.sheet.character [data-action=reset-failed-notches]:focus,.unknownarmies.sheet.character [data-action=reset-failed-notches]:hover{
+  text-shadow:0 0 .3125rem #dfff00;
+}
+.unknownarmies.sheet.character .upper-content{
+  grid-template-columns:max-content 1fr min-content;
+}
+.unknownarmies.sheet.character .upper-content__section:first-of-type{
+  grid-template-columns:min-content 1fr repeat(2, min-content) max-content;
+}
+.unknownarmies.sheet.character .upper-content__section--wound-threshold-only{
+  grid-template-columns:min-content;
+}
+.unknownarmies.sheet.character .name{
+  grid-column:2 /  6;
+}
+.unknownarmies.sheet.character .status{
+  align-items:center;
+  display:flex;
+  gap:.3125rem;
+  justify-content:center;
+}
+.unknownarmies.sheet.character .status span{
+  background-color:#dfff00;
+  color:#0c0d0f;
+  padding:.3125rem .5rem;
+  white-space:nowrap;
+}
+.unknownarmies.sheet.character .tab-buttons{
+  grid-template-columns:repeat(6, 1fr);
+}
+.unknownarmies.sheet.character .lower-content[data-tab=magick],.unknownarmies.sheet.character .lower-content[data-tab=main]{
+  grid-template-rows:repeat(2, min-content);
+}
+.unknownarmies.sheet.character .obsession-passions{
+  grid-template-columns:min-content 1fr repeat(2, min-content);
+}
+.unknownarmies.sheet.character .obsession-passions input[type=checkbox]{
+  align-self:center;
+  margin:0 auto;
+}
+.unknownarmies.sheet.character .obsession-passions input[type=text]{
+  grid-column:2 /  4;
+}
+.unknownarmies.sheet.character .obsession-passions .label:nth-of-type(2){
+  align-self:flex-end;
+}
+.unknownarmies.sheet.character .obsession-passions .label:last-of-type{
+  grid-column:2;
+}
+.unknownarmies.sheet.character .relationships{
+  align-items:center;
+  grid-template-columns:min-content 1fr repeat(2, min-content);
+}
+.unknownarmies.sheet.character .relationships input[type=number]{
+  margin-left:-.125rem;
+}
+.unknownarmies.sheet.character .shock-meter{
+  align-items:center;
+  grid-template-columns:7.125rem repeat(2, min-content);
+  justify-content:space-evenly;
+  padding:.3125rem;
+}
+.unknownarmies.sheet.character .shock-meter [data-action=roll]{
+  width:4.3125rem;
+}
+.unknownarmies.sheet.character .shock-meter h3{
+  border:0;
+  font-size:16px;
+  font-size:1rem;
+  margin:0;
+  text-transform:uppercase;
+}
+.unknownarmies.sheet.character .shock-meter input[type=text]{
+  grid-column:2 /  7;
+}
+.unknownarmies.sheet.character .shock-meter p{
+  margin:0;
+}
+.unknownarmies.sheet.character .shock-meter__name-coerce-resist{
+  text-align:center;
+}
+.unknownarmies.sheet.character .shock-meter__abilities-hardened-notches{
+  -moz-column-gap:.3125rem;
+       column-gap:.3125rem;
+  display:grid;
+  grid-template-columns:repeat(11, min-content);
+  position:relative;
+}
+.unknownarmies.sheet.character .shock-meter__abilities-hardened-notches:before{
+  transform:translateX(calc(50% - 1.125rem)) translateY(2.25rem);
+  width:12.8125rem;
+}
+.unknownarmies.sheet.character .shock-meter__abilities-hardened-notches input[type=radio]{
+  margin:-.0625rem auto -.125rem;
+}
+.unknownarmies.sheet.character .shock-meter__abilities-hardened-notches input[type=radio]+.label,.unknownarmies.sheet.character .shock-meter__abilities-hardened-notches input[type=radio]:first-of-type{
+  grid-column:2;
+}
+.unknownarmies.sheet.character .shock-meter__failed-notches-ongoing-madness{
+  grid-template-columns:repeat(6, min-content);
+  position:relative;
+}
+.unknownarmies.sheet.character .shock-meter__failed-notches-ongoing-madness:before{
+  transform:translateX(calc(50% + .5625rem)) translateY(.375rem);
+  width:6.5625rem;
+}
+.unknownarmies.sheet.character .shock-meter__failed-notches-ongoing-madness input[type=radio]{
+  margin:.0625rem .6875rem 0 0;
+}
+.unknownarmies.sheet.character .shock-meter__failed-notches-ongoing-madness input[type=radio]:first-of-type{
+  margin-left:.5625rem;
+}
+.unknownarmies.sheet.character .item-list--identities [data-action=create-item]{
+  height:2rem;
+  width:2rem;
+}
+.unknownarmies.sheet.character .item-list--rituals [data-action=create-item]{
+  border-radius:0;
+}
+.unknownarmies.sheet.character .item-list--rituals .item-list__header,.unknownarmies.sheet.character .item-list--rituals .item-list__item{
+  grid-template-columns:3fr 1fr 4rem;
+  padding-left:.625rem;
+}
+.unknownarmies.sheet.character .item-list--spells [data-action=create-item]{
+  border-radius:0;
+}
+.unknownarmies.sheet.character .item-list--spells .item-list__header,.unknownarmies.sheet.character .item-list--spells .item-list__item{
+  grid-template-columns:3fr 1fr 4rem;
+  padding-left:.625rem;
+}
+.unknownarmies.sheet.character .item-list--artifacts [data-action=create-item]{
+  border-radius:0;
+}
+.unknownarmies.sheet.character .item-list--artifacts .item-list__header,.unknownarmies.sheet.character .item-list--artifacts .item-list__item{
+  grid-template-columns:3fr 2fr 1fr 4rem;
+  padding-left:.625rem;
+}
+.unknownarmies.sheet.character .item-list--items [data-action=create-item]{
+  border-radius:0;
+}
+.unknownarmies.sheet.character .item-list--items .item-list__header,.unknownarmies.sheet.character .item-list--items .item-list__item{
+  grid-template-columns:1fr 4rem;
+  padding-left:.625rem;
+}
+.unknownarmies.sheet.character .identity:not(:first-of-type){
+  margin-top:.3125rem;
+}
+.unknownarmies.sheet.character .identity__upper-content{
+  grid-template-columns:min-content 1fr 7.625rem;
+  position:relative;
+}
+.unknownarmies.sheet.character .identity [data-action=roll]{
+  width:7.625rem;
+}
+.unknownarmies.sheet.character .identity__name-percentage{
+  align-items:center;
+  display:flex;
+  font-size:22px;
+  font-size:1.375rem;
+  justify-content:center;
+}
+.unknownarmies.sheet.character .identity__obsession-experience{
+  display:flex;
+  gap:.3125rem;
+  position:absolute;
+  right:3.375rem;
+  top:-1.25rem;
+}
+.unknownarmies.sheet.character .identity__obsession-experience span{
+  background-color:#dfff00;
+  color:#0c0d0f;
+  padding:.25rem .4375rem;
+}
+.unknownarmies.sheet.character .identity__edit-destroy{
+  display:flex;
+  position:absolute;
+  right:-1.25rem;
+  top:-1.25rem;
+}
+.unknownarmies.sheet.character .identity__lower-content{
+  grid-template-columns:min-content 1fr;
+}
+.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n){
+  font-family:Calluna Sans;
+  font-size:12px;
+  font-size:.75rem;
+  padding:.3125rem .5rem;
+}
+.unknownarmies.sheet.character .charges{
+  grid-template-columns:repeat(6, min-content);
+  justify-content:center;
+  margin:0 auto;
+  padding:.625rem;
+}
+.chat-message .message-header .flavor-text{
+  background-color:#002fa7;
+  color:#fbfbfb;
+  font-family:Alatsi,sans-serif;
+  line-height:1.25;
+  margin-bottom:.1875rem;
+  padding:.3125rem .5rem;
+  text-align:center;
+}
+
+.dice{
+  margin:.3125rem 0;
+}
+
+.dice-roll .dice-formula{
+  font-family:Alatsi,sans-serif;
+  margin:0;
+}
+
+.dice-roll .dice-total{
+  display:flex;
+  font-family:Fira Sans,sans-serif;
+  font-size:18px;
+  font-size:1.125rem;
+  gap:.3125rem;
+  justify-content:center;
+}
+
+.vs{
+  font-size:12px;
+  font-size:.75rem;
+  font-weight:400;
+}
+
+.unknownarmies.sheet.identity .upper-content__section{
+  grid-template-columns:repeat(2, min-content) 1fr repeat(5, min-content);
+}
+.unknownarmies.sheet.identity .name{
+  grid-column:2 /  7;
+}
+.unknownarmies.sheet.identity .lower-content[data-tab=main]:not(.lower-content--details-only){
+  grid-template-rows:min-content 1fr;
+}
+.unknownarmies.sheet.identity .stats-features{
+  grid-template-columns:repeat(2, min-content) 1fr;
+}
+.unknownarmies.sheet.identity .stats-features .editor{
+  grid-column:2 /  4;
+}
+.unknownarmies.sheet.identity .stats-features__details{
+  align-items:center;
+  display:flex;
+  margin-left:.3125rem;
+}
+
+.unknownarmies.sheet.ritual .upper-content__section{
+  grid-template-columns:repeat(3, min-content) 1fr;
+}
+.unknownarmies.sheet.ritual .name{
+  grid-column:2 /  5;
+}
+
+.unknownarmies.sheet.artifact input[type=checkbox],.unknownarmies.sheet.identity input[type=checkbox]{
+  margin:.375rem 0 0;
+}
+
+.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=radio],.unknownarmies.sheet input[type=radio]:before,.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
+  border:.0625rem solid rgba(12,13,15,.5);
+}
+
+.chat-message .message-header .flavor-text,.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .item-list--identities [data-action=create-item],.unknownarmies.sheet.character .shock-meter{
+  border-radius:.1875rem;
+}
+
+.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=radio],.unknownarmies.sheet input[type=text],.unknownarmies.sheet option,.unknownarmies.sheet select{
+  background-color:#fbfbfb;
+  color:#0c0d0f;
+}
+
+.unknownarmies.sheet input[type=checkbox],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
+  transition:box-shadow .1s;
+}
+.unknownarmies.sheet input[type=checkbox]:focus,.unknownarmies.sheet input[type=number]:focus,.unknownarmies.sheet input[type=text]:focus,.unknownarmies.sheet select:focus{
+  box-shadow:0 0 .3125rem #dfff00;
+}
+
+.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
+  height:2rem;
+}
+
+.unknownarmies.sheet input[type=checkbox],.unknownarmies.sheet input[type=radio]{
+  transition:box-shadow .1s;
+}
+.unknownarmies.sheet input[type=checkbox]:hover,.unknownarmies.sheet input[type=radio]:hover{
+  box-shadow:0 0 .3125rem #dfff00;
+}
+
+.unknownarmies.sheet .lower-content,.unknownarmies.sheet .upper-content,.unknownarmies.sheet.character .identity__upper-content{
+  display:grid;
+  gap:1.25rem;
+}
+
+.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item{
+  display:grid;
+  gap:.625rem;
+}
+
+.unknownarmies.sheet .tab-buttons,.unknownarmies.sheet .upper-content__section,.unknownarmies.sheet.character .charges,.unknownarmies.sheet.character .identity__lower-content,.unknownarmies.sheet.character .obsession-passions,.unknownarmies.sheet.character .relationships,.unknownarmies.sheet.character .shock-meter,.unknownarmies.sheet.character .shock-meter__failed-notches-ongoing-madness,.unknownarmies.sheet.identity .stats-features{
+  display:grid;
+  gap:.3125rem;
+}
+
+.unknownarmies.sheet.artifact .label:nth-of-type(3),.unknownarmies.sheet.artifact .label:nth-of-type(4),.unknownarmies.sheet.character .charges .label:not(:first-child),.unknownarmies.sheet.character .upper-content .label:nth-of-type(3),.unknownarmies.sheet.identity .upper-content__section .label:last-of-type,.unknownarmies.sheet.identity .upper-content__section .label:nth-of-type(4),.unknownarmies.sheet.spell .label:last-of-type{
+  margin-left:1.25rem;
+}
+
+.unknownarmies.sheet .tab-panels,.unknownarmies.sheet.character .identity{
+  padding:1.25rem;
+}
+
+.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text]{
+  font-family:Fira Sans,sans-serif;
+}
+
+.unknownarmies.sheet .name[name],.unknownarmies.sheet.character .charges input[type=number],.unknownarmies.sheet.character .upper-content__section--wound-threshold-only input[type=number],.unknownarmies.sheet.identity input[type=number]{
+  font-size:26px;
+  font-size:1.625rem;
+  height:2.9375rem;
+  min-width:4rem;
+}
+.unknownarmies.sheet .name[name]+.percentage,.unknownarmies.sheet.character .charges input[type=number]+.percentage,.unknownarmies.sheet.character .upper-content__section--wound-threshold-only input[type=number]+.percentage,.unknownarmies.sheet.identity input[type=number]+.percentage{
+  align-items:center;
+  display:flex;
+  font-size:26px;
+  font-size:1.625rem;
+}
+
+.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text]{
+  min-width:3rem;
+  padding:.3125rem .5rem;
+  text-overflow:ellipsis;
+}
+
+.unknownarmies.sheet .item-list__column span,.unknownarmies.sheet .label,.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet.character .identity__obsession-experience span,.unknownarmies.sheet.character .shock-meter p,.unknownarmies.sheet.character .status span,.unknownarmies.sheet.identity .stats-features__details{
+  font-size:10px;
+  font-size:.625rem;
+  text-transform:uppercase;
+}
+
+.unknownarmies.sheet button[data-action=create-item],.unknownarmies.sheet button[data-action=destroy-item],.unknownarmies.sheet button[data-action=edit-item]{
+  background-color:rgba(12,13,15,.1);
+  color:inherit;
+}
+
+.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet button[data-tab].active,.unknownarmies.sheet.character .charges,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .shock-meter{
+  background-color:hsla(0,0%,98%,.15);
+  color:inherit;
+}
+
+.unknownarmies.sheet button{
+  font-family:inherit;
+  margin:0;
+}
+.unknownarmies.sheet button:disabled{
+  opacity:.5;
+}
+.unknownarmies.sheet button:focus,.unknownarmies.sheet button:hover{
+  box-shadow:none;
+}
+.unknownarmies.sheet button[data-action=create-item]{
+  border:0;
+  transition:filter .1s;
+}
+.unknownarmies.sheet button[data-action=create-item]:focus,.unknownarmies.sheet button[data-action=create-item]:hover{
+  filter:brightness(20);
+}
+.unknownarmies.sheet button[data-action=destroy-item],.unknownarmies.sheet button[data-action=edit-item]{
+  border:0;
+  border-radius:0;
+  height:2rem;
+  transition:filter .1s;
+  width:2rem;
+}
+.unknownarmies.sheet button[data-action=destroy-item]:focus,.unknownarmies.sheet button[data-action=destroy-item]:hover,.unknownarmies.sheet button[data-action=edit-item]:focus,.unknownarmies.sheet button[data-action=edit-item]:hover{
+  filter:brightness(20);
+}
+.unknownarmies.sheet button[data-action=open-cabal]{
+  background-color:#002fa7;
+  color:#fbfbfb;
+  transition:filter .1s;
+}
+.unknownarmies.sheet button[data-action=open-cabal]:focus,.unknownarmies.sheet button[data-action=open-cabal]:hover{
+  filter:brightness(1.25);
+}
+.unknownarmies.sheet button[data-action=roll]{
+  background-color:#002fa7;
+  color:#fbfbfb;
+  transition:filter .1s;
+}
+.unknownarmies.sheet button[data-action=roll]:focus,.unknownarmies.sheet button[data-action=roll]:hover{
+  filter:brightness(1.25);
+}
+.unknownarmies.sheet button[data-tab]{
+  border:0;
+  border-radius:.1875rem .1875rem 0 0;
+  text-transform:uppercase;
+  transition:all .1s;
+}
+.unknownarmies.sheet button[data-tab]:not(.active){
+  background-color:transparent;
+  color:inherit;
+}
+.unknownarmies.sheet button[data-tab]:not(.active):focus,.unknownarmies.sheet button[data-tab]:not(.active):hover{
+  background-color:hsla(0,0%,98%,.1);
+  color:inherit;
+}
+.unknownarmies.sheet button[data-tab].active:focus,.unknownarmies.sheet button[data-tab].active:hover{
+  text-shadow:0 0 .3125rem #dfff00;
+}
+.unknownarmies.sheet h2{
+  border:0;
+  font-size:18px;
+  font-size:1.125rem;
+  margin:0;
+  text-align:center;
+  text-transform:uppercase;
+}
+.unknownarmies.sheet i{
+  margin-right:0;
+}
+.unknownarmies.sheet input[type=checkbox]{
+  accent-color:#dfff00;
+}
+.unknownarmies.sheet input[type=number]{
+  font-size:18px;
+  font-size:1.125rem;
+  text-align:center;
+}
+.unknownarmies.sheet input[type=radio]{
+  -webkit-appearance:none;
+     -moz-appearance:none;
+          appearance:none;
+  border-radius:50%;
+  display:grid;
+  height:.625rem;
+  place-content:center;
+  top:0;
+  width:.625rem;
+}
+.unknownarmies.sheet input[type=radio]:before{
+  background-color:#dfff00;
+  border-radius:50%;
+  content:"";
+  height:.875rem;
+  transform:scale(0);
+  width:.875rem;
+}
+.unknownarmies.sheet input[type=radio].checked:before,.unknownarmies.sheet input[type=radio]:checked:before{
+  transform:scale(1);
+}
+.unknownarmies.sheet select{
+  text-align:center;
+}
+.unknownarmies.sheet select:last-child{
+  margin-right:.125rem;
+}
+.unknownarmies.sheet .window-content{
+  background-color:#010109;
+  background-image:url(../image/sheet-background.webp);
+  background-position-x:center;
+  background-repeat:no-repeat;
+  color:#fbfbfb;
+  font-family:Alatsi,sans-serif;
+}
+.unknownarmies.sheet .main-form{
+  display:flex;
+  flex-direction:column;
+}
+.unknownarmies.sheet .main-form.locked .tab-buttons{
+  display:none;
+}
+.unknownarmies.sheet .main-form--limited h2{
+  font-size:30px;
+  font-size:1.875rem;
+  margin-top:.3125rem;
+}
+.unknownarmies.sheet .main-form--limited h2:nth-last-child(2){
+  margin-bottom:.625rem;
+}
+.unknownarmies.sheet .main-form--limited h3{
+  border:0;
+  margin-bottom:.625rem;
+  text-align:center;
+  text-transform:uppercase;
+}
+.unknownarmies.sheet .main-form--limited .portrait{
+  height:18.75rem;
+  margin:0 auto;
+  width:18.75rem;
+}
+.unknownarmies.sheet .main-form--limited .editor-wrapper{
+  padding:0 2.5rem;
+}
+.unknownarmies.sheet .main-form--limited .editor{
+  background-color:transparent;
+  border-top:.0625rem solid hsla(0,0%,98%,.25);
+  color:inherit;
+  font-size:16px;
+  font-size:1rem;
+  line-height:1.3;
+  margin:0 auto;
+  padding-top:.625rem;
+  text-indent:1em;
+  width:-moz-fit-content;
+  width:fit-content;
+}
+.unknownarmies.sheet .main-form--limited .editor-content{
+  padding:0;
+}
+.unknownarmies.sheet .main-form--limited .editor-content>:first-child{
+  margin-top:0;
+}
+.unknownarmies.sheet .upper-content{
+  align-items:center;
+  grid-template-columns:max-content 1fr;
+  padding:0 1.25rem .5rem;
+}
+.unknownarmies.sheet .upper-content__section{
+  grid-template-columns:min-content 1fr;
+}
+.unknownarmies.sheet .portrait{
+  height:6.25rem;
+  -o-object-fit:cover;
+     object-fit:cover;
+  width:6.25rem;
+}
+.unknownarmies.sheet .label{
+  align-items:center;
+  display:flex;
+  justify-content:right;
+  text-align:right;
+  white-space:nowrap;
+}
+.unknownarmies.sheet .label--wrap{
+  white-space:pre-wrap;
+}
+.unknownarmies.sheet .name[name]{
+  font-family:inherit;
+}
+.unknownarmies.sheet .tab-buttons{
+  grid-template-columns:repeat(2, 1fr);
+  padding:0 2.5rem;
+}
+.unknownarmies.sheet .tab-panels{
+  flex-grow:1;
+}
+.unknownarmies.sheet .lower-content{
+  grid-auto-rows:1fr;
+  height:100%;
+}
+.unknownarmies.sheet .lower-content--2-columns{
+  grid-template-columns:repeat(2, 1fr);
+}
+.unknownarmies.sheet .lower-content--2-columns .lower-content__section--full-width{
+  grid-column:1 /  3;
+}
+.unknownarmies.sheet .lower-content__section{
+  display:flex;
+  flex-direction:column;
+  gap:.3125rem;
+}
+.unknownarmies.sheet .tab:not(.active){
+  display:none;
+}
+.unknownarmies.sheet .item-list__header{
+  background-color:#002fa7;
+  color:#fbfbfb;
+}
+.unknownarmies.sheet .item-list__header+.item-list__list .item-list__item{
+  margin-top:.1875rem;
+}
+.unknownarmies.sheet .item-list__list{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.unknownarmies.sheet .item-list__column{
+  align-items:center;
+  display:flex;
+  justify-content:center;
+  overflow:hidden;
+}
+.unknownarmies.sheet .item-list__column span{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.unknownarmies.sheet .item-list__footer{
+  margin-top:.625rem;
+  text-align:center;
+}
+.unknownarmies.sheet .editor{
+  display:flex;
+  flex-direction:column;
+  flex-grow:1;
+  font-family:Calluna Sans,sans-serif;
+  font-size:12px;
+  font-size:.75rem;
+  min-height:2.125rem;
+}
+.unknownarmies.sheet .editor.prosemirror{
+  min-height:6rem;
+}
+.unknownarmies.sheet .editor.prosemirror .editor-content{
+  height:auto;
+}
+.unknownarmies.sheet .editor-content--extra-small{
+  height:9.375rem;
+}
+.unknownarmies.sheet .editor-content--small{
+  height:11.5625rem;
+}
+.unknownarmies.sheet .editor-content--medium{
+  height:12.6875rem;
+}
+.unknownarmies.sheet .editor-content--large{
+  height:18.875rem;
+}
+.unknownarmies.sheet .editor-content--extra-large{
+  height:21.75rem;
+}
+.unknownarmies.sheet .editor-content{
+  flex-grow:1;
+  padding:.25rem .8125rem;
+}
+.unknownarmies.sheet .editor-edit{
+  background-color:transparent;
+  border:0;
+  box-shadow:none;
+  color:inherit;
+  right:.4375rem;
+  top:.4375rem;
+}
+.unknownarmies.sheet .editor-menu{
+  border-radius:0;
+}
+.unknownarmies.sheet .editor-container{
+  margin:0;
+}
+
+.unknownarmies.sheet.spell .upper-content__section{
+  grid-template-columns:min-content 1fr repeat(3, min-content);
+}
+.unknownarmies.sheet.spell .name{
+  grid-column:2 /  6;
+}
+@font-face{
+  font-family:Calluna Sans;
+  src:url(../font/CallunaSansRegular.woff2) format("woff2"), url(../font/CallunaSansRegular.woff) format("woff");
+}
+@font-face{
+  font-display:swap;
+  font-family:Alatsi;
+  font-style:normal;
+  font-weight:400;
+  src:url(https://fonts.gstatic.com/s/alatsi/v11/TK3iWkUJAxQ2nLN2FD8Ghe4.woff2) format("woff2");
+  unicode-range:u+0460-052f, u+1c80-1c88, u+20b4, u+2de0-2dff, u+a640-a69f, u+fe2e-fe2f;
+}
+@font-face{
+  font-display:swap;
+  font-family:Alatsi;
+  font-style:normal;
+  font-weight:400;
+  src:url(https://fonts.gstatic.com/s/alatsi/v11/TK3iWkUJAxQ2nLN2Fj8Ghe4.woff2) format("woff2");
+  unicode-range:u+0102-0103, u+0110-0111, u+0128-0129, u+0168-0169, u+01a0-01a1, u+01af-01b0, u+0300-0301, u+0303-0304, u+0308-0309, u+0323, u+0329, u+1ea0-1ef9, u+20ab;
+}
+@font-face{
+  font-display:swap;
+  font-family:Alatsi;
+  font-style:normal;
+  font-weight:400;
+  src:url(https://fonts.gstatic.com/s/alatsi/v11/TK3iWkUJAxQ2nLN2Fz8Ghe4.woff2) format("woff2");
+  unicode-range:u+0100-02af, u+0304, u+0308, u+0329, u+1e00-1e9f, u+1ef2-1eff, u+2020, u+20a0-20ab, u+20ad-20cf, u+2113, u+2c60-2c7f, u+a720-a7ff;
+}
+@font-face{
+  font-display:swap;
+  font-family:Alatsi;
+  font-style:normal;
+  font-weight:400;
+  src:url(https://fonts.gstatic.com/s/alatsi/v11/TK3iWkUJAxQ2nLN2GT8G.woff2) format("woff2");
+  unicode-range:u+00??, u+0131, u+0152-0153, u+02bb-02bc, u+02c6, u+02da, u+02dc, u+0304, u+0308, u+0329, u+2000-206f, u+2074, u+20ac, u+2122, u+2191, u+2193, u+2212, u+2215, u+feff, u+fffd;
+}
+@font-face{
+  font-display:swap;
+  font-family:Fira Sans;
+  font-style:normal;
+  font-weight:400;
+  src:url(https://fonts.gstatic.com/s/firasans/v17/va9E4kDNxMZdWfMOD5VvmojLeTY.woff2) format("woff2");
+  unicode-range:u+0460-052f, u+1c80-1c88, u+20b4, u+2de0-2dff, u+a640-a69f, u+fe2e-fe2f;
+}
+@font-face{
+  font-display:swap;
+  font-family:Fira Sans;
+  font-style:normal;
+  font-weight:400;
+  src:url(https://fonts.gstatic.com/s/firasans/v17/va9E4kDNxMZdWfMOD5Vvk4jLeTY.woff2) format("woff2");
+  unicode-range:u+0301, u+0400-045f, u+0490-0491, u+04b0-04b1, u+2116;
+}
+@font-face{
+  font-display:swap;
+  font-family:Fira Sans;
+  font-style:normal;
+  font-weight:400;
+  src:url(https://fonts.gstatic.com/s/firasans/v17/va9E4kDNxMZdWfMOD5Vvm4jLeTY.woff2) format("woff2");
+  unicode-range:u+1f??;
+}
+@font-face{
+  font-display:swap;
+  font-family:Fira Sans;
+  font-style:normal;
+  font-weight:400;
+  src:url(https://fonts.gstatic.com/s/firasans/v17/va9E4kDNxMZdWfMOD5VvlIjLeTY.woff2) format("woff2");
+  unicode-range:u+0370-03ff;
+}
+@font-face{
+  font-display:swap;
+  font-family:Fira Sans;
+  font-style:normal;
+  font-weight:400;
+  src:url(https://fonts.gstatic.com/s/firasans/v17/va9E4kDNxMZdWfMOD5VvmIjLeTY.woff2) format("woff2");
+  unicode-range:u+0102-0103, u+0110-0111, u+0128-0129, u+0168-0169, u+01a0-01a1, u+01af-01b0, u+0300-0301, u+0303-0304, u+0308-0309, u+0323, u+0329, u+1ea0-1ef9, u+20ab;
+}
+@font-face{
+  font-display:swap;
+  font-family:Fira Sans;
+  font-style:normal;
+  font-weight:400;
+  src:url(https://fonts.gstatic.com/s/firasans/v17/va9E4kDNxMZdWfMOD5VvmYjLeTY.woff2) format("woff2");
+  unicode-range:u+0100-02af, u+0304, u+0308, u+0329, u+1e00-1e9f, u+1ef2-1eff, u+2020, u+20a0-20ab, u+20ad-20cf, u+2113, u+2c60-2c7f, u+a720-a7ff;
+}
+@font-face{
+  font-display:swap;
+  font-family:Fira Sans;
+  font-style:normal;
+  font-weight:400;
+  src:url(https://fonts.gstatic.com/s/firasans/v17/va9E4kDNxMZdWfMOD5Vvl4jL.woff2) format("woff2");
+  unicode-range:u+00??, u+0131, u+0152-0153, u+02bb-02bc, u+02c6, u+02da, u+02dc, u+0304, u+0308, u+0329, u+2000-206f, u+2074, u+20ac, u+2122, u+2191, u+2193, u+2212, u+2215, u+feff, u+fffd;
+}
