@@ -35,13 +35,16 @@
   grid-column:2 /  6;
 }
 .unknownarmies.sheet.character .status{
-  align-items:center;
   display:flex;
   gap:.3125rem;
   justify-content:center;
+  position:absolute;
+  top:-.5rem;
+  width:100%;
 }
 .unknownarmies.sheet.character .status span{
   background-color:#dfff00;
+  box-shadow:0 0 .125rem #0c0d0f;
   color:#0c0d0f;
   padding:.3125rem .5rem;
   white-space:nowrap;
@@ -490,6 +493,7 @@
 .unknownarmies.sheet .main-form{
   display:flex;
   flex-direction:column;
+  position:relative;
 }
 .unknownarmies.sheet .main-form.locked .tab-buttons{
   display:none;
