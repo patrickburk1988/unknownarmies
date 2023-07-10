@@ -27,5 +27,9 @@
         "lang": "en",
         "name": "English",
         "path": "language/en.json"
+    }],
+    "media": [{
+        "type": "cover",
+        "url": "systems/unknownarmies/image/system-background.webp"
     }]
 }
