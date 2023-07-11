@@ -1,7 +1,7 @@
 <form class="main-form {{cssClass}}">
-    <div class="status">
-        {{#if actor.system.isBurnedOut}}<span>{{localize 'UA.BurnedOut'}}</span>{{/if}}
-        {{#if actor.system.wounds.severity}}<span>{{localize (concat 'UA.' (replace actor.system.wounds.severity ' ' ''))}}</span>{{/if}}
+    <div class="status">{{#if actor.system.isBurnedOut}}
+        <span>{{localize 'UA.BurnedOut'}}</span>{{/if}}{{#if actor.system.wounds.severity}}
+        <span>{{localize (concat 'UA.' (replace actor.system.wounds.severity ' ' ''))}}</span>{{/if}}
     </div>
     <div class="upper-content">
         <img class="portrait" data-edit="img" alt="{{actor.name}} portrait" src="{{actor.img}}">
@@ -12,15 +12,15 @@
             <input type="text" name="system.concept" data-dtype="String" value="{{actor.system.concept}}">
             <span class="label">{{localize 'UA.Cabal'}}:</span>
             <select name="system.cabal">{{#select actor.system.cabal}}
-                <option value=""></option>
-                {{#each cabals as |cabal x|}}<option value="{{cabal.id}}">{{cabal.name}}</option>{{/each}}
+                <option value=""></option>{{#each cabals as |cabal x|}}
+                <option value="{{cabal.id}}">{{cabal.name}}</option>{{/each}}
             {{/select}}</select>
             <button data-action="open-cabal" {{disabled (not actor.system.cabal)}}>{{localize 'UA.OpenCabal'}}</button>
         </div>
         <div class="upper-content__section {{#if (not (isGM))}}upper-content__section--wound-threshold-only{{/if}}">
             <span class="label {{#if (isGM)}}label--wrap{{/if}}">{{localize 'UA.WoundThreshold'}}:</span>
-            <input type="number" name="system.wounds.threshold" data-dtype="Number" value="{{actor.system.wounds.threshold}}" min="0" max="100">
-            {{#if (isGM)}}<span class="label">{{localize 'UA.Wounds'}}:</span>
+            <input type="number" name="system.wounds.threshold" data-dtype="Number" value="{{actor.system.wounds.threshold}}" min="0" max="100">{{#if (isGM)}}
+            <span class="label">{{localize 'UA.Wounds'}}:</span>
             <input type="number" name="system.wounds.suffered" data-dtype="Number" value="{{actor.system.wounds.suffered}}" min="0" max="{{actor.system.wounds.threshold}}">{{/if}}
         </div>
     </div>
@@ -119,8 +119,8 @@
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Identities'}}:</h2>
                 <div class="item-list item-list--identities">
-                    <ul class="item-list__list">
-                        {{#each actor.items as |item itemId|}}{{#if (equals item.type 'identity')}}<li class="item-list__item identity" data-item-id="{{item.id}}">
+                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'identity')}}
+                        <li class="item-list__item identity" data-item-id="{{item.id}}">
                             <div class="identity__upper-content">
                                 <button data-action="roll" data-roll-label="{{localize (concat 'UA.' item.system.type 'Identity')}} ({{item.name}})" data-roll-target="{{item.system.percentage}}">{{localize (concat 'UA.' item.system.type 'Identity')}}</button>
                                 <span class="identity__name-percentage">{{item.name}} {{item.system.percentage}}%</span>
@@ -199,8 +199,8 @@
                         </div>
                         <button data-action="create-item" data-item-type="ritual"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">
-                        {{#each actor.items as |item itemId|}}{{#if (equals item.type 'ritual')}}<li class="item-list__item" data-item-id="{{item.id}}">
+                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'ritual')}}
+                        <li class="item-list__item" data-item-id="{{item.id}}">
                             <div class="item-list__column">
                                 <span>{{item.name}}</span>
                             </div>
@@ -227,8 +227,8 @@
                         </div>
                         <button data-action="create-item" data-item-type="spell"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">
-                        {{#each actor.items as |item itemId|}}{{#if (equals item.type 'spell')}}<li class="item-list__item" data-item-id="{{item.id}}">
+                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'spell')}}
+                        <li class="item-list__item" data-item-id="{{item.id}}">
                             <div class="item-list__column">
                                 <span>{{item.name}}</span>
                             </div>
@@ -260,8 +260,8 @@
                         </div>
                         <button data-action="create-item" data-item-type="artifact"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">
-                        {{#each actor.items as |item itemId|}}{{#if (equals item.type 'artifact')}}<li class="item-list__item" data-item-id="{{item.id}}">
+                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'artifact')}}
+                        <li class="item-list__item" data-item-id="{{item.id}}">
                             <div class="item-list__column">
                                 <span>{{item.name}}</span>
                             </div>
@@ -288,8 +288,8 @@
                         </div>
                         <button data-action="create-item" data-item-type="item"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">
-                        {{#each actor.items as |item itemId|}}{{#if (equals item.type 'item')}}<li class="item-list__item" data-item-id="{{item.id}}">
+                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'item')}}
+                        <li class="item-list__item" data-item-id="{{item.id}}">
                             <div class="item-list__column">
                                 <span>{{item.name}}</span>
                             </div>
