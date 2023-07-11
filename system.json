@@ -30,6 +30,6 @@
     }],
     "media": [{
         "type": "cover",
-        "url": "systems/unknownarmies/image/system-background.webp"
+        "url": "https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/system-background.webp"
     }]
 }
