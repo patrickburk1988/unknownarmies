@@ -513,9 +513,10 @@
   text-transform:uppercase;
 }
 .unknownarmies.sheet .main-form--limited .portrait{
-  height:18.75rem;
+  height:auto;
   margin:0 auto;
-  width:18.75rem;
+  max-height:18.75rem;
+  width:auto;
 }
 .unknownarmies.sheet .main-form--limited .editor-wrapper{
   padding:0 2.5rem;
