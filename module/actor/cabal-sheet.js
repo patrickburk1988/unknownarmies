@@ -39,6 +39,9 @@ export default class UACabalSheet extends ActorSheet
     activateListeners (html) {
         super.activateListeners(html);
         html.find("input").on("keydown", this._onInputKeydown.bind(this));
+        let showImage = html.find("[data-action='show-image']");
+        showImage.on("click", this._onShowImage.bind(this));
+        showImage.prop("disabled", false);
         html.find(".editor-content--extra-small").parent().addClass("editor--extra-small");
     }
 
@@ -48,5 +51,12 @@ export default class UACabalSheet extends ActorSheet
             super.submit();
             $(event.currentTarget)[0].blur();
         }
+    }
+
+    _onShowImage (event) {
+        event.preventDefault();
+        new ImagePopout(this.actor.img, {
+            title: this.actor.name
+        }).render(true);
     }
 }

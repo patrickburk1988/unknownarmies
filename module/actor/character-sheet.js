@@ -53,6 +53,9 @@ export default class UACharacterSheet extends ActorSheet
     activateListeners (html) {
         super.activateListeners(html);
         html.find("input").on("keydown", this._onInputKeydown.bind(this));
+        let showImage = html.find("[data-action='show-image']");
+        showImage.on("click", this._onShowImage.bind(this));
+        showImage.prop("disabled", false);
         html.find("[data-action='open-cabal']").on("click", this._onOpenCabal.bind(this));
         html.find("[data-action='reset-failed-notches']").on("click", this._onResetFailedNotches.bind(this));
         html.find("[data-action='create-item']").on("click", this._onCreateItem.bind(this));
@@ -77,6 +80,13 @@ export default class UACharacterSheet extends ActorSheet
             super.submit();
             $(event.currentTarget)[0].blur();
         }
+    }
+
+    _onShowImage (event) {
+        event.preventDefault();
+        new ImagePopout(this.actor.img, {
+            title: this.actor.name
+        }).render(true);
     }
 
     _onOpenCabal (event) {

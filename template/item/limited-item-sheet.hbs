@@ -1,5 +1,8 @@
 <form class="main-form main-form--limited {{cssClass}}">
-    <img class="portrait" alt="{{item.name}} portrait" src="{{item.img}}">
+    <div class="portrait">
+        <img alt="{{item.name}} portrait" src="{{item.img}}">
+        <button data-action="show-image"><i class="fas fa-image"></i></button>
+    </div>
     <h2>{{item.name}}</h2>
     <div class="editor-wrapper">
         {{editor enrichedPublicNotes target="system.notes.public"}}

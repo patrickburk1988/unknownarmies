@@ -1,6 +1,9 @@
 <form class="main-form {{cssClass}}">
     <div class="upper-content">
-        <img class="portrait" data-edit="img" alt="{{actor.name}} portrait" src="{{actor.img}}">
+        <div class="portrait">
+            <img data-edit="img" alt="{{actor.name}} portrait" src="{{actor.img}}">
+            <button data-action="show-image"><i class="fas fa-image"></i></button>
+        </div>
         <div class="upper-content__section">
             <span class="label">{{localize 'UA.Name'}}:</span>
             <input type="text" class="name" name="name" data-dtype="String" value="{{actor.name}}">

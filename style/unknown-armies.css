@@ -418,6 +418,23 @@
 .unknownarmies.sheet button[data-action=roll]:focus,.unknownarmies.sheet button[data-action=roll]:hover{
   filter:brightness(1.25);
 }
+.unknownarmies.sheet button[data-action=show-image]{
+  clip:rect(1px 1px 1px 1px);
+  clip:rect(1px, 1px, 1px, 1px);
+  background-color:transparent;
+  border:0;
+  bottom:.3125rem;
+  -webkit-clip-path:inset(50%);
+          clip-path:inset(50%);
+  color:inherit;
+  line-height:1;
+  opacity:0;
+  padding:0;
+  position:absolute;
+  right:.3125rem;
+  transition:opacity .1s;
+  width:1px;
+}
 .unknownarmies.sheet button[data-tab]{
   border:0;
   border-radius:.1875rem .1875rem 0 0;
@@ -512,7 +529,7 @@
   text-align:center;
   text-transform:uppercase;
 }
-.unknownarmies.sheet .main-form--limited .portrait{
+.unknownarmies.sheet .main-form--limited .portrait img{
   height:auto;
   margin:0 auto;
   max-height:18.75rem;
@@ -551,6 +568,18 @@
   grid-template-columns:min-content 1fr;
 }
 .unknownarmies.sheet .portrait{
+  display:flex;
+  margin:0 auto;
+  position:relative;
+}
+.unknownarmies.sheet .portrait:hover [data-action=show-image]{
+  clip:auto;
+  -webkit-clip-path:none;
+          clip-path:none;
+  opacity:1;
+  width:auto;
+}
+.unknownarmies.sheet .portrait img{
   height:6.25rem;
   -o-object-fit:cover;
      object-fit:cover;
