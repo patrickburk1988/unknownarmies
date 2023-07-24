@@ -1,0 +1,14 @@
+<form class="main-form {{cssClass}}">
+    <div class="upper-content">
+        <div class="upper-content__section">
+            <input type="text" class="name" name="name" data-dtype="String" value="{{item.name}}">
+            <span class="sign">+</span>
+            <input type="number" name="system.percentage" data-dtype="Number" value="{{item.system.percentage}}" min="0" max="100">
+            <span class="percentage">%</span>
+        </div>
+        <div class="upper-content__section">
+            <button data-action="roll" data-roll-formula="1d10+5" data-roll-label="{{item.name}}">{{localize 'UA.PettyTask'}}</button>
+            <button data-action="roll" data-roll-formula="2d10+10" data-roll-label="{{item.name}}">{{localize 'UA.IntenseTask'}}</button>
+        </div>
+    </div>
+</form>

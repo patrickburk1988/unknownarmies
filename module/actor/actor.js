@@ -71,5 +71,11 @@ export default class UAActor extends Actor
     }
 
     _prepareDerivedCabalData (cabal) {
+        cabal.system.objective.percentage = 0;
+        for (let item of cabal.items) {
+            if (item.type === "milestone") {
+                cabal.system.objective.percentage += item.system.percentage;
+            }
+        }
     }
 }

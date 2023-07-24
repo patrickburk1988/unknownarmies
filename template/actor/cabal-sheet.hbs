@@ -10,15 +10,53 @@
         </div>
     </div>
     <nav class="tab-buttons">
-        {{!-- <button data-tab="main">{{localize 'UA.Main'}}</button> --}}
+        <button data-tab="main">{{localize 'UA.Main'}}</button>
         <button data-tab="notes">{{localize 'UA.Notes'}}</button>
     </nav>
     <div class="tab-panels">
-        {{!-- <div class="lower-content tab" data-tab="main">
+        <div class="lower-content tab" data-tab="main">
             <div class="lower-content__section">
-                <h2>{{localize 'UA.'}}:</h2>
+                <div class="objective">
+                    <span class="label">{{localize 'UA.Objective'}}:</span>
+                    <input type="text" name="system.objective.name" data-dtype="String" value="{{actor.system.objective.name}}">
+                    <span>{{actor.system.objective.percentage}}%</span>
+                    <span class="label">{{localize 'UA.Scale'}}:</span>
+                    <select name="system.objective.scale">{{#select actor.system.objective.scale}}
+                        <option value=""></option>
+                        <option value="Local">{{localize 'UA.Local'}}</option>
+                        <option value="Weighty">{{localize 'UA.Weighty'}}</option>
+                        <option value="Cosmic">{{localize 'UA.Cosmic'}}</option>
+                    {{/select}}</select>
+                </div>
             </div>
-        </div> --}}
+            <div class="lower-content__section">
+                <div class="item-list item-list--milestones">
+                    <div class="item-list__header">
+                        <div class="item-list__column">
+                            <span>{{localize 'UA.Milestone'}}</span>
+                        </div>
+                        <div class="item-list__column">
+                            <span>{{localize 'UA.Percentage'}}</span>
+                        </div>
+                        <button data-action="create-item" data-item-type="milestone"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'milestone')}}
+                        <li class="item-list__item" data-item-id="{{item.id}}">
+                            <div class="item-list__column">
+                                <span>{{item.name}}</span>
+                            </div>
+                            <div class="item-list__column">
+                                <span>+{{item.system.percentage}}%</span>
+                            </div>
+                            <div class="item-list__column">
+                                <button data-action="edit-item"><i class="fas fa-edit"></i></button>
+                                <button data-action="destroy-item"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </li>{{/if}}{{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="lower-content tab" data-tab="notes">
             <div class="lower-content__section">
                 <h2>{{localize 'UA.PublicNotes'}}:</h2>

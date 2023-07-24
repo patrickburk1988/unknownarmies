@@ -9,6 +9,24 @@
 .unknownarmies.sheet.artifact .name{
   grid-column:2 /  7;
 }
+.unknownarmies.sheet.cabal select:last-child{
+  margin:0;
+}
+.unknownarmies.sheet.cabal .lower-content[data-tab=main]{
+  grid-template-rows:min-content 1fr;
+}
+.unknownarmies.sheet.cabal .objective{
+  align-items:center;
+  grid-template-columns:min-content 1fr repeat(3, min-content);
+}
+.unknownarmies.sheet.cabal .item-list--milestones [data-action=create-item]{
+  border-radius:0;
+}
+.unknownarmies.sheet.cabal .item-list--milestones .item-list__header,.unknownarmies.sheet.cabal .item-list--milestones .item-list__item{
+  grid-template-columns:5fr 1fr 4rem;
+  padding-left:.625rem;
+}
+
 .unknownarmies.sheet.character .shock-meter__abilities-hardened-notches:before,.unknownarmies.sheet.character .shock-meter__failed-notches-ongoing-madness:before{
   background-color:rgba(12,13,15,.25);
   content:"";
@@ -271,6 +289,16 @@
   margin-left:.3125rem;
 }
 
+.unknownarmies.sheet.milestone .upper-content{
+  grid-template-columns:1fr min-content;
+}
+.unknownarmies.sheet.milestone .upper-content__section:first-child{
+  grid-template-columns:1fr repeat(3, min-content);
+}
+.unknownarmies.sheet.milestone .upper-content__section:last-child{
+  grid-template-columns:max-content;
+}
+
 .unknownarmies.sheet.ritual .upper-content__section{
   grid-template-columns:repeat(3, min-content) 1fr;
 }
@@ -323,12 +351,12 @@
   gap:.625rem;
 }
 
-.unknownarmies.sheet .tab-buttons,.unknownarmies.sheet .upper-content__section,.unknownarmies.sheet.character .charges,.unknownarmies.sheet.character .identity__lower-content,.unknownarmies.sheet.character .obsession-passions,.unknownarmies.sheet.character .relationships,.unknownarmies.sheet.character .shock-meter,.unknownarmies.sheet.character .shock-meter__failed-notches-ongoing-madness,.unknownarmies.sheet.identity .stats-features{
+.unknownarmies.sheet .tab-buttons,.unknownarmies.sheet .upper-content__section,.unknownarmies.sheet.cabal .objective,.unknownarmies.sheet.character .charges,.unknownarmies.sheet.character .identity__lower-content,.unknownarmies.sheet.character .obsession-passions,.unknownarmies.sheet.character .relationships,.unknownarmies.sheet.character .shock-meter,.unknownarmies.sheet.character .shock-meter__failed-notches-ongoing-madness,.unknownarmies.sheet.identity .stats-features{
   display:grid;
   gap:.3125rem;
 }
 
-.unknownarmies.sheet.artifact .label:nth-of-type(3),.unknownarmies.sheet.artifact .label:nth-of-type(4),.unknownarmies.sheet.character .charges .label:not(:first-child),.unknownarmies.sheet.character .upper-content .label:nth-of-type(3),.unknownarmies.sheet.identity .upper-content__section .label:last-of-type,.unknownarmies.sheet.identity .upper-content__section .label:nth-of-type(4),.unknownarmies.sheet.spell .label:last-of-type{
+.unknownarmies.sheet.artifact .label:nth-of-type(3),.unknownarmies.sheet.artifact .label:nth-of-type(4),.unknownarmies.sheet.cabal .label:last-of-type,.unknownarmies.sheet.character .charges .label:not(:first-child),.unknownarmies.sheet.character .upper-content .label:nth-of-type(3),.unknownarmies.sheet.identity .upper-content__section .label:last-of-type,.unknownarmies.sheet.identity .upper-content__section .label:nth-of-type(4),.unknownarmies.sheet.milestone .sign,.unknownarmies.sheet.spell .label:last-of-type{
   margin-left:1.25rem;
 }
 
@@ -340,13 +368,13 @@
   font-family:Fira Sans,sans-serif;
 }
 
-.unknownarmies.sheet .name[name],.unknownarmies.sheet.character .charges input[type=number],.unknownarmies.sheet.character .upper-content__section--wound-threshold-only input[type=number],.unknownarmies.sheet.identity input[type=number]{
+.unknownarmies.sheet .name[name],.unknownarmies.sheet.character .charges input[type=number],.unknownarmies.sheet.character .upper-content__section--wound-threshold-only input[type=number],.unknownarmies.sheet.identity input[type=number],.unknownarmies.sheet.milestone input[type=number]{
   font-size:26px;
   font-size:1.625rem;
   height:2.9375rem;
   min-width:4rem;
 }
-.unknownarmies.sheet .name[name]+.percentage,.unknownarmies.sheet.character .charges input[type=number]+.percentage,.unknownarmies.sheet.character .upper-content__section--wound-threshold-only input[type=number]+.percentage,.unknownarmies.sheet.identity input[type=number]+.percentage{
+.unknownarmies.sheet .name[name]+.percentage,.unknownarmies.sheet .name[name]+.sign,.unknownarmies.sheet.character .charges input[type=number]+.percentage,.unknownarmies.sheet.character .charges input[type=number]+.sign,.unknownarmies.sheet.character .upper-content__section--wound-threshold-only input[type=number]+.percentage,.unknownarmies.sheet.character .upper-content__section--wound-threshold-only input[type=number]+.sign,.unknownarmies.sheet.identity input[type=number]+.percentage,.unknownarmies.sheet.identity input[type=number]+.sign,.unknownarmies.sheet.milestone input[type=number]+.percentage,.unknownarmies.sheet.milestone input[type=number]+.sign{
   align-items:center;
   display:flex;
   font-size:26px;

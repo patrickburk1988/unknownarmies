@@ -5,6 +5,7 @@ import UACharacterSheet from "./actor/character-sheet.js";
 import UAIdentitySheet from "./item/identity-sheet.js";
 import UAItem from "./item/item.js";
 import UAItemSheet from "./item/item-sheet.js";
+import UAMilestoneSheet from "./item/milestone-sheet.js";
 import UARitualSheet from "./item/ritual-sheet.js";
 import UASpellSheet from "./item/spell-sheet.js";
 
@@ -46,6 +47,13 @@ Hooks.once("init", async function() {
         label: "UA.ItemSheet",
         types: [
             "item"
+        ],
+        makeDefault: true
+    });
+    Items.registerSheet("unknownarmies", UAMilestoneSheet, {
+        label: "UA.MilestoneSheet",
+        types: [
+            "milestone"
         ],
         makeDefault: true
     });
@@ -113,4 +121,13 @@ Hooks.once("init", async function() {
         return jQuery(string).text().replaceAll(/([.!?])([^.!?])/g, "$1 $2");
     });
     // Handlebars Helpers (Blocks) ---------------------------------------------
+});
+
+Hooks.on("renderDialog", (dialog, html) => {
+    let hiddenTypes = ["milestone"];
+    Array.from(html.find("#document-create option")).forEach(i => {
+        if (hiddenTypes.includes(i.value)) {
+            i.remove();
+        }
+    });
 });

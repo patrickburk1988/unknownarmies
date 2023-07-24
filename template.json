@@ -47,7 +47,7 @@
                     "name": "",
                     "percentage": 0
                 },
-                "responsbility": {
+                "responsibility": {
                     "name": "",
                     "percentage": 0
                 },
@@ -109,7 +109,12 @@
         "cabal": {
             "templates": [
                 "NOTES"
-            ]
+            ],
+            "objective": {
+                "name": "",
+                "percentage": 0,
+                "scale": ""
+            }
         }
     },
     "Item": {
@@ -117,6 +122,7 @@
             "artifact",
             "identity",
             "item",
+            "milestone",
             "ritual",
             "spell"
         ],
@@ -132,6 +138,9 @@
                     "public": "",
                     "private": ""
                 }
+            },
+            "PERCENTAGE": {
+                "percentage": 0
             }
         },
         "artifact": {
@@ -146,9 +155,9 @@
         },
         "identity": {
             "templates": [
+                "PERCENTAGE",
                 "NOTES"
             ],
-            "percentage": 0,
             "type": "",
             "isObsession": false,
             "hasExperience": false,
@@ -191,6 +200,11 @@
                 "description",
                 "effect",
                 "NOTES"
+            ]
+        },
+        "milestone": {
+            "templates": [
+                "PERCENTAGE"
             ]
         },
         "ritual": {
