@@ -61,7 +61,7 @@ export default class UAMilestoneSheet extends ItemSheet
         content += `</div>`;
         roll.toMessage({
             content: content,
-            flavor: "Milestone (" + dataset["rollLabel"] + ")"
+            flavor: dataset["rollLabel"]
         });
     }
 }

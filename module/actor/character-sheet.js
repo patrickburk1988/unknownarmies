@@ -142,10 +142,12 @@ export default class UACharacterSheet extends ActorSheet
                 }
                 outcome += rollResult <= rollTarget ? "Success" : "Failure";
         }
+        outcome = game.i18n.localize("UA." + outcome.replace(/\s/g, ""));
+        let vs = game.i18n.localize("UA.Vs");
         let content = "";
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;
-        content += `        <h4 class="dice-total">${rollResult} <span class="vs">vs</span> ${rollTarget}</h4>`;
+        content += `        <h4 class="dice-total">${rollResult} <span class="vs">${vs}</span> ${rollTarget}</h4>`;
         content += `        <div class="dice-tooltip">`;
         content += `            <section class="tooltip-part">`;
         content += `                <div class="dice">`;
