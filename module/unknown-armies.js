@@ -124,7 +124,10 @@ Hooks.once("init", async function() {
 });
 
 Hooks.on("renderDialog", (dialog, html) => {
-    let hiddenTypes = ["milestone"];
+    let hiddenTypes = [
+        "identity",
+        "milestone"
+    ];
     Array.from(html.find("#document-create option")).forEach(i => {
         if (hiddenTypes.includes(i.value)) {
             i.remove();
