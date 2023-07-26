@@ -35,8 +35,9 @@ export default class UAMilestoneSheet extends ItemSheet
         await roll.evaluate();
         console.log(roll);
         let rollTotal = parseInt(roll.total);
-        this.item.system.percentage += rollTotal;
-        super.render(true);
+        this.item.update({
+            "system.percentage": rollTotal
+        });
         let content = "";
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;

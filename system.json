@@ -1,6 +1,6 @@
 {
     "id": "unknownarmies",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "title": "Unknown Armies",
     "description": "An occult game about broken people conspiring to fix the world.",
     "background": "systems/unknownarmies/image/system-background.webp",
@@ -14,7 +14,7 @@
     }],
     "compatibility": {
         "minimum": 11,
-        "verified": "11.305"
+        "verified": "11.306"
     },
     "gridUnits": "ft",
     "esmodules": [
