@@ -314,7 +314,7 @@
   border:.0625rem solid rgba(12,13,15,.5);
 }
 
-.chat-message .message-header .flavor-text,.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .item-list--identities [data-action=create-item],.unknownarmies.sheet.character .shock-meter{
+.chat-message .message-header .flavor-text,.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet blockquote,.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .item-list--identities [data-action=create-item],.unknownarmies.sheet.character .shock-meter{
   border-radius:.1875rem;
 }
 
@@ -398,11 +398,16 @@
   color:inherit;
 }
 
-.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet button[data-tab].active,.unknownarmies.sheet.character .charges,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .shock-meter{
+.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet blockquote,.unknownarmies.sheet button[data-tab].active,.unknownarmies.sheet.character .charges,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .shock-meter{
   background-color:hsla(0,0%,98%,.15);
   color:inherit;
 }
 
+.unknownarmies.sheet blockquote{
+  border:0;
+  margin:0;
+  padding:.3125rem .9375rem;
+}
 .unknownarmies.sheet button{
   font-family:inherit;
   margin:0;
@@ -577,6 +582,10 @@
   padding-top:.625rem;
   width:-moz-fit-content;
   width:fit-content;
+}
+.unknownarmies.sheet .main-form--limited .editor blockquote{
+  font-size:14px;
+  font-size:.875rem;
 }
 .unknownarmies.sheet .main-form--limited .editor p{
   text-indent:1em;
