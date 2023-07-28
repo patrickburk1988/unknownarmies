@@ -1,3 +1,8 @@
+## v1.1.2
+
+- Restyled sheet blockquotes.
+- Localized chat messages.
+
 ## v1.1.1
 
 - Fixed issue with milestones updating.
