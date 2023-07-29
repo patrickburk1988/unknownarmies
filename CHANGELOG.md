@@ -1,3 +1,9 @@
+## v1.1.3
+
+- Aligned form elements with actor/item name input.
+- Added an option to hide artifact charges from players.
+- Add an items tab to the cabal sheet.
+
 ## v1.1.2
 
 - Restyled sheet blockquotes.
