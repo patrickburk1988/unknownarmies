@@ -28,9 +28,6 @@
 .unknownarmies.sheet.artifact .name{
   grid-column:2 /  9;
 }
-.unknownarmies.sheet.cabal select:last-child{
-  margin:0;
-}
 .unknownarmies.sheet.cabal .tab-buttons{
   grid-template-columns:repeat(3, 1fr);
 }
@@ -376,6 +373,9 @@
 .unknownarmies.sheet input[type=checkbox]:hover,.unknownarmies.sheet input[type=radio]:hover{
   box-shadow:0 0 .3125rem #dfff00;
 }
+.unknownarmies.sheet button[data-action=open-cabal]:last-child,.unknownarmies.sheet.artifact input[type=number]:last-child,.unknownarmies.sheet.artifact input[type=text]:last-child,.unknownarmies.sheet.character .obsession-passions select:last-child,.unknownarmies.sheet.spell select:last-child{
+  margin-right:.125rem;
+}
 
 .unknownarmies.sheet .lower-content,.unknownarmies.sheet .upper-content,.unknownarmies.sheet.character .identity__upper-content{
   display:grid;
@@ -475,6 +475,7 @@
   background-color:#002fa7;
   color:#fbfbfb;
   transition:filter .1s;
+  width:auto;
 }
 .unknownarmies.sheet button[data-action=open-cabal]:focus,.unknownarmies.sheet button[data-action=open-cabal]:hover{
   filter:brightness(1.25);
@@ -564,9 +565,6 @@
 }
 .unknownarmies.sheet select{
   text-align:center;
-}
-.unknownarmies.sheet select:last-child{
-  margin-right:.125rem;
 }
 .unknownarmies.sheet .window-content{
   background-color:#010109;
