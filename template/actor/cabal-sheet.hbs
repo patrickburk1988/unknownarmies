@@ -11,6 +11,7 @@
     </div>
     <nav class="tab-buttons">
         <button data-tab="main">{{localize 'UA.Main'}}</button>
+        <button data-tab="items">{{localize 'UA.Items'}}</button>
         <button data-tab="notes">{{localize 'UA.Notes'}}</button>
     </nav>
     <div class="tab-panels">
@@ -47,6 +48,64 @@
                             </div>
                             <div class="item-list__column">
                                 <span>+{{item.system.percentage}}%</span>
+                            </div>
+                            <div class="item-list__column">
+                                <button data-action="edit-item"><i class="fas fa-edit"></i></button>
+                                <button data-action="destroy-item"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </li>{{/if}}{{/each}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="lower-content lower-content--2-columns tab" data-tab="items">
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.Artifacts'}}:</h2>
+                <div class="item-list item-list--artifacts">
+                    <div class="item-list__header">
+                        <div class="item-list__column">
+                            <span>{{localize 'UA.Artifact'}}</span>
+                        </div>
+                        <div class="item-list__column">
+                            <span>{{localize 'UA.Power'}}</span>
+                        </div>
+                        <div class="item-list__column">
+                            <span>{{localize 'UA.Charges'}}</span>
+                        </div>
+                        <button data-action="create-item" data-item-type="artifact"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'artifact')}}
+                        <li class="item-list__item" data-item-id="{{item.id}}">
+                            <div class="item-list__column">
+                                <span>{{item.name}}</span>
+                            </div>
+                            <div class="item-list__column">
+                                <span>{{item.system.power}}</span>
+                            </div>
+                            <div class="item-list__column">
+                                <span>{{#if item.system.isEternal}}&infin;{{else}}{{item.system.charges}}{{/if}}</span>
+                            </div>
+                            <div class="item-list__column">
+                                <button data-action="edit-item"><i class="fas fa-edit"></i></button>
+                                <button data-action="destroy-item"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </li>{{/if}}{{/each}}
+                    </ul>
+                </div>
+            </div>
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.OtherItems'}}:</h2>
+                <div class="item-list item-list--items">
+                    <div class="item-list__header">
+                        <div class="item-list__column">
+                            <span>{{localize 'UA.Item'}}</span>
+                        </div>
+                        <button data-action="create-item" data-item-type="item"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'item')}}
+                        <li class="item-list__item" data-item-id="{{item.id}}">
+                            <div class="item-list__column">
+                                <span>{{item.name}}</span>
                             </div>
                             <div class="item-list__column">
                                 <button data-action="edit-item"><i class="fas fa-edit"></i></button>

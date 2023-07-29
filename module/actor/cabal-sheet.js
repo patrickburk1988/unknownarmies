@@ -13,7 +13,7 @@ export default class UACabalSheet extends ActorSheet
                 contentSelector: ".tab-panels",
                 initial: "main"
             }],
-            width: 650
+            width: 800
         });
     }
 

@@ -12,6 +12,9 @@
 .unknownarmies.sheet.cabal select:last-child{
   margin:0;
 }
+.unknownarmies.sheet.cabal .tab-buttons{
+  grid-template-columns:repeat(3, 1fr);
+}
 .unknownarmies.sheet.cabal .lower-content[data-tab=main]{
   grid-template-rows:min-content 1fr;
 }
@@ -24,6 +27,20 @@
 }
 .unknownarmies.sheet.cabal .item-list--milestones .item-list__header,.unknownarmies.sheet.cabal .item-list--milestones .item-list__item{
   grid-template-columns:5fr 1fr 4rem;
+  padding-left:.625rem;
+}
+.unknownarmies.sheet.cabal .item-list--artifacts [data-action=create-item]{
+  border-radius:0;
+}
+.unknownarmies.sheet.cabal .item-list--artifacts .item-list__header,.unknownarmies.sheet.cabal .item-list--artifacts .item-list__item{
+  grid-template-columns:3fr 2fr 1fr 4rem;
+  padding-left:.625rem;
+}
+.unknownarmies.sheet.cabal .item-list--items [data-action=create-item]{
+  border-radius:0;
+}
+.unknownarmies.sheet.cabal .item-list--items .item-list__header,.unknownarmies.sheet.cabal .item-list--items .item-list__item{
+  grid-template-columns:1fr 4rem;
   padding-left:.625rem;
 }
 
