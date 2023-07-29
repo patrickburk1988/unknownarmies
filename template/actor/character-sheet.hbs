@@ -272,7 +272,7 @@
                                 <span>{{item.system.power}}</span>
                             </div>
                             <div class="item-list__column">
-                                <span>{{#if item.system.isEternal}}&infin;{{else}}{{item.system.charges}}{{/if}}</span>
+                                <span>{{#if item.system.charges.isHidden}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</span>
                             </div>
                             <div class="item-list__column">
                                 <button data-action="edit-item"><i class="fas fa-edit"></i></button>

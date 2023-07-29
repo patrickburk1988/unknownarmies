@@ -150,8 +150,11 @@
                 "NOTES"
             ],
             "power": "",
-            "isEternal": false,
-            "charges": 0
+            "charges": {
+                "isHidden": false,
+                "isEternal": false,
+                "amount": 0
+            }
         },
         "identity": {
             "templates": [

@@ -1,13 +1,32 @@
-.unknownarmies.sheet.artifact input[type=text]:last-of-type{
-  font-size:30px;
-  font-size:1.875rem;
+@charset "UTF-8";
+.unknownarmies.sheet.artifact input[type=text]{
   text-align:center;
 }
+.unknownarmies.sheet.artifact input[type=text][value="?"]{
+  font-size:20px;
+  font-size:1.25rem;
+}
+.unknownarmies.sheet.artifact input[type=text][value=∞]{
+  font-size:30px;
+  font-size:1.875rem;
+}
 .unknownarmies.sheet.artifact .upper-content__section{
+  grid-template-columns:repeat(2, min-content) 1fr repeat(5, min-content);
+}
+.unknownarmies.sheet.artifact .upper-content__section--is-eternal-and-charges-only{
   grid-template-columns:repeat(2, min-content) 1fr repeat(3, min-content);
 }
-.unknownarmies.sheet.artifact .name{
+.unknownarmies.sheet.artifact .upper-content__section--is-eternal-and-charges-only .name{
   grid-column:2 /  7;
+}
+.unknownarmies.sheet.artifact .upper-content__section--charges-only{
+  grid-template-columns:repeat(2, min-content) 1fr min-content;
+}
+.unknownarmies.sheet.artifact .upper-content__section--charges-only .name{
+  grid-column:2 /  5;
+}
+.unknownarmies.sheet.artifact .name{
+  grid-column:2 /  9;
 }
 .unknownarmies.sheet.cabal select:last-child{
   margin:0;
@@ -373,7 +392,7 @@
   gap:.3125rem;
 }
 
-.unknownarmies.sheet.artifact .label:nth-of-type(3),.unknownarmies.sheet.artifact .label:nth-of-type(4),.unknownarmies.sheet.cabal .label:last-of-type,.unknownarmies.sheet.character .charges .label:not(:first-child),.unknownarmies.sheet.character .upper-content .label:nth-of-type(3),.unknownarmies.sheet.identity .upper-content__section .label:last-of-type,.unknownarmies.sheet.identity .upper-content__section .label:nth-of-type(4),.unknownarmies.sheet.milestone .sign,.unknownarmies.sheet.spell .label:last-of-type{
+.unknownarmies.sheet.artifact .label:nth-of-type(3),.unknownarmies.sheet.artifact .label:nth-of-type(4),.unknownarmies.sheet.artifact .label:nth-of-type(5),.unknownarmies.sheet.cabal .label:last-of-type,.unknownarmies.sheet.character .charges .label:not(:first-child),.unknownarmies.sheet.character .upper-content .label:nth-of-type(3),.unknownarmies.sheet.identity .upper-content__section .label:last-of-type,.unknownarmies.sheet.identity .upper-content__section .label:nth-of-type(4),.unknownarmies.sheet.milestone .sign,.unknownarmies.sheet.spell .label:last-of-type{
   margin-left:1.25rem;
 }
 
