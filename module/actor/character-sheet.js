@@ -62,6 +62,7 @@ export default class UACharacterSheet extends ActorSheet
         html.find("[data-action='edit-item']").on("click", this._onEditItem.bind(this));
         html.find("[data-action='destroy-item']").on("click", this._onDestroyItem.bind(this));
         html.find("[data-action='roll']").on("click", this._onRoll.bind(this));
+        html.find("[data-action='identity-levelup-roll']").on("click", this._identityLevelUpRoll.bind(this));
         html.find(".editor-content--small").parent().addClass("editor--small");
         html.find(".editor-content--large").parent().addClass("editor--large");
     }
@@ -94,6 +95,7 @@ export default class UACharacterSheet extends ActorSheet
     }
 
     _onResetFailedNotches (event) {
+        //Works not as intended. Will check later.
         this.actor.system.shockGauge[$(event.currentTarget).data("shock-meter")].notches.failed = 0;
         this.render(true);
     }
@@ -167,6 +169,51 @@ export default class UACharacterSheet extends ActorSheet
         roll.toMessage({
             content: content,
             flavor: dataset["rollLabel"]
+        });
+    }
+    
+    async _identityLevelUpRoll(event){
+        event.preventDefault();
+        let dataset = event.currentTarget.dataset;
+        
+        let formula      = dataset["rollFormula"];
+        let identityID   = dataset["rollLabel"];
+        let roll         = new Roll(formula);
+        await roll.evaluate();
+        let rollTotal    = parseInt(roll.total);
+        let percentTotal = Math.ceil(rollTotal / 2);
+        let entry        = await this.object.items.get(identityID);
+
+        let oldPercent = entry.system.percentage;
+        let finalPercent = oldPercent + percentTotal;
+        
+        entry.update({
+            "system.percentage": finalPercent,
+            "system.hasExperience" : false
+        });
+        let roundedUp = game.i18n.localize("UA.RoundedUp");
+        let content = "";
+        content += `<div class="dice-roll">`;
+        content += `    <div class="dice-result">`;
+        content += `        <h4 class="dice-total">${oldPercent}% + ${percentTotal}% = ${finalPercent}%</h4>`;
+        content += `        <div class="dice-tooltip">`;
+        content += `            <section class="tooltip-part">`;
+        content += `                <div class="dice">`;
+        content += `                    <header class="part-header flexrow">`;
+        content += `                        <span class="part-formula">1d10 / 2 <span class="vs">${roundedUp}</span></span>`;
+        content += `                        <span class="part-total">${percentTotal}</span>`;
+        content += `                    </header>`;
+        content += `                    <ol class="dice-rolls">`;
+        content += `                        <li class="roll die d10">${rollTotal}</li>`;
+        content += `                    </ol>`;
+        content += `                </div>`;
+        content += `            </section>`;
+        content += `        </div>`;
+        content += `    </div>`;
+        content += `</div>`;
+        roll.toMessage({
+            content: content,
+            flavor: entry.name
         });
     }
 }

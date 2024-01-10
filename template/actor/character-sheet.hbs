@@ -106,7 +106,7 @@
                         <button data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'downbeatAbility')))}}" data-roll-target="{{#each ../actor.system.abilities as |ability abilityKey|}}{{#if (equals abilityKey (shockGaugeSchema shockMeterKey 'downbeatAbility'))}}{{ability}}{{/if}}{{/each}}">{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'downbeatAbility')))}}</button>
                     </div>
                     <div class="shock-meter__failed-notches-ongoing-madness">
-                        <a class="label" data-action="reset-failed-notches" data-shock-meter="{{shockMeterKey}}">{{localize 'UA.Failed'}}:</a>
+                        <input type="radio" name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="0" {{checked (equals shockMeter.notches.failed 0)}}>
                         <input type="radio" {{#if (exceeds shockMeter.notches.failed 1)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="1" {{checked (equals shockMeter.notches.failed 1)}}>
                         <input type="radio" {{#if (exceeds shockMeter.notches.failed 2)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="2" {{checked (equals shockMeter.notches.failed 2)}}>
                         <input type="radio" {{#if (exceeds shockMeter.notches.failed 3)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="3" {{checked (equals shockMeter.notches.failed 3)}}>
@@ -129,7 +129,7 @@
                                 <span class="identity__name-percentage">{{item.name}} {{item.system.percentage}}%</span>
                                 <div class="identity__obsession-experience">
                                     {{#if item.system.isObsession}}<span>{{localize 'UA.Obsession'}}</span>{{/if}}
-                                    {{#if item.system.hasExperience}}<span>{{localize 'UA.Experience'}}</span>{{/if}}
+                                    {{#if item.system.hasExperience}}<button data-action="identity-levelup-roll" data-roll-formula="1d10" data-roll-label="{{item.id}}">{{localize 'UA.Experience'}}</button>{{/if}}
                                 </div>
                                 <div class="identity__edit-destroy">
                                     <button data-action="edit-item"><i class="fas fa-edit"></i></button>

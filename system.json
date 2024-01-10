@@ -23,11 +23,18 @@
     "styles": [
         "style/unknown-armies.css"
     ],
-    "languages": [{
+    "languages": [
+    {
         "lang": "en",
         "name": "English",
         "path": "language/en.json"
-    }],
+    },
+    {
+        "lang": "ru",
+        "name": "Russian",
+        "path": "language/ru.json"
+    }
+    ],
     "media": [{
         "type": "cover",
         "url": "https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/system-background.webp"

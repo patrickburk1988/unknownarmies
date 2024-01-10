@@ -136,7 +136,7 @@
   padding:.3125rem;
 }
 .unknownarmies.sheet.character .shock-meter [data-action=roll]{
-  width:4.3125rem;
+  width:5rem;
 }
 .unknownarmies.sheet.character .shock-meter h3{
   border:0;
@@ -241,10 +241,11 @@
   right:3.375rem;
   top:-1.25rem;
 }
-.unknownarmies.sheet.character .identity__obsession-experience span{
+.unknownarmies.sheet.character .identity__obsession-experience span, .unknownarmies.sheet.character [data-action=identity-levelup-roll]{
   background-color:#dfff00;
   color:#0c0d0f;
   padding:.25rem .4375rem;
+  line-height: 1px;
 }
 .unknownarmies.sheet.character .identity__edit-destroy{
   display:flex;
@@ -423,7 +424,7 @@
   text-overflow:ellipsis;
 }
 
-.unknownarmies.sheet .item-list__column span,.unknownarmies.sheet .label,.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet.character .identity__obsession-experience span,.unknownarmies.sheet.character .shock-meter p,.unknownarmies.sheet.character .status span,.unknownarmies.sheet.identity .stats-features__details{
+.unknownarmies.sheet .item-list__column span,.unknownarmies.sheet .label,.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=indentityRoll],.unknownarmies.sheet.character .identity__obsession-experience span,.unknownarmies.sheet.character .shock-meter p,.unknownarmies.sheet.character .status span,.unknownarmies.sheet.identity .stats-features__details, .unknownarmies.sheet.character [data-action=identity-levelup-roll]{
   font-size:10px;
   font-size:.625rem;
   text-transform:uppercase;
@@ -485,6 +486,7 @@
   color:#fbfbfb;
   transition:filter .1s;
 }
+
 .unknownarmies.sheet button[data-action=roll]:focus,.unknownarmies.sheet button[data-action=roll]:hover{
   filter:brightness(1.25);
 }
