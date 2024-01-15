@@ -21,6 +21,8 @@
             <input type="checkbox" name="system.isObsession" data-dtype="Boolean" {{checked item.system.isObsession}}>
             <span class="label">{{localize 'UA.Experience'}}:</span>
             <input type="checkbox" name="system.hasExperience" data-dtype="Boolean" {{checked item.system.hasExperience}}>
+            <button data-action="improve" data-roll-label="{{localize (concat 'UA.' item.system.type 'Identity')}} ({{item.name}})" {{disabled (not item.system.hasExperience)}}>{{localize 'UA.Improve'}}
+            </button>
         </div>
     </div>
     <nav class="tab-buttons">
