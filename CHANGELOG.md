@@ -1,3 +1,7 @@
+## v1.1.5
+
+- Added button for rolling Objective (i.e. "taking the plunge").
+
 ## v1.1.4
 
 - Added Russian localization (many thanks to alxnsk).
