@@ -1,3 +1,7 @@
+## v1.1.6
+
+- Added confirmation dialog when deleting items from sheets.
+
 ## v1.1.5
 
 - Added button for rolling Objective (i.e. "taking the plunge").

@@ -115,9 +115,21 @@ export default class UACharacterSheet extends ActorSheet
     }
 
     _onDestroyItem (event) {
-        this.actor.deleteEmbeddedDocuments("Item", [
-            $(event.currentTarget).parents(".item-list__item").data("item-id")
-        ]);
+        let item = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));
+        let type = item.type.charAt(0).toUpperCase() + item.type.slice(1);
+        Dialog.confirm({
+            // TODO no render defaultYes rejectClose options
+            // TODO buttons default close
+            title: game.i18n.localize("UA.Delete" + type),
+            content: game.i18n.format("UA.DeleteItem_Confirmation", {
+                name: item.name
+            }),
+            yes: () => {
+                this.actor.deleteEmbeddedDocuments("Item", [
+                    item.id
+                ]);
+            }
+        });
     }
 
     async _onRoll (event) {
