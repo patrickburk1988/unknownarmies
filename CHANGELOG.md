@@ -1,3 +1,7 @@
+## v1.1.7
+
+- Added custom pause icon.
+
 ## v1.1.6
 
 - Added confirmation dialog when deleting items from sheets.
