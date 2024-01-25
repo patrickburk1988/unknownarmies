@@ -1,3 +1,7 @@
+## v1.1.8
+
+- Restyled actor-owned identity cards.
+
 ## v1.1.7
 
 - Added custom pause icon.

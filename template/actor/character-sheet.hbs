@@ -125,8 +125,9 @@
                     <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'identity')}}
                         <li class="item-list__item identity" data-item-id="{{item.id}}">
                             <div class="identity__upper-content">
-                                <button data-action="roll" data-roll-label="{{localize (concat 'UA.' item.system.type 'Identity')}} ({{item.name}})" data-roll-target="{{item.system.percentage}}">{{localize (concat 'UA.' item.system.type 'Identity')}}</button>
+                                <button data-action="roll" data-roll-label="{{localize (concat 'UA.' item.system.type 'Identity')}} ({{item.name}})" data-roll-target="{{item.system.percentage}}"><i class="fas fa-d10"></i></button>
                                 <span class="identity__name-percentage">{{item.name}} {{item.system.percentage}}%</span>
+                                {{#if item.system.type}}<span class="identity__type">{{localize (concat 'UA.' item.system.type 'Identity')}}</span>{{/if}}
                                 <div class="identity__obsession-experience">
                                     {{#if item.system.isObsession}}<span>{{localize 'UA.Obsession'}}</span>{{/if}}
                                     {{#if item.system.hasExperience}}<span>{{localize 'UA.Experience'}}</span>{{/if}}
