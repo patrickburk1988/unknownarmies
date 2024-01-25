@@ -1,4 +1,4 @@
-# Unknown Armies
+![Unknown Armies](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/system-background.webp)
 
 An unofficial Unknown Armies rule system for Foundry VTT. Unknown Armies is an occult game about broken people conspiring to fix the world.
 
