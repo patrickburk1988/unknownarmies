@@ -61,7 +61,7 @@ export default class UACharacterSheet extends ActorSheet
         html.find("[data-action='create-item']").on("click", this._onCreateItem.bind(this));
         html.find("[data-action='edit-item']").on("click", this._onEditItem.bind(this));
         html.find("[data-action='destroy-item']").on("click", this._onDestroyItem.bind(this));
-        html.find("[data-action='roll']").on("click", this._onRoll.bind(this));
+        html.find("[data-action='roll']").on("click contextmenu", this._onRoll.bind(this));
         html.find(".editor-content--small").parent().addClass("editor--small");
         html.find(".editor-content--large").parent().addClass("editor--large");
     }
@@ -121,9 +121,9 @@ export default class UACharacterSheet extends ActorSheet
             // TODO no render defaultYes rejectClose options
             // TODO buttons default close
             title: game.i18n.localize("UA.Delete" + type),
-            content: game.i18n.format("UA.DeleteItem_Confirmation", {
+            content: `<p>${game.i18n.format("UA.DeleteItem_Details", {
                 name: item.name
-            }),
+            })}</p>`,
             yes: () => {
                 this.actor.deleteEmbeddedDocuments("Item", [
                     item.id
@@ -134,11 +134,20 @@ export default class UACharacterSheet extends ActorSheet
 
     async _onRoll (event) {
         event.preventDefault();
+        let modifier = 0;
+        if (event.which == 3 || event.shiftKey || event.ctrlKey || event.altKey) {
+            modifier = parseInt(await this._onModifyRoll());
+            if (isNaN(modifier)) {
+                return;
+            }
+        }
         let dataset = event.currentTarget.dataset;
         let roll = new Roll("1d100");
         await roll.evaluate();
         let rollResult = parseInt(roll.result);
-        let rollTarget = parseInt(dataset["rollTarget"]);
+        let vs = game.i18n.localize("UA.Vs");
+        let rollTarget = parseInt(dataset["rollTarget"]) + modifier;
+        let modifierString = modifier == 0 ? "" : ` <span class="roll-modifier">(` + (modifier > 0 ? "+" : "") + modifier + `%)</span>`;
         let outcome = "";
         switch (rollResult) {
             case 1:
@@ -157,11 +166,10 @@ export default class UACharacterSheet extends ActorSheet
                 outcome += rollResult <= rollTarget ? "Success" : "Failure";
         }
         outcome = game.i18n.localize("UA." + outcome.replace(/\s/g, ""));
-        let vs = game.i18n.localize("UA.Vs");
         let content = "";
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;
-        content += `        <h4 class="dice-total">${rollResult} <span class="vs">${vs}</span> ${rollTarget}</h4>`;
+        content += `        <h4 class="dice-total">${rollResult} <span class="vs">${vs}</span> ${rollTarget}${modifierString}</h4>`;
         content += `        <div class="dice-tooltip">`;
         content += `            <section class="tooltip-part">`;
         content += `                <div class="dice">`;
@@ -182,5 +190,17 @@ export default class UACharacterSheet extends ActorSheet
             content: content,
             flavor: dataset["rollLabel"]
         });
+    }
+
+    async _onModifyRoll () {
+        let modifier = false;
+        await Dialog.confirm({
+            title: game.i18n.localize("UA.ModifyRoll"),
+            content: `<p>${game.i18n.localize("UA.ModifyRoll_Details")}: <input type="number" style="max-width: 80px; text-align: center" data-dtype="Number" value="0" min="0" max="100">%</p>`,
+            yes: (prompt) => {
+                modifier = prompt.find("input")[0].value;
+            }
+        });
+        return modifier;
     }
 }

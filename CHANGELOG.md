@@ -1,3 +1,7 @@
+## v1.1.9
+
+- Added option to modify rolls via popup when right-clicking roll button (or when left-clicking while holding shift, control or alt).
+
 ## v1.1.8
 
 - Restyled actor-owned identity cards.
