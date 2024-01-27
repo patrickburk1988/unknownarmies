@@ -1,6 +1,7 @@
 ## v1.1.9
 
 - Added option to modify rolls via popup when right-clicking roll button (or when left-clicking while holding shift, control or alt).
+- Fixed objective percentage miscalculation when re-rolling milestone tasks.
 
 ## v1.1.8
 
