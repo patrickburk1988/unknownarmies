@@ -1,3 +1,11 @@
+## v1.1.4
+
+- Added Russian localization (many thanks to alxnsk).
+- Tweaked some localization strings.
+- Fixed bug that occurred when resetting failed shock meter notches?
+- Added a button to roll for identity improvement.
+- Standardized the chat message when improving identities and objectives.
+
 ## v1.1.3
 
 - Aligned form elements with actor/item name input.

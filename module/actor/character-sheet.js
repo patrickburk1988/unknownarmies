@@ -95,9 +95,10 @@ export default class UACharacterSheet extends ActorSheet
     }
 
     _onResetFailedNotches (event) {
-        //Works not as intended. Will check later.
-        this.actor.system.shockGauge[$(event.currentTarget).data("shock-meter")].notches.failed = 0;
-        this.render(true);
+        let key = "system.shockGauge." + $(event.currentTarget).data("shock-meter") + ".notches.failed";
+        this.actor.update({
+            [key]: 0
+        });
     }
 
     _onCreateItem (event) {

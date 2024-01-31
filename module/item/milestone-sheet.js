@@ -33,8 +33,10 @@ export default class UAMilestoneSheet extends ItemSheet
         let formula = dataset["rollFormula"];
         let roll = new Roll(formula);
         await roll.evaluate();
-        console.log(roll);
         let rollTotal = parseInt(roll.total);
+        let oldPercentage = this.actor.system.objective.percentage;
+        let newPercentage = oldPercentage + rollTotal;
+        let outcome = game.i18n.localize("UA.ObjectiveImproved") + ": " + oldPercentage + '% <span class="arrow">▶</span> ' + newPercentage + "%";
         this.item.update({
             "system.percentage": rollTotal
         });
@@ -57,6 +59,7 @@ export default class UAMilestoneSheet extends ItemSheet
         content += `                </div>`;
         content += `            </section>`;
         content += `        </div>`;
+        content += `        <div class="dice-formula">${outcome}`;
         content += `    </div>`;
         content += `</div>`;
         roll.toMessage({

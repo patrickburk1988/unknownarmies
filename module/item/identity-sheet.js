@@ -87,6 +87,7 @@ export default class UAIdentitySheet extends ItemSheet
         let showImage = html.find("[data-action='show-image']");
         showImage.on("click", this._onShowImage.bind(this));
         showImage.prop("disabled", false);
+        html.find("[data-action='improve']").on("click", this._onImprove.bind(this));
         html.find(".editor-content--medium").parent().addClass("editor--medium");
     }
 
@@ -111,5 +112,43 @@ export default class UAIdentitySheet extends ItemSheet
         new ImagePopout(this.item.img, {
             title: this.item.name
         }).render(true);
+    }
+
+    async _onImprove (event) {
+        event.preventDefault();
+        let roll = new Roll("1d5");
+        await roll.evaluate();
+        let rollResult = parseInt(roll.result);
+        let oldPercentage = this.object.system.percentage;
+        let newPercentage = oldPercentage + rollResult;
+        let outcome = game.i18n.localize("UA.IdentityImproved") + ": " + oldPercentage + '% <span class="arrow">▶</span> ' + newPercentage + "%";
+        this.item.update({
+            "system.percentage": newPercentage,
+            "system.hasExperience": false
+        });
+        let content = "";
+        content += `<div class="dice-roll">`;
+        content += `    <div class="dice-result">`;
+        content += `        <h4 class="dice-total">+${rollResult}%</h4>`;
+        content += `        <div class="dice-tooltip">`;
+        content += `            <section class="tooltip-part">`;
+        content += `                <div class="dice">`;
+        content += `                    <header class="part-header flexrow">`;
+        content += `                        <span class="part-formula">1d5</span>`;
+        content += `                        <span class="part-total">${rollResult}</span>`;
+        content += `                    </header>`;
+        content += `                    <ol class="dice-rolls">`;
+        content += `                        <li class="roll die d10">${rollResult}</li>`;
+        content += `                    </ol>`;
+        content += `                </div>`;
+        content += `            </section>`;
+        content += `        </div>`;
+        content += `        <div class="dice-formula">${outcome}`;
+        content += `    </div>`;
+        content += `</div>`;
+        roll.toMessage({
+            content: content,
+            flavor: event.currentTarget.dataset["rollLabel"]
+        });
     }
 }

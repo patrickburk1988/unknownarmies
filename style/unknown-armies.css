@@ -296,7 +296,7 @@
   justify-content:center;
 }
 
-.vs{
+.arrow,.vs{
   font-size:12px;
   font-size:.75rem;
   font-weight:400;
@@ -304,6 +304,9 @@
 
 .unknownarmies.sheet.identity .upper-content__section{
   grid-template-columns:repeat(2, min-content) 1fr repeat(5, min-content);
+}
+.unknownarmies.sheet.identity .upper-content__section input[type=checkbox]:last-of-type{
+  margin-right:1.25rem;
 }
 .unknownarmies.sheet.identity .name{
   grid-column:2 /  7;
@@ -344,11 +347,11 @@
   margin:.375rem 0 0;
 }
 
-.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=radio],.unknownarmies.sheet input[type=radio]:before,.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
+.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=radio],.unknownarmies.sheet input[type=radio]:before,.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
   border:.0625rem solid rgba(12,13,15,.5);
 }
 
-.chat-message .message-header .flavor-text,.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet blockquote,.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .item-list--identities [data-action=create-item],.unknownarmies.sheet.character .shock-meter{
+.chat-message .message-header .flavor-text,.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet blockquote,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .item-list--identities [data-action=create-item],.unknownarmies.sheet.character .shock-meter{
   border-radius:.1875rem;
 }
 
@@ -364,7 +367,7 @@
   box-shadow:0 0 .3125rem #dfff00;
 }
 
-.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
+.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
   height:2rem;
 }
 
@@ -424,7 +427,7 @@
   text-overflow:ellipsis;
 }
 
-.unknownarmies.sheet .item-list__column span,.unknownarmies.sheet .label,.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=indentityRoll],.unknownarmies.sheet.character .identity__obsession-experience span,.unknownarmies.sheet.character .shock-meter p,.unknownarmies.sheet.character .status span,.unknownarmies.sheet.identity .stats-features__details, .unknownarmies.sheet.character [data-action=identity-levelup-roll]{
+.unknownarmies.sheet .item-list__column span,.unknownarmies.sheet .label,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet.character .identity__obsession-experience span,.unknownarmies.sheet.character .shock-meter p,.unknownarmies.sheet.character .status span,.unknownarmies.sheet.identity .stats-features__details{
   font-size:10px;
   font-size:.625rem;
   text-transform:uppercase;
@@ -472,6 +475,14 @@
 .unknownarmies.sheet button[data-action=destroy-item]:focus,.unknownarmies.sheet button[data-action=destroy-item]:hover,.unknownarmies.sheet button[data-action=edit-item]:focus,.unknownarmies.sheet button[data-action=edit-item]:hover{
   filter:brightness(20);
 }
+.unknownarmies.sheet button[data-action=improve]{
+  background-color:#002fa7;
+  color:#fbfbfb;
+  transition:filter .1s;
+}
+.unknownarmies.sheet button[data-action=improve]:focus,.unknownarmies.sheet button[data-action=improve]:hover{
+  filter:brightness(1.25);
+}
 .unknownarmies.sheet button[data-action=open-cabal]{
   background-color:#002fa7;
   color:#fbfbfb;
@@ -491,14 +502,14 @@
   filter:brightness(1.25);
 }
 .unknownarmies.sheet button[data-action=show-image]{
-  clip:rect(1px 1px 1px 1px);
-  clip:rect(1px, 1px, 1px, 1px);
   background-color:transparent;
   border:0;
   bottom:.3125rem;
+  color:inherit;
+  clip:rect(1px 1px 1px 1px);
+  clip:rect(1px, 1px, 1px, 1px);
   -webkit-clip-path:inset(50%);
           clip-path:inset(50%);
-  color:inherit;
   line-height:1;
   opacity:0;
   padding:0;
