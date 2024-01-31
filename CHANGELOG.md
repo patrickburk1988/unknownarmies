@@ -1,3 +1,24 @@
+## v1.1.9
+
+- Added option to modify rolls via popup when right-clicking roll button (or when left-clicking while holding shift, control or alt).
+- Fixed objective percentage miscalculation when re-rolling milestone tasks.
+
+## v1.1.8
+
+- Restyled actor-owned identity cards.
+
+## v1.1.7
+
+- Added custom pause icon.
+
+## v1.1.6
+
+- Added confirmation dialog when deleting items from sheets.
+
+## v1.1.5
+
+- Added button for rolling Objective (i.e. "taking the plunge").
+
 ## v1.1.4
 
 - Added Russian localization (many thanks to alxnsk).

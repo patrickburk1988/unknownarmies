@@ -34,9 +34,10 @@ export default class UAMilestoneSheet extends ItemSheet
         let roll = new Roll(formula);
         await roll.evaluate();
         let rollTotal = parseInt(roll.total);
-        let oldPercentage = this.actor.system.objective.percentage;
-        let newPercentage = oldPercentage + rollTotal;
-        let outcome = game.i18n.localize("UA.ObjectiveImproved") + ": " + oldPercentage + '% <span class="arrow">▶</span> ' + newPercentage + "%";
+        let oldMilestonePercentage = this.item.system.percentage;
+        let oldObjectivePercentage = this.actor.system.objective.percentage - oldMilestonePercentage;
+        let newObjectivePercentage = oldObjectivePercentage + rollTotal;
+        let outcome = game.i18n.localize("UA.ObjectiveImproved") + ": " + oldObjectivePercentage + '% <span class="arrow">▶</span> ' + newObjectivePercentage + "%";
         this.item.update({
             "system.percentage": rollTotal
         });

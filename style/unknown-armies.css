@@ -1,4 +1,9 @@
 @charset "UTF-8";
+
+#pause img{
+  content:url(../image/pause.png);
+}
+
 .unknownarmies.sheet.artifact input[type=text]{
   text-align:center;
 }
@@ -136,7 +141,7 @@
   padding:.3125rem;
 }
 .unknownarmies.sheet.character .shock-meter [data-action=roll]{
-  width:5rem;
+  width:4.3125rem;
 }
 .unknownarmies.sheet.character .shock-meter h3{
   border:0;
@@ -221,11 +226,18 @@
   margin-top:.3125rem;
 }
 .unknownarmies.sheet.character .identity__upper-content{
-  grid-template-columns:min-content 1fr 7.625rem;
+  grid-template-columns:2rem 1fr 2rem;
   position:relative;
 }
 .unknownarmies.sheet.character .identity [data-action=roll]{
-  width:7.625rem;
+  width:2rem;
+}
+.unknownarmies.sheet.character .identity .fa-d10{
+  height:.875rem;
+  width:.875rem;
+}
+.unknownarmies.sheet.character .identity .fa-d10:before{
+  content:url(../image/d10.svg);
 }
 .unknownarmies.sheet.character .identity__name-percentage{
   align-items:center;
@@ -233,6 +245,15 @@
   font-size:22px;
   font-size:1.375rem;
   justify-content:center;
+  text-align:center;
+}
+.unknownarmies.sheet.character .identity__type{
+  left:0;
+  line-height:1;
+  position:absolute;
+  right:0;
+  text-align:center;
+  top:-1em;
 }
 .unknownarmies.sheet.character .identity__obsession-experience{
   display:flex;
@@ -241,11 +262,10 @@
   right:3.375rem;
   top:-1.25rem;
 }
-.unknownarmies.sheet.character .identity__obsession-experience span, .unknownarmies.sheet.character [data-action=identity-levelup-roll]{
+.unknownarmies.sheet.character .identity__obsession-experience span{
   background-color:#dfff00;
   color:#0c0d0f;
   padding:.25rem .4375rem;
-  line-height: 1px;
 }
 .unknownarmies.sheet.character .identity__edit-destroy{
   display:flex;
@@ -296,7 +316,7 @@
   justify-content:center;
 }
 
-.arrow,.vs{
+.arrow,.roll-modifier,.vs{
   font-size:12px;
   font-size:.75rem;
   font-weight:400;
@@ -427,7 +447,7 @@
   text-overflow:ellipsis;
 }
 
-.unknownarmies.sheet .item-list__column span,.unknownarmies.sheet .label,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet.character .identity__obsession-experience span,.unknownarmies.sheet.character .shock-meter p,.unknownarmies.sheet.character .status span,.unknownarmies.sheet.identity .stats-features__details{
+.unknownarmies.sheet .item-list__column span,.unknownarmies.sheet .label,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet.character .identity__obsession-experience span,.unknownarmies.sheet.character .identity__type,.unknownarmies.sheet.character .shock-meter p,.unknownarmies.sheet.character .status span,.unknownarmies.sheet.identity .stats-features__details{
   font-size:10px;
   font-size:.625rem;
   text-transform:uppercase;
@@ -495,9 +515,9 @@
 .unknownarmies.sheet button[data-action=roll]{
   background-color:#002fa7;
   color:#fbfbfb;
+  line-height:1;
   transition:filter .1s;
 }
-
 .unknownarmies.sheet button[data-action=roll]:focus,.unknownarmies.sheet button[data-action=roll]:hover{
   filter:brightness(1.25);
 }
@@ -884,4 +904,15 @@
 .directory .directory-item img{
   -o-object-position:center;
      object-position:center;
+}
+@keyframes a{
+  0%{
+    transform:rotate(0deg);
+  }
+  to{
+    transform:rotate(1turn);
+  }
+}
+.identity [data-action=roll]:hover i{
+  animation:a 2s linear infinite;
 }
