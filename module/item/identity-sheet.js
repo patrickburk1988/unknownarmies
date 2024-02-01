@@ -1,4 +1,6 @@
-export default class UAIdentitySheet extends ItemSheet
+import UABaseItemSheet from "./base-item-sheet.js";
+
+export default class UAIdentitySheet extends UABaseItemSheet
 {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -8,21 +10,8 @@ export default class UAIdentitySheet extends ItemSheet
                 "identity"
             ],
             height: 707,
-            tabs: [{
-                navSelector: ".tab-buttons",
-                contentSelector: ".tab-panels",
-                initial: "main"
-            }],
             width: 800
         });
-    }
-
-    get template() {
-        if (game.user.isGM || !this.item.limited) {
-            return "systems/unknownarmies/template/item/identity-sheet.hbs";
-        } else {
-            return "systems/unknownarmies/template/item/limited-identity-sheet.hbs";
-        }
     }
 
     async getData (options) {
@@ -72,46 +61,12 @@ export default class UAIdentitySheet extends ItemSheet
         data.enrichedDetails = await TextEditor.enrichHTML(this.object.system.details, {
             async: true
         });
-        data.enrichedPublicNotes = await TextEditor.enrichHTML(this.object.system.notes.public, {
-            async: true
-        });
-        data.enrichedPrivateNotes = await TextEditor.enrichHTML(this.object.system.notes.private, {
-            async: true
-        });
         return data;
     }
 
     activateListeners (html) {
         super.activateListeners(html);
-        html.find("input").on("keydown", this._onInputKeydown.bind(this));
-        let showImage = html.find("[data-action='show-image']");
-        showImage.on("click", this._onShowImage.bind(this));
-        showImage.prop("disabled", false);
         html.find("[data-action='improve']").on("click", this._onImprove.bind(this));
-        html.find(".editor-content--medium").parent().addClass("editor--medium");
-    }
-
-    setPosition (position) {
-        if ($(this.form).hasClass("main-form--limited") && position.width == 800 && position.height == 707) {
-            position.width = 650;
-            position.height = 600;
-        }
-        super.setPosition(position);
-    }
-
-    _onInputKeydown (event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            super.submit();
-            $(event.currentTarget)[0].blur();
-        }
-    }
-
-    _onShowImage (event) {
-        event.preventDefault();
-        new ImagePopout(this.item.img, {
-            title: this.item.name
-        }).render(true);
     }
 
     async _onImprove (event) {

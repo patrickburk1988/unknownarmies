@@ -1,4 +1,6 @@
-export default class UAMilestoneSheet extends ItemSheet
+import UABaseItemSheet from "./base-item-sheet.js";
+
+export default class UAMilestoneSheet extends UABaseItemSheet
 {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -8,23 +10,14 @@ export default class UAMilestoneSheet extends ItemSheet
                 "milestone"
             ],
             height: 123,
-            template: "systems/unknownarmies/template/item/milestone-sheet.hbs",
+            // MAYBE template: "systems/unknownarmies/template/item/milestone-sheet.hbs",
             width: 800
         });
     }
 
     activateListeners (html) {
         super.activateListeners(html);
-        html.find("input").on("keydown", this._onInputKeydown.bind(this));
         html.find("[data-action='roll']").on("click", this._onRoll.bind(this));
-    }
-
-    _onInputKeydown (event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            super.submit();
-            $(event.currentTarget)[0].blur();
-        }
     }
 
     async _onRoll (event) {

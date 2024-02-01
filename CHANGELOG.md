@@ -1,3 +1,13 @@
+## v1.2.1
+
+- Moved common functions from actor sheets to `base-actor-sheet.js`.
+- Moved common functions from item sheets to `base-item-sheet.js`.
+
+## v1.2.0
+
+- Moved roll modifier to chat message flavor text.
+- Fixed identity feature non-English localization issues.
+
 ## v1.1.9
 
 - Added option to modify rolls via popup when right-clicking roll button (or when left-clicking while holding shift, control or alt).
