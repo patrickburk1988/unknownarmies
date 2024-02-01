@@ -111,7 +111,6 @@ export default class UACabalSheet extends ActorSheet
         let rollResult = parseInt(roll.result);
         let vs = game.i18n.localize("UA.Vs");
         let rollTarget = parseInt(dataset["rollTarget"]) + modifier;
-        let modifierString = modifier == 0 ? "" : ` <span class="roll-modifier">(` + (modifier > 0 ? "+" : "") + modifier + `%)</span>`;
         let rollType = dataset["rollType"];
         let outcome = "";
         switch (rollResult) {
@@ -135,10 +134,11 @@ export default class UACabalSheet extends ActorSheet
                 outcome += rollResult <= rollTarget ? "Success" : "Failure";
         }
         outcome = game.i18n.localize("UA." + outcome.replace(/\s/g, ""));
+        let modifierString = modifier == 0 ? "" : (modifier > 0 ? " + " : " - ") + Math.abs(modifier) + `%`;
         let content = "";
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;
-        content += `        <h4 class="dice-total">${rollResult} <span class="vs">${vs}</span> ${rollTarget}${modifierString}</h4>`;
+        content += `        <h4 class="dice-total">${rollResult} <span class="vs">${vs}</span> ${rollTarget}</h4>`;
         content += `        <div class="dice-tooltip">`;
         content += `            <section class="tooltip-part">`;
         content += `                <div class="dice">`;
@@ -157,7 +157,7 @@ export default class UACabalSheet extends ActorSheet
         content += `</div>`;
         roll.toMessage({
             content: content,
-            flavor: dataset["rollLabel"]
+            flavor: dataset["rollLabel"] + modifierString
         });
     }
 
