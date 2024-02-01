@@ -2,7 +2,7 @@ export default class UABaseItemSheet extends ItemSheet
 {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            tabs: [{ // TODO Make sure this works with milestones.
+            tabs: [{
                 navSelector: ".tab-buttons",
                 contentSelector: ".tab-panels",
                 initial: "main"
@@ -16,14 +16,15 @@ export default class UABaseItemSheet extends ItemSheet
     }
 
     async getData (options) {
-        // TODO Make sure this works with milestones.
         let data = await super.getData(options);
-        data.enrichedPublicNotes = await TextEditor.enrichHTML(this.object.system.notes.public, {
-            async: true
-        });
-        data.enrichedPrivateNotes = await TextEditor.enrichHTML(this.object.system.notes.private, {
-            async: true
-        });
+        if (this.constructor.name != "UAMilestoneSheet") { // FIX
+            data.enrichedPublicNotes = await TextEditor.enrichHTML(this.object.system.notes.public, {
+                async: true
+            });
+            data.enrichedPrivateNotes = await TextEditor.enrichHTML(this.object.system.notes.private, {
+                async: true
+            });
+        }
         return data;
     }
 
