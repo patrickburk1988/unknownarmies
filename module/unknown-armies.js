@@ -114,6 +114,9 @@ Hooks.once("init", async function() {
     Handlebars.registerHelper("replace", function (string, pattern, replacement) {
         return string.replace(pattern, replacement);
     });
+    Handlebars.registerHelper("replaceAll", function (string, pattern, replacement) {
+        return string.replaceAll(pattern, replacement);
+    });
     Handlebars.registerHelper("shockGaugeSchema", function (meter, key) {
         return UAActor.shockGaugeSchema[meter][key];
     });
