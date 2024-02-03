@@ -50,6 +50,7 @@
                                 <span>+{{item.system.percentage}}%</span>
                             </div>
                             <div class="item-list__column">
+                                <button data-action="post-item"><i class="fas fa-message"></i></button>
                                 <button data-action="edit-item"><i class="fas fa-edit"></i></button>
                                 <button data-action="destroy-item"><i class="fas fa-trash"></i></button>
                             </div>
@@ -67,9 +68,6 @@
                             <span>{{localize 'UA.Artifact'}}</span>
                         </div>
                         <div class="item-list__column">
-                            <span>{{localize 'UA.Power'}}</span>
-                        </div>
-                        <div class="item-list__column">
                             <span>{{localize 'UA.Charges'}}</span>
                         </div>
                         <button data-action="create-item" data-item-type="artifact"><i class="fas fa-plus"></i></button>
@@ -80,12 +78,10 @@
                                 <span>{{item.name}}</span>
                             </div>
                             <div class="item-list__column">
-                                <span>{{item.system.power}}</span>
-                            </div>
-                            <div class="item-list__column">
                                 <span>{{#if item.system.charges.isHidden}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</span>
                             </div>
                             <div class="item-list__column">
+                                <button data-action="post-item"><i class="fas fa-message"></i></button>
                                 <button data-action="edit-item"><i class="fas fa-edit"></i></button>
                                 <button data-action="destroy-item"><i class="fas fa-trash"></i></button>
                             </div>
@@ -108,6 +104,7 @@
                                 <span>{{item.name}}</span>
                             </div>
                             <div class="item-list__column">
+                                <button data-action="post-item"><i class="fas fa-message"></i></button>
                                 <button data-action="edit-item"><i class="fas fa-edit"></i></button>
                                 <button data-action="destroy-item"><i class="fas fa-trash"></i></button>
                             </div>

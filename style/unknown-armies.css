@@ -47,21 +47,21 @@
   border-radius:0;
 }
 .unknownarmies.sheet.cabal .item-list--milestones .item-list__header,.unknownarmies.sheet.cabal .item-list--milestones .item-list__item{
-  grid-template-columns:5fr 1fr 4rem;
+  grid-template-columns:5fr 2fr 6rem;
   padding-left:.625rem;
 }
 .unknownarmies.sheet.cabal .item-list--artifacts [data-action=create-item]{
   border-radius:0;
 }
 .unknownarmies.sheet.cabal .item-list--artifacts .item-list__header,.unknownarmies.sheet.cabal .item-list--artifacts .item-list__item{
-  grid-template-columns:3fr 2fr 1fr 4rem;
+  grid-template-columns:3fr 1fr 6rem;
   padding-left:.625rem;
 }
 .unknownarmies.sheet.cabal .item-list--items [data-action=create-item]{
   border-radius:0;
 }
 .unknownarmies.sheet.cabal .item-list--items .item-list__header,.unknownarmies.sheet.cabal .item-list--items .item-list__item{
-  grid-template-columns:1fr 4rem;
+  grid-template-columns:1fr 6rem;
   padding-left:.625rem;
 }
 
@@ -198,28 +198,28 @@
   border-radius:0;
 }
 .unknownarmies.sheet.character .item-list--rituals .item-list__header,.unknownarmies.sheet.character .item-list--rituals .item-list__item{
-  grid-template-columns:3fr 1fr 4rem;
+  grid-template-columns:3fr 1fr 6rem;
   padding-left:.625rem;
 }
 .unknownarmies.sheet.character .item-list--spells [data-action=create-item]{
   border-radius:0;
 }
 .unknownarmies.sheet.character .item-list--spells .item-list__header,.unknownarmies.sheet.character .item-list--spells .item-list__item{
-  grid-template-columns:3fr 1fr 4rem;
+  grid-template-columns:3fr 1fr 6rem;
   padding-left:.625rem;
 }
 .unknownarmies.sheet.character .item-list--artifacts [data-action=create-item]{
   border-radius:0;
 }
 .unknownarmies.sheet.character .item-list--artifacts .item-list__header,.unknownarmies.sheet.character .item-list--artifacts .item-list__item{
-  grid-template-columns:3fr 2fr 1fr 4rem;
+  grid-template-columns:3fr 1fr 6rem;
   padding-left:.625rem;
 }
 .unknownarmies.sheet.character .item-list--items [data-action=create-item]{
   border-radius:0;
 }
 .unknownarmies.sheet.character .item-list--items .item-list__header,.unknownarmies.sheet.character .item-list--items .item-list__item{
-  grid-template-columns:1fr 4rem;
+  grid-template-columns:1fr 6rem;
   padding-left:.625rem;
 }
 .unknownarmies.sheet.character .identity:not(:first-of-type){
@@ -453,7 +453,7 @@
   text-transform:uppercase;
 }
 
-.unknownarmies.sheet button[data-action=create-item],.unknownarmies.sheet button[data-action=destroy-item],.unknownarmies.sheet button[data-action=edit-item]{
+.unknownarmies.sheet button[data-action=create-item],.unknownarmies.sheet button[data-action=destroy-item],.unknownarmies.sheet button[data-action=edit-item],.unknownarmies.sheet button[data-action=post-item]{
   background-color:rgba(12,13,15,.1);
   color:inherit;
 }
@@ -485,14 +485,14 @@
 .unknownarmies.sheet button[data-action=create-item]:focus,.unknownarmies.sheet button[data-action=create-item]:hover{
   filter:brightness(20);
 }
-.unknownarmies.sheet button[data-action=destroy-item],.unknownarmies.sheet button[data-action=edit-item]{
+.unknownarmies.sheet button[data-action=destroy-item],.unknownarmies.sheet button[data-action=edit-item],.unknownarmies.sheet button[data-action=post-item]{
   border:0;
   border-radius:0;
   height:2rem;
   transition:filter .1s;
   width:2rem;
 }
-.unknownarmies.sheet button[data-action=destroy-item]:focus,.unknownarmies.sheet button[data-action=destroy-item]:hover,.unknownarmies.sheet button[data-action=edit-item]:focus,.unknownarmies.sheet button[data-action=edit-item]:hover{
+.unknownarmies.sheet button[data-action=destroy-item]:focus,.unknownarmies.sheet button[data-action=destroy-item]:hover,.unknownarmies.sheet button[data-action=edit-item]:focus,.unknownarmies.sheet button[data-action=edit-item]:hover,.unknownarmies.sheet button[data-action=post-item]:focus,.unknownarmies.sheet button[data-action=post-item]:hover{
   filter:brightness(20);
 }
 .unknownarmies.sheet button[data-action=improve]{
@@ -710,8 +710,7 @@
   flex-grow:1;
 }
 .unknownarmies.sheet .lower-content{
-  grid-auto-rows:1fr;
-  height:100%;
+  grid-auto-rows:min-content;
 }
 .unknownarmies.sheet .lower-content--2-columns{
   grid-template-columns:repeat(2, 1fr);
