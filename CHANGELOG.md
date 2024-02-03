@@ -2,6 +2,8 @@
 
 - Moved common functions from actor sheets to `base-actor-sheet.js`.
 - Moved common functions from item sheets to `base-item-sheet.js`.
+- Added "post item to chat" buttons to character/cabal sheets.
+- Added effect tooltip to items in character/cabal sheets.
 
 ## v1.2.0
 
