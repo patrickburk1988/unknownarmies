@@ -75,7 +75,7 @@
                     <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'artifact')}}
                         <li class="item-list__item" data-item-id="{{item.id}}">
                             <div class="item-list__column">
-                                <span>{{item.name}}</span>
+                                <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>
                             </div>
                             <div class="item-list__column">
                                 <span>{{#if item.system.charges.isHidden}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</span>
@@ -101,7 +101,7 @@
                     <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'item')}}
                         <li class="item-list__item" data-item-id="{{item.id}}">
                             <div class="item-list__column">
-                                <span>{{item.name}}</span>
+                                <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>
                             </div>
                             <div class="item-list__column">
                                 <button data-action="post-item"><i class="fas fa-message"></i></button>

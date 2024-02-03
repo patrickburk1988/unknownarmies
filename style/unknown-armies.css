@@ -710,7 +710,8 @@
   flex-grow:1;
 }
 .unknownarmies.sheet .lower-content{
-  grid-auto-rows:min-content;
+  grid-auto-rows:1fr;
+  height:100%;
 }
 .unknownarmies.sheet .lower-content--2-columns{
   grid-template-columns:repeat(2, 1fr);
