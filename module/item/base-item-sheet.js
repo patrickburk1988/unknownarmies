@@ -12,7 +12,7 @@ export default class UABaseItemSheet extends ItemSheet
 
     get template() {
         // TODO Make sure this works for milestones.
-        return "systems/unknownarmies/template/item/" + (game.user.isGM || !this.actor.limited ? "" : "limited-") + this.constructor.name.replaceAll(/UA|Sheet/g, "").toLowerCase() + "-sheet.hbs";
+        return "systems/unknownarmies/template/item/" + ((game.user.isGM || !this.item.limited) ? "" : "limited-") + this.constructor.name.replaceAll(/UA|Sheet/g, "").toLowerCase() + "-sheet.hbs";
     }
 
     async getData (options) {
