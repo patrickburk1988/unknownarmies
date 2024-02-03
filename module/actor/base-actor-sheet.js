@@ -37,6 +37,7 @@ export default class UABaseActorSheet extends ActorSheet
         showImage.on("click", this._onShowImage.bind(this));
         showImage.prop("disabled", false);
         html.find("[data-action='create-item']").on("click", this._onCreateItem.bind(this));
+        html.find("[data-action='post-item']").on("click", this._onPostItem.bind(this));
         html.find("[data-action='edit-item']").on("click", this._onEditItem.bind(this));
         html.find("[data-action='destroy-item']").on("click", this._onDestroyItem.bind(this));
         html.find("[data-action='roll']").on("click contextmenu", this._onRoll.bind(this));
@@ -76,6 +77,40 @@ export default class UABaseActorSheet extends ActorSheet
             type: type,
         }]).then(item => {
             item[0].sheet.render(true);
+        });
+    }
+
+    _onPostItem (event) {
+        // TODO Make sure this is all formatted correctly.
+        let item = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));
+        let content = `<div>`;
+        content += `    <h3>${item.name}</h3>`;
+        switch (item.type) {
+            case "artifact":
+                // TODO power charges description
+                content += `    ${item.system.effect}`;
+                break;
+            case "identity":
+                // TODO PERCENTAGE type isObsession hasExperience ofCourseICan substitutesFor ability attributes symbols taboos channels domain taboos generateCharge features details
+                break;
+            case "item":
+                // TODO description
+                content += `    ${item.system.effect}`;
+                break;
+            case "milestone":
+                content += `    ${item.system.percentage}%`;
+                break;
+            case "ritual":
+                // TODO cost action
+                content += `    ${item.system.effect}`;
+                break;
+            case "spell":
+                // TODO school cost
+                content += `    ${item.system.effect}`;
+        }
+        content += `</div>`;
+        ChatMessage.create({
+            content: content
         });
     }
 
