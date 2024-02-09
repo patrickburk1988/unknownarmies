@@ -4,9 +4,6 @@
   content:url(../image/pause.png);
 }
 
-.unknownarmies.sheet.artifact input[type=text]{
-  text-align:center;
-}
 .unknownarmies.sheet.artifact input[type=text][value="?"]{
   font-size:20px;
   font-size:1.25rem;

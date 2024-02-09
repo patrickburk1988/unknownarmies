@@ -1,3 +1,7 @@
+## v1.2.2
+
+- Uncentered artifact sheet name field.
+
 ## v1.2.1
 
 - Moved common functions from actor sheets to `base-actor-sheet.js`.
