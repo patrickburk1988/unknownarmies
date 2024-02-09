@@ -100,6 +100,9 @@ Hooks.once("init", async function() {
     Handlebars.registerHelper("isGM", function() {
         return game.user.isGM;
     });
+    Handlebars.registerHelper("lang", function() {
+        return game.i18n.lang;
+    });
     Handlebars.registerHelper("not", function (arg) {
         return !arg;
     });

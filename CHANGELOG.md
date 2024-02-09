@@ -1,6 +1,7 @@
 ## v1.2.2
 
 - Uncentered artifact sheet name field.
+- Resized sheet elements for Russian localization.
 
 ## v1.2.1
 

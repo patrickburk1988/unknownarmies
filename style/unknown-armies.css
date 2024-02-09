@@ -4,6 +4,9 @@
   content:url(../image/pause.png);
 }
 
+.unknownarmies.sheet.artifact input[type=text]:nth-child(10){
+  text-align:center;
+}
 .unknownarmies.sheet.artifact input[type=text][value="?"]{
   font-size:20px;
   font-size:1.25rem;
@@ -11,6 +14,9 @@
 .unknownarmies.sheet.artifact input[type=text][value=∞]{
   font-size:30px;
   font-size:1.875rem;
+}
+.unknownarmies.sheet.artifact .main-form.editable.ru .label:nth-of-type(3){
+  white-space:break-spaces;
 }
 .unknownarmies.sheet.artifact .upper-content__section{
   grid-template-columns:repeat(2, min-content) 1fr repeat(5, min-content);
@@ -75,17 +81,30 @@
 .unknownarmies.sheet.character [data-action=reset-failed-notches]:focus,.unknownarmies.sheet.character [data-action=reset-failed-notches]:hover{
   text-shadow:0 0 .3125rem #dfff00;
 }
-.unknownarmies.sheet.character .upper-content{
-  grid-template-columns:max-content 1fr min-content;
+.unknownarmies.sheet.character .main-form.editable.ru .obsession-passions input[type=checkbox]{
+  margin:0;
 }
-.unknownarmies.sheet.character .upper-content__section:first-of-type{
-  grid-template-columns:min-content 1fr repeat(2, min-content) max-content;
+.unknownarmies.sheet.character .main-form.editable.ru .obsession-passions .label:last-of-type{
+  white-space:pre-wrap;
 }
-.unknownarmies.sheet.character .upper-content__section--wound-threshold-only{
-  grid-template-columns:min-content;
+.unknownarmies.sheet.character .main-form.editable.ru .shock-meter [data-action=roll]{
+  width:5.25rem;
 }
-.unknownarmies.sheet.character .name{
-  grid-column:2 /  6;
+.unknownarmies.sheet.character .main-form.editable.ru .shock-meter h3{
+  font-size:14px;
+  font-size:.875rem;
+}
+.unknownarmies.sheet.character .main-form.editable.ru .shock-meter__abilities-hardened-notches:before{
+  transform:translateX(calc(50% - .25rem)) translateY(2.25rem);
+}
+.unknownarmies.sheet.character .main-form.editable.ru .shock-meter__failed-notches-ongoing-madness:before{
+  transform:translateX(calc(50% + 1.125rem)) translateY(.375rem);
+}
+.unknownarmies.sheet.character .main-form.editable.ru .shock-meter .label--wrap{
+  word-break:break-word;
+}
+.unknownarmies.sheet.character .main-form.editable.ru .item-list--rituals .item-list__header,.unknownarmies.sheet.character .main-form.editable.ru .item-list--rituals .item-list__item,.unknownarmies.sheet.character .main-form.editable.ru .item-list--spells .item-list__header,.unknownarmies.sheet.character .main-form.editable.ru .item-list--spells .item-list__item{
+  grid-template-columns:3fr 1.5fr 6rem;
 }
 .unknownarmies.sheet.character .status{
   display:flex;
@@ -101,6 +120,21 @@
   color:#0c0d0f;
   padding:.3125rem .5rem;
   white-space:nowrap;
+}
+.unknownarmies.sheet.character .upper-content{
+  grid-template-columns:max-content 1fr min-content;
+}
+.unknownarmies.sheet.character .upper-content__section:first-of-type{
+  grid-template-columns:min-content 1fr repeat(2, min-content) max-content;
+}
+.unknownarmies.sheet.character .upper-content__section--wound-threshold-only{
+  grid-template-columns:min-content;
+}
+.unknownarmies.sheet.character .name{
+  grid-column:2 /  6;
+}
+.unknownarmies.sheet.character .cabal{
+  max-width:7.8125rem;
 }
 .unknownarmies.sheet.character .tab-buttons{
   grid-template-columns:repeat(6, 1fr);
@@ -319,6 +353,9 @@
   font-weight:400;
 }
 
+.unknownarmies.sheet.identity .main-form.editable.ru .stats-features__details{
+  line-height:.5625rem;
+}
 .unknownarmies.sheet.identity .upper-content__section{
   grid-template-columns:repeat(2, min-content) 1fr repeat(5, min-content);
 }

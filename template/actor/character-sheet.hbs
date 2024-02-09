@@ -1,4 +1,4 @@
-<form class="main-form {{cssClass}}">
+<form class="main-form {{cssClass}} {{lang}}">
     <div class="status">{{#if actor.system.isBurnedOut}}
         <span>{{localize 'UA.BurnedOut'}}</span>{{/if}}{{#if actor.system.wounds.severity}}
         <span>{{localize (concat 'UA.' (replace actor.system.wounds.severity ' ' ''))}}</span>{{/if}}
@@ -14,7 +14,7 @@
             <span class="label">{{localize 'UA.Concept'}}:</span>
             <input type="text" name="system.concept" data-dtype="String" value="{{actor.system.concept}}">
             <span class="label">{{localize 'UA.Cabal'}}:</span>
-            <select name="system.cabal">{{#select actor.system.cabal}}
+            <select class="cabal" name="system.cabal">{{#select actor.system.cabal}}
                 <option value=""></option>{{#each cabals as |cabal x|}}
                 <option value="{{cabal.id}}">{{cabal.name}}</option>{{/each}}
             {{/select}}</select>
@@ -141,9 +141,9 @@
                                 {{#if (equals item.system.type 'Mundane')}}{{#if item.system.mundane.ofCourseICan}}<span class="label">{{localize 'UA.OfCourseICan'}}:</span>
                                 <span>{{stripHTML item.system.mundane.ofCourseICan}}</span>{{/if}}
                                 {{#if item.system.mundane.substitutesFor}}<span class="label">{{localize 'UA.SubstitutesFor'}}:</span>
-                                <span>{{item.system.mundane.substitutesFor}} ({{localize 'UA.SubstitutesForAbility_Details'}})</span>{{/if}}{{/if}}
+                                <span>{{localize (concat 'UA.' item.system.mundane.substitutesFor)}} ({{localize 'UA.SubstitutesForAbility_Details'}})</span>{{/if}}{{/if}}
                                 {{#if (equals item.system.type 'Supernatural')}}{{#if item.system.supernatural.ability}}<span class="label">{{localize 'UA.SupernaturalAbility'}}:</span>
-                                <span>{{item.system.supernatural.ability}} ({{#if (includes item.system.supernatural.ability 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{/if}}{{#if (equals item.system.supernatural.ability 'Influence')}}{{localize 'UA.Influence_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Harm')}}{{localize 'UA.Harm_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Information')}}{{localize 'UA.Information_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Protection')}}{{localize 'UA.Protection_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{/if}}{{#if (equals item.system.supernatural.ability 'Versatility')}}{{localize 'UA.Versatility_Details'}}{{/if}})</span></span>{{/if}}{{/if}}
+                                <span>{{localize (concat 'UA.' (replaceAll item.system.supernatural.ability ' ' ''))}} ({{#if (includes item.system.supernatural.ability 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{/if}}{{#if (equals item.system.supernatural.ability 'Influence')}}{{localize 'UA.Influence_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Harm')}}{{localize 'UA.Harm_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Information')}}{{localize 'UA.Information_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Protection')}}{{localize 'UA.Protection_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{/if}}{{#if (equals item.system.supernatural.ability 'Versatility')}}{{localize 'UA.Versatility_Details'}}{{/if}})</span></span>{{/if}}{{/if}}
                                 {{#if (equals item.system.type 'Avatar')}}{{#if item.system.avatar.attributes}}<span class="label">{{localize 'UA.Attributes'}}:</span>
                                 <span>{{stripHTML item.system.avatar.attributes}}</span>{{/if}}
                                 {{#if item.system.avatar.symbols}}<span class="label">{{localize 'UA.Symbols'}}:</span>
