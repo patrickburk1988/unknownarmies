@@ -122,7 +122,7 @@
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Identities'}}:</h2>
                 <div class="item-list item-list--identities">
-                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'identity')}}
+                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'identity')}}
                         <li class="item-list__item identity" data-item-id="{{item.id}}">
                             <div class="identity__upper-content">
                                 <button data-action="roll" data-roll-label="{{localize (concat 'UA.' item.system.type 'Identity')}} ({{item.name}})" data-roll-target="{{item.system.percentage}}"><i class="fas fa-d10"></i></button>
@@ -203,7 +203,7 @@
                         </div>
                         <button data-action="create-item" data-item-type="ritual"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'ritual')}}
+                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'ritual')}}
                         <li class="item-list__item" data-item-id="{{item.id}}">
                             <div class="item-list__column">
                                 <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>
@@ -232,7 +232,7 @@
                         </div>
                         <button data-action="create-item" data-item-type="spell"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'spell')}}
+                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'spell')}}
                         <li class="item-list__item" data-item-id="{{item.id}}">
                             <div class="item-list__column">
                                 <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>
@@ -263,7 +263,7 @@
                         </div>
                         <button data-action="create-item" data-item-type="artifact"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'artifact')}}
+                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'artifact')}}
                         <li class="item-list__item" data-item-id="{{item.id}}">
                             <div class="item-list__column">
                                 <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>
@@ -289,7 +289,7 @@
                         </div>
                         <button data-action="create-item" data-item-type="item"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">{{#each actor.items as |item itemId|}}{{#if (equals item.type 'item')}}
+                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'item')}}
                         <li class="item-list__item" data-item-id="{{item.id}}">
                             <div class="item-list__column">
                                 <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>

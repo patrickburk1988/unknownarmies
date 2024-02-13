@@ -1,3 +1,7 @@
+## v1.2.3
+
+- Added ability to reorder items on actor sheets.
+
 ## v1.2.2
 
 - Uncentered artifact sheet name field.

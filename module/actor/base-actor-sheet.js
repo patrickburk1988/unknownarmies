@@ -21,6 +21,7 @@ export default class UABaseActorSheet extends ActorSheet
 
     async getData (options) {
         let data = await super.getData(options);
+        data.items = this.actor.items.contents.sort((a, b) => a.sort - b.sort);
         data.enrichedPublicNotes = await TextEditor.enrichHTML(this.object.system.notes.public, {
             async: true
         });
