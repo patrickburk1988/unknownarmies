@@ -171,7 +171,7 @@
                                 {{#if item.system.adept.generateCharge.major}}<span class="label">{{localize 'UA.GenerateMajorCharge'}}:</span>
                                 <span>{{stripHTML item.system.adept.generateCharge.major}}</span>{{/if}}{{/if}}
                                 {{#each item.system.features as |feature x|}}{{#if feature}}<span class="label">{{localize 'UA.Feature'}}:</span>
-                                <span>{{localize (concat 'UA.' (replaceAll feature ' ' ''))}} ({{localize (concat 'UA.' (replaceAll feature ' ' '') '_Details')}})</span>{{/if}}{{/each}}
+                                <span>{{#if (includes feature 'Substitutes')}}{{localize (concat 'UA.' (replaceAll (replaceAll feature 'for' 'For') ' ' ''))}}{{else}}{{localize (concat 'UA.' (replaceAll feature ' ' ''))}}{{/if}} ({{#if (includes feature 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes feature 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes feature 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes feature 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes feature 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{localize (concat 'UA.' (replaceAll feature ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}})</span>{{/if}}{{/each}}
                                 {{#if item.system.details}}<span class="label">{{localize 'UA.Details'}}:</span>
                                 <span>{{stripHTML item.system.details}}</span>{{/if}}
                             </div>{{/if}}

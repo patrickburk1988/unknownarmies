@@ -1,3 +1,7 @@
+## v1.2.4
+
+- Fixed identity feature localization in identity/character sheets.
+
 ## v1.2.3
 
 - Added ability to reorder items on actor sheets.

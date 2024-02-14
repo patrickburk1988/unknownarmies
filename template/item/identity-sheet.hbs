@@ -70,7 +70,7 @@
                         <option value="Vague Protection">{{localize 'UA.VagueProtection'}}</option>
                         <option value="Versatility">{{localize 'UA.Versatility'}}</option>
                     {{/select}}</select>
-                    <span class="stats-features__details">{{#if (includes item.system.supernatural.ability 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{/if}}{{#if (equals item.system.supernatural.ability 'Influence')}}{{localize 'UA.Influence_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Harm')}}{{localize 'UA.Harm_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Information')}}{{localize 'UA.Information_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Protection')}}{{localize 'UA.Protection_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{/if}}{{#if (equals item.system.supernatural.ability 'Versatility')}}{{localize 'UA.Versatility_Details'}}{{/if}}</span>{{/if}}{{#if (equals item.system.type 'Avatar')}}
+                    <span class="stats-features__details">{{#if item.system.supernatural.ability}}{{#if (includes item.system.supernatural.ability 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Harm')}}{{localize 'UA.Harm_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Information')}}{{localize 'UA.Information_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Protection')}}{{localize 'UA.Protection_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{else}}{{localize (concat 'UA.' item.system.supernatural.ability '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/if}}{{#if (equals item.system.type 'Avatar')}}
                     <span class="label">{{localize 'UA.Attributes'}}:</span>
                     {{editor enrichedAttributes target="system.avatar.attributes" button=true engine="prosemirror"}}
                     <span class="label">{{localize 'UA.Symbols'}}:</span>
@@ -143,7 +143,7 @@
                         <option value="Use Gutter Magick">{{localize 'UA.UseGutterMagick'}}</option>{{#if (equals ../item.system.type 'Mundane')}}
                         <option value="Weaponized Physique">{{localize 'UA.WeaponizedPhysique'}}</option>{{/if}}
                     {{/select}}</select>
-                    <span class="stats-features__details">{{localize (concat 'UA.' (replaceAll feature ' ' '') '_Details')}}</span>{{/each}}
+                    <span class="stats-features__details">{{#if feature}}{{#if (includes feature 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes feature 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes feature 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes feature 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes feature 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{localize (concat 'UA.' (replaceAll feature ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/each}}
                 </div>
             </div>{{/if}}
             <div class="lower-content__section">
