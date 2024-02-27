@@ -11,6 +11,21 @@ import UASpellSheet from "./item/spell-sheet.js";
 
 Hooks.once("init", async function() {
     console.log("Rebooting the universe.");
+    // Setting Registration ----------------------------------------------------
+    game.settings.register("unknownarmies", "MM&YIdentityFeatures", {
+        name: "UA.MM&YIdentityFeatures", // MAYBE
+        hint: "UA.MM&YIdentityFeatures_Hint", // MAYBE
+        scope: "world",
+        config: true,
+        type: Boolean,
+        default: false, // MAYBE
+        requiresReload: true // MAYBE
+        // onChange: value => {},
+        // choices: {},
+        // range: {},
+        // filepicker: "",
+    });
+    // Sheet Registration ------------------------------------------------------
     CONFIG.Actor.documentClass = UAActor;
     CONFIG.Item.documentClass = UAItem;
     Actors.unregisterSheet("core", ActorSheet);
@@ -119,6 +134,9 @@ Hooks.once("init", async function() {
     });
     Handlebars.registerHelper("replaceAll", function (string, pattern, replacement) {
         return string.replaceAll(pattern, replacement);
+    });
+    Handlebars.registerHelper("setting", function (string) {
+        return game.settings.get("unknownarmies", string);
     });
     Handlebars.registerHelper("shockGaugeSchema", function (meter, key) {
         return UAActor.shockGaugeSchema[meter][key];

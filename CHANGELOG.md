@@ -1,3 +1,7 @@
+## v1.2.5
+
+- Added world setting for using "Me, Myself & You" identity features.
+
 ## v1.2.4
 
 - Fixed identity feature localization in identity/character sheets.

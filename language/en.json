@@ -8,6 +8,8 @@
     "TYPES.Item.spell":                  "Spell",
     "UA.Adept":                          "Adept",
     "UA.AdeptIdentity":                  "Adept Identity",
+    "UA.MM&YIdentityFeatures":           "\"Me, Myself & You\" Identity Features",
+    "UA.MM&YIdentityFeatures_Hint":      "Use additional identity features from \"Me, Myself & You\".",
     "UA.AlterFear":                      "Alter Fear",
     "UA.AlterNoble":                     "Alter Noble",
     "UA.AlterPassion_Details":           "Roll this identity to supernaturally alter someone’s chosen passion.",
