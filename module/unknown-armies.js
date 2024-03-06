@@ -162,6 +162,7 @@ Hooks.on("renderDialog", (dialog, html) => {
 
 Hooks.on("renderSidebarTab", (app, html) => {
     if (app.tabName === "chat") {
+        html.find(".chat-control-icon i").removeClass("fa-dice-d20").addClass("fa-dice-d10");
         html.find(".chat-control-icon").on("click", async () => {
             let roll = new Roll("1d100");
             await roll.evaluate();

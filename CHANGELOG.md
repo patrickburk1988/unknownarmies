@@ -1,3 +1,7 @@
+## v1.2.7
+
+- Changed chat button icon to d10.
+
 ## v1.2.6
 
 - Added functionality to otherwise useless chat button (rolls 1d100).
