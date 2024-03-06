@@ -148,6 +148,7 @@ Hooks.once("init", async function() {
 });
 
 Hooks.on("renderDialog", (dialog, html) => {
+    // MAYBE Remove dialog?
     let hiddenTypes = [
         "identity",
         "milestone"
@@ -157,4 +158,37 @@ Hooks.on("renderDialog", (dialog, html) => {
             i.remove();
         }
     });
+});
+
+Hooks.on("renderSidebarTab", (app, html) => {
+    if (app.tabName === "chat") {
+        html.find(".chat-control-icon").on("click", async () => {
+            let roll = new Roll("1d100");
+            await roll.evaluate();
+            let rollResult = parseInt(roll.result);
+            let content = "";
+            content += `<div class="dice-roll">`;
+            content += `    <div class="dice-result">`;
+            content += `        <h4 class="dice-total">${rollResult}</h4>`;
+            content += `        <div class="dice-tooltip">`;
+            content += `            <section class="tooltip-part">`;
+            content += `                <div class="dice">`;
+            content += `                    <header class="part-header flexrow">`;
+            content += `                        <span class="part-formula">1d100</span>`;
+            content += `                        <span class="part-total">${rollResult}</span>`;
+            content += `                    </header>`;
+            content += `                    <ol class="dice-rolls">`;
+            content += `                        <li class="roll die d100">${rollResult}</li>`;
+            content += `                    </ol>`;
+            content += `                </div>`;
+            content += `            </section>`;
+            content += `        </div>`;
+            content += `    </div>`;
+            content += `</div>`;
+            roll.toMessage({
+                content: content,
+                flavor: "1d100"
+            });
+        });
+    }
 });

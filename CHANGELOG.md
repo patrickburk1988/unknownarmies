@@ -1,3 +1,7 @@
+## v1.2.6
+
+- Added functionality to otherwise useless chat button (rolls 1d100).
+
 ## v1.2.5
 
 - Added world setting for using "Me, Myself & You" identity features.
