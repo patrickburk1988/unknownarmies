@@ -197,7 +197,10 @@ export default class UABaseActorSheet extends ActorSheet
         content += `</div>`;
         roll.toMessage({
             content: content,
-            flavor: dataset["rollLabel"] + modifierString
+            flavor: dataset["rollLabel"] + modifierString,
+            speaker: {
+                actor: this.actor.id
+            }
         });
     }
 
