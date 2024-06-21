@@ -4,6 +4,7 @@
     "TYPES.Item.artifact":               "Артефакт",
     "TYPES.Item.identity":               "Личина",
     "TYPES.Item.item":                   "Предмет",
+    "TYPES.Item.milestone":              "Milestone",
     "TYPES.Item.ritual":                 "Ритуал",
     "TYPES.Item.spell":                  "Заклинание",
     "UA.Adept":                          "Адепт",

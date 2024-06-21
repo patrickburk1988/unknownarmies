@@ -646,7 +646,7 @@
   flex-direction:column;
   position:relative;
 }
-.unknownarmies.sheet .main-form.locked .tab-buttons{
+.unknownarmies.sheet .main-form.locked .editor-edit,.unknownarmies.sheet .main-form.locked .tab-buttons{
   display:none;
 }
 .unknownarmies.sheet .main-form--limited h2{

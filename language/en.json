@@ -4,6 +4,7 @@
     "TYPES.Item.artifact":               "Artifact",
     "TYPES.Item.identity":               "Identity",
     "TYPES.Item.item":                   "Item",
+    "TYPES.Item.milestone":              "Milestone",
     "TYPES.Item.ritual":                 "Ritual",
     "TYPES.Item.spell":                  "Spell",
     "UA.Adept":                          "Adept",
