@@ -1,3 +1,12 @@
+## v1.2.9
+
+- Update to v12. Nothing appears to be broken?
+
+## v1.2.8
+
+- Added speaker to roll chat messages.
+- Russian localization update.
+
 ## v1.2.7
 
 - Changed chat button icon to d10.
