@@ -12,9 +12,9 @@ import UASpellSheet from "./item/spell-sheet.js";
 Hooks.once("init", async function() {
     console.log("Rebooting the universe.");
     // Setting Registration ----------------------------------------------------
-    game.settings.register("unknownarmies", "MM&YIdentityFeatures", {
-        name: "UA.MM&YIdentityFeatures", // MAYBE
-        hint: "UA.MM&YIdentityFeatures_Hint", // MAYBE
+    game.settings.register("unknownarmies", "IdentitiesAllowMM&YFeatures", {
+        name: "UA.IdentitiesAllowMM&YFeatures", // MAYBE
+        hint: "UA.IdentitiesAllowMM&YFeatures_Hint", // MAYBE
         scope: "world",
         config: true,
         type: Boolean,

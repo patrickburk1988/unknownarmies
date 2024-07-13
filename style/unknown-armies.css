@@ -462,6 +462,12 @@
   font-family:Fira Sans,sans-serif;
 }
 
+.unknownarmies.sheet input[type=number]{
+  font-size:18px;
+  font-size:1.125rem;
+  text-align:center;
+}
+
 .unknownarmies.sheet .name[name],.unknownarmies.sheet.character .charges input[type=number],.unknownarmies.sheet.character .upper-content__section--wound-threshold-only input[type=number],.unknownarmies.sheet.identity input[type=number],.unknownarmies.sheet.milestone input[type=number]{
   font-size:26px;
   font-size:1.625rem;
@@ -602,11 +608,6 @@
 }
 .unknownarmies.sheet input[type=checkbox]{
   accent-color:#dfff00;
-}
-.unknownarmies.sheet input[type=number]{
-  font-size:18px;
-  font-size:1.125rem;
-  text-align:center;
 }
 .unknownarmies.sheet input[type=radio]{
   -webkit-appearance:none;
