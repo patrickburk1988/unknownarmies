@@ -52,14 +52,14 @@
                     <span class="stats-features__details">{{#if item.system.mundane.substitutesFor}}{{localize 'UA.SubstitutesForAbility_Details'}}{{/if}}</span>{{/if}}{{#if (equals item.system.type 'Supernatural')}}
                     <span class="label">{{localize 'UA.SupernaturalAbility'}}:</span>
                     <select name="system.supernatural.ability">{{#select item.system.supernatural.ability}}
-                        <option value=""></option>{{#if (setting 'MM&YIdentityFeatures')}}
+                        <option value=""></option>{{#if (setting 'IdentitiesAllowMM&YFeatures')}}
                         <option value="Alter Fear">{{localize 'UA.AlterFear'}}</option>
                         <option value="Alter Noble">{{localize 'UA.AlterNoble'}}</option>
                         <option value="Alter Rage">{{localize 'UA.AlterRage'}}</option>{{/if}}
                         <option value="Influence">{{localize 'UA.Influence'}}</option>
                         <option value="Specific Harm">{{localize 'UA.SpecificHarm'}}</option>
                         <option value="Specific Information">{{localize 'UA.SpecificInformation'}}</option>
-                        <option value="Specific Protection">{{localize 'UA.SpecificProtection'}}</option>{{#if (setting 'MM&YIdentityFeatures')}}
+                        <option value="Specific Protection">{{localize 'UA.SpecificProtection'}}</option>{{#if (setting 'IdentitiesAllowMM&YFeatures')}}
                         <option value="Terrorize Helplessness">{{localize 'UA.TerrorizeHelplessness'}}</option>
                         <option value="Terrorize Isolation">{{localize 'UA.TerrorizeIsolation'}}</option>
                         <option value="Terrorize Self">{{localize 'UA.TerrorizeSelf'}}</option>
@@ -115,7 +115,7 @@
                         <option value="Medical">{{localize 'UA.Medical'}}</option>
                         <option value="Provides Firearm Attacks">{{localize 'UA.ProvidesFirearmAttacks'}}</option>
                         <option value="Provides Initiative">{{localize 'UA.ProvidesInitiative'}}</option>
-                        <option value="Provides Wound Threshold">{{localize 'UA.ProvidesWoundThreshold'}}</option>{{#if (setting 'MM&YIdentityFeatures')}}
+                        <option value="Provides Wound Threshold">{{localize 'UA.ProvidesWoundThreshold'}}</option>{{#if (setting 'IdentitiesAllowMM&YFeatures')}}
                         <option value="Reads Fear">{{localize 'UA.ReadsFear'}}</option>
                         <option value="Reads Noble">{{localize 'UA.ReadsNoble'}}</option>
                         <option value="Reads Obsession">{{localize 'UA.ReadsObsession'}}</option>
@@ -137,7 +137,7 @@
                         <option value="Substitutes for Status">{{localize 'UA.SubstitutesForStatus'}}</option>
                         <option value="Substitutes for Struggle">{{localize 'UA.SubstitutesForStruggle'}}</option>
                         <option value="Tactical">{{localize 'UA.Tactical'}}</option>
-                        <option value="Therapeutic">{{localize 'UA.Therapeutic'}}</option>{{#if (setting 'MM&YIdentityFeatures')}}
+                        <option value="Therapeutic">{{localize 'UA.Therapeutic'}}</option>{{#if (setting 'IdentitiesAllowMM&YFeatures')}}
                         <option value="Totem">{{localize 'UA.Totem'}}</option>{{/if}}
                         <option value="Unique">{{localize 'UA.Unique'}}</option>{{/if}}
                         <option value="Use Gutter Magick">{{localize 'UA.UseGutterMagick'}}</option>{{#if (equals ../item.system.type 'Mundane')}}

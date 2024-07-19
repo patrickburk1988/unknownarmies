@@ -257,11 +257,11 @@
   margin-top:.3125rem;
 }
 .unknownarmies.sheet.character .identity__upper-content{
-  grid-template-columns:2rem 1fr 2rem;
   position:relative;
 }
-.unknownarmies.sheet.character .identity [data-action=roll]{
-  width:2rem;
+.unknownarmies.sheet.character .identity [data-action=roll],.unknownarmies.sheet.character .identity [data-action=select-identity-feature]{
+  white-space:nowrap;
+  width:auto;
 }
 .unknownarmies.sheet.character .identity .fa-d10{
   height:.875rem;
@@ -273,10 +273,12 @@
 .unknownarmies.sheet.character .identity__name-percentage{
   align-items:center;
   display:flex;
-  font-size:22px;
-  font-size:1.375rem;
   justify-content:center;
-  text-align:center;
+  margin-top:.1875rem;
+  padding:0 4rem;
+}
+.unknownarmies.sheet.character .identity__name-percentage [data-action=roll],.unknownarmies.sheet.character .identity__name-percentage [data-action=select-identity-feature]{
+  margin-right:.3125rem;
 }
 .unknownarmies.sheet.character .identity__type{
   left:0;
@@ -307,11 +309,16 @@
 .unknownarmies.sheet.character .identity__lower-content{
   grid-template-columns:min-content 1fr;
 }
+.unknownarmies.sheet.character .identity__lower-content [data-action=roll]{
+  min-width:9.0625rem;
+}
 .unknownarmies.sheet.character .identity__lower-content span:nth-child(2n){
+  align-items:center;
+  display:flex;
   font-family:Calluna Sans;
   font-size:12px;
   font-size:.75rem;
-  padding:.3125rem .5rem;
+  padding:.5rem;
 }
 .unknownarmies.sheet.character .charges{
   grid-template-columns:repeat(6, min-content);
@@ -322,10 +329,13 @@
 .chat-message .message-header .flavor-text{
   background-color:#002fa7;
   color:#fbfbfb;
-  font-family:Alatsi,sans-serif;
   line-height:1.25;
   margin-bottom:.1875rem;
   padding:.3125rem .5rem;
+}
+
+.chat-message .message-header .flavor-text,.subheader{
+  font-family:Alatsi,sans-serif;
   text-align:center;
 }
 
@@ -353,6 +363,16 @@
   font-weight:400;
 }
 
+.system-unknownarmies .dialog button{
+  background-color:hsla(0,0%,98%,.15);
+  color:inherit;
+}
+.system-unknownarmies .dialog button:focus,.system-unknownarmies .dialog button:hover{
+  box-shadow:none;
+}
+.system-unknownarmies .dialog p{
+  text-align:center;
+}
 .unknownarmies.sheet.identity .main-form.editable.ru .stats-features__details{
   line-height:.5625rem;
 }
@@ -401,11 +421,20 @@
   margin:.375rem 0 0;
 }
 
-.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=radio],.unknownarmies.sheet input[type=radio]:before,.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
+.system-unknownarmies .dialog .window-content,.unknownarmies.sheet .window-content{
+  background-color:#010109;
+  background-image:url(../image/sheet-background.webp);
+  background-position-x:center;
+  background-repeat:no-repeat;
+  color:#fbfbfb;
+  font-family:Alatsi,sans-serif;
+}
+
+.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=radio],.unknownarmies.sheet input[type=radio]:before,.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
   border:.0625rem solid rgba(12,13,15,.5);
 }
 
-.chat-message .message-header .flavor-text,.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet blockquote,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .item-list--identities [data-action=create-item],.unknownarmies.sheet.character .shock-meter{
+.chat-message .message-header .flavor-text,.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet blockquote,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .item-list--identities [data-action=create-item],.unknownarmies.sheet.character .shock-meter{
   border-radius:.1875rem;
 }
 
@@ -421,7 +450,7 @@
   box-shadow:0 0 .3125rem #dfff00;
 }
 
-.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
+.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
   height:2rem;
 }
 
@@ -435,7 +464,7 @@
   margin-right:.125rem;
 }
 
-.unknownarmies.sheet .lower-content,.unknownarmies.sheet .upper-content,.unknownarmies.sheet.character .identity__upper-content{
+.unknownarmies.sheet .lower-content,.unknownarmies.sheet .upper-content{
   display:grid;
   gap:1.25rem;
 }
@@ -458,11 +487,11 @@
   padding:1.25rem;
 }
 
-.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text]{
+.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet.character .identity__name-percentage span{
   font-family:Fira Sans,sans-serif;
 }
 
-.unknownarmies.sheet input[type=number]{
+.unknownarmies.sheet input[type=number],.unknownarmies.sheet.character .identity__name-percentage span{
   font-size:18px;
   font-size:1.125rem;
   text-align:center;
@@ -487,7 +516,17 @@
   text-overflow:ellipsis;
 }
 
-.unknownarmies.sheet .item-list__column span,.unknownarmies.sheet .label,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet.character .identity__obsession-experience span,.unknownarmies.sheet.character .identity__type,.unknownarmies.sheet.character .shock-meter p,.unknownarmies.sheet.character .status span,.unknownarmies.sheet.identity .stats-features__details{
+.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature]{
+  background-color:#002fa7;
+  color:#fbfbfb;
+  line-height:1;
+  transition:filter .1s;
+}
+.system-unknownarmies .dialog button[data-action=roll]:focus,.system-unknownarmies .dialog button[data-action=roll]:hover,.unknownarmies.sheet button[data-action=roll]:focus,.unknownarmies.sheet button[data-action=roll]:hover,.unknownarmies.sheet button[data-action=select-identity-feature]:focus,.unknownarmies.sheet button[data-action=select-identity-feature]:hover{
+  filter:brightness(1.25);
+}
+
+.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet .item-list__column span,.unknownarmies.sheet .label,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet.character .identity__obsession-experience span,.unknownarmies.sheet.character .identity__type,.unknownarmies.sheet.character .shock-meter p,.unknownarmies.sheet.character .status span,.unknownarmies.sheet.identity .stats-features__details{
   font-size:10px;
   font-size:.625rem;
   text-transform:uppercase;
@@ -550,15 +589,6 @@
   width:auto;
 }
 .unknownarmies.sheet button[data-action=open-cabal]:focus,.unknownarmies.sheet button[data-action=open-cabal]:hover{
-  filter:brightness(1.25);
-}
-.unknownarmies.sheet button[data-action=roll]{
-  background-color:#002fa7;
-  color:#fbfbfb;
-  line-height:1;
-  transition:filter .1s;
-}
-.unknownarmies.sheet button[data-action=roll]:focus,.unknownarmies.sheet button[data-action=roll]:hover{
   filter:brightness(1.25);
 }
 .unknownarmies.sheet button[data-action=show-image]{
@@ -633,14 +663,6 @@
 }
 .unknownarmies.sheet select{
   text-align:center;
-}
-.unknownarmies.sheet .window-content{
-  background-color:#010109;
-  background-image:url(../image/sheet-background.webp);
-  background-position-x:center;
-  background-repeat:no-repeat;
-  color:#fbfbfb;
-  font-family:Alatsi,sans-serif;
 }
 .unknownarmies.sheet .main-form{
   display:flex;

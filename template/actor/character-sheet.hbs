@@ -125,9 +125,11 @@
                     <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'identity')}}
                         <li class="item-list__item identity" data-item-id="{{item.id}}">
                             <div class="identity__upper-content">
-                                <button data-action="roll" data-roll-label="{{localize (concat 'UA.' item.system.type 'Identity')}} ({{item.name}})" data-roll-target="{{item.system.percentage}}"><i class="fas fa-d10"></i></button>
-                                <span class="identity__name-percentage">{{item.name}} {{item.system.percentage}}%</span>
-                                {{#if item.system.type}}<span class="identity__type">{{localize (concat 'UA.' item.system.type 'Identity')}}</span>{{/if}}
+                                <div class="identity__name-percentage">
+                                    <button data-action="{{#if (equals (setting "IdentitiesSelectFeatureWhenRolling") 2)}}select-identity-feature{{else}}roll{{/if}}" data-roll-label="{{item.name}} ({{localize (concat 'UA.' item.system.type 'Identity')}})" data-roll-target="{{item.system.percentage}}">{{item.name}}</button>{{!-- //TODO rollContentHeader? --}}
+                                    <span>{{item.system.percentage}}%</span>
+                                </div>
+                                {{#if item.system.type}}<span class="identity__type">{{localize (concat 'UA.' item.system.type 'Identity')}}</span>{{/if}}{{!-- //TODO move before button? --}}
                                 <div class="identity__obsession-experience">
                                     {{#if item.system.isObsession}}<span>{{localize 'UA.Obsession'}}</span>{{/if}}
                                     {{#if item.system.hasExperience}}<span>{{localize 'UA.Experience'}}</span>{{/if}}
@@ -139,27 +141,13 @@
                             </div>
                             {{#if (or item.system.mundane.ofCourseICan item.system.mundane.substitutesFor item.system.supernatural.ability item.system.avatar.attributes item.system.avatar.symbols item.system.avatar.taboos (and (exceedsOrEquals item.system.percentage 1) item.system.avatar.channels.1-50) (and (exceedsOrEquals item.system.percentage 51) item.system.avatar.channels.51-70) (and (exceedsOrEquals item.system.percentage 71) item.system.avatar.channels.71-90) (and (exceedsOrEquals item.system.percentage 91) item.system.avatar.channels.91-98) (and (exceedsOrEquals item.system.percentage 99) item.system.avatar.channels.99-) item.system.adept.domain item.system.adept.taboos item.system.adept.generateCharge.minor item.system.adept.generateCharge.significant item.system.adept.generateCharge.major item.system.features.one item.system.features.two item.system.details)}}<div class="identity__lower-content">
                                 {{#if (equals item.system.type 'Mundane')}}{{#if item.system.mundane.ofCourseICan}}<span class="label">{{localize 'UA.OfCourseICan'}}:</span>
-                                <span>{{stripHTML item.system.mundane.ofCourseICan}}</span>{{/if}}
-                                {{#if item.system.mundane.substitutesFor}}<span class="label">{{localize 'UA.SubstitutesFor'}}:</span>
-                                <span>{{localize (concat 'UA.' item.system.mundane.substitutesFor)}} ({{localize 'UA.SubstitutesForAbility_Details'}})</span>{{/if}}{{/if}}
-                                {{#if (equals item.system.type 'Supernatural')}}{{#if item.system.supernatural.ability}}<span class="label">{{localize 'UA.SupernaturalAbility'}}:</span>
-                                <span>{{localize (concat 'UA.' (replaceAll item.system.supernatural.ability ' ' ''))}} ({{#if (includes item.system.supernatural.ability 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{/if}}{{#if (equals item.system.supernatural.ability 'Influence')}}{{localize 'UA.Influence_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Harm')}}{{localize 'UA.Harm_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Information')}}{{localize 'UA.Information_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Protection')}}{{localize 'UA.Protection_Details'}}{{/if}}{{#if (includes item.system.supernatural.ability 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{/if}}{{#if (equals item.system.supernatural.ability 'Versatility')}}{{localize 'UA.Versatility_Details'}}{{/if}})</span></span>{{/if}}{{/if}}
+                                <span>{{stripHTML item.system.mundane.ofCourseICan}}</span>{{/if}}{{/if}}
                                 {{#if (equals item.system.type 'Avatar')}}{{#if item.system.avatar.attributes}}<span class="label">{{localize 'UA.Attributes'}}:</span>
                                 <span>{{stripHTML item.system.avatar.attributes}}</span>{{/if}}
                                 {{#if item.system.avatar.symbols}}<span class="label">{{localize 'UA.Symbols'}}:</span>
                                 <span>{{stripHTML item.system.avatar.symbols}}</span>{{/if}}
                                 {{#if item.system.avatar.taboos}}<span class="label">{{localize 'UA.Taboos'}}:</span>
-                                <span>{{stripHTML item.system.avatar.taboos}}</span>{{/if}}
-                                {{#if (and (exceedsOrEquals item.system.percentage 1) item.system.avatar.channels.1-50)}}<span class="label">{{localize 'UA.Channel1-50%'}}:</span>
-                                <span>{{stripHTML item.system.avatar.channels.1-50}}</span>{{/if}}
-                                {{#if (and (exceedsOrEquals item.system.percentage 51) item.system.avatar.channels.51-70)}}<span class="label">{{localize 'UA.Channel51-70%'}}:</span>
-                                <span>{{stripHTML item.system.avatar.channels.51-70}}</span>{{/if}}
-                                {{#if (and (exceedsOrEquals item.system.percentage 71) item.system.avatar.channels.71-90)}}<span class="label">{{localize 'UA.Channel71-90%'}}:</span>
-                                <span>{{stripHTML item.system.avatar.channels.71-90}}</span>{{/if}}
-                                {{#if (and (exceedsOrEquals item.system.percentage 91) item.system.avatar.channels.91-98)}}<span class="label">{{localize 'UA.Channel91-98%'}}:</span>
-                                <span>{{stripHTML item.system.avatar.channels.91-98}}</span>{{/if}}
-                                {{#if (and (exceedsOrEquals item.system.percentage 99) item.system.avatar.channels.99-)}}<span class="label">{{localize 'UA.Channel99%'}}:</span>
-                                <span>{{stripHTML item.system.avatar.channels.99-}}</span>{{/if}}{{/if}}
+                                <span>{{stripHTML item.system.avatar.taboos}}</span>{{/if}}{{/if}}
                                 {{#if (equals item.system.type 'Adept')}}{{#if item.system.adept.domain}}<span class="label">{{localize 'UA.Domain'}}:</span>
                                 <span>{{stripHTML item.system.adept.domain}}</span>{{/if}}
                                 {{#if item.system.adept.taboos}}<span class="label">{{localize 'UA.Taboos'}}:</span>
@@ -170,8 +158,8 @@
                                 <span>{{stripHTML item.system.adept.generateCharge.significant}}</span>{{/if}}
                                 {{#if item.system.adept.generateCharge.major}}<span class="label">{{localize 'UA.GenerateMajorCharge'}}:</span>
                                 <span>{{stripHTML item.system.adept.generateCharge.major}}</span>{{/if}}{{/if}}
-                                {{#each item.system.features as |feature x|}}{{#if feature}}<span class="label">{{localize 'UA.Feature'}}:</span>
-                                <span>{{#if (includes feature 'Substitutes')}}{{localize (concat 'UA.' (replaceAll (replaceAll feature 'for' 'For') ' ' ''))}}{{else}}{{localize (concat 'UA.' (replaceAll feature ' ' ''))}}{{/if}} ({{#if (includes feature 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes feature 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes feature 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes feature 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes feature 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{localize (concat 'UA.' (replaceAll feature ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}})</span>{{/if}}{{/each}}
+                                {{#each (sortFeatures item) as |feature|}}{{#if feature}}{{#if (equals (setting "IdentitiesSelectFeatureWhenRolling") 3)}}<button data-action="roll" data-roll-label="{{item.name}} ({{localize (concat 'UA.' item.system.type 'Identity')}})" data-roll-content-header="{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}" data-roll-target="{{item.system.percentage}}">{{!-- //FIX content-header --}}{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</button>{{else}}<span class="label">{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</span>{{/if}}
+                                <span>{{#if (includes feature 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes feature 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes feature 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes feature 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes feature 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{#if (includes feature 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{else}}{{#if (includes feature 'Harm')}}{{localize 'UA.Harm_Details'}}{{else}}{{#if (includes feature 'Information')}}{{localize 'UA.Information_Details'}}{{else}}{{#if (includes feature 'Protection')}}{{localize 'UA.Protection_Details'}}{{else}}{{#if (includes feature 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{else}}{{#if (includes feature '1-50')}}{{stripHTML item.system.avatar.channels.1-50}}{{else}}{{#if (includes feature '51-70')}}{{stripHTML item.system.avatar.channels.51-70}}{{else}}{{#if (includes feature '71-90')}}{{stripHTML item.system.avatar.channels.71-90}}{{else}}{{#if (includes feature '91-98')}}{{stripHTML item.system.avatar.channels.91-98}}{{else}}{{#if (includes feature '99')}}{{stripHTML item.system.avatar.channels.99-}}{{else}}{{localize (concat 'UA.' (replaceAll feature ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/if}}{{/each}}
                                 {{#if item.system.details}}<span class="label">{{localize 'UA.Details'}}:</span>
                                 <span>{{stripHTML item.system.details}}</span>{{/if}}
                             </div>{{/if}}

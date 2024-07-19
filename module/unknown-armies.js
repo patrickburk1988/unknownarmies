@@ -12,6 +12,19 @@ import UASpellSheet from "./item/spell-sheet.js";
 Hooks.once("init", async function() {
     console.log("Rebooting the universe.");
     // Setting Registration ----------------------------------------------------
+    // game.settings.register("unknownarmies", "", {
+    //     name: "UA.",
+    //     hint: "UA._Hint",
+    //     scope: "world",
+    //     config: true,
+    //     type: Boolean,
+    //     default: false,
+    //     requiresReload: true
+    //     onChange: value => {},
+    //     choices: {},
+    //     range: {},
+    //     filepicker: "",
+    // });
     game.settings.register("unknownarmies", "IdentitiesAllowMM&YFeatures", {
         name: "UA.IdentitiesAllowMM&YFeatures", // MAYBE
         hint: "UA.IdentitiesAllowMM&YFeatures_Hint", // MAYBE
@@ -20,10 +33,20 @@ Hooks.once("init", async function() {
         type: Boolean,
         default: false, // MAYBE
         requiresReload: true // MAYBE
-        // onChange: value => {},
-        // choices: {},
-        // range: {},
-        // filepicker: "",
+    });
+    game.settings.register("unknownarmies", "IdentitiesSelectFeatureWhenRolling", {
+        name: "UA.IdentitiesSelectFeatureWhenRolling", // MAYBE
+        hint: "UA.IdentitiesSelectFeatureWhenRolling_Hint", // MAYBE
+        scope: "client", // MAYBE
+        config: true,
+        type: Number, // MAYBE
+        default: 0, // MAYBE
+        requiresReload: true, // MAYBE
+        choices: {
+            1: game.i18n.localize("UA.Disabled"),
+            2: game.i18n.localize("UA.Dialog"),
+            3: game.i18n.localize("UA.Sheet")
+        },
     });
     // Sheet Registration ------------------------------------------------------
     CONFIG.Actor.documentClass = UAActor;
@@ -140,6 +163,43 @@ Hooks.once("init", async function() {
     });
     Handlebars.registerHelper("shockGaugeSchema", function (meter, key) {
         return UAActor.shockGaugeSchema[meter][key];
+    });
+    Handlebars.registerHelper("sortFeatures", function (identity) {
+        let features = Object.values(identity.system.features);
+        switch (identity.system.type) {
+            case "Adept":
+                break;
+            case "Avatar":
+                let percentage = identity.system.percentage;
+                if (percentage >= 1 && identity.system.avatar.channels["1-50"] !== "") {
+                    features.push("Channel1-50%");
+                }
+                if (percentage >= 51 && identity.system.avatar.channels["51-70"] !== "") {
+                    features.push("Channel51-70%");
+                }
+                if (percentage >= 71 && identity.system.avatar.channels["71-90"] !== "") {
+                    features.push("Channel71-90%");
+                }
+                if (percentage >= 91 && identity.system.avatar.channels["91-98"] !== "") {
+                    features.push("Channel91-98%");
+                }
+                if (percentage >= 99 && identity.system.avatar.channels["99-"] !== "") {
+                    features.push("Channel99%");
+                }
+                break;
+            case "Mundane":
+                let substitutesFor = identity.system.mundane.substitutesFor;
+                if (substitutesFor !== "") {
+                    features.push("Substitutes for " + substitutesFor);
+                }
+                break;
+            case "Supernatural":
+                let supernaturalAbility = identity.system.supernatural.ability;
+                if (supernaturalAbility !== "") {
+                    features.push(supernaturalAbility);
+                }
+        }
+        return features.sort();
     });
     Handlebars.registerHelper("stripHTML", function (string) {
         return jQuery(string).text().replaceAll(/([.!?])([^.!?])/g, "$1 $2");

@@ -175,7 +175,7 @@ export default class UABaseActorSheet extends ActorSheet
         }
         outcome = game.i18n.localize("UA." + outcome.replace(/\s/g, ""));
         let modifierString = modifier == 0 ? "" : (modifier > 0 ? " + " : " - ") + Math.abs(modifier) + `%`;
-        let content = "";
+        let content = (typeof dataset["rollContentHeader"] !== "undefined") ? `<h4 class="subheader">${dataset["rollContentHeader"]}</h4>` : "";
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;
         content += `        <h4 class="dice-total">${rollResult} <span class="vs">${vs}</span> ${rollTarget}</h4>`;
