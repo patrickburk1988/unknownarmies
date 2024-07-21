@@ -19,7 +19,7 @@ Hooks.once("init", async function() {
     //     config: true,
     //     type: Boolean,
     //     default: false,
-    //     requiresReload: true
+    //     requiresReload: true,
     //     onChange: value => {},
     //     choices: {},
     //     range: {},
@@ -40,7 +40,7 @@ Hooks.once("init", async function() {
         scope: "client", // MAYBE
         config: true,
         type: Number, // MAYBE
-        default: 0, // MAYBE
+        default: 1, // MAYBE
         requiresReload: true, // MAYBE
         choices: {
             1: game.i18n.localize("UA.Disabled"),
