@@ -363,14 +363,30 @@
   font-weight:400;
 }
 
-.system-unknownarmies .dialog button{
-  background-color:hsla(0,0%,98%,.15);
+.system-unknownarmies .dialog button,.system-unknownarmies .dialog button.default{
+  background-color:rgba(12,13,15,.25);
+  border:0;
   color:inherit;
+  font-family:inherit;
+  margin:0;
+  transition:filter .1s;
 }
-.system-unknownarmies .dialog button:focus,.system-unknownarmies .dialog button:hover{
+.system-unknownarmies .dialog button.default:disabled,.system-unknownarmies .dialog button:disabled{
+  opacity:.5;
+}
+.system-unknownarmies .dialog button.default:focus,.system-unknownarmies .dialog button.default:hover,.system-unknownarmies .dialog button:focus,.system-unknownarmies .dialog button:hover{
   box-shadow:none;
+  filter:brightness(20);
 }
-.system-unknownarmies .dialog p{
+.system-unknownarmies .dialog label{
+  margin-right:.3125rem;
+  text-align:right;
+}
+.system-unknownarmies .dialog label:after{
+  content:":";
+}
+
+.system-unknownarmies .dialog p,.system-unknownarmies .dialog select{
   text-align:center;
 }
 
@@ -430,27 +446,27 @@
   font-family:Alatsi,sans-serif;
 }
 
-.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=radio],.unknownarmies.sheet input[type=radio]:before,.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
+.system-unknownarmies .dialog button.default[data-action=roll],.system-unknownarmies .dialog button[data-action=roll],.system-unknownarmies .dialog input[type=number],.system-unknownarmies .dialog input[type=text],.system-unknownarmies .dialog select,.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=radio],.unknownarmies.sheet input[type=radio]:before,.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
   border:.0625rem solid rgba(12,13,15,.5);
 }
 
-.chat-message .message-header .flavor-text,.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet blockquote,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .item-list--identities [data-action=create-item],.unknownarmies.sheet.character .shock-meter{
+.chat-message .message-header .flavor-text,.system-unknownarmies .dialog button.default[data-action=roll],.system-unknownarmies .dialog button[data-action=roll],.system-unknownarmies .dialog input[type=number],.system-unknownarmies .dialog input[type=text],.system-unknownarmies .dialog select,.unknownarmies.sheet .editor,.unknownarmies.sheet .item-list__header,.unknownarmies.sheet .item-list__item,.unknownarmies.sheet .tab-panels,.unknownarmies.sheet blockquote,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet img,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select,.unknownarmies.sheet.character .identity__lower-content span:nth-child(2n),.unknownarmies.sheet.character .item-list--identities [data-action=create-item],.unknownarmies.sheet.character .shock-meter{
   border-radius:.1875rem;
 }
 
-.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=radio],.unknownarmies.sheet input[type=text],.unknownarmies.sheet option,.unknownarmies.sheet select{
+.system-unknownarmies .dialog input[type=number],.system-unknownarmies .dialog input[type=text],.system-unknownarmies .dialog select,.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=radio],.unknownarmies.sheet input[type=text],.unknownarmies.sheet option,.unknownarmies.sheet select{
   background-color:#fbfbfb;
   color:#0c0d0f;
 }
 
-.unknownarmies.sheet input[type=checkbox],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
+.system-unknownarmies .dialog input[type=number],.system-unknownarmies .dialog input[type=text],.system-unknownarmies .dialog select,.unknownarmies.sheet input[type=checkbox],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
   transition:box-shadow .1s;
 }
-.unknownarmies.sheet input[type=checkbox]:focus,.unknownarmies.sheet input[type=number]:focus,.unknownarmies.sheet input[type=text]:focus,.unknownarmies.sheet select:focus{
+.system-unknownarmies .dialog input[type=number]:focus,.system-unknownarmies .dialog input[type=text]:focus,.system-unknownarmies .dialog select:focus,.unknownarmies.sheet input[type=checkbox]:focus,.unknownarmies.sheet input[type=number]:focus,.unknownarmies.sheet input[type=text]:focus,.unknownarmies.sheet select:focus{
   box-shadow:0 0 .3125rem #dfff00;
 }
 
-.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
+.system-unknownarmies .dialog button.default[data-action=roll],.system-unknownarmies .dialog button[data-action=roll],.system-unknownarmies .dialog input[type=number],.system-unknownarmies .dialog input[type=text],.system-unknownarmies .dialog select,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet select{
   height:2rem;
 }
 
@@ -487,11 +503,11 @@
   padding:1.25rem;
 }
 
-.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet.character .identity__name-percentage span{
+.system-unknownarmies .dialog input[type=number],.system-unknownarmies .dialog input[type=text],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text],.unknownarmies.sheet.character .identity__name-percentage span{
   font-family:Fira Sans,sans-serif;
 }
 
-.unknownarmies.sheet input[type=number],.unknownarmies.sheet.character .identity__name-percentage span{
+.system-unknownarmies .dialog input[type=number],.unknownarmies.sheet input[type=number],.unknownarmies.sheet.character .identity__name-percentage span{
   font-size:18px;
   font-size:1.125rem;
   text-align:center;
@@ -510,13 +526,13 @@
   font-size:1.625rem;
 }
 
-.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text]{
+.system-unknownarmies .dialog input[type=number],.system-unknownarmies .dialog input[type=text],.unknownarmies.sheet input[type=number],.unknownarmies.sheet input[type=text]{
   min-width:3rem;
   padding:.3125rem .5rem;
   text-overflow:ellipsis;
 }
 
-.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature]{
+.system-unknownarmies .dialog button.default[data-action=roll],.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature]{
   background-color:var(--color-accent-dark);
   color:#fbfbfb;
   line-height:1;
@@ -526,7 +542,7 @@
   filter:brightness(1.25);
 }
 
-.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet .item-list__column span,.unknownarmies.sheet .label,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet.character .identity__obsession-experience span,.unknownarmies.sheet.character .identity__type,.unknownarmies.sheet.character .shock-meter p,.unknownarmies.sheet.character .status span,.unknownarmies.sheet.identity .stats-features__details{
+.system-unknownarmies .dialog button.default[data-action=roll],.system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet .item-list__column span,.unknownarmies.sheet .label,.unknownarmies.sheet button[data-action=improve],.unknownarmies.sheet button[data-action=open-cabal],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature],.unknownarmies.sheet.character .identity__obsession-experience span,.unknownarmies.sheet.character .identity__type,.unknownarmies.sheet.character .shock-meter p,.unknownarmies.sheet.character .status span,.unknownarmies.sheet.identity .stats-features__details{
   font-size:10px;
   font-size:.625rem;
   text-transform:uppercase;
