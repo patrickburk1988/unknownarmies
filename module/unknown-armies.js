@@ -8,6 +8,7 @@ import UAItemSheet from "./item/item-sheet.js";
 import UAMilestoneSheet from "./item/milestone-sheet.js";
 import UARitualSheet from "./item/ritual-sheet.js";
 import UASpellSheet from "./item/spell-sheet.js";
+import UAUtils from "./utils.js";
 
 Hooks.once("init", async function() {
     console.log("Rebooting the universe.");
@@ -25,6 +26,21 @@ Hooks.once("init", async function() {
     //     range: {},
     //     filepicker: "",
     // });
+    game.settings.register("unknownarmies", "Sheet&UITheme", { // MAYBE
+        name: "UA.Sheet&UITheme", // MAYBE
+        hint: "UA.Sheet&UITheme_Hint", // MAYBE
+        scope: "world", // MAYBE
+        config: true,
+        type: Number, // MAYBE
+        default: 1,
+        requiresReload: true, // MAYBE
+        choices: {
+            1: game.i18n.localize("UA.BonTonBlue"),
+            2: game.i18n.localize("UA.GodwalkerGreen"),
+            3: game.i18n.localize("UA.ParadoxPurple"),
+            4: game.i18n.localize("UA.RenunciationRed")
+        }
+    });
     game.settings.register("unknownarmies", "IdentitiesAllowMM&YFeatures", {
         name: "UA.IdentitiesAllowMM&YFeatures", // MAYBE
         hint: "UA.IdentitiesAllowMM&YFeatures_Hint", // MAYBE
@@ -46,7 +62,7 @@ Hooks.once("init", async function() {
             1: game.i18n.localize("UA.Disabled"),
             2: game.i18n.localize("UA.Dialog"),
             3: game.i18n.localize("UA.Sheet")
-        },
+        }
     });
     // Sheet Registration ------------------------------------------------------
     CONFIG.Actor.documentClass = UAActor;
@@ -205,6 +221,10 @@ Hooks.once("init", async function() {
         return jQuery(string).text().replaceAll(/([.!?])([^.!?])/g, "$1 $2");
     });
     // Handlebars Helpers (Blocks) ---------------------------------------------
+});
+
+Hooks.once("ready", async function() {
+    $(document.getElementsByTagName("body")).addClass(UAUtils.theme);
 });
 
 Hooks.on("renderDialog", (dialog, html) => {

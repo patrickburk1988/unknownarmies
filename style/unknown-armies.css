@@ -327,7 +327,7 @@
   padding:.625rem;
 }
 .chat-message .message-header .flavor-text{
-  background-color:#002fa7;
+  background-color:var(--color-accent-dark);
   color:#fbfbfb;
   line-height:1.25;
   margin-bottom:.1875rem;
@@ -373,6 +373,7 @@
 .system-unknownarmies .dialog p{
   text-align:center;
 }
+
 .unknownarmies.sheet.identity .main-form.editable.ru .stats-features__details{
   line-height:.5625rem;
 }
@@ -423,7 +424,6 @@
 
 .system-unknownarmies .dialog .window-content,.unknownarmies.sheet .window-content{
   background-color:#010109;
-  background-image:url(../image/sheet-background.webp);
   background-position-x:center;
   background-repeat:no-repeat;
   color:#fbfbfb;
@@ -517,7 +517,7 @@
 }
 
 .system-unknownarmies .dialog button[data-action=roll],.unknownarmies.sheet button[data-action=roll],.unknownarmies.sheet button[data-action=select-identity-feature]{
-  background-color:#002fa7;
+  background-color:var(--color-accent-dark);
   color:#fbfbfb;
   line-height:1;
   transition:filter .1s;
@@ -575,7 +575,7 @@
   filter:brightness(20);
 }
 .unknownarmies.sheet button[data-action=improve]{
-  background-color:#002fa7;
+  background-color:var(--color-accent-dark);
   color:#fbfbfb;
   transition:filter .1s;
 }
@@ -583,7 +583,7 @@
   filter:brightness(1.25);
 }
 .unknownarmies.sheet button[data-action=open-cabal]{
-  background-color:#002fa7;
+  background-color:var(--color-accent-dark);
   color:#fbfbfb;
   transition:filter .1s;
   width:auto;
@@ -785,7 +785,7 @@
   display:none;
 }
 .unknownarmies.sheet .item-list__header{
-  background-color:#002fa7;
+  background-color:var(--color-accent-dark);
   color:#fbfbfb;
 }
 .unknownarmies.sheet .item-list__header+.item-list__list .item-list__item{
@@ -865,6 +865,33 @@
 }
 .unknownarmies.sheet.spell .name{
   grid-column:2 /  6;
+}
+.theme--blue{
+  --color-accent-dark:#002fa7;
+}
+.theme--blue .dialog .window-content,.theme--blue .unknownarmies.sheet .window-content{
+  background-image:url(../image/sheet-background-blue.webp);
+}
+
+.theme--green{
+  --color-accent-dark:#007260;
+}
+.theme--green .dialog .window-content,.theme--green .unknownarmies.sheet .window-content{
+  background-image:url(../image/sheet-background-green.webp);
+}
+
+.theme--purple{
+  --color-accent-dark:#4a007c;
+}
+.theme--purple .dialog .window-content,.theme--purple .unknownarmies.sheet .window-content{
+  background-image:url(../image/sheet-background-purple.webp);
+}
+
+.theme--red{
+  --color-accent-dark:#7a0101;
+}
+.theme--red .dialog .window-content,.theme--red .unknownarmies.sheet .window-content{
+  background-image:url(../image/sheet-background-red.webp);
 }
 @font-face{
   font-family:Calluna Sans;
