@@ -1,7 +1,7 @@
 export default class UABaseActorSheet extends ActorSheet
 {
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             dragDrop: [{
                 dragSelector: ".item-list__item" // FIX
                 // FIX dropSelector: null

@@ -3,7 +3,7 @@ import UABaseActorSheet from "./base-actor-sheet.js";
 export default class UACharacterSheet extends UABaseActorSheet
 {
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
                 "unknownarmies",
                 "sheet",
