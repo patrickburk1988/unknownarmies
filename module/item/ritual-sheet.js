@@ -1,4 +1,5 @@
 import UABaseItemSheet from "./base-item-sheet.js";
+import UAUtils from "../utils.js";
 
 export default class UARitualSheet extends UABaseItemSheet
 {
@@ -16,6 +17,8 @@ export default class UARitualSheet extends UABaseItemSheet
 
     async getData (options) {
         let data = await super.getData(options);
+        data.optionsCostTypePlural = UAUtils.optionsRitualSpellCostTypePlural;
+        data.optionsCostTypeSingular = UAUtils.optionsRitualSpellCostTypeSingular;
         data.enrichedRitualAction = await TextEditor.enrichHTML(this.object.system.action, {
             async: true
         });

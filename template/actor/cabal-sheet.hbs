@@ -22,12 +22,7 @@
                     <input type="text" name="system.objective.name" data-dtype="String" value="{{actor.system.objective.name}}">
                     <span>{{actor.system.objective.percentage}}%</span>
                     <span class="label">{{localize 'UA.Scale'}}:</span>
-                    <select name="system.objective.scale">{{#select actor.system.objective.scale}}
-                        <option value=""></option>
-                        <option value="Local">{{localize 'UA.Local'}}</option>
-                        <option value="Weighty">{{localize 'UA.Weighty'}}</option>
-                        <option value="Cosmic">{{localize 'UA.Cosmic'}}</option>
-                    {{/select}}</select>
+                    <select name="system.objective.scale">{{selectOptions optionsObjectiveScale selected=actor.system.objective.scale localize=true}}</select>
                 </div>
             </div>
             <div class="lower-content__section">

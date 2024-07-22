@@ -1,4 +1,5 @@
 import UABaseActorSheet from "./base-actor-sheet.js";
+import UAUtils from "../utils.js";
 
 export default class UACharacterSheet extends UABaseActorSheet
 {
@@ -15,7 +16,13 @@ export default class UACharacterSheet extends UABaseActorSheet
 
     async getData (options) {
         let data = await super.getData(options);
-        data.cabals = game.actors.filter(actor => actor.type === "cabal" && actor.testUserPermission(game.user, "OBSERVER"));
+        data.cabals = {
+            "": ""
+        }
+        for (let cabal of game.actors.filter(actor => actor.type === "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {
+            data.cabals[cabal._id] = cabal.name;
+        }
+        data.optionsFearShockMeter = UAUtils.optionsCharacterFearShockMeter;
         data.enrichedAppearance = await TextEditor.enrichHTML(this.object.system.appearance, {
             async: true
         });

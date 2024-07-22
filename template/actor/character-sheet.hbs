@@ -14,10 +14,7 @@
             <span class="label">{{localize 'UA.Concept'}}:</span>
             <input type="text" name="system.concept" data-dtype="String" value="{{actor.system.concept}}">
             <span class="label">{{localize 'UA.Cabal'}}:</span>
-            <select class="cabal" name="system.cabal">{{#select actor.system.cabal}}
-                <option value=""></option>{{#each cabals as |cabal x|}}
-                <option value="{{cabal.id}}">{{cabal.name}}</option>{{/each}}
-            {{/select}}</select>
+            <select class="cabal" name="system.cabal">{{selectOptions cabals selected=actor.system.cabal}}</select>
             <button data-action="open-cabal" {{disabled (not actor.system.cabal)}}>{{localize 'UA.OpenCabal'}}</button>
         </div>
         <div class="upper-content__section {{#if (not (isGM))}}upper-content__section--wound-threshold-only{{/if}}">
@@ -47,14 +44,7 @@
                     <input type="text" name="system.passions.{{passionKey}}.name" data-dtype="String" value="{{passion.name}}">
                     <input type="checkbox" name="system.passions.{{passionKey}}.isUsed" data-dtype="Boolean" {{#if ../actor.system.isBurnedOut}}title="{{localize 'UA.BurnedOut'}}"{{/if}} {{checked passion.isUsed}} {{disabled ../actor.system.isBurnedOut}}>
                     {{#if (equals passionKey 'fear')}}<span class="label">{{localize 'UA.FearShockMeter'}}:</span>
-                    <select name="system.passions.fear.shockMeter">{{#select passion.shockMeter}}
-                        <option value=""></option>
-                        <option value="Helplessness">{{localize 'UA.Helplessness'}}</option>
-                        <option value="Isolation">{{localize 'UA.Isolation'}}</option>
-                        <option value="Self">{{localize 'UA.Self'}}</option>
-                        <option value="Unnatural">{{localize 'UA.Unnatural'}}</option>
-                        <option value="Violence">{{localize 'UA.Violence'}}</option>
-                    {{/select}}</select>{{/if}}{{/each}}
+                    <select name="system.passions.fear.shockMeter">{{selectOptions ../optionsFearShockMeter selected=passion.shockMeter localize=true}}</select>{{/if}}{{/each}}
                 </div>
             </div>
             <div class="lower-content__section">

@@ -10,13 +10,7 @@
             <input type="number" name="system.percentage" data-dtype="Number" value="{{item.system.percentage}}" min="0" max="100">
             <span class="percentage">%</span>
             <span class="label">{{localize 'UA.Type'}}:</span>
-            <select name="system.type">{{#select item.system.type}}
-                <option value=""></option>
-                <option value="Mundane">{{localize 'UA.Mundane'}}</option>
-                <option value="Supernatural">{{localize 'UA.Supernatural'}}</option>
-                <option value="Avatar">{{localize 'UA.Avatar'}}</option>
-                <option value="Adept">{{localize 'UA.Adept'}}</option>
-            {{/select}}</select>
+            <select name="system.type">{{selectOptions optionsType selected=item.system.type localize=true}}</select>
             <span class="label">{{localize 'UA.Obsession'}}:</span>
             <input type="checkbox" name="system.isObsession" data-dtype="Boolean" {{checked item.system.isObsession}}>
             <span class="label">{{localize 'UA.Experience'}}:</span>
@@ -36,40 +30,10 @@
                     <span class="label">{{localize 'UA.OfCourseICan'}}:</span>
                     {{editor enrichedOfCourseICan target="system.mundane.ofCourseICan" button=true engine="prosemirror"}}
                     <span class="label">{{localize 'UA.SubstitutesFor'}}:</span>
-                    <select name="system.mundane.substitutesFor">{{#select item.system.mundane.substitutesFor}}
-                        <option value=""></option>
-                        <option value="Connect">{{localize 'UA.Connect'}}</option>
-                        <option value="Dodge">{{localize 'UA.Dodge'}}</option>
-                        <option value="Fitness">{{localize 'UA.Fitness'}}</option>
-                        <option value="Knowledge">{{localize 'UA.Knowledge'}}</option>
-                        <option value="Lie">{{localize 'UA.Lie'}}</option>
-                        <option value="Notice">{{localize 'UA.Notice'}}</option>
-                        <option value="Pursuit">{{localize 'UA.Pursuit'}}</option>
-                        <option value="Secrecy">{{localize 'UA.Secrecy'}}</option>
-                        <option value="Status">{{localize 'UA.Status'}}</option>
-                        <option value="Struggle">{{localize 'UA.Struggle'}}</option>
-                    {{/select}}</select>
+                    <select name="system.mundane.substitutesFor">{{selectOptions optionsSubstitutesFor selected=item.system.mundane.substitutesFor localize=true}}</select>
                     <span class="stats-features__details">{{#if item.system.mundane.substitutesFor}}{{localize 'UA.SubstitutesForAbility_Details'}}{{/if}}</span>{{/if}}{{#if (equals item.system.type 'Supernatural')}}
                     <span class="label">{{localize 'UA.SupernaturalAbility'}}:</span>
-                    <select name="system.supernatural.ability">{{#select item.system.supernatural.ability}}
-                        <option value=""></option>{{#if (setting 'IdentitiesAllowMM&YFeatures')}}
-                        <option value="Alter Fear">{{localize 'UA.AlterFear'}}</option>
-                        <option value="Alter Noble">{{localize 'UA.AlterNoble'}}</option>
-                        <option value="Alter Rage">{{localize 'UA.AlterRage'}}</option>{{/if}}
-                        <option value="Influence">{{localize 'UA.Influence'}}</option>
-                        <option value="Specific Harm">{{localize 'UA.SpecificHarm'}}</option>
-                        <option value="Specific Information">{{localize 'UA.SpecificInformation'}}</option>
-                        <option value="Specific Protection">{{localize 'UA.SpecificProtection'}}</option>{{#if (setting 'IdentitiesAllowMM&YFeatures')}}
-                        <option value="Terrorize Helplessness">{{localize 'UA.TerrorizeHelplessness'}}</option>
-                        <option value="Terrorize Isolation">{{localize 'UA.TerrorizeIsolation'}}</option>
-                        <option value="Terrorize Self">{{localize 'UA.TerrorizeSelf'}}</option>
-                        <option value="Terrorize Unnatural">{{localize 'UA.TerrorizeUnnatural'}}</option>
-                        <option value="Terrorize Violence">{{localize 'UA.TerrorizeViolence'}}</option>{{/if}}
-                        <option value="Vague Harm">{{localize 'UA.VagueHarm'}}</option>
-                        <option value="Vague Information">{{localize 'UA.VagueInformation'}}</option>
-                        <option value="Vague Protection">{{localize 'UA.VagueProtection'}}</option>
-                        <option value="Versatility">{{localize 'UA.Versatility'}}</option>
-                    {{/select}}</select>
+                    <select name="system.supernatural.ability">{{selectOptions optionsSupernaturalAbility selected=item.system.supernatural.ability localize=true}}</select>
                     <span class="stats-features__details">{{#if item.system.supernatural.ability}}{{#if (includes item.system.supernatural.ability 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Harm')}}{{localize 'UA.Harm_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Information')}}{{localize 'UA.Information_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Protection')}}{{localize 'UA.Protection_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{else}}{{localize (concat 'UA.' item.system.supernatural.ability '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/if}}{{#if (equals item.system.type 'Avatar')}}
                     <span class="label">{{localize 'UA.Attributes'}}:</span>
                     {{editor enrichedAttributes target="system.avatar.attributes" button=true engine="prosemirror"}}
@@ -98,51 +62,7 @@
                     <span class="label">{{localize 'UA.GenerateMajorCharge'}}:</span>
                     {{editor enrichedGenerateMajorCharge target="system.adept.generateCharge.major" button=true engine="prosemirror"}}{{/if}}
                     {{#each item.system.features as |feature featureKey|}}<span class="label">{{localize 'UA.Feature'}}:</span>
-                    <select name="system.features.{{featureKey}}">{{#select feature}}
-                        <option value=""></option>
-                        <option value="Casts Rituals">{{localize 'UA.CastsRituals'}}</option>{{#if (equals ../item.system.type 'Mundane')}}
-                        <option value="Coerces Helplessness">{{localize 'UA.CoercesHelplessness'}}</option>
-                        <option value="Coerces Isolation">{{localize 'UA.CoercesIsolation'}}</option>
-                        <option value="Coerces Self">{{localize 'UA.CoercesSelf'}}</option>
-                        <option value="Coerces Unnatural">{{localize 'UA.CoercesUnnatural'}}</option>
-                        <option value="Coerces Violence">{{localize 'UA.CoercesViolence'}}</option>
-                        <option value="Cooperative">{{localize 'UA.Cooperative'}}</option>
-                        <option value="Evaluates Helplessness">{{localize 'UA.EvaluatesHelplessness'}}</option>
-                        <option value="Evaluates Isolation">{{localize 'UA.EvaluatesIsolation'}}</option>
-                        <option value="Evaluates Self">{{localize 'UA.EvaluatesSelf'}}</option>
-                        <option value="Evaluates Unnatural">{{localize 'UA.EvaluatesUnnatural'}}</option>
-                        <option value="Evaluates Violence">{{localize 'UA.EvaluatesViolence'}}</option>
-                        <option value="Medical">{{localize 'UA.Medical'}}</option>
-                        <option value="Provides Firearm Attacks">{{localize 'UA.ProvidesFirearmAttacks'}}</option>
-                        <option value="Provides Initiative">{{localize 'UA.ProvidesInitiative'}}</option>
-                        <option value="Provides Wound Threshold">{{localize 'UA.ProvidesWoundThreshold'}}</option>{{#if (setting 'IdentitiesAllowMM&YFeatures')}}
-                        <option value="Reads Fear">{{localize 'UA.ReadsFear'}}</option>
-                        <option value="Reads Noble">{{localize 'UA.ReadsNoble'}}</option>
-                        <option value="Reads Obsession">{{localize 'UA.ReadsObsession'}}</option>
-                        <option value="Reads Rage">{{localize 'UA.ReadsRage'}}</option>{{/if}}
-                        <option value="Resists Helplessness">{{localize 'UA.ResistsHelplessness'}}</option>
-                        <option value="Resists Isolation">{{localize 'UA.ResistsIsolation'}}</option>
-                        <option value="Resists Self">{{localize 'UA.ResistsSelf'}}</option>
-                        <option value="Resists Unnatural">{{localize 'UA.ResistsUnnatural'}}</option>
-                        <option value="Resists Violence">{{localize 'UA.ResistsViolence'}}</option>
-                        <option value="Sincere">{{localize 'UA.Sincere'}}</option>
-                        <option value="Substitutes for Connect">{{localize 'UA.SubstitutesForConnect'}}</option>
-                        <option value="Substitutes for Dodge">{{localize 'UA.SubstitutesForDodge'}}</option>
-                        <option value="Substitutes for Fitness">{{localize 'UA.SubstitutesForFitness'}}</option>
-                        <option value="Substitutes for Knowledge">{{localize 'UA.SubstitutesForKnowledge'}}</option>
-                        <option value="Substitutes for Lie">{{localize 'UA.SubstitutesForLie'}}</option>
-                        <option value="Substitutes for Notice">{{localize 'UA.SubstitutesForNotice'}}</option>
-                        <option value="Substitutes for Pursuit">{{localize 'UA.SubstitutesForPursuit'}}</option>
-                        <option value="Substitutes for Secrecy">{{localize 'UA.SubstitutesForSecrecy'}}</option>
-                        <option value="Substitutes for Status">{{localize 'UA.SubstitutesForStatus'}}</option>
-                        <option value="Substitutes for Struggle">{{localize 'UA.SubstitutesForStruggle'}}</option>
-                        <option value="Tactical">{{localize 'UA.Tactical'}}</option>
-                        <option value="Therapeutic">{{localize 'UA.Therapeutic'}}</option>{{#if (setting 'IdentitiesAllowMM&YFeatures')}}
-                        <option value="Totem">{{localize 'UA.Totem'}}</option>{{/if}}
-                        <option value="Unique">{{localize 'UA.Unique'}}</option>{{/if}}
-                        <option value="Use Gutter Magick">{{localize 'UA.UseGutterMagick'}}</option>{{#if (equals ../item.system.type 'Mundane')}}
-                        <option value="Weaponized Physique">{{localize 'UA.WeaponizedPhysique'}}</option>{{/if}}
-                    {{/select}}</select>
+                    <select name="system.features.{{featureKey}}">{{#if (equals ../item.system.type 'Mundane')}}{{selectOptions ../optionsFeatures selected=feature localize=true}}{{else}}{{selectOptions ../optionsFeaturesNotMundane selected=feature localize=true}}{{/if}}</select>
                     <span class="stats-features__details">{{#if feature}}{{#if (includes feature 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes feature 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes feature 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes feature 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes feature 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{localize (concat 'UA.' (replaceAll feature ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/each}}
                 </div>
             </div>{{/if}}

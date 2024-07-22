@@ -8,12 +8,7 @@
             <span class="label">{{localize 'UA.Name'}}:</span>
             <input type="text" class="name" name="name" data-dtype="String" value="{{item.name}}">
             <span class="label">{{localize 'UA.Power'}}:</span>
-            <select name="system.power">{{#select item.system.power}}
-                <option value=""></option>
-                <option value="Minor">{{localize 'UA.Minor'}}</option>
-                <option value="Significant">{{localize 'UA.Significant'}}</option>
-                <option value="Major">{{localize 'UA.Major'}}</option>
-            {{/select}}</select>{{#if (isGM)}}
+            <select name="system.power">{{selectOptions optionsPower selected=item.system.power localize=true}}</select>{{#if (isGM)}}
             <span class="label">{{localize 'UA.HideCharges'}}:</span>
             <input type="checkbox" name="system.charges.isHidden" data-dtype="Boolean" {{checked item.system.charges.isHidden}}>{{/if}}
             {{#if (and (not (isGM)) item.system.charges.isHidden)}}<span class="label">{{localize 'UA.Charges'}}:</span>

@@ -1,4 +1,5 @@
 import UABaseItemSheet from "./base-item-sheet.js";
+import UAUtils from "../utils.js";
 
 export default class UAArtifactSheet extends UABaseItemSheet
 {
@@ -16,6 +17,7 @@ export default class UAArtifactSheet extends UABaseItemSheet
 
     async getData (options) {
         let data = await super.getData(options);
+        data.optionsPower = UAUtils.optionsArtifactPower;
         data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description, {
             async: true
         });

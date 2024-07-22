@@ -9,12 +9,7 @@
             <input type="text" class="name" name="name" data-dtype="String" value="{{item.name}}">
             <span class="label">{{localize 'UA.Cost'}}:</span>
             <input type="number" name="system.cost.amount" data-dtype="Number" value="{{item.system.cost.amount}}" min="0">
-            <select name="system.cost.type">{{#select item.system.cost.type}}
-                <option value=""></option>
-                <option value="Minor Charge">{{#if (equals item.system.cost.amount 1)}}{{localize 'UA.MinorCharge'}}{{else}}{{localize 'UA.MinorCharges'}}{{/if}}</option>
-                <option value="Significant Charge">{{#if (equals item.system.cost.amount 1)}}{{localize 'UA.SignificantCharge'}}{{else}}{{localize 'UA.SignificantCharges'}}{{/if}}</option>
-                <option value="Major Charge">{{#if (equals item.system.cost.amount 1)}}{{localize 'UA.MajorCharge'}}{{else}}{{localize 'UA.MajorCharges'}}{{/if}}</option>
-            {{/select}}</select>
+            <select name="system.cost.type">{{#if (equals item.system.cost.amount 1)}}{{selectOptions optionsCostTypeSingular selected=item.system.cost.type localize=true}}{{else}}{{selectOptions optionsCostTypePlural selected=item.system.cost.type localize=true}}{{/if}}</select>
         </div>
     </div>
     <nav class="tab-buttons">

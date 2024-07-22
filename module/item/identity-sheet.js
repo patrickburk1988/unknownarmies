@@ -1,4 +1,5 @@
 import UABaseItemSheet from "./base-item-sheet.js";
+import UAUtils from "../utils.js";
 
 export default class UAIdentitySheet extends UABaseItemSheet
 {
@@ -16,6 +17,16 @@ export default class UAIdentitySheet extends UABaseItemSheet
 
     async getData (options) {
         let data = await super.getData(options);
+        data.optionsType = UAUtils.optionsIdentityType;
+        data.optionsSubstitutesFor = UAUtils.optionsIdentitySubstitutesFor;
+        if (game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures")) {
+            data.optionsSupernaturalAbility = UAUtils.optionsIdentitySupernaturalAbilityMMY;
+            data.optionsFeatures = UAUtils.optionsIdentityFeaturesMundaneMMY;
+        } else {
+            data.optionsSupernaturalAbility = UAUtils.optionsIdentitySupernaturalAbility;
+            data.optionsFeatures = UAUtils.optionsIdentityFeaturesMundane;
+        }
+        data.optionsFeaturesNotMundane = UAUtils.optionsIdentityFeaturesNotMundane;
         data.enrichedOfCourseICan = await TextEditor.enrichHTML(this.object.system.mundane.ofCourseICan, {
             async: true
         });
