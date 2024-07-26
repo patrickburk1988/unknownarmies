@@ -1,3 +1,16 @@
+## v1.3.1
+
+- Added setting for sheet/UI theme.
+- Corrected default for "Identities: Select Feature When Rolling" setting.
+- Improved dialog styles.
+- Replaced mergeObject with foundry.utils.mergeObject for future compatibility.
+- Replaced {{#select}} with {{selectOptions}} for future compatibility.
+
+## v1.3.0
+
+- Improved description of "Me, Myself & You" setting.
+- Add setting to select feature when rolling identity.
+
 ## v1.2.9
 
 - Update to v12. Nothing appears to be broken?
