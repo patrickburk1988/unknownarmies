@@ -37,8 +37,9 @@ Hooks.once("init", async function() {
         choices: {
             1: game.i18n.localize("UA.BonTonBlue"),
             2: game.i18n.localize("UA.GodwalkerGreen"),
-            3: game.i18n.localize("UA.ParadoxPurple"),
-            4: game.i18n.localize("UA.RenunciationRed")
+            3: game.i18n.localize("UA.GridironGrey"),
+            4: game.i18n.localize("UA.ParadoxPurple"),
+            5: game.i18n.localize("UA.RenunciationRed")
         }
     });
     game.settings.register("unknownarmies", "IdentitiesAllowMM&YFeatures", {

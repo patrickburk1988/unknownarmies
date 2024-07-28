@@ -896,6 +896,13 @@
   background-image:url(../image/sheet-background-green.webp);
 }
 
+.theme--grey{
+  --color-accent-dark:#202020;
+}
+.theme--grey .dialog .window-content,.theme--grey .unknownarmies.sheet .window-content{
+  background-image:url(../image/sheet-background-grey.webp);
+}
+
 .theme--purple{
   --color-accent-dark:#4a007c;
 }
