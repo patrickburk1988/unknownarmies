@@ -1,3 +1,8 @@
+## v1.3.2
+
+- Added grey theme.
+- Make purple theme slightly less blue.
+
 ## v1.3.1
 
 - Added setting for sheet/UI theme.
