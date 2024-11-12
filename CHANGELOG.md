@@ -1,3 +1,7 @@
+## v1.3.3
+
+- Tweaked README.
+
 ## v1.3.2
 
 - Added grey theme.
