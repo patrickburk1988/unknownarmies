@@ -1,6 +1,7 @@
 ## v1.3.3
 
 - Tweaked README.
+- Organized manifest and replaced outdated `gridUnits`.
 
 ## v1.3.2
 
