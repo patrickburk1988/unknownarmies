@@ -12,6 +12,9 @@ export default class UAItem extends Item
             case "item":
                 this._prepareDerivedItemData(this);
                 break;
+            case "milestone":
+                this._prepareDerivedMilestoneData(this);
+                break;
             case "ritual":
                 this._prepareDerivedRitualData(this);
                 break;
@@ -33,6 +36,9 @@ export default class UAItem extends Item
     }
 
     _prepareDerivedItemData (item) {
+    }
+
+    _prepareDerivedMilestoneData (milestone) {
     }
 
     _prepareDerivedRitualData (ritual) {

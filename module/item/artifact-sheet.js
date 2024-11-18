@@ -1,8 +1,14 @@
 import UABaseItemSheet from "./base-item-sheet.js";
-import UAUtils from "../utils.js";
 
 export default class UAArtifactSheet extends UABaseItemSheet
 {
+    static optionsPower = {
+        "":            "",
+        "Minor":       "Minor",
+        "Significant": "Significant",
+        "Major":       "Major"
+    }
+
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
@@ -10,14 +16,14 @@ export default class UAArtifactSheet extends UABaseItemSheet
                 "sheet",
                 "artifact"
             ],
-            height: 600,
-            width: 650
+/*FIX*/            height: 600,
+/*FIX*/            width: 650
         });
     }
 
     async getData (options) {
-        let data = await super.getData(options);
-        data.optionsPower = UAUtils.optionsArtifactPower;
+        const data = await super.getData(options);
+        data.optionsPower = UAArtifactSheet.optionsPower;
         data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description, {
             async: true
         });

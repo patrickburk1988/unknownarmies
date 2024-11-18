@@ -19,18 +19,6 @@ export default class UABaseActorSheet extends ActorSheet
         return "systems/unknownarmies/template/actor/" + (game.user.isGM || !this.actor.limited ? "" : "limited-") + this.constructor.name.replaceAll(/UA|Sheet/g, "").toLowerCase() + "-sheet.hbs";
     }
 
-    async getData (options) {
-        let data = await super.getData(options);
-        data.items = this.actor.items.contents.sort((a, b) => a.sort - b.sort);
-        data.enrichedPublicNotes = await TextEditor.enrichHTML(this.object.system.notes.public, {
-            async: true
-        });
-        data.enrichedPrivateNotes = await TextEditor.enrichHTML(this.object.system.notes.private, {
-            async: true
-        });
-        return data;
-    }
-
     activateListeners (html) {
         super.activateListeners(html);
         html.find("input").on("keydown", this._onInputKeydown.bind(this));
@@ -45,6 +33,18 @@ export default class UABaseActorSheet extends ActorSheet
         html.find(".editor-content--extra-small").parent().addClass("editor--extra-small");
         html.find(".editor-content--small").parent().addClass("editor--small");
         html.find(".editor-content--large").parent().addClass("editor--large");
+    }
+
+    async getData (options) {
+        const data = await super.getData(options);
+        data.items = this.actor.items.contents.sort((a, b) => a.sort - b.sort);
+        data.enrichedPublicNotes = await TextEditor.enrichHTML(this.object.system.notes.public, {
+            async: true
+        });
+        data.enrichedPrivateNotes = await TextEditor.enrichHTML(this.object.system.notes.private, {
+            async: true
+        });
+        return data;
     }
 
     setPosition (position) {

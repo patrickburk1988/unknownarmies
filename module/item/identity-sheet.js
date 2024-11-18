@@ -1,8 +1,154 @@
 import UABaseItemSheet from "./base-item-sheet.js";
-import UAUtils from "../utils.js";
 
 export default class UAIdentitySheet extends UABaseItemSheet
 {
+    static optionsType = {
+        "":             "",
+        "Mundane":      "Mundane",
+        "Supernatural": "Supernatural",
+        "Avatar":       "Avatar",
+        "Adept":        "Adept"
+    }
+
+    static optionsSubstitutesFor = {
+        "":          "",
+        "Connect":   "Connect",
+        "Dodge":     "Dodge",
+        "Fitness":   "Fitness",
+        "Knowledge": "Knowledge",
+        "Lie":       "Lie",
+        "Notice":    "Notice",
+        "Pursuit":   "Pursuit",
+        "Secrecy":   "Secrecy",
+        "Status":    "Status",
+        "Struggle":  "Struggle"
+    }
+
+    static optionsIdentitySupernaturalAbility = {
+        "":                       "",
+        "Influence":              "Influence",
+        "Specific Harm":          "Specific Harm",
+        "Specific Information":   "Specific Information",
+        "Specific Protection":    "Specific Protection",
+        "Vague Harm":             "Vague Harm",
+        "Vague Information":      "Vague Information",
+        "Vague Protection":       "Vague Protection",
+        "Versatility":            "Versatility"
+    }
+
+    static optionsIdentitySupernaturalAbilityMMY = {
+        "":                       "",
+        "Alter Fear":             "Alter Fear",
+        "Alter Noble":            "Alter Noble",
+        "Alter Rage":             "Alter Rage",
+        "Influence":              "Influence",
+        "Specific Harm":          "Specific Harm",
+        "Specific Information":   "Specific Information",
+        "Specific Protection":    "Specific Protection",
+        "Terrorize Helplessness": "Terrorize Helplessness",
+        "Terrorize Isolation":    "Terrorize Isolation",
+        "Terrorize Self":         "Terrorize Self",
+        "Terrorize Unnatural":    "Terrorize Unnatural",
+        "Terrorize Violence":     "Terrorize Violence",
+        "Vague Harm":             "Vague Harm",
+        "Vague Information":      "Vague Information",
+        "Vague Protection":       "Vague Protection",
+        "Versatility":            "Versatility"
+    }
+
+    static optionsIdentityFeaturesMundane = {
+        "": "",
+        "Casts Rituals":             "Casts Rituals",
+        "Coerces Helplessness":      "Coerces Helplessness",
+        "Coerces Isolation":         "Coerces Isolation",
+        "Coerces Self":              "Coerces Self",
+        "Coerces Unnatural":         "Coerces Unnatural",
+        "Coerces Violence":          "Coerces Violence",
+        "Cooperative":               "Cooperative",
+        "Evaluates Helplessness":    "Evaluates Helplessness",
+        "Evaluates Isolation":       "Evaluates Isolation",
+        "Evaluates Self":            "Evaluates Self",
+        "Evaluates Unnatural":       "Evaluates Unnatural",
+        "Evaluates Violence":        "Evaluates Violence",
+        "Medical":                   "Medical",
+        "Provides Firearm Attacks":  "Provides Firearm Attacks",
+        "Provides Initiative":       "Provides Initiative",
+        "Provides Wound Threshold":  "Provides Wound Threshold",
+        "Resists Helplessness":      "Resists Helplessness",
+        "Resists Isolation":         "Resists Isolation",
+        "Resists Self":              "Resists Self",
+        "Resists Unnatural":         "Resists Unnatural",
+        "Resists Violence":          "Resists Violence",
+        "Sincere":                   "Sincere",
+        "Substitutes for Connect":   "Substitutes for Connect",
+        "Substitutes for Dodge":     "Substitutes for Dodge",
+        "Substitutes for Fitness":   "Substitutes for Fitness",
+        "Substitutes for Knowledge": "Substitutes for Knowledge",
+        "Substitutes for Lie":       "Substitutes for Lie",
+        "Substitutes for Notice":    "Substitutes for Notice",
+        "Substitutes for Pursuit":   "Substitutes for Pursuit",
+        "Substitutes for Secrecy":   "Substitutes for Secrecy",
+        "Substitutes for Status":    "Substitutes for Status",
+        "Substitutes for Struggle":  "Substitutes for Struggle",
+        "Tactical":                  "Tactical",
+        "Therapeutic":               "Therapeutic",
+        "Unique":                    "Unique",
+        "Use Gutter Magick":         "Use Gutter Magick",
+        "Weaponized Physique":       "Weaponized Physique"
+    }
+
+    static optionsIdentityFeaturesMundaneMMY = {
+        "": "",
+        "Casts Rituals":             "Casts Rituals",
+        "Coerces Helplessness":      "Coerces Helplessness",
+        "Coerces Isolation":         "Coerces Isolation",
+        "Coerces Self":              "Coerces Self",
+        "Coerces Unnatural":         "Coerces Unnatural",
+        "Coerces Violence":          "Coerces Violence",
+        "Cooperative":               "Cooperative",
+        "Evaluates Helplessness":    "Evaluates Helplessness",
+        "Evaluates Isolation":       "Evaluates Isolation",
+        "Evaluates Self":            "Evaluates Self",
+        "Evaluates Unnatural":       "Evaluates Unnatural",
+        "Evaluates Violence":        "Evaluates Violence",
+        "Medical":                   "Medical",
+        "Provides Firearm Attacks":  "Provides Firearm Attacks",
+        "Provides Initiative":       "Provides Initiative",
+        "Provides Wound Threshold":  "Provides Wound Threshold",
+        "Reads Fear":                "Reads Fear",
+        "Reads Noble":               "Reads Noble",
+        "Reads Obsession":           "Reads Obsession",
+        "Reads Rage":                "Reads Rage",
+        "Resists Helplessness":      "Resists Helplessness",
+        "Resists Isolation":         "Resists Isolation",
+        "Resists Self":              "Resists Self",
+        "Resists Unnatural":         "Resists Unnatural",
+        "Resists Violence":          "Resists Violence",
+        "Sincere":                   "Sincere",
+        "Substitutes for Connect":   "Substitutes for Connect",
+        "Substitutes for Dodge":     "Substitutes for Dodge",
+        "Substitutes for Fitness":   "Substitutes for Fitness",
+        "Substitutes for Knowledge": "Substitutes for Knowledge",
+        "Substitutes for Lie":       "Substitutes for Lie",
+        "Substitutes for Notice":    "Substitutes for Notice",
+        "Substitutes for Pursuit":   "Substitutes for Pursuit",
+        "Substitutes for Secrecy":   "Substitutes for Secrecy",
+        "Substitutes for Status":    "Substitutes for Status",
+        "Substitutes for Struggle":  "Substitutes for Struggle",
+        "Tactical":                  "Tactical",
+        "Therapeutic":               "Therapeutic",
+        "Totem":                     "Totem",
+        "Unique":                    "Unique",
+        "Use Gutter Magick":         "Use Gutter Magick",
+        "Weaponized Physique":       "Weaponized Physique"
+    }
+
+    static optionsIdentityFeaturesNotMundane = {
+        "": "",
+        "Casts Rituals":     "Casts Rituals",
+        "Use Gutter Magick": "Use Gutter Magick"
+    }
+
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
@@ -10,23 +156,28 @@ export default class UAIdentitySheet extends UABaseItemSheet
                 "sheet",
                 "identity"
             ],
-            height: 707,
-            width: 800
+/*FIX*/            height: 707,
+/*FIX*/            width: 800
         });
     }
 
+    activateListeners (html) {
+        super.activateListeners(html);
+        html.find("[data-action='improve']").on("click", this._onImprove.bind(this));
+    }
+
     async getData (options) {
-        let data = await super.getData(options);
-        data.optionsType = UAUtils.optionsIdentityType;
-        data.optionsSubstitutesFor = UAUtils.optionsIdentitySubstitutesFor;
-        if (game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures")) {
-            data.optionsSupernaturalAbility = UAUtils.optionsIdentitySupernaturalAbilityMMY;
-            data.optionsFeatures = UAUtils.optionsIdentityFeaturesMundaneMMY;
-        } else {
-            data.optionsSupernaturalAbility = UAUtils.optionsIdentitySupernaturalAbility;
-            data.optionsFeatures = UAUtils.optionsIdentityFeaturesMundane;
-        }
-        data.optionsFeaturesNotMundane = UAUtils.optionsIdentityFeaturesNotMundane;
+        const data = await super.getData(options);
+        data.optionsType = UAIdentitySheet.optionsType;
+        data.optionsSubstitutesFor = UAIdentitySheet.optionsSubstitutesFor;
+        if (game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures")) {/*FIX*/
+            data.optionsSupernaturalAbility = UAIdentitySheet.optionsIdentitySupernaturalAbilityMMY;/*FIX*/
+            data.optionsFeatures = UAIdentitySheet.optionsIdentityFeaturesMundaneMMY;/*FIX*/
+        } else {/*FIX*/
+            data.optionsSupernaturalAbility = UAIdentitySheet.optionsIdentitySupernaturalAbility;/*FIX*/
+            data.optionsFeatures = UAIdentitySheet.optionsIdentityFeaturesMundane;/*FIX*/
+        }/*FIX*/
+        data.optionsFeaturesNotMundane = UAIdentitySheet.optionsIdentityFeaturesNotMundane;/*FIX*/
         data.enrichedOfCourseICan = await TextEditor.enrichHTML(this.object.system.mundane.ofCourseICan, {
             async: true
         });
@@ -73,11 +224,6 @@ export default class UAIdentitySheet extends UABaseItemSheet
             async: true
         });
         return data;
-    }
-
-    activateListeners (html) {
-        super.activateListeners(html);
-        html.find("[data-action='improve']").on("click", this._onImprove.bind(this));
     }
 
     async _onImprove (event) {

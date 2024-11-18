@@ -10,60 +10,58 @@ import UARitualSheet from "./item/ritual-sheet.js";
 import UASpellSheet from "./item/spell-sheet.js";
 import UAUtils from "./utils.js";
 
-Hooks.once("init", async function() {
+Hooks.once("init", function() {
     console.log("Rebooting the universe.");
     // Setting Registration ----------------------------------------------------
     // game.settings.register("unknownarmies", "", {
+    //     config: true,
     //     name: "UA.",
     //     hint: "UA._Hint",
     //     scope: "world",
-    //     config: true,
     //     type: Boolean,
-    //     default: false,
-    //     requiresReload: true,
-    //     onChange: value => {},
     //     choices: {},
     //     range: {},
-    //     filepicker: "",
+    //     default: false,
+    //     requiresReload: true
     // });
-    game.settings.register("unknownarmies", "Sheet&UITheme", { // MAYBE
-        name: "UA.Sheet&UITheme", // MAYBE
-        hint: "UA.Sheet&UITheme_Hint", // MAYBE
-        scope: "world", // MAYBE
+    game.settings.register("unknownarmies", "Sheet&UITheme", {
         config: true,
-        type: Number, // MAYBE
-        default: 1,
-        requiresReload: true, // MAYBE
+        name: "UA.Sheet&UITheme",
+        hint: "UA.Sheet&UITheme_Hint",
+        scope: "world",
+        type: Number,
         choices: {
             1: game.i18n.localize("UA.BonTonBlue"),
             2: game.i18n.localize("UA.GodwalkerGreen"),
             3: game.i18n.localize("UA.GridironGrey"),
             4: game.i18n.localize("UA.ParadoxPurple"),
             5: game.i18n.localize("UA.RenunciationRed")
-        }
+        },
+        default: 1,
+        requiresReload: true
     });
     game.settings.register("unknownarmies", "IdentitiesAllowMM&YFeatures", {
-        name: "UA.IdentitiesAllowMM&YFeatures", // MAYBE
-        hint: "UA.IdentitiesAllowMM&YFeatures_Hint", // MAYBE
-        scope: "world",
         config: true,
+        name: "UA.IdentitiesAllowMM&YFeatures",
+        hint: "UA.IdentitiesAllowMM&YFeatures_Hint",
+        scope: "world",
         type: Boolean,
-        default: false, // MAYBE
-        requiresReload: true // MAYBE
+        default: false,
+        requiresReload: true
     });
     game.settings.register("unknownarmies", "IdentitiesSelectFeatureWhenRolling", {
-        name: "UA.IdentitiesSelectFeatureWhenRolling", // MAYBE
-        hint: "UA.IdentitiesSelectFeatureWhenRolling_Hint", // MAYBE
-        scope: "client", // MAYBE
         config: true,
-        type: Number, // MAYBE
-        default: 1, // MAYBE
-        requiresReload: true, // MAYBE
+        name: "UA.IdentitiesSelectFeatureWhenRolling",
+        hint: "UA.IdentitiesSelectFeatureWhenRolling_Hint",
+        scope: "client",
+        type: Number,
         choices: {
             1: game.i18n.localize("UA.Disabled"),
             2: game.i18n.localize("UA.Dialog"),
             3: game.i18n.localize("UA.Sheet")
-        }
+        },
+        default: 1,
+        requiresReload: true
     });
     // Sheet Registration ------------------------------------------------------
     CONFIG.Actor.documentClass = UAActor;
@@ -175,8 +173,8 @@ Hooks.once("init", async function() {
     Handlebars.registerHelper("replaceAll", function (string, pattern, replacement) {
         return string.replaceAll(pattern, replacement);
     });
-    Handlebars.registerHelper("setting", function (string) {
-        return game.settings.get("unknownarmies", string);
+    Handlebars.registerHelper("setting", function (key) {
+        return game.settings.get("unknownarmies", key);
     });
     Handlebars.registerHelper("shockGaugeSchema", function (meter, key) {
         return UAActor.shockGaugeSchema[meter][key];
@@ -218,19 +216,18 @@ Hooks.once("init", async function() {
         }
         return features.sort();
     });
-    Handlebars.registerHelper("stripHTML", function (string) {
-        return jQuery(string).text().replaceAll(/([.!?])([^.!?])/g, "$1 $2");
+    Handlebars.registerHelper("stripHTML", function (html) {
+        return jQuery(html).text().replaceAll(/([.!?])([^.!?])/g, "$1 $2");
     });
     // Handlebars Helpers (Blocks) ---------------------------------------------
 });
 
-Hooks.once("ready", async function() {
-    $(document.getElementsByTagName("body")).addClass(UAUtils.theme);
+Hooks.once("ready", function() {
+    $(document.body).addClass(UAUtils.theme);
 });
 
 Hooks.on("renderDialog", (dialog, html) => {
-    // MAYBE Remove dialog?
-    let hiddenTypes = [
+    const hiddenTypes = [
         "identity",
         "milestone"
     ];
@@ -241,8 +238,8 @@ Hooks.on("renderDialog", (dialog, html) => {
     });
 });
 
-Hooks.on("renderSidebarTab", (app, html) => {
-    if (app.tabName === "chat") {
+Hooks.on("renderSidebarTab", (sidebarTab, html) => {
+    if (sidebarTab.tabName === "chat") {
         html.find(".chat-control-icon i").removeClass("fa-dice-d20").addClass("fa-dice-d10");
         html.find(".chat-control-icon").on("click", async () => {
             let roll = new Roll("1d100");

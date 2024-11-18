@@ -36,11 +36,20 @@ export default class UAActor extends Actor
     prepareDerivedData() {
         super.prepareDerivedData();
         switch (this.type) {
-            case "character":
-                this._prepareDerivedCharacterData(this);
-                break;
             case "cabal":
                 this._prepareDerivedCabalData(this);
+                break;
+            case "character":
+                this._prepareDerivedCharacterData(this);
+        }
+    }
+
+    _prepareDerivedCabalData (cabal) {
+        cabal.system.objective.percentage = 0;
+        for (let item of cabal.items) {
+            if (item.type === "milestone") {
+                cabal.system.objective.percentage += item.system.percentage;
+            }
         }
     }
 
@@ -68,14 +77,5 @@ export default class UAActor extends Actor
         character.system.isBurnedOut = totalHardenedNotches >= 25;
         let woundsRatio = character.system.wounds.suffered / character.system.wounds.threshold;
         character.system.wounds.severity = woundsRatio < 0.5 ? "" : woundsRatio < 0.75 ? "Injured" : woundsRatio < 0.9 ? "Badly Injured" : woundsRatio < 1 ? "Unconscious" : "Dead";
-    }
-
-    _prepareDerivedCabalData (cabal) {
-        cabal.system.objective.percentage = 0;
-        for (let item of cabal.items) {
-            if (item.type === "milestone") {
-                cabal.system.objective.percentage += item.system.percentage;
-            }
-        }
     }
 }

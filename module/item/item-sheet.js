@@ -9,13 +9,13 @@ export default class UAItemSheet extends UABaseItemSheet
                 "sheet",
                 "item"
             ],
-            height: 600,
-            width: 650
+/*FIX*/            height: 600,
+/*FIX*/            width: 650
         });
     }
 
     async getData (options) {
-        let data = await super.getData(options);
+        const data = await super.getData(options);
         data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description, {
             async: true
         });

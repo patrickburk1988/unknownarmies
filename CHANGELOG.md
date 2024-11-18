@@ -2,6 +2,7 @@
 
 - Tweaked README.
 - Organized manifest and replaced outdated `gridUnits`.
+- Moved option maps from `utils.js` to their respective sheets.
 
 ## v1.3.2
 

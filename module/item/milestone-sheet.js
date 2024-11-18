@@ -9,9 +9,9 @@ export default class UAMilestoneSheet extends UABaseItemSheet
                 "sheet",
                 "milestone"
             ],
-            height: 123,
-            // MAYBE template: "systems/unknownarmies/template/item/milestone-sheet.hbs",
-            width: 800
+/*FIX*/            height: 123,
+/*FIX*/            // MAYBE template: "systems/unknownarmies/template/item/milestone-sheet.hbs",
+/*FIX*/            width: 800
         });
     }
 

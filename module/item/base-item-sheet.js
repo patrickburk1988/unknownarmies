@@ -11,21 +11,7 @@ export default class UABaseItemSheet extends ItemSheet
     }
 
     get template() {
-        // TODO Make sure this works for milestones.
-        return "systems/unknownarmies/template/item/" + ((game.user.isGM || !this.item.limited) ? "" : "limited-") + this.constructor.name.replaceAll(/UA|Sheet/g, "").toLowerCase() + "-sheet.hbs";
-    }
-
-    async getData (options) {
-        let data = await super.getData(options);
-        if (this.constructor.name != "UAMilestoneSheet") { // FIX
-            data.enrichedPublicNotes = await TextEditor.enrichHTML(this.object.system.notes.public, {
-                async: true
-            });
-            data.enrichedPrivateNotes = await TextEditor.enrichHTML(this.object.system.notes.private, {
-                async: true
-            });
-        }
-        return data;
+        return "systems/unknownarmies/template/item/" + (game.user.isGM || !this.item.limited ? "" : "limited-") + this.constructor.name.replaceAll(/UA|Sheet/g, "").toLowerCase() + "-sheet.hbs";
     }
 
     activateListeners (html) {
@@ -37,6 +23,19 @@ export default class UABaseItemSheet extends ItemSheet
         html.find(".editor-content--extra-small").parent().addClass("editor--extra-small");
         html.find(".editor-content--medium").parent().addClass("editor--medium");
         html.find(".editor-content--extra-large").parent().addClass("editor--extra-large");
+    }
+
+    async getData (options) {
+        const data = await super.getData(options);
+        if (this.constructor.name != "UAMilestoneSheet") {
+            data.enrichedPublicNotes = await TextEditor.enrichHTML(this.object.system.notes.public, {
+                async: true
+            });
+            data.enrichedPrivateNotes = await TextEditor.enrichHTML(this.object.system.notes.private, {
+                async: true
+            });
+        }
+        return data;
     }
 
     setPosition (position) {
