@@ -151,13 +151,13 @@ export default class UAIdentitySheet extends UABaseItemSheet
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
+            width: 800,
+            height: 707,
             classes: [
                 "unknownarmies",
                 "sheet",
                 "identity"
-            ],
-/*FIX*/            height: 707,
-/*FIX*/            width: 800
+            ]
         });
     }
 

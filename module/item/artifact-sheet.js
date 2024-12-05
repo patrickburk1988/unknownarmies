@@ -11,13 +11,13 @@ export default class UAArtifactSheet extends UABaseItemSheet
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
+            width: 650,
+            height: 600,
             classes: [
                 "unknownarmies",
                 "sheet",
                 "artifact"
-            ],
-/*FIX*/            height: 600,
-/*FIX*/            width: 650
+            ]
         });
     }
 

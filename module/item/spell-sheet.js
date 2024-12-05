@@ -3,14 +3,14 @@ import UABaseItemSheet from "./base-item-sheet.js";
 export default class UASpellSheet extends UABaseItemSheet
 {
     static optionsCostTypeSingular = {
-        "": "",
+        "":                   "",
         "Minor Charge":       "Minor Charge",
         "Significant Charge": "Significant Charge",
         "Major Charge":       "Major Charge"
     }
 
     static optionsCostTypePlural = {
-        "": "",
+        "":                   "",
         "Minor Charge":       "Minor Charges",
         "Significant Charge": "Significant Charges",
         "Major Charge":       "Major Charges"
@@ -18,13 +18,13 @@ export default class UASpellSheet extends UABaseItemSheet
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
+            width: 650,
+            height: 600,
             classes: [
                 "unknownarmies",
                 "sheet",
                 "spell"
-            ],
-/*FIX*/            height: 600,
-/*FIX*/            width: 650
+            ]
         });
     }
 

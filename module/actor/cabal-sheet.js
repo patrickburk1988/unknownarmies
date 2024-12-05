@@ -11,12 +11,12 @@ export default class UACabalSheet extends UABaseActorSheet
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
+            height: 600,
             classes: [
                 "unknownarmies",
                 "sheet",
                 "cabal"
-            ],
-/*FIX*/            height: 600
+            ]
         });
     }
 

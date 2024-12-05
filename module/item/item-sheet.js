@@ -4,13 +4,13 @@ export default class UAItemSheet extends UABaseItemSheet
 {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
+            width: 650,
+            height: 600,
             classes: [
                 "unknownarmies",
                 "sheet",
                 "item"
-            ],
-/*FIX*/            height: 600,
-/*FIX*/            width: 650
+            ]
         });
     }
 

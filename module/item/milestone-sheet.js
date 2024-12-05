@@ -4,14 +4,13 @@ export default class UAMilestoneSheet extends UABaseItemSheet
 {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
+            width: 800,
+            height: 123,
             classes: [
                 "unknownarmies",
                 "sheet",
                 "milestone"
-            ],
-/*FIX*/            height: 123,
-/*FIX*/            // MAYBE template: "systems/unknownarmies/template/item/milestone-sheet.hbs",
-/*FIX*/            width: 800
+            ]
         });
     }
 

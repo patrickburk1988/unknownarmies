@@ -219,14 +219,13 @@ Hooks.once("init", function() {
     Handlebars.registerHelper("stripHTML", function (html) {
         return jQuery(html).text().replaceAll(/([.!?])([^.!?])/g, "$1 $2");
     });
-    // Handlebars Helpers (Blocks) ---------------------------------------------
 });
 
 Hooks.once("ready", function() {
     $(document.body).addClass(UAUtils.theme);
 });
 
-Hooks.on("renderDialog", (dialog, html) => {
+Hooks.on("renderDialog", (dialog, html, data) => {
     const hiddenTypes = [
         "identity",
         "milestone"
@@ -238,7 +237,7 @@ Hooks.on("renderDialog", (dialog, html) => {
     });
 });
 
-Hooks.on("renderSidebarTab", (sidebarTab, html) => {
+Hooks.on("renderSidebarTab", (sidebarTab, html, data) => {
     if (sidebarTab.tabName === "chat") {
         html.find(".chat-control-icon i").removeClass("fa-dice-d20").addClass("fa-dice-d10");
         html.find(".chat-control-icon").on("click", async () => {
