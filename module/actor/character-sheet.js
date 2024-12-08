@@ -13,30 +13,32 @@ export default class UACharacterSheet extends UABaseActorSheet
 
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
+            height: 905,
             classes: [
                 "unknownarmies",
                 "sheet",
                 "character"
-            ],
-/*FIX*/            height: 905
+            ]
         });
     }
 
     activateListeners (html) {
         super.activateListeners(html);
         html.find("[data-action='open-cabal']").on("click", this._onOpenCabal.bind(this));
+        // HACK BELOW
         html.find("[data-action='reset-failed-notches']").on("click", this._onResetFailedNotches.bind(this));
         html.find("[data-action='select-identity-feature']").on("click", this._onSelectIdentityFeature.bind(this)); // FIX contextmenu?
+        // HACK ABOVE
     }
 
     async getData (options) {
         const data = await super.getData(options);
-/*FIX*/        data.cabals = {
-/*FIX*/            "": ""
-/*FIX*/        }
-/*FIX*/        for (let cabal of game.actors.filter(actor => actor.type === "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {
-/*FIX*/            data.cabals[cabal._id] = cabal.name;
-/*FIX*/        }
+        data.cabals = {
+            "": ""
+        };
+        for (let cabal of game.actors.filter(actor => actor.type === "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {
+            data.cabals[cabal._id] = cabal.name;
+        }
         data.optionsFearShockMeter = UACharacterSheet.optionsFearShockMeter;
         data.enrichedAppearance = await TextEditor.enrichHTML(this.object.system.appearance, {
             async: true
@@ -53,6 +55,8 @@ export default class UACharacterSheet extends UABaseActorSheet
     _onOpenCabal (event) {
         game.actors.get(this.actor.system.cabal).sheet.render(true);
     }
+
+    // FIX BELOW ---------------------------------------------------------------
 
     _onResetFailedNotches (event) {
         let key = "system.shockGauge." + $(event.currentTarget).data("shock-meter") + ".notches.failed";

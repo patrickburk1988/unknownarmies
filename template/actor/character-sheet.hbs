@@ -19,7 +19,7 @@
         </div>
         <div class="upper-content__section {{#if (not (isGM))}}upper-content__section--wound-threshold-only{{/if}}">
             <span class="label {{#if (isGM)}}label--wrap{{/if}}">{{localize 'UA.WoundThreshold'}}:</span>
-            <input type="number" name="system.wounds.threshold" data-dtype="Number" value="{{actor.system.wounds.threshold}}" min="0" max="100">{{#if (isGM)}}
+            <input type="number" name="system.wounds.threshold" data-dtype="Number" value="{{actor.system.wounds.threshold}}" min="0">{{#if (isGM)}}
             <span class="label">{{localize 'UA.Wounds'}}:</span>
             <input type="number" name="system.wounds.suffered" data-dtype="Number" value="{{actor.system.wounds.suffered}}" min="0" max="{{actor.system.wounds.threshold}}">{{/if}}
         </div>
