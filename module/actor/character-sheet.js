@@ -28,7 +28,6 @@ export default class UACharacterSheet extends UABaseActorSheet
         // HACK BELOW
         html.find("[data-action='reset-failed-notches']").on("click", this._onResetFailedNotches.bind(this));
         html.find("[data-action='select-identity-feature']").on("click", this._onSelectIdentityFeature.bind(this)); // FIX contextmenu?
-        // HACK ABOVE
     }
 
     async getData (options) {
@@ -55,8 +54,6 @@ export default class UACharacterSheet extends UABaseActorSheet
     _onOpenCabal (event) {
         game.actors.get(this.actor.system.cabal).sheet.render(true);
     }
-
-    // FIX BELOW ---------------------------------------------------------------
 
     _onResetFailedNotches (event) {
         let key = "system.shockGauge." + $(event.currentTarget).data("shock-meter") + ".notches.failed";

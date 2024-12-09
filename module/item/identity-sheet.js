@@ -9,7 +9,6 @@ export default class UAIdentitySheet extends UABaseItemSheet
         "Avatar":       "Avatar",
         "Adept":        "Adept"
     }
-
     static optionsSubstitutesFor = {
         "":          "",
         "Connect":   "Connect",
@@ -23,7 +22,6 @@ export default class UAIdentitySheet extends UABaseItemSheet
         "Status":    "Status",
         "Struggle":  "Struggle"
     }
-
     static optionsIdentitySupernaturalAbility = {
         "":                       "",
         "Influence":              "Influence",
@@ -35,7 +33,6 @@ export default class UAIdentitySheet extends UABaseItemSheet
         "Vague Protection":       "Vague Protection",
         "Versatility":            "Versatility"
     }
-
     static optionsIdentitySupernaturalAbilityMMY = {
         "":                       "",
         "Alter Fear":             "Alter Fear",
@@ -55,7 +52,6 @@ export default class UAIdentitySheet extends UABaseItemSheet
         "Vague Protection":       "Vague Protection",
         "Versatility":            "Versatility"
     }
-
     static optionsIdentityFeaturesMundane = {
         "": "",
         "Casts Rituals":             "Casts Rituals",
@@ -96,7 +92,6 @@ export default class UAIdentitySheet extends UABaseItemSheet
         "Use Gutter Magick":         "Use Gutter Magick",
         "Weaponized Physique":       "Weaponized Physique"
     }
-
     static optionsIdentityFeaturesMundaneMMY = {
         "": "",
         "Casts Rituals":             "Casts Rituals",
@@ -142,7 +137,6 @@ export default class UAIdentitySheet extends UABaseItemSheet
         "Use Gutter Magick":         "Use Gutter Magick",
         "Weaponized Physique":       "Weaponized Physique"
     }
-
     static optionsIdentityFeaturesNotMundane = {
         "": "",
         "Casts Rituals":     "Casts Rituals",
@@ -228,17 +222,14 @@ export default class UAIdentitySheet extends UABaseItemSheet
 
     async _onImprove (event) {
         event.preventDefault();
-        let roll = new Roll("1d5");
-        await roll.evaluate();
-        let rollResult = parseInt(roll.result);
-        let oldPercentage = this.object.system.percentage;
-        let newPercentage = oldPercentage + rollResult;
-        let outcome = game.i18n.localize("UA.IdentityImproved") + ": " + oldPercentage + '% <span class="arrow">▶</span> ' + newPercentage + "%";
-        this.item.update({
-            "system.percentage": newPercentage,
-            "system.hasExperience": false
+        const roll = await new Roll("1d5").evaluate();
+        const rollResult = parseInt(roll.result);
+        const oldPercentage = this.object.system.percentage;
+        await this.item.update({
+            "system.hasExperience": false,
+            "system.percentage": oldPercentage + rollResult
         });
-        let content = "";
+        let content = ``;
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;
         content += `        <h4 class="dice-total">+${rollResult}%</h4>`;
@@ -255,12 +246,12 @@ export default class UAIdentitySheet extends UABaseItemSheet
         content += `                </div>`;
         content += `            </section>`;
         content += `        </div>`;
-        content += `        <div class="dice-formula">${outcome}`;
+        content += `        <div class="dice-formula">${game.i18n.localize("UA.IdentityImproved") + ": " + oldPercentage + '% <span class="arrow">▶</span> ' + this.object.system.percentage + "%"}</div>`;
         content += `    </div>`;
         content += `</div>`;
         roll.toMessage({
-            content: content,
-            flavor: event.currentTarget.dataset["rollLabel"]
+            flavor: event.currentTarget.dataset["rollLabel"],
+            content: content
         });
     }
 }

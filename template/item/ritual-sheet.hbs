@@ -1,14 +1,14 @@
 <form class="main-form {{cssClass}}">
     <div class="upper-content">
         <div class="portrait">
-            <img data-edit="img" alt="{{item.name}} portrait" src="{{item.img}}">
+            <img data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
             <button data-action="show-image"><i class="fas fa-image"></i></button>
         </div>
         <div class="upper-content__section">
             <span class="label">{{localize 'UA.Name'}}:</span>
-            <input type="text" class="name" name="name" data-dtype="String" value="{{item.name}}">
+            <input type="text" class="name" name="name" value="{{item.name}}" data-dtype="String">
             <span class="label">{{localize 'UA.Cost'}}:</span>
-            <input type="number" name="system.cost.amount" data-dtype="Number" value="{{item.system.cost.amount}}" min="0">
+            <input type="number" name="system.cost.amount" value="{{item.system.cost.amount}}" min="0" data-dtype="Number">
             <select name="system.cost.type">{{#if (equals item.system.cost.amount 1)}}{{selectOptions optionsCostTypeSingular selected=item.system.cost.type localize=true}}{{else}}{{selectOptions optionsCostTypePlural selected=item.system.cost.type localize=true}}{{/if}}</select>
         </div>
     </div>
@@ -17,24 +17,24 @@
         <button data-tab="notes">{{localize 'UA.Notes'}}</button>
     </nav>
     <div class="tab-panels">
-        <div class="lower-content tab" data-tab="main">
+        <div class="tab lower-content" data-tab="main">
             <div class="lower-content__section">
                 <h2>{{localize 'UA.RitualAction'}}:</h2>
-                {{editor enrichedRitualAction target="system.action" button=true class="editor-content--extra-small" engine="prosemirror"}}
+                {{editor enrichedRitualAction target="system.action" engine="prosemirror" button=true class="editor-content--extra-small"}}
             </div>
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Effect'}}:</h2>
-                {{editor enrichedEffect target="system.effect" button=true class="editor-content--extra-small" engine="prosemirror"}}
+                {{editor enrichedEffect target="system.effect" engine="prosemirror" button=true class="editor-content--extra-small"}}
             </div>
         </div>
-        <div class="lower-content tab" data-tab="notes">
+        <div class="tab lower-content" data-tab="notes">
             <div class="lower-content__section">
                 <h2>{{localize 'UA.PublicNotes'}}:</h2>
-                {{editor enrichedPublicNotes target="system.notes.public" button=true class="editor-content--extra-small" engine="prosemirror"}}
+                {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true class="editor-content--extra-small"}}
             </div>
             <div class="lower-content__section">
                 <h2>{{localize 'UA.PrivateNotes'}}:</h2>
-                {{editor enrichedPrivateNotes target="system.notes.private" button=true class="editor-content--extra-small" engine="prosemirror"}}
+                {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true class="editor-content--extra-small"}}
             </div>
         </div>
     </div>

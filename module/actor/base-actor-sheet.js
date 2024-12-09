@@ -20,6 +20,7 @@ export default class UABaseActorSheet extends ActorSheet
 
     activateListeners (html) {
         super.activateListeners(html);
+        // HACK BELOW
         html.find("input").on("keydown", this._onInputKeydown.bind(this));
         let showImage = html.find("[data-action='show-image']");
         showImage.on("click", this._onShowImage.bind(this));
@@ -55,21 +56,6 @@ export default class UABaseActorSheet extends ActorSheet
         super.setPosition(position);
     }
 
-    _onInputKeydown (event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            super.submit();
-            $(event.currentTarget)[0].blur();
-        }
-    }
-
-    _onShowImage (event) {
-        event.preventDefault();
-        new ImagePopout(this.actor.img, {
-            title: this.actor.name
-        }).render(true);
-    }
-
     _onCreateItem (event) {
         let type = $(event.currentTarget).data("item-type");
         this.actor.createEmbeddedDocuments("Item", [{
@@ -78,6 +64,47 @@ export default class UABaseActorSheet extends ActorSheet
         }]).then(item => {
             item[0].sheet.render(true);
         });
+    }
+
+    _onDestroyItem (event) {
+        let item = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));
+        Dialog.confirm({
+            // TODO no render defaultYes rejectClose options
+            // TODO buttons default close
+            title: game.i18n.localize("UA.Delete" + item.type.charAt(0).toUpperCase() + item.type.slice(1)),
+            content: `<p>${game.i18n.format("UA.DeleteItem_Details", {
+                name: item.name
+            })}</p>`,
+            yes: () => {
+                this.actor.deleteEmbeddedDocuments("Item", [
+                    item.id
+                ]);
+            }
+        });
+    }
+
+    _onEditItem (event) {
+        this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id")).sheet.render(true);
+    }
+
+    _onInputKeydown (event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            super.submit();
+            $(event.currentTarget)[0].blur();
+        }
+    }
+
+    async _onModifyRoll () {
+        let modifier = false;
+        await Dialog.confirm({
+            title: game.i18n.localize("UA.ModifyRoll"),
+            content: `<p>${game.i18n.localize("UA.ModifyRoll_Details")}: <input type="number" style="max-width: 80px; text-align: center" data-dtype="Number" value="0" min="0" max="100">%</p>`,
+            yes: (prompt) => {
+                modifier = prompt.find("input")[0].value;
+            }
+        });
+        return modifier;
     }
 
     _onPostItem (event) {
@@ -111,27 +138,6 @@ export default class UABaseActorSheet extends ActorSheet
         content += `</div>`;
         ChatMessage.create({
             content: content
-        });
-    }
-
-    _onEditItem (event) {
-        this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id")).sheet.render(true);
-    }
-
-    _onDestroyItem (event) {
-        let item = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));
-        Dialog.confirm({
-            // TODO no render defaultYes rejectClose options
-            // TODO buttons default close
-            title: game.i18n.localize("UA.Delete" + item.type.charAt(0).toUpperCase() + item.type.slice(1)),
-            content: `<p>${game.i18n.format("UA.DeleteItem_Details", {
-                name: item.name
-            })}</p>`,
-            yes: () => {
-                this.actor.deleteEmbeddedDocuments("Item", [
-                    item.id
-                ]);
-            }
         });
     }
 
@@ -203,15 +209,10 @@ export default class UABaseActorSheet extends ActorSheet
         });
     }
 
-    async _onModifyRoll () {
-        let modifier = false;
-        await Dialog.confirm({
-            title: game.i18n.localize("UA.ModifyRoll"),
-            content: `<p>${game.i18n.localize("UA.ModifyRoll_Details")}: <input type="number" style="max-width: 80px; text-align: center" data-dtype="Number" value="0" min="0" max="100">%</p>`,
-            yes: (prompt) => {
-                modifier = prompt.find("input")[0].value;
-            }
-        });
-        return modifier;
+    _onShowImage (event) {
+        event.preventDefault();
+        new ImagePopout(this.actor.img, {
+            title: this.actor.name
+        }).render(true);
     }
 }

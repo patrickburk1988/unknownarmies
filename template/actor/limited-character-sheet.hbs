@@ -1,11 +1,11 @@
 <form class="main-form main-form--limited {{cssClass}}">
     <div class="portrait">
-        <img alt="{{actor.name}} portrait" src="{{actor.img}}">
+        <img src="{{actor.img}}" alt="{{actor.name}} portrait">
         <button data-action="show-image"><i class="fas fa-image"></i></button>
     </div>
     <h2>{{actor.name}}</h2>{{#if actor.system.concept}}
     <h3>{{actor.system.concept}}</h3>{{/if}}
     <div class="editor-wrapper">
-        {{editor enrichedPublicNotes target="system.notes.public"}}
+        {{editor enrichedPublicNotes}}
     </div>
 </form>

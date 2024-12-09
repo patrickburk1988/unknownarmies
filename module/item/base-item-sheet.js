@@ -38,6 +38,14 @@ export default class UABaseItemSheet extends ItemSheet
         return data;
     }
 
+    _onShowImage (event) {
+        event.preventDefault();
+        new ImagePopout(this.item.img, {
+            title: this.item.name
+        }).render(true);
+    }
+    // FIX BELOW ---------------------------------------------------------------
+
     setPosition (position) {
         if ($(this.form).hasClass("main-form--limited")) {
             // MAYBE Move this to identity sheet?
@@ -54,12 +62,5 @@ export default class UABaseItemSheet extends ItemSheet
             super.submit();
             $(event.currentTarget)[0].blur();
         }
-    }
-
-    _onShowImage (event) {
-        event.preventDefault();
-        new ImagePopout(this.item.img, {
-            title: this.item.name
-        }).render(true);
     }
 }
