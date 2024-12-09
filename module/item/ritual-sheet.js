@@ -8,7 +8,6 @@ export default class UARitualSheet extends UABaseItemSheet
         "Significant Charge": "Significant Charge",
         "Major Charge":       "Major Charge"
     }
-
     static optionsCostTypePlural = {
         "":                   "",
         "Minor Charge":       "Minor Charges",

@@ -21,19 +21,15 @@ export default class UAMilestoneSheet extends UABaseItemSheet
 
     async _onRoll (event) {
         event.preventDefault();
-        let dataset = event.currentTarget.dataset;
-        let formula = dataset["rollFormula"];
-        let roll = new Roll(formula);
-        await roll.evaluate();
-        let rollTotal = parseInt(roll.total);
-        let oldMilestonePercentage = this.item.system.percentage;
-        let oldObjectivePercentage = this.actor.system.objective.percentage - oldMilestonePercentage;
-        let newObjectivePercentage = oldObjectivePercentage + rollTotal;
-        let outcome = game.i18n.localize("UA.ObjectiveImproved") + ": " + oldObjectivePercentage + '% <span class="arrow">▶</span> ' + newObjectivePercentage + "%";
-        this.item.update({
+        const dataset = event.currentTarget.dataset;
+        const formula = dataset["rollFormula"];
+        const roll = await new Roll(formula).evaluate();
+        const rollTotal = parseInt(roll.total);
+        const oldObjectivePercentage = this.actor.system.objective.percentage;
+        await this.item.update({
             "system.percentage": rollTotal
         });
-        let content = "";
+        let content = ``;
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;
         content += `        <h4 class="dice-total">+${rollTotal}%</h4>`;
@@ -52,12 +48,12 @@ export default class UAMilestoneSheet extends UABaseItemSheet
         content += `                </div>`;
         content += `            </section>`;
         content += `        </div>`;
-        content += `        <div class="dice-formula">${outcome}`;
+        content += `        <div class="dice-formula">${game.i18n.localize("UA.ObjectiveImproved") + ": " + oldObjectivePercentage + '% <span class="arrow">▶</span> ' + this.actor.system.objective.percentage + "%"}</div>`;
         content += `    </div>`;
         content += `</div>`;
         roll.toMessage({
-            content: content,
-            flavor: dataset["rollLabel"]
+            flavor: dataset["rollLabel"],
+            content: content
         });
     }
 }

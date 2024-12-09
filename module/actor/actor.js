@@ -68,14 +68,14 @@ export default class UAActor extends Actor
         }
         let totalHardenedNotches = 0;
         for (let shockMeterKey of Object.keys(character.system.shockGauge)) {
-            let hardenedNotches = character.system.shockGauge[shockMeterKey].notches.hardened;
+            const hardenedNotches = character.system.shockGauge[shockMeterKey].notches.hardened;
             totalHardenedNotches += parseInt(hardenedNotches);
-            let hardenedNotchesx5 = hardenedNotches * 5;
+            const hardenedNotchesx5 = hardenedNotches * 5;
             character.system.abilities[UAActor.shockGaugeSchema[shockMeterKey]["upbeatAbility"]] = 65 - hardenedNotchesx5;
             character.system.abilities[UAActor.shockGaugeSchema[shockMeterKey]["downbeatAbility"]] = 15 + hardenedNotchesx5;
         }
         character.system.isBurnedOut = totalHardenedNotches >= 25;
-        let woundsRatio = character.system.wounds.suffered / character.system.wounds.threshold;
+        const woundsRatio = character.system.wounds.suffered / character.system.wounds.threshold;
         character.system.wounds.severity = woundsRatio < 0.5 ? "" : woundsRatio < 0.75 ? "Injured" : woundsRatio < 0.9 ? "Badly Injured" : woundsRatio < 1 ? "Unconscious" : "Dead";
     }
 }
