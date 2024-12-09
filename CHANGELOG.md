@@ -1,7 +1,3 @@
-## v1.3.5
-
-- Actually fixed character sheet bug. 🙃
-
 ## v1.3.4
 
 - Fixed character sheet bug.
