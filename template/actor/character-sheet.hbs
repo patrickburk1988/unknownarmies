@@ -97,13 +97,13 @@
                     </div>
                     <div class="shock-meter__failed-notches-ongoing-madness">{{!--//FIX class="shock-meter__failed-notches-ongoing-madness" --}}
                         <a class="label" data-action="reset-failed-notches" data-shock-meter="{{shockMeterKey}}">{{localize 'UA.Failed'}}:</a>
-                        <input type="radio" {{#if (exceeds shockMeterObject,notches.failed 1)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="1" {{checked (equals shockMeterObject,notches.failed 1)}}>
-                        <input type="radio" {{#if (exceeds shockMeterObject,notches.failed 2)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="2" {{checked (equals shockMeterObject,notches.failed 2)}}>
-                        <input type="radio" {{#if (exceeds shockMeterObject,notches.failed 3)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="3" {{checked (equals shockMeterObject,notches.failed 3)}}>
-                        <input type="radio" {{#if (exceeds shockMeterObject,notches.failed 4)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="4" {{checked (equals shockMeterObject,notches.failed 4)}}>
-                        <input type="radio" name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="5" {{checked (equals shockMeterObject,notches.failed 5)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.failed 1)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="1" {{checked (equals shockMeterObject.notches.failed 1)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.failed 2)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="2" {{checked (equals shockMeterObject.notches.failed 2)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.failed 3)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="3" {{checked (equals shockMeterObject.notches.failed 3)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.failed 4)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="4" {{checked (equals shockMeterObject.notches.failed 4)}}>
+                        <input type="radio" name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="5" {{checked (equals shockMeterObject.notches.failed 5)}}>
                         <span class="label label--wrap">{{localize 'UA.OngoingMadness'}}:</span>
-                        <input type="text" name="system.shockGauge.{{shockMeterKey}}.ongoingMadness" data-dtype="String" value="{{shockMeterObject,ongoingMadness}}">
+                        <input type="text" name="system.shockGauge.{{shockMeterKey}}.ongoingMadness" data-dtype="String" value="{{shockMeterObject.ongoingMadness}}">
                     </div>
                 </div>{{/each}}
             </div>
