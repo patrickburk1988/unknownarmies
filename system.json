@@ -10,7 +10,7 @@
     "url": "https://github.com/patrickburk1988/unknownarmies",
     "manifest": "https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/system.json",
     "download": "https://github.com/patrickburk1988/unknownarmies/releases/latest/download/unknownarmies.zip",
-    "version": "1.3.3",
+    "version": "1.3.4",
     "compatibility": {
         "minimum": 11,
         "verified": "12.331"
