@@ -1,22 +1,21 @@
-<form class="main-form {{cssClass}} {{lang}}">
+<form class="main-form {{cssClass}} {{lang}}">{{!--//FIX class="  {{lang}}" --}}
     <div class="upper-content">
         <div class="portrait">
-            <img data-edit="img" alt="{{item.name}} portrait" src="{{item.img}}">
+            <img data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
             <button data-action="show-image"><i class="fas fa-image"></i></button>
         </div>
         <div class="upper-content__section">
             <span class="label">{{localize 'UA.Name'}}:</span>
-            <input type="text" class="name" name="name" data-dtype="String" value="{{item.name}}">
-            <input type="number" name="system.percentage" data-dtype="Number" value="{{item.system.percentage}}" min="0" max="100">
-            <span class="percentage">%</span>
+            <input type="text" class="name" name="name" value="{{item.name}}" data-dtype="String">
+            <input type="number" name="system.percentage" value="{{item.system.percentage}}" min="0" max="100" data-dtype="Number">
+            <span class="percentage">%</span>{{!--//FIX class="percentage" --}}
             <span class="label">{{localize 'UA.Type'}}:</span>
             <select name="system.type">{{selectOptions optionsType selected=item.system.type localize=true}}</select>
             <span class="label">{{localize 'UA.Obsession'}}:</span>
             <input type="checkbox" name="system.isObsession" data-dtype="Boolean" {{checked item.system.isObsession}}>
             <span class="label">{{localize 'UA.Experience'}}:</span>
             <input type="checkbox" name="system.hasExperience" data-dtype="Boolean" {{checked item.system.hasExperience}}>
-            <button data-action="improve" data-roll-label="{{localize (concat 'UA.' item.system.type 'Identity')}} ({{item.name}})" {{disabled (not item.system.hasExperience)}}>{{localize 'UA.Improve'}}
-            </button>
+            <button data-action="improve" data-roll-label="{{localize (concat 'UA.' item.system.type 'Identity')}} ({{item.name}})" {{disabled (not item.system.hasExperience)}}>{{localize 'UA.Improve'}}</button>
         </div>
     </div>
     <nav class="tab-buttons">
@@ -24,7 +23,7 @@
         <button data-tab="notes">{{localize 'UA.Notes'}}</button>
     </nav>
     <div class="tab-panels">
-        <div class="lower-content {{#if (not item.system.type)}}lower-content--details-only{{/if}} tab" data-tab="main">{{#if item.system.type}}
+        <div class="tab lower-content {{#if (not item.system.type)}}lower-content--details-only{{/if}}" data-tab="main">{{#if item.system.type}}{{!--//FIX class=" {{#if (not item.system.type)}}lower-content--details-only{{/if}} ">{{#if item.system.type}} --}}
             <div class="lower-content__section">
                 <div class="stats-features">{{#if (equals item.system.type 'Mundane')}}
                     <span class="label">{{localize 'UA.OfCourseICan'}}:</span>
@@ -65,21 +64,49 @@
                     <select name="system.features.{{featureKey}}">{{#if (equals ../item.system.type 'Mundane')}}{{selectOptions ../optionsFeatures selected=feature localize=true}}{{else}}{{selectOptions ../optionsFeaturesNotMundane selected=feature localize=true}}{{/if}}</select>
                     <span class="stats-features__details">{{#if feature}}{{#if (includes feature 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes feature 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes feature 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes feature 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes feature 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{localize (concat 'UA.' (replaceAll feature ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/each}}
                 </div>
-            </div>{{/if}}
+            </div>{{/if}}{{!--//FIX >{{/if}} --}}
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Details'}}:</h2>
-                {{editor enrichedDetails target="system.details" button=true engine="prosemirror"}}
+                {{editor enrichedDetails target="system.details" engine="prosemirror" button=true}}
             </div>
         </div>
-        <div class="lower-content tab" data-tab="notes">
+        <div class="tab lower-content" data-tab="notes">
             <div class="lower-content__section">
                 <h2>{{localize 'UA.PublicNotes'}}:</h2>
-                {{editor enrichedPublicNotes target="system.notes.public" button=true class="editor-content--medium" engine="prosemirror"}}
+                {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true class="editor-content--medium"}}
             </div>
             <div class="lower-content__section">
                 <h2>{{localize 'UA.PrivateNotes'}}:</h2>
-                {{editor enrichedPrivateNotes target="system.notes.private" button=true class="editor-content--medium" engine="prosemirror"}}
+                {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true class="editor-content--medium"}}
             </div>
         </div>
     </div>
 </form>
+{{!--
+"identity": {
+    "mundane": {
+        "ofCourseICan": "",
+        "substitutesFor": ""
+    "supernatural": {
+        "ability": ""
+    "avatar": {
+        "attributes": "",
+        "symbols": "",
+        "taboos": "",
+        "channels": {
+            "1-50": "",
+            "51-70": "",
+            "71-90": "",
+            "91-98": "",
+            "99-": ""
+    "adept": {
+        "domain": "",
+        "taboos": "",
+        "generateCharge": {
+            "minor": "",
+            "significant": "",
+            "major": ""
+    "features": {
+        "one": "",
+        "two": ""
+--}}

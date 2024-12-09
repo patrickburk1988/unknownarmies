@@ -1,27 +1,27 @@
-<form class="main-form {{cssClass}} {{lang}}">
+<form class="main-form {{cssClass}} {{lang}}">{{!--//FIX class=" {{lang}}" --}}
     <div class="status">{{#if actor.system.isBurnedOut}}
         <span>{{localize 'UA.BurnedOut'}}</span>{{/if}}{{#if actor.system.wounds.severity}}
         <span>{{localize (concat 'UA.' (replace actor.system.wounds.severity ' ' ''))}}</span>{{/if}}
     </div>
     <div class="upper-content">
         <div class="portrait">
-            <img data-edit="img" alt="{{actor.name}} portrait" src="{{actor.img}}">
+            <img data-edit="img" src="{{actor.img}}" alt="{{actor.name}} portrait">
             <button data-action="show-image"><i class="fas fa-image"></i></button>
         </div>
         <div class="upper-content__section">
             <span class="label">{{localize 'UA.Name'}}:</span>
-            <input type="text" class="name" name="name" data-dtype="String" value="{{actor.name}}">
+            <input type="text" class="name" name="name" value="{{actor.name}}" data-dtype="String">
             <span class="label">{{localize 'UA.Concept'}}:</span>
-            <input type="text" name="system.concept" data-dtype="String" value="{{actor.system.concept}}">
+            <input type="text" name="system.concept" value="{{actor.system.concept}}" data-dtype="String">
             <span class="label">{{localize 'UA.Cabal'}}:</span>
             <select class="cabal" name="system.cabal">{{selectOptions cabals selected=actor.system.cabal}}</select>
             <button data-action="open-cabal" {{disabled (not actor.system.cabal)}}>{{localize 'UA.OpenCabal'}}</button>
         </div>
-        <div class="upper-content__section {{#if (not (isGM))}}upper-content__section--wound-threshold-only{{/if}}">
-            <span class="label {{#if (isGM)}}label--wrap{{/if}}">{{localize 'UA.WoundThreshold'}}:</span>
-            <input type="number" name="system.wounds.threshold" data-dtype="Number" value="{{actor.system.wounds.threshold}}" min="0">{{#if (isGM)}}
+        <div class="upper-content__section {{#if (not (isGM))}}upper-content__section--wound-threshold-only{{/if}}">{{!--//FIX {{#if (not (isGM))}} upper-content__section--wound-threshold-only{{/if}}--}}
+            <span class="label {{#if (isGM)}}label--wrap{{/if}}">{{localize 'UA.WoundThreshold'}}:</span>{{!-- //FIX <span class="label {{#if (isGM)}}label--wrap{{/if}}"> --}}
+            <input type="number" name="system.wounds.threshold" value="{{actor.system.wounds.threshold}}" min="0" data-dtype="Number">{{#if (isGM)}}
             <span class="label">{{localize 'UA.Wounds'}}:</span>
-            <input type="number" name="system.wounds.suffered" data-dtype="Number" value="{{actor.system.wounds.suffered}}" min="0" max="{{actor.system.wounds.threshold}}">{{/if}}
+            <input type="number" name="system.wounds.suffered" value="{{actor.system.wounds.suffered}}" min="0" max="{{actor.system.wounds.threshold}}" data-dtype="Number">{{/if}}
         </div>
     </div>
     <nav class="tab-buttons">
@@ -33,39 +33,39 @@
         <button data-tab="notes">{{localize 'UA.Notes'}}</button>
     </nav>
     <div class="tab-panels">
-        <div class="lower-content lower-content--2-columns tab" data-tab="main">
+        <div class="tab lower-content lower-content--2-columns" data-tab="main">{{!--//FIX class="lower-content--2-columns " --}}
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Obsession&Passions'}}:</h2>
                 <div class="obsession-passions">
                     <span class="label">{{localize 'UA.Obsession'}}:</span>
-                    <input type="text" name="system.obsession" data-dtype="String" value="{{actor.system.obsession}}">
+                    <input type="text" name="system.obsession" value="{{actor.system.obsession}}" data-dtype="String">
                     <span class="label">{{localize 'UA.Used'}}</span>
-                    {{#each actor.system.passions as |passion passionKey|}}<span class="label">{{localize (concat 'UA.' (capitalize passionKey))}}:</span>
-                    <input type="text" name="system.passions.{{passionKey}}.name" data-dtype="String" value="{{passion.name}}">
-                    <input type="checkbox" name="system.passions.{{passionKey}}.isUsed" data-dtype="Boolean" {{#if ../actor.system.isBurnedOut}}title="{{localize 'UA.BurnedOut'}}"{{/if}} {{checked passion.isUsed}} {{disabled ../actor.system.isBurnedOut}}>
+                    {{#each actor.system.passions as |passionValue passionKey|}}<span class="label">{{localize (concat 'UA.' (capitalize passionKey))}}:</span>
+                    <input type="text" name="system.passions.{{passionKey}}.name" value="{{passionValue.name}}" data-dtype="String">
+                    <input type="checkbox" name="system.passions.{{passionKey}}.isUsed" {{#if ../actor.system.isBurnedOut}}title="{{localize 'UA.BurnedOut'}}"{{/if}} data-dtype="Boolean" {{checked passionValue.isUsed}} {{disabled ../actor.system.isBurnedOut}}>
                     {{#if (equals passionKey 'fear')}}<span class="label">{{localize 'UA.FearShockMeter'}}:</span>
-                    <select name="system.passions.fear.shockMeter">{{selectOptions ../optionsFearShockMeter selected=passion.shockMeter localize=true}}</select>{{/if}}{{/each}}
+                    <select name="system.passions.fear.shockMeter">{{selectOptions ../optionsFearShockMeter selected=passionValue.shockMeter localize=true}}</select>{{/if}}{{/each}}
                 </div>
             </div>
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Relationships'}}:</h2>
                 <div class="relationships">
-                    {{#each actor.system.relationships as |relationship relationshipKey|}}<button data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize relationshipKey))}}{{#if relationship.name}} ({{relationship.name}}){{/if}}" data-roll-target="{{relationship.percentage}}">{{localize (concat 'UA.' (capitalize relationshipKey))}}</button>
-                    <input type="text" name="system.relationships.{{relationshipKey}}.name" data-dtype="String" value="{{relationship.name}}">
-                    <input type="number" name="system.relationships.{{relationshipKey}}.percentage" data-dtype="Number" value="{{relationship.percentage}}" min="0" max="100">
+                    {{#each actor.system.relationships as |relationshipValue relationshipKey|}}<button data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize relationshipKey))}}{{#if relationshipValue.name}} ({{relationshipValue.name}}){{/if}}" data-roll-target="{{relationshipValue.percentage}}">{{localize (concat 'UA.' (capitalize relationshipKey))}}</button>{{!-- //FIX data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize relationshipKey))}}{{#if relationshipValue.name}} ({{relationshipValue.name}}){{/if}}" data-roll-target="{{relationshipValue.percentage}}"> --}}
+                    <input type="text" name="system.relationships.{{relationshipKey}}.name" value="{{relationshipValue.name}}" data-dtype="String">
+                    <input type="number" name="system.relationships.{{relationshipKey}}.percentage" value="{{relationshipValue.percentage}}" min="0" max="100" step="5" data-dtype="Number">
                     <span>%</span>{{/each}}
                 </div>
             </div>
-            <div class="lower-content__section lower-content__section--full-width">
+            <div class="lower-content__section lower-content__section--full-width">{{!--//FIX class=" lower-content__section--full-width"> --}}
                 <h2>{{localize 'UA.ShockGauge'}}:</h2>
-                {{#each actor.system.shockGauge as |shockMeter shockMeterKey|}}<div class="shock-meter">
-                    <div class="shock-meter__name-coerce-resist">
+                {{#each actor.system.shockGauge as |shockMeterObject shockMeterKey|}}<div class="shock-meter">
+                    <div class="shock-meter__name-coerce-resist">{{!-- //FIX class="shock-meter__name-coerce-resist --}}
                         <h3>{{localize (concat 'UA.' (capitalize shockMeterKey))}}</h3>
                         <p>{{localize (concat 'UA.CoerceWith' (capitalize (shockGaugeSchema shockMeterKey 'coerceWith')))}}</p>
                         <p>{{localize (concat 'UA.ResistWith' (capitalize (shockGaugeSchema shockMeterKey 'resistWith')))}}</p>
                     </div>
-                    <div class="shock-meter__abilities-hardened-notches">
-                        <button data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'upbeatAbility')))}}" data-roll-target="{{#each ../actor.system.abilities as |ability abilityKey|}}{{#if (equals abilityKey (shockGaugeSchema shockMeterKey 'upbeatAbility'))}}{{ability}}{{/if}}{{/each}}">{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'upbeatAbility')))}}</button>
+                    <div class="shock-meter__abilities-hardened-notches">{{!--//FIX class="shock-meter__abilities-hardened-notches" --}}
+                        <button data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'upbeatAbility')))}}" data-roll-target="{{#each ../actor.system.abilities as |ability abilityKey|}}{{#if (equals abilityKey (shockGaugeSchema shockMeterKey 'upbeatAbility'))}}{{ability}}{{/if}}{{/each}}">{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'upbeatAbility')))}}</button>{{!--//FIX data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'upbeatAbility')))}}" data-roll-target="{{#each ../actor.system.abilities as |ability abilityKey|}}{{#if (equals abilityKey (shockGaugeSchema shockMeterKey 'upbeatAbility'))}}{{ability}}{{/if}}{{/each}}"> --}}
                         <span class="label">60%</span>
                         <span class="label">55%</span>
                         <span class="label">50%</span>
@@ -75,15 +75,15 @@
                         <span class="label">30%</span>
                         <span class="label">25%</span>
                         <span class="label">20%</span>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.hardened 1)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="1" {{checked (equals shockMeter.notches.hardened 1)}}>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.hardened 2)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="2" {{checked (equals shockMeter.notches.hardened 2)}}>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.hardened 3)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="3" {{checked (equals shockMeter.notches.hardened 3)}}>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.hardened 4)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="4" {{checked (equals shockMeter.notches.hardened 4)}}>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.hardened 5)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="5" {{checked (equals shockMeter.notches.hardened 5)}}>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.hardened 6)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="6" {{checked (equals shockMeter.notches.hardened 6)}}>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.hardened 7)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="7" {{checked (equals shockMeter.notches.hardened 7)}}>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.hardened 8)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="8" {{checked (equals shockMeter.notches.hardened 8)}}>
-                        <input type="radio" name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="9" {{checked (equals shockMeter.notches.hardened 9)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.hardened 1)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="1" {{checked (equals shockMeterObject.notches.hardened 1)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.hardened 2)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="2" {{checked (equals shockMeterObject.notches.hardened 2)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.hardened 3)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="3" {{checked (equals shockMeterObject.notches.hardened 3)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.hardened 4)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="4" {{checked (equals shockMeterObject.notches.hardened 4)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.hardened 5)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="5" {{checked (equals shockMeterObject.notches.hardened 5)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.hardened 6)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="6" {{checked (equals shockMeterObject.notches.hardened 6)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.hardened 7)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="7" {{checked (equals shockMeterObject.notches.hardened 7)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject.notches.hardened 8)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="8" {{checked (equals shockMeterObject.notches.hardened 8)}}>
+                        <input type="radio" name="system.shockGauge.{{shockMeterKey}}.notches.hardened" value="9" {{checked (equals shockMeterObject.notches.hardened 9)}}>
                         <span class="label">20%</span>
                         <span class="label">25%</span>
                         <span class="label">30%</span>
@@ -93,22 +93,22 @@
                         <span class="label">50%</span>
                         <span class="label">55%</span>
                         <span class="label">60%</span>
-                        <button data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'downbeatAbility')))}}" data-roll-target="{{#each ../actor.system.abilities as |ability abilityKey|}}{{#if (equals abilityKey (shockGaugeSchema shockMeterKey 'downbeatAbility'))}}{{ability}}{{/if}}{{/each}}">{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'downbeatAbility')))}}</button>
+                        <button data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'downbeatAbility')))}}" data-roll-target="{{#each ../actor.system.abilities as |ability abilityKey|}}{{#if (equals abilityKey (shockGaugeSchema shockMeterKey 'downbeatAbility'))}}{{ability}}{{/if}}{{/each}}">{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'downbeatAbility')))}}</button>{{!--//FIX data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterKey 'downbeatAbility')))}}" data-roll-target="{{#each ../actor.system.abilities as |ability abilityKey|}}{{#if (equals abilityKey (shockGaugeSchema shockMeterKey 'downbeatAbility'))}}{{ability}}{{/if}}{{/each}}"> --}}
                     </div>
-                    <div class="shock-meter__failed-notches-ongoing-madness">
+                    <div class="shock-meter__failed-notches-ongoing-madness">{{!--//FIX class="shock-meter__failed-notches-ongoing-madness" --}}
                         <a class="label" data-action="reset-failed-notches" data-shock-meter="{{shockMeterKey}}">{{localize 'UA.Failed'}}:</a>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.failed 1)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="1" {{checked (equals shockMeter.notches.failed 1)}}>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.failed 2)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="2" {{checked (equals shockMeter.notches.failed 2)}}>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.failed 3)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="3" {{checked (equals shockMeter.notches.failed 3)}}>
-                        <input type="radio" {{#if (exceeds shockMeter.notches.failed 4)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="4" {{checked (equals shockMeter.notches.failed 4)}}>
-                        <input type="radio" name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="5" {{checked (equals shockMeter.notches.failed 5)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject,notches.failed 1)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="1" {{checked (equals shockMeterObject,notches.failed 1)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject,notches.failed 2)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="2" {{checked (equals shockMeterObject,notches.failed 2)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject,notches.failed 3)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="3" {{checked (equals shockMeterObject,notches.failed 3)}}>
+                        <input type="radio" {{#if (exceeds shockMeterObject,notches.failed 4)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="4" {{checked (equals shockMeterObject,notches.failed 4)}}>
+                        <input type="radio" name="system.shockGauge.{{shockMeterKey}}.notches.failed" value="5" {{checked (equals shockMeterObject,notches.failed 5)}}>
                         <span class="label label--wrap">{{localize 'UA.OngoingMadness'}}:</span>
-                        <input type="text" name="system.shockGauge.{{shockMeterKey}}.ongoingMadness" data-dtype="String" value="{{shockMeter.ongoingMadness}}">
+                        <input type="text" name="system.shockGauge.{{shockMeterKey}}.ongoingMadness" data-dtype="String" value="{{shockMeterObject,ongoingMadness}}">
                     </div>
                 </div>{{/each}}
             </div>
         </div>
-        <div class="lower-content tab" data-tab="identities">
+        <div class="tab lower-content" data-tab="identities">
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Identities'}}:</h2>
                 <div class="item-list item-list--identities">
@@ -148,7 +148,7 @@
                                 <span>{{stripHTML item.system.adept.generateCharge.significant}}</span>{{/if}}
                                 {{#if item.system.adept.generateCharge.major}}<span class="label">{{localize 'UA.GenerateMajorCharge'}}:</span>
                                 <span>{{stripHTML item.system.adept.generateCharge.major}}</span>{{/if}}{{/if}}
-                                {{#each (sortFeatures item) as |feature|}}{{#if feature}}{{#if (equals (setting "IdentitiesSelectFeatureWhenRolling") 3)}}<button data-action="roll" data-roll-label="{{item.name}} ({{localize (concat 'UA.' item.system.type 'Identity')}})" data-roll-content-header="{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}" data-roll-target="{{item.system.percentage}}">{{!-- //FIX content-header --}}{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</button>{{else}}<span class="label">{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</span>{{/if}}
+                                {{#each (sortFeatures item) as |feature|}}{{#if feature}}{{#if (equals (setting "IdentitiesSelectFeatureWhenRolling") 3)}}<button data-action="roll" data-roll-label="{{item.name}} ({{localize (concat 'UA.' item.system.type 'Identity')}})" data-roll-content-header="{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}" data-roll-target="{{item.system.percentage}}">{{!-- //FIX content-header --}}{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</button>{{else}}<span class="label">{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</span>{{/if}}{{!--//FIX {{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</button>{{else}}<span class="label">{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</span>{{/if}} --}}
                                 <span>{{#if (includes feature 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes feature 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes feature 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes feature 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes feature 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{#if (includes feature 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{else}}{{#if (includes feature 'Harm')}}{{localize 'UA.Harm_Details'}}{{else}}{{#if (includes feature 'Information')}}{{localize 'UA.Information_Details'}}{{else}}{{#if (includes feature 'Protection')}}{{localize 'UA.Protection_Details'}}{{else}}{{#if (includes feature 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{else}}{{#if (includes feature '1-50')}}{{stripHTML item.system.avatar.channels.1-50}}{{else}}{{#if (includes feature '51-70')}}{{stripHTML item.system.avatar.channels.51-70}}{{else}}{{#if (includes feature '71-90')}}{{stripHTML item.system.avatar.channels.71-90}}{{else}}{{#if (includes feature '91-98')}}{{stripHTML item.system.avatar.channels.91-98}}{{else}}{{#if (includes feature '99')}}{{stripHTML item.system.avatar.channels.99-}}{{else}}{{localize (concat 'UA.' (replaceAll feature ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/if}}{{/each}}
                                 {{#if item.system.details}}<span class="label">{{localize 'UA.Details'}}:</span>
                                 <span>{{stripHTML item.system.details}}</span>{{/if}}
@@ -161,8 +161,8 @@
                 </div>
             </div>
         </div>
-        <div class="lower-content lower-content--2-columns tab" data-tab="magick">
-            <div class="lower-content__section lower-content__section--full-width">
+        <div class="tab lower-content lower-content--2-columns" data-tab="magick">{{!--//FIX class="lower-content--2-columns" --}}
+            <div class="lower-content__section lower-content__section--full-width">{{!--//FIX class=" lower-content__section--full-width"> --}}
                 <h2>{{localize 'UA.Charges'}}:</h2>
                 <div class="charges">
                     {{#each actor.system.charges as |charge chargeKey|}}<span class="label label--wrap">{{localize (concat 'UA.' (capitalize chargeKey) 'Charges')}}:</span>
@@ -228,7 +228,7 @@
                 </div>
             </div>
         </div>
-        <div class="lower-content lower-content--2-columns tab" data-tab="items">
+        <div class="tab lower-content--2-columns " data-tab="items">{{!--//FIX class="lower-content--2-columns " --}}
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Artifacts'}}:</h2>
                 <div class="item-list item-list--artifacts">
@@ -282,29 +282,63 @@
                 </div>
             </div>
         </div>
-        <div class="lower-content tab" data-tab="biography">
+        <div class="tab lower-content" data-tab="biography">
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Appearance'}}:</h2>
-                {{editor enrichedAppearance target="system.appearance" button=true class="editor-content--small" engine="prosemirror"}}
+                {{editor enrichedAppearance target="system.appearance" engine="prosemirror" button=true class="editor-content--small"}}
             </div>
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Personality'}}:</h2>
-                {{editor enrichedPersonality target="system.personality" button=true class="editor-content--small" engine="prosemirror"}}
+                {{editor enrichedPersonality target="system.personality" engine="prosemirror" button=true class="editor-content--small"}}
             </div>
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Background'}}:</h2>
-                {{editor enrichedBackground target="system.background" button=true class="editor-content--small" engine="prosemirror"}}
+                {{editor enrichedBackground target="system.background" engine="prosemirror" button=true class="editor-content--small"}}
             </div>
         </div>
-        <div class="lower-content tab" data-tab="notes">
+        <div class="tab lower-content" data-tab="notes">
             <div class="lower-content__section">
                 <h2>{{localize 'UA.PublicNotes'}}:</h2>
-                {{editor enrichedPublicNotes target="system.notes.public" button=true class="editor-content--large" engine="prosemirror"}}
+                {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true class="editor-content--large"}}
             </div>
             <div class="lower-content__section">
                 <h2>{{localize 'UA.PrivateNotes'}}:</h2>
-                {{editor enrichedPrivateNotes target="system.notes.private" button=true class="editor-content--large" engine="prosemirror"}}
+                {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true class="editor-content--large"}}
             </div>
         </div>
     </div>
 </form>
+{{!--
+"character": {
+    "shockGauge": {
+        "helplessness": {
+            "notches": {
+                "hardened": 1,
+                "failed": 0
+            "ongoingMadness": ""
+        "isolation": {
+            "notches": {
+                "hardened": 1,
+                "failed": 0
+            "ongoingMadness": ""
+        "self": {
+            "notches": {
+                "hardened": 1,
+                "failed": 0
+            "ongoingMadness": ""
+        "unnatural": {
+            "notches": {
+                "hardened": 1,
+                "failed": 0
+            "ongoingMadness": ""
+        "violence": {
+            "notches": {
+                "hardened": 1,
+                "failed": 0
+            "ongoingMadness": ""
+    "charges": {
+        "minor": 0,
+        "significant": 0,
+        "major": 0
+}
+--}}

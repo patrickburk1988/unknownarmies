@@ -1,21 +1,21 @@
 <form class="main-form {{cssClass}} {{lang}}">
     <div class="upper-content">
         <div class="portrait">
-            <img data-edit="img" alt="{{item.name}} portrait" src="{{item.img}}">
+            <img data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
             <button data-action="show-image"><i class="fas fa-image"></i></button>
         </div>
-        <div class="upper-content__section {{#if (not (isGM))}}upper-content__section--{{#if (not item.system.charges.isHidden)}}is-eternal-and-{{/if}}charges-only{{/if}}">
+        <div class="upper-content__section {{#if (not (isGM))}}upper-content__section--{{#if (not item.system.charges.isHidden)}}is-eternal-and-{{/if}}charges-only{{/if}}">{{!--//FIX {{#if (not (isGM))}}upper-content__section--{{#if (not item.system.charges.isHidden)}}is-eternal-and-{{/if}}charges-only{{/if}}" --}}
             <span class="label">{{localize 'UA.Name'}}:</span>
-            <input type="text" class="name" name="name" data-dtype="String" value="{{item.name}}">
+            <input type="text" class="name" name="name" value="{{item.name}}" data-dtype="String">
             <span class="label">{{localize 'UA.Power'}}:</span>
             <select name="system.power">{{selectOptions optionsPower selected=item.system.power localize=true}}</select>{{#if (isGM)}}
             <span class="label">{{localize 'UA.HideCharges'}}:</span>
             <input type="checkbox" name="system.charges.isHidden" data-dtype="Boolean" {{checked item.system.charges.isHidden}}>{{/if}}
-            {{#if (and (not (isGM)) item.system.charges.isHidden)}}<span class="label">{{localize 'UA.Charges'}}:</span>
-            <input type="text" data-dtype="String" value="&quest;" disabled>{{else}}<span class="label">{{localize 'UA.Eternal'}}:</span>
-            <input type="checkbox" name="system.charges.isEternal" data-dtype="Boolean" {{checked item.system.charges.isEternal}}>
-            <span class="label">{{localize 'UA.Charges'}}:</span>
-            {{#if item.system.charges.isEternal}}<input type="text" data-dtype="String" value="&infin;" disabled>{{else}}<input type="number" name="system.charges.amount" data-dtype="Number" value="{{item.system.charges.amount}}" min="0">{{/if}}{{/if}}
+            {{#if (and (not (isGM)) item.system.charges.isHidden)}}<span class="label">{{localize 'UA.Charges'}}:</span>{{!--//FIX {{#if (and (not (isGM)) item.system.charges.isHidden)}}<span class="label">{{localize 'UA.Charges'}}:</span> --}}
+            <input type="text" data-dtype="String" value="&quest;" disabled>{{else}}<span class="label">{{localize 'UA.Eternal'}}:</span>{{!--//FIX <input type="text" data-dtype="String" value="&quest;" disabled>{{else}}<span class="label">{{localize 'UA.Eternal'}}:</span> --}}
+            <input type="checkbox" name="system.charges.isEternal" data-dtype="Boolean" {{checked item.system.charges.isEternal}}>{{!--//FIX <input type="checkbox" name="system.charges.isEternal" data-dtype="Boolean" {{checked item.system.charges.isEternal}}> --}}
+            <span class="label">{{localize 'UA.Charges'}}:</span>{{!--//FIX <span class="label">{{localize 'UA.Charges'}}:</span> --}}
+            {{#if item.system.charges.isEternal}}<input type="text" data-dtype="String" value="&infin;" disabled>{{else}}<input type="number" name="system.charges.amount" data-dtype="Number" value="{{item.system.charges.amount}}" min="0">{{/if}}{{/if}}{{!--//FIX {{#if item.system.charges.isEternal}}<input type="text" data-dtype="String" value="&infin;" disabled>{{else}}<input type="number" name="system.charges.amount" data-dtype="Number" value="{{item.system.charges.amount}}" min="0">{{/if}}{{/if}} --}}
         </div>
     </div>
     <nav class="tab-buttons">
@@ -23,25 +23,33 @@
         <button data-tab="notes">{{localize 'UA.Notes'}}</button>
     </nav>
     <div class="tab-panels">
-        <div class="lower-content tab" data-tab="main">
+        <div class="tab lower-content" data-tab="main">
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Description'}}:</h2>
-                {{editor enrichedDescription target="system.description" button=true class="editor-content--extra-small" engine="prosemirror"}}
+                {{editor enrichedDescription target="system.description" engine="prosemirror" button=true class="editor-content--extra-small"}}
             </div>
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Effect'}}:</h2>
-                {{editor enrichedEffect target="system.effect" button=true class="editor-content--extra-small" engine="prosemirror"}}
+                {{editor enrichedEffect target="system.effect" engine="prosemirror" button=true class="editor-content--extra-small"}}
             </div>
         </div>
-        <div class="lower-content tab" data-tab="notes">
+        <div class="tab lower-content" data-tab="notes">
             <div class="lower-content__section">
                 <h2>{{localize 'UA.PublicNotes'}}:</h2>
-                {{editor enrichedPublicNotes target="system.notes.public" button=true class="editor-content--extra-small" engine="prosemirror"}}
+                {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true class="editor-content--extra-small"}}
             </div>
             <div class="lower-content__section">
                 <h2>{{localize 'UA.PrivateNotes'}}:</h2>
-                {{editor enrichedPrivateNotes target="system.notes.private" button=true class="editor-content--extra-small" engine="prosemirror"}}
+                {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true class="editor-content--extra-small"}}
             </div>
         </div>
     </div>
 </form>
+{{!--
+"artifact": {
+    "charges": {
+        "isEternal": false,
+        "amount": 0
+    }
+},
+--}}
