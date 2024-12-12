@@ -4,13 +4,13 @@ export default class UAMilestoneSheet extends UABaseItemSheet
 {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
-            width: 800,
-            height: 123,
             classes: [
                 "unknownarmies",
                 "sheet",
                 "milestone"
-            ]
+            ],
+            height: 123,                                                 // TODO
+            width: 800                                                   // TODO
         });
     }
 
@@ -52,8 +52,8 @@ export default class UAMilestoneSheet extends UABaseItemSheet
         content += `    </div>`;
         content += `</div>`;
         roll.toMessage({
+            content: content,
             flavor: dataset["rollLabel"],
-            content: content
         });
     }
 }
