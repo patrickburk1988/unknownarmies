@@ -1,3 +1,7 @@
+## v1.3.6
+
+- Tightened up artifact sheet logic.
+
 ## v1.3.5
 
 - Actually fixed character sheet bug. 🙃
