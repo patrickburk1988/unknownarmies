@@ -1,6 +1,7 @@
 ## v1.3.6
 
 - Tightened up artifact sheet logic.
+- Changed milestone button text.
 
 ## v1.3.5
 
