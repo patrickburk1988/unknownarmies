@@ -1,5 +1,3 @@
-// FIX use data-item-id
-
 import UABaseActorSheet from "./base-actor-sheet.js";
 
 export default class UACharacterSheet extends UABaseActorSheet
