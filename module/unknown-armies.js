@@ -14,22 +14,17 @@ Hooks.once("init", function() {
     console.log("Rebooting the universe.");
     // Setting Registration ----------------------------------------------------
     // game.settings.register("unknownarmies", "", {
-    //     config: true,
-    //     name: "UA.",
-    //     hint: "UA._Hint",
-    //     scope: "world",
-    //     type: Boolean,
     //     choices: {},
-    //     range: {},
+    //     config: true,
     //     default: false,
-    //     requiresReload: true
+    //     hint: "UA._Hint",
+    //     name: "UA.",
+    //     range: {},
+    //     requiresReload: true,
+    //     scope: "world",
+    //     type: Boolean
     // });
     game.settings.register("unknownarmies", "Sheet&UITheme", {
-        config: true,
-        name: "UA.Sheet&UITheme",
-        hint: "UA.Sheet&UITheme_Hint",
-        scope: "world",
-        type: Number,
         choices: {
             1: game.i18n.localize("UA.BonTonBlue"),
             2: game.i18n.localize("UA.GodwalkerGreen"),
@@ -37,31 +32,36 @@ Hooks.once("init", function() {
             4: game.i18n.localize("UA.ParadoxPurple"),
             5: game.i18n.localize("UA.RenunciationRed")
         },
+        config: true,
         default: 1,
-        requiresReload: true
+        hint: "UA.Sheet&UITheme_Hint",
+        name: "UA.Sheet&UITheme",
+        requiresReload: true,
+        scope: "world",
+        type: Number
     });
     game.settings.register("unknownarmies", "IdentitiesAllowMM&YFeatures", {
         config: true,
-        name: "UA.IdentitiesAllowMM&YFeatures",
-        hint: "UA.IdentitiesAllowMM&YFeatures_Hint",
-        scope: "world",
-        type: Boolean,
         default: false,
-        requiresReload: true
+        hint: "UA.IdentitiesAllowMM&YFeatures_Hint",
+        name: "UA.IdentitiesAllowMM&YFeatures",
+        requiresReload: true,
+        scope: "world",
+        type: Boolean
     });
     game.settings.register("unknownarmies", "IdentitiesSelectFeatureWhenRolling", {
-        config: true,
-        name: "UA.IdentitiesSelectFeatureWhenRolling",
-        hint: "UA.IdentitiesSelectFeatureWhenRolling_Hint",
-        scope: "client",
-        type: Number,
         choices: {
             1: game.i18n.localize("UA.Disabled"),
             2: game.i18n.localize("UA.Dialog"),
             3: game.i18n.localize("UA.Sheet")
         },
+        config: true,
         default: 1,
-        requiresReload: true
+        hint: "UA.IdentitiesSelectFeatureWhenRolling_Hint",
+        name: "UA.IdentitiesSelectFeatureWhenRolling",
+        requiresReload: true,
+        scope: "client",
+        type: Number
     });
     // Sheet Registration ------------------------------------------------------
     CONFIG.Actor.documentClass = UAActor;
@@ -70,59 +70,59 @@ Hooks.once("init", function() {
     Items.unregisterSheet("core", ItemSheet);
     Actors.registerSheet("unknownarmies", UACabalSheet, {
         label: "UA.CabalSheet",
+        makeDefault: true,
         types: [
             "cabal"
-        ],
-        makeDefault: true
+        ]
     });
     Actors.registerSheet("unknownarmies", UACharacterSheet, {
         label: "UA.CharacterSheet",
+        makeDefault: true,
         types: [
             "character"
-        ],
-        makeDefault: true
+        ]
     });
     Items.registerSheet("unknownarmies", UAArtifactSheet, {
         label: "UA.ArtifactSheet",
+        makeDefault: true,
         types: [
             "artifact"
-        ],
-        makeDefault: true
+        ]
     });
     Items.registerSheet("unknownarmies", UAIdentitySheet, {
         label: "UA.IdentitySheet",
+        makeDefault: true,
         types: [
             "identity"
-        ],
-        makeDefault: true
+        ]
     });
     Items.registerSheet("unknownarmies", UAItemSheet, {
         label: "UA.ItemSheet",
+        makeDefault: true,
         types: [
             "item"
-        ],
-        makeDefault: true
+        ]
     });
     Items.registerSheet("unknownarmies", UAMilestoneSheet, {
         label: "UA.MilestoneSheet",
+        makeDefault: true,
         types: [
             "milestone"
-        ],
-        makeDefault: true
+        ]
     });
     Items.registerSheet("unknownarmies", UARitualSheet, {
         label: "UA.RitualSheet",
+        makeDefault: true,
         types: [
             "ritual"
-        ],
-        makeDefault: true
+        ]
     });
     Items.registerSheet("unknownarmies", UASpellSheet, {
         label: "UA.SpellSheet",
+        makeDefault: true,
         types: [
             "spell"
-        ],
-        makeDefault: true
+        ]
     });
     // Handlebars Helpers (Simple) ---------------------------------------------
     Handlebars.registerHelper("and", function() {
@@ -180,41 +180,41 @@ Hooks.once("init", function() {
         return UAActor.shockGaugeSchema[meter][key];
     });
     Handlebars.registerHelper("sortFeatures", function (identity) {
-        let features = Object.values(identity.system.features);
-        switch (identity.system.type) {
-            case "Adept":
-                break;
-            case "Avatar":
-                let percentage = identity.system.percentage;
-                if (percentage >= 1 && identity.system.avatar.channels["1-50"] !== "") {
-                    features.push("Channel1-50%");
-                }
-                if (percentage >= 51 && identity.system.avatar.channels["51-70"] !== "") {
-                    features.push("Channel51-70%");
-                }
-                if (percentage >= 71 && identity.system.avatar.channels["71-90"] !== "") {
-                    features.push("Channel71-90%");
-                }
-                if (percentage >= 91 && identity.system.avatar.channels["91-98"] !== "") {
-                    features.push("Channel91-98%");
-                }
-                if (percentage >= 99 && identity.system.avatar.channels["99-"] !== "") {
-                    features.push("Channel99%");
-                }
-                break;
-            case "Mundane":
-                let substitutesFor = identity.system.mundane.substitutesFor;
-                if (substitutesFor !== "") {
-                    features.push("Substitutes for " + substitutesFor);
-                }
-                break;
-            case "Supernatural":
-                let supernaturalAbility = identity.system.supernatural.ability;
-                if (supernaturalAbility !== "") {
-                    features.push(supernaturalAbility);
-                }
-        }
-        return features.sort();
+        let features = Object.values(identity.system.features);                             //TODO
+        switch (identity.system.type) {                                                     //TODO
+            case "Adept":                                                                   //TODO
+                break;                                                                      //TODO
+            case "Avatar":                                                                  //TODO
+                let percentage = identity.system.percentage;                                //TODO
+                if (percentage >= 1 && identity.system.avatar.channels["1-50"] !== "") {    //TODO
+                    features.push("Channel1-50%");                                          //TODO
+                }                                                                           //TODO
+                if (percentage >= 51 && identity.system.avatar.channels["51-70"] !== "") {  //TODO
+                    features.push("Channel51-70%");                                         //TODO
+                }                                                                           //TODO
+                if (percentage >= 71 && identity.system.avatar.channels["71-90"] !== "") {  //TODO
+                    features.push("Channel71-90%");                                         //TODO
+                }                                                                           //TODO
+                if (percentage >= 91 && identity.system.avatar.channels["91-98"] !== "") {  //TODO
+                    features.push("Channel91-98%");                                         //TODO
+                }                                                                           //TODO
+                if (percentage >= 99 && identity.system.avatar.channels["99-"] !== "") {    //TODO
+                    features.push("Channel99%");                                            //TODO
+                }                                                                           //TODO
+                break;                                                                      //TODO
+            case "Mundane":                                                                 //TODO
+                let substitutesFor = identity.system.mundane.substitutesFor;                //TODO
+                if (substitutesFor !== "") {                                                //TODO
+                    features.push("Substitutes for " + substitutesFor);                     //TODO
+                }                                                                           //TODO
+                break;                                                                      //TODO
+            case "Supernatural":                                                            //TODO
+                let supernaturalAbility = identity.system.supernatural.ability;             //TODO
+                if (supernaturalAbility !== "") {                                           //TODO
+                    features.push(supernaturalAbility);                                     //TODO
+                }                                                                           //TODO
+        }                                                                                   //TODO
+        return features.sort();                                                             //TODO
     });
     Handlebars.registerHelper("stripHTML", function (html) {
         return jQuery(html).text().replaceAll(/([.!?])([^.!?])/g, "$1 $2");
@@ -238,35 +238,35 @@ Hooks.on("renderDialog", (dialog, html, data) => {
 });
 
 Hooks.on("renderSidebarTab", (sidebarTab, html, data) => {
-    if (sidebarTab.tabName === "chat") {
-        html.find(".chat-control-icon i").removeClass("fa-dice-d20").addClass("fa-dice-d10");
-        html.find(".chat-control-icon").on("click", async () => {
-            let roll = new Roll("1d100");
-            await roll.evaluate();
-            let rollResult = parseInt(roll.result);
-            let content = "";
-            content += `<div class="dice-roll">`;
-            content += `    <div class="dice-result">`;
-            content += `        <h4 class="dice-total">${rollResult}</h4>`;
-            content += `        <div class="dice-tooltip">`;
-            content += `            <section class="tooltip-part">`;
-            content += `                <div class="dice">`;
-            content += `                    <header class="part-header flexrow">`;
-            content += `                        <span class="part-formula">1d100</span>`;
-            content += `                        <span class="part-total">${rollResult}</span>`;
-            content += `                    </header>`;
-            content += `                    <ol class="dice-rolls">`;
-            content += `                        <li class="roll die d100">${rollResult}</li>`;
-            content += `                    </ol>`;
-            content += `                </div>`;
-            content += `            </section>`;
-            content += `        </div>`;
-            content += `    </div>`;
-            content += `</div>`;
-            roll.toMessage({
-                content: content,
-                flavor: "1d100"
-            });
-        });
-    }
+    if (sidebarTab.tabName === "chat") {                                        //TODO
+        html.find(".chat-control-icon i").removeClass("fa-dice-d20").addClass("fa-dice-d10");//TODO
+        html.find(".chat-control-icon").on("click", async () => {               //TODO
+            let roll = new Roll("1d100");                                       //TODO
+            await roll.evaluate();                                              //TODO
+            let rollResult = parseInt(roll.result);                             //TODO
+            let content = "";                                                   //TODO
+            content += `<div class="dice-roll">`;                               //TODO
+            content += `    <div class="dice-result">`;                         //TODO
+            content += `        <h4 class="dice-total">${rollResult}</h4>`;     //TODO
+            content += `        <div class="dice-tooltip">`;                    //TODO
+            content += `            <section class="tooltip-part">`;            //TODO
+            content += `                <div class="dice">`;                    //TODO
+            content += `                    <header class="part-header flexrow">`;//TODO
+            content += `                        <span class="part-formula">1d100</span>`;//TODO
+            content += `                        <span class="part-total">${rollResult}</span>`;                                                             //TODO
+            content += `                    </header>`;                         //TODO
+            content += `                    <ol class="dice-rolls">`;           //TODO
+            content += `                        <li class="roll die d100">${rollResult}</li>`;//TODO
+            content += `                    </ol>`;                             //TODO
+            content += `                </div>`;                                //TODO
+            content += `            </section>`;                                //TODO
+            content += `        </div>`;                                        //TODO
+            content += `    </div>`;                                            //TODO
+            content += `</div>`;                                                //TODO
+            roll.toMessage({                                                    //TODO
+                content: content,                                               //TODO
+                flavor: "1d100"                                                 //TODO
+            });                                                                 //TODO
+        });                                                                     //TODO
+    }                                                                           //TODO
 });

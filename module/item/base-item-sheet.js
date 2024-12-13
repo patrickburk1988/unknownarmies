@@ -16,13 +16,13 @@ export default class UABaseItemSheet extends ItemSheet
 
     activateListeners (html) {
         super.activateListeners(html);
-        html.find("input").on("keydown", this._onInputKeydown.bind(this));
-        let showImage = html.find("[data-action='show-image']");
-        showImage.on("click", this._onShowImage.bind(this));
-        showImage.prop("disabled", false);
-        html.find(".editor-content--extra-small").parent().addClass("editor--extra-small");
-        html.find(".editor-content--medium").parent().addClass("editor--medium");
-        html.find(".editor-content--extra-large").parent().addClass("editor--extra-large");
+        html.find("input").on("keydown", this._onInputKeydown.bind(this));                   // TODO
+        let showImage = html.find("[data-action='show-image']");                             // TODO
+        showImage.on("click", this._onShowImage.bind(this));                                 // TODO
+        showImage.prop("disabled", false);                                                   // TODO
+        html.find(".editor-content--extra-small").parent().addClass("editor--extra-small");  // TODO
+        html.find(".editor-content--medium").parent().addClass("editor--medium");            // TODO
+        html.find(".editor-content--extra-large").parent().addClass("editor--extra-large");  // TODO
     }
 
     async getData (options) {
@@ -38,29 +38,28 @@ export default class UABaseItemSheet extends ItemSheet
         return data;
     }
 
+    setPosition (position) {                                             // TODO
+        if ($(this.form).hasClass("main-form--limited")) {               // TODO
+            // MAYBE Move this to identity sheet?                        // TODO
+            // MAYBE && position.width == 800 && position.height == 707  // TODO
+            position.width = 650;                                        // TODO
+            position.height = 600;                                       // TODO
+        }                                                                // TODO
+        super.setPosition(position);                                     // TODO
+    }                                                                    // TODO
+
+    _onInputKeydown (event) {                                            // TODO
+        if (event.keyCode === 13) {                                      // TODO
+            event.preventDefault();                                      // TODO
+            super.submit();                                              // TODO
+            $(event.currentTarget)[0].blur();                            // TODO
+        }                                                                // TODO
+    }                                                                    // TODO
+
     _onShowImage (event) {
         event.preventDefault();
         new ImagePopout(this.item.img, {
             title: this.item.name
         }).render(true);
-    }
-    // FIX BELOW ---------------------------------------------------------------
-
-    setPosition (position) {
-        if ($(this.form).hasClass("main-form--limited")) {
-            // MAYBE Move this to identity sheet?
-            // MAYBE && position.width == 800 && position.height == 707
-            position.width = 650;
-            position.height = 600;
-        }
-        super.setPosition(position);
-    }
-
-    _onInputKeydown (event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            super.submit();
-            $(event.currentTarget)[0].blur();
-        }
     }
 }
