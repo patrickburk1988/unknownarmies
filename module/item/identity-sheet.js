@@ -2,139 +2,139 @@ import UABaseItemSheet from "./base-item-sheet.js";
 
 export default class UAIdentitySheet extends UABaseItemSheet
 {
-    static optionsSubstitutesFor = {                                     // TODO
-        "":          "",                                                 // TODO
-        "Connect":   "Connect",                                          // TODO
-        "Dodge":     "Dodge",                                            // TODO
-        "Fitness":   "Fitness",                                          // TODO
-        "Knowledge": "Knowledge",                                        // TODO
-        "Lie":       "Lie",                                              // TODO
-        "Notice":    "Notice",                                           // TODO
-        "Pursuit":   "Pursuit",                                          // TODO
-        "Secrecy":   "Secrecy",                                          // TODO
-        "Status":    "Status",                                           // TODO
-        "Struggle":  "Struggle"                                          // TODO
-    }                                                                    // TODO
-    static optionsIdentitySupernaturalAbility = {                        // TODO
-        "":                       "",                                    // TODO
-        "Influence":              "Influence",                           // TODO
-        "Specific Harm":          "Specific Harm",                       // TODO
-        "Specific Information":   "Specific Information",                // TODO
-        "Specific Protection":    "Specific Protection",                 // TODO
-        "Vague Harm":             "Vague Harm",                          // TODO
-        "Vague Information":      "Vague Information",                   // TODO
-        "Vague Protection":       "Vague Protection",                    // TODO
-        "Versatility":            "Versatility"                          // TODO
-    }                                                                    // TODO
-    static optionsIdentitySupernaturalAbilityMMY = {                     // TODO
-        "":                       "",                                    // TODO
-        "Alter Fear":             "Alter Fear",                          // TODO
-        "Alter Noble":            "Alter Noble",                         // TODO
-        "Alter Rage":             "Alter Rage",                          // TODO
-        "Influence":              "Influence",                           // TODO
-        "Specific Harm":          "Specific Harm",                       // TODO
-        "Specific Information":   "Specific Information",                // TODO
-        "Specific Protection":    "Specific Protection",                 // TODO
-        "Terrorize Helplessness": "Terrorize Helplessness",              // TODO
-        "Terrorize Isolation":    "Terrorize Isolation",                 // TODO
-        "Terrorize Self":         "Terrorize Self",                      // TODO
-        "Terrorize Unnatural":    "Terrorize Unnatural",                 // TODO
-        "Terrorize Violence":     "Terrorize Violence",                  // TODO
-        "Vague Harm":             "Vague Harm",                          // TODO
-        "Vague Information":      "Vague Information",                   // TODO
-        "Vague Protection":       "Vague Protection",                    // TODO
-        "Versatility":            "Versatility"                          // TODO
-    }                                                                    // TODO
-    static optionsIdentityFeaturesMundane = {                            // TODO
-        "": "",                                                          // TODO
-        "Casts Rituals":             "Casts Rituals",                    // TODO
-        "Coerces Helplessness":      "Coerces Helplessness",             // TODO
-        "Coerces Isolation":         "Coerces Isolation",                // TODO
-        "Coerces Self":              "Coerces Self",                     // TODO
-        "Coerces Unnatural":         "Coerces Unnatural",                // TODO
-        "Coerces Violence":          "Coerces Violence",                 // TODO
-        "Cooperative":               "Cooperative",                      // TODO
-        "Evaluates Helplessness":    "Evaluates Helplessness",           // TODO
-        "Evaluates Isolation":       "Evaluates Isolation",              // TODO
-        "Evaluates Self":            "Evaluates Self",                   // TODO
-        "Evaluates Unnatural":       "Evaluates Unnatural",              // TODO
-        "Evaluates Violence":        "Evaluates Violence",               // TODO
-        "Medical":                   "Medical",                          // TODO
-        "Provides Firearm Attacks":  "Provides Firearm Attacks",         // TODO
-        "Provides Initiative":       "Provides Initiative",              // TODO
-        "Provides Wound Threshold":  "Provides Wound Threshold",         // TODO
-        "Resists Helplessness":      "Resists Helplessness",             // TODO
-        "Resists Isolation":         "Resists Isolation",                // TODO
-        "Resists Self":              "Resists Self",                     // TODO
-        "Resists Unnatural":         "Resists Unnatural",                // TODO
-        "Resists Violence":          "Resists Violence",                 // TODO
-        "Sincere":                   "Sincere",                          // TODO
-        "Substitutes for Connect":   "Substitutes for Connect",          // TODO
-        "Substitutes for Dodge":     "Substitutes for Dodge",            // TODO
-        "Substitutes for Fitness":   "Substitutes for Fitness",          // TODO
-        "Substitutes for Knowledge": "Substitutes for Knowledge",        // TODO
-        "Substitutes for Lie":       "Substitutes for Lie",              // TODO
-        "Substitutes for Notice":    "Substitutes for Notice",           // TODO
-        "Substitutes for Pursuit":   "Substitutes for Pursuit",          // TODO
-        "Substitutes for Secrecy":   "Substitutes for Secrecy",          // TODO
-        "Substitutes for Status":    "Substitutes for Status",           // TODO
-        "Substitutes for Struggle":  "Substitutes for Struggle",         // TODO
-        "Tactical":                  "Tactical",                         // TODO
-        "Therapeutic":               "Therapeutic",                      // TODO
-        "Unique":                    "Unique",                           // TODO
-        "Use Gutter Magick":         "Use Gutter Magick",                // TODO
-        "Weaponized Physique":       "Weaponized Physique"               // TODO
-    }                                                                    // TODO
-    static optionsIdentityFeaturesMundaneMMY = {                         // TODO
-        "": "",                                                          // TODO
-        "Casts Rituals":             "Casts Rituals",                    // TODO
-        "Coerces Helplessness":      "Coerces Helplessness",             // TODO
-        "Coerces Isolation":         "Coerces Isolation",                // TODO
-        "Coerces Self":              "Coerces Self",                     // TODO
-        "Coerces Unnatural":         "Coerces Unnatural",                // TODO
-        "Coerces Violence":          "Coerces Violence",                 // TODO
-        "Cooperative":               "Cooperative",                      // TODO
-        "Evaluates Helplessness":    "Evaluates Helplessness",           // TODO
-        "Evaluates Isolation":       "Evaluates Isolation",              // TODO
-        "Evaluates Self":            "Evaluates Self",                   // TODO
-        "Evaluates Unnatural":       "Evaluates Unnatural",              // TODO
-        "Evaluates Violence":        "Evaluates Violence",               // TODO
-        "Medical":                   "Medical",                          // TODO
-        "Provides Firearm Attacks":  "Provides Firearm Attacks",         // TODO
-        "Provides Initiative":       "Provides Initiative",              // TODO
-        "Provides Wound Threshold":  "Provides Wound Threshold",         // TODO
-        "Reads Fear":                "Reads Fear",                       // TODO
-        "Reads Noble":               "Reads Noble",                      // TODO
-        "Reads Obsession":           "Reads Obsession",                  // TODO
-        "Reads Rage":                "Reads Rage",                       // TODO
-        "Resists Helplessness":      "Resists Helplessness",             // TODO
-        "Resists Isolation":         "Resists Isolation",                // TODO
-        "Resists Self":              "Resists Self",                     // TODO
-        "Resists Unnatural":         "Resists Unnatural",                // TODO
-        "Resists Violence":          "Resists Violence",                 // TODO
-        "Sincere":                   "Sincere",                          // TODO
-        "Substitutes for Connect":   "Substitutes for Connect",          // TODO
-        "Substitutes for Dodge":     "Substitutes for Dodge",            // TODO
-        "Substitutes for Fitness":   "Substitutes for Fitness",          // TODO
-        "Substitutes for Knowledge": "Substitutes for Knowledge",        // TODO
-        "Substitutes for Lie":       "Substitutes for Lie",              // TODO
-        "Substitutes for Notice":    "Substitutes for Notice",           // TODO
-        "Substitutes for Pursuit":   "Substitutes for Pursuit",          // TODO
-        "Substitutes for Secrecy":   "Substitutes for Secrecy",          // TODO
-        "Substitutes for Status":    "Substitutes for Status",           // TODO
-        "Substitutes for Struggle":  "Substitutes for Struggle",         // TODO
-        "Tactical":                  "Tactical",                         // TODO
-        "Therapeutic":               "Therapeutic",                      // TODO
-        "Totem":                     "Totem",                            // TODO
-        "Unique":                    "Unique",                           // TODO
-        "Use Gutter Magick":         "Use Gutter Magick",                // TODO
-        "Weaponized Physique":       "Weaponized Physique"               // TODO
-    }                                                                    // TODO
-    static optionsIdentityFeaturesNotMundane = {                         // TODO
-        "": "",                                                          // TODO
-        "Casts Rituals":     "Casts Rituals",                            // TODO
-        "Use Gutter Magick": "Use Gutter Magick"                         // TODO
-    }                                                                    // TODO
+    static optionsIdentityFeaturesMundane = {
+        "":                          "",
+        "Casts Rituals":             "Casts Rituals",
+        "Coerces Helplessness":      "Coerces Helplessness",
+        "Coerces Isolation":         "Coerces Isolation",
+        "Coerces Self":              "Coerces Self",
+        "Coerces Unnatural":         "Coerces Unnatural",
+        "Coerces Violence":          "Coerces Violence",
+        "Cooperative":               "Cooperative",
+        "Evaluates Helplessness":    "Evaluates Helplessness",
+        "Evaluates Isolation":       "Evaluates Isolation",
+        "Evaluates Self":            "Evaluates Self",
+        "Evaluates Unnatural":       "Evaluates Unnatural",
+        "Evaluates Violence":        "Evaluates Violence",
+        "Medical":                   "Medical",
+        "Provides Firearm Attacks":  "Provides Firearm Attacks",
+        "Provides Initiative":       "Provides Initiative",
+        "Provides Wound Threshold":  "Provides Wound Threshold",
+        "Resists Helplessness":      "Resists Helplessness",
+        "Resists Isolation":         "Resists Isolation",
+        "Resists Self":              "Resists Self",
+        "Resists Unnatural":         "Resists Unnatural",
+        "Resists Violence":          "Resists Violence",
+        "Sincere":                   "Sincere",
+        "Substitutes for Connect":   "Substitutes for Connect",
+        "Substitutes for Dodge":     "Substitutes for Dodge",
+        "Substitutes for Fitness":   "Substitutes for Fitness",
+        "Substitutes for Knowledge": "Substitutes for Knowledge",
+        "Substitutes for Lie":       "Substitutes for Lie",
+        "Substitutes for Notice":    "Substitutes for Notice",
+        "Substitutes for Pursuit":   "Substitutes for Pursuit",
+        "Substitutes for Secrecy":   "Substitutes for Secrecy",
+        "Substitutes for Status":    "Substitutes for Status",
+        "Substitutes for Struggle":  "Substitutes for Struggle",
+        "Tactical":                  "Tactical",
+        "Therapeutic":               "Therapeutic",
+        "Unique":                    "Unique",
+        "Use Gutter Magick":         "Use Gutter Magick",
+        "Weaponized Physique":       "Weaponized Physique"
+    }
+    static optionsIdentityFeaturesMundaneMMY = {
+        "":                          "",
+        "Casts Rituals":             "Casts Rituals",
+        "Coerces Helplessness":      "Coerces Helplessness",
+        "Coerces Isolation":         "Coerces Isolation",
+        "Coerces Self":              "Coerces Self",
+        "Coerces Unnatural":         "Coerces Unnatural",
+        "Coerces Violence":          "Coerces Violence",
+        "Cooperative":               "Cooperative",
+        "Evaluates Helplessness":    "Evaluates Helplessness",
+        "Evaluates Isolation":       "Evaluates Isolation",
+        "Evaluates Self":            "Evaluates Self",
+        "Evaluates Unnatural":       "Evaluates Unnatural",
+        "Evaluates Violence":        "Evaluates Violence",
+        "Medical":                   "Medical",
+        "Provides Firearm Attacks":  "Provides Firearm Attacks",
+        "Provides Initiative":       "Provides Initiative",
+        "Provides Wound Threshold":  "Provides Wound Threshold",
+        "Reads Fear":                "Reads Fear",
+        "Reads Noble":               "Reads Noble",
+        "Reads Obsession":           "Reads Obsession",
+        "Reads Rage":                "Reads Rage",
+        "Resists Helplessness":      "Resists Helplessness",
+        "Resists Isolation":         "Resists Isolation",
+        "Resists Self":              "Resists Self",
+        "Resists Unnatural":         "Resists Unnatural",
+        "Resists Violence":          "Resists Violence",
+        "Sincere":                   "Sincere",
+        "Substitutes for Connect":   "Substitutes for Connect",
+        "Substitutes for Dodge":     "Substitutes for Dodge",
+        "Substitutes for Fitness":   "Substitutes for Fitness",
+        "Substitutes for Knowledge": "Substitutes for Knowledge",
+        "Substitutes for Lie":       "Substitutes for Lie",
+        "Substitutes for Notice":    "Substitutes for Notice",
+        "Substitutes for Pursuit":   "Substitutes for Pursuit",
+        "Substitutes for Secrecy":   "Substitutes for Secrecy",
+        "Substitutes for Status":    "Substitutes for Status",
+        "Substitutes for Struggle":  "Substitutes for Struggle",
+        "Tactical":                  "Tactical",
+        "Therapeutic":               "Therapeutic",
+        "Totem":                     "Totem",
+        "Unique":                    "Unique",
+        "Use Gutter Magick":         "Use Gutter Magick",
+        "Weaponized Physique":       "Weaponized Physique"
+    }
+    static optionsIdentitySupernaturalAbility = {
+        "":                       "",
+        "Influence":              "Influence",
+        "Specific Harm":          "Specific Harm",
+        "Specific Information":   "Specific Information",
+        "Specific Protection":    "Specific Protection",
+        "Vague Harm":             "Vague Harm",
+        "Vague Information":      "Vague Information",
+        "Vague Protection":       "Vague Protection",
+        "Versatility":            "Versatility"
+    }
+    static optionsIdentitySupernaturalAbilityMMY = {
+        "":                       "",
+        "Alter Fear":             "Alter Fear",
+        "Alter Noble":            "Alter Noble",
+        "Alter Rage":             "Alter Rage",
+        "Influence":              "Influence",
+        "Specific Harm":          "Specific Harm",
+        "Specific Information":   "Specific Information",
+        "Specific Protection":    "Specific Protection",
+        "Terrorize Helplessness": "Terrorize Helplessness",
+        "Terrorize Isolation":    "Terrorize Isolation",
+        "Terrorize Self":         "Terrorize Self",
+        "Terrorize Unnatural":    "Terrorize Unnatural",
+        "Terrorize Violence":     "Terrorize Violence",
+        "Vague Harm":             "Vague Harm",
+        "Vague Information":      "Vague Information",
+        "Vague Protection":       "Vague Protection",
+        "Versatility":            "Versatility"
+    }            
+    static optionsSubstitutesFor = {
+        "":          "",
+        "Connect":   "Connect",
+        "Dodge":     "Dodge",
+        "Fitness":   "Fitness",
+        "Knowledge": "Knowledge",
+        "Lie":       "Lie",
+        "Notice":    "Notice",
+        "Pursuit":   "Pursuit",
+        "Secrecy":   "Secrecy",
+        "Status":    "Status",
+        "Struggle":  "Struggle"
+    }
+    static optionsIdentityFeaturesNotMundane = {
+        "":                  "",
+        "Casts Rituals":     "Casts Rituals",
+        "Use Gutter Magick": "Use Gutter Magick"
+    }
     static optionsType = {
         "":             "",
         "Mundane":      "Mundane",
@@ -162,16 +162,16 @@ export default class UAIdentitySheet extends UABaseItemSheet
 
     async getData (options) {
         const data = await super.getData(options);
+        data.optionsFeaturesNotMundane = UAIdentitySheet.optionsIdentityFeaturesNotMundane;
+        data.optionsSubstitutesFor = UAIdentitySheet.optionsSubstitutesFor;
         data.optionsType = UAIdentitySheet.optionsType;
-        data.optionsSubstitutesFor = UAIdentitySheet.optionsSubstitutesFor;                  // TODO
-        if (game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures")) {             // TODO
-            data.optionsSupernaturalAbility = UAIdentitySheet.optionsIdentitySupernaturalAbilityMMY;                                           // TODO
-            data.optionsFeatures = UAIdentitySheet.optionsIdentityFeaturesMundaneMMY;        // TODO
-        } else {                                                                             // TODO
-            data.optionsSupernaturalAbility = UAIdentitySheet.optionsIdentitySupernaturalAbility;                                              // TODO
-            data.optionsFeatures = UAIdentitySheet.optionsIdentityFeaturesMundane;           // TODO
-        }                                                                                    // TODO
-        data.optionsFeaturesNotMundane = UAIdentitySheet.optionsIdentityFeaturesNotMundane;  // TODO
+        if (game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures")) {
+            data.optionsFeatures = UAIdentitySheet.optionsIdentityFeaturesMundaneMMY;
+            data.optionsSupernaturalAbility = UAIdentitySheet.optionsIdentitySupernaturalAbilityMMY;
+        } else {
+            data.optionsFeatures = UAIdentitySheet.optionsIdentityFeaturesMundane;
+            data.optionsSupernaturalAbility = UAIdentitySheet.optionsIdentitySupernaturalAbility;
+        }
         data.enrichedOfCourseICan = await TextEditor.enrichHTML(this.object.system.mundane.ofCourseICan, {
             async: true
         });
@@ -220,38 +220,38 @@ export default class UAIdentitySheet extends UABaseItemSheet
         return data;
     }
 
-    async _onImprove (event) {//     async _onImprove (event) {         // TODO async
+    async _onImprove (event) {
         event.preventDefault();
-        const roll = await new Roll("1d5").evaluate();                   // TODO
-        const rollResult = parseInt(roll.result);                        // TODO
-        const oldPercentage = this.object.system.percentage;             // TODO
-        await this.item.update({                                         // TODO
-            "system.hasExperience": false,                               // TODO
-            "system.percentage": oldPercentage + rollResult              // TODO
-        });                                                              // TODO
-        let content = ``;                                                // TODO
-        content += `<div class="dice-roll">`;                            // TODO
-        content += `    <div class="dice-result">`;                      // TODO
-        content += `        <h4 class="dice-total">+${rollResult}%</h4>`;// TODO
-        content += `        <div class="dice-tooltip">`;                 // TODO
-        content += `            <section class="tooltip-part">`;         // TODO
-        content += `                <div class="dice">`;                 // TODO
-        content += `                    <header class="part-header flexrow">`;// TODO
-        content += `                        <span class="part-formula">1d5</span>`;// TODO
-        content += `                        <span class="part-total">${rollResult}</span>`;// TODO
-        content += `                    </header>`;                      // TODO
-        content += `                    <ol class="dice-rolls">`;        // TODO
-        content += `                        <li class="roll die d10">${rollResult}</li>`;// TODO
-        content += `                    </ol>`;                          // TODO
-        content += `                </div>`;                             // TODO
-        content += `            </section>`;                             // TODO
-        content += `        </div>`;                                     // TODO
-        content += `        <div class="dice-formula">${game.i18n.localize("UA.IdentityImproved") + ": " + oldPercentage + '% <span class="arrow">▶</span> ' + this.object.system.percentage + "%"}</div>`;                                                     // TODO
-        content += `    </div>`;                                         // TODO
-        content += `</div>`;                                             // TODO
-        roll.toMessage({                                                 // TODO
-            flavor: event.currentTarget.dataset["rollLabel"],            // TODO
-            content: content                                             // TODO
-        });                                                              // TODO
-    }                                                                    // TODO
+        const roll = await new Roll("1d5").evaluate();
+        const rollResult = parseInt(roll.result);
+        const oldPercentage = this.object.system.percentage;
+        await this.item.update({
+            "system.hasExperience": false,
+            "system.percentage": oldPercentage + rollResult
+        });
+        let content = ``;
+        content += `<div class="dice-roll">`;
+        content += `    <div class="dice-result">`;
+        content += `        <h4 class="dice-total">+${rollResult}%</h4>`;
+        content += `        <div class="dice-tooltip">`;
+        content += `            <section class="tooltip-part">`;
+        content += `                <div class="dice">`;
+        content += `                    <header class="part-header flexrow">`;
+        content += `                        <span class="part-formula">1d5</span>`;
+        content += `                        <span class="part-total">${rollResult}</span>`;
+        content += `                    </header>`;
+        content += `                    <ol class="dice-rolls">`;
+        content += `                        <li class="roll die d10">${rollResult}</li>`;
+        content += `                    </ol>`;
+        content += `                </div>`;
+        content += `            </section>`;
+        content += `        </div>`;
+        content += `        <div class="dice-formula">${game.i18n.localize("UA.IdentityImproved") + ": " + oldPercentage + '% <span class="arrow">▶</span> ' + this.item.system.percentage + "%"}</div>`;
+        content += `    </div>`;
+        content += `</div>`;
+        roll.toMessage({
+            content: content,
+            flavor: event.currentTarget.dataset["rollLabel"]
+        });
+    }
 }
