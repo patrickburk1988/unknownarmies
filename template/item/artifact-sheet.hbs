@@ -4,7 +4,7 @@
             <img data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
             <button data-action="show-image"><i class="fas fa-image"></i></button>
         </div>
-        <div class="upper-content__section {{#if (not (isGM))}}upper-content__section--{{#if (not item.system.charges.isHidden)}}is-eternal-and-{{/if}}charges-only{{/if}}">{{!--//FIX {{#if (not (isGM))}}upper-content__section--{{#if (not item.system.charges.isHidden)}}is-eternal-and-{{/if}}charges-only{{/if}}" --}}
+        <div class="upper-content__section {{#if (not (isGM))}}upper-content__section--{{#if (not item.system.charges.isHidden)}}is-eternal-and-{{/if}}charges-only{{/if}}">
             <span class="label">{{localize 'UA.Name'}}:</span>
             <input type="text" class="name" name="name" value="{{item.name}}" data-dtype="String">
             <span class="label">{{localize 'UA.Power'}}:</span>
@@ -44,5 +44,3 @@
         </div>
     </div>
 </form>
-{{!--
---}}
