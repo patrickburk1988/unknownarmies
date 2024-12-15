@@ -143,7 +143,7 @@ export default class UABaseActorSheet extends ActorSheet
     }                                                                    // TODO
 
     async _onRoll (event) {                                                    // TODO async
-        // FIX use data-roll-label, data-roll-target
+        // FIX use data-roll-label, data-roll-target, data-roll-content-header
         event.preventDefault();
         let modifier = 0;                                                // TODO
         if (event.which == 3 || event.shiftKey || event.ctrlKey || event.altKey) {// TODO
