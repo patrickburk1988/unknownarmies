@@ -126,14 +126,12 @@
                                 </div>
                                 <div class="identity__edit-destroy">
                                     <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                    <button data-action="destroy-item"><i class="fas fa-trash"></i></button>
+                                    <button data-action="delete-item"><i class="fas fa-trash"></i></button>
                                 </div>
-                            </div>
-                            {{#if (or item.system.mundane.ofCourseICan item.system.mundane.substitutesFor item.system.supernatural.ability item.system.avatar.attributes item.system.avatar.symbols item.system.avatar.taboos (and (exceedsOrEquals item.system.percentage 1) item.system.avatar.channels.1-50) (and (exceedsOrEquals item.system.percentage 51) item.system.avatar.channels.51-70) (and (exceedsOrEquals item.system.percentage 71) item.system.avatar.channels.71-90) (and (exceedsOrEquals item.system.percentage 91) item.system.avatar.channels.91-98) (and (exceedsOrEquals item.system.percentage 99) item.system.avatar.channels.99-) item.system.adept.domain item.system.adept.taboos item.system.adept.generateCharge.minor item.system.adept.generateCharge.significant item.system.adept.generateCharge.major item.system.features.one item.system.features.two item.system.details)}}<div class="identity__lower-content">
-                                {{#if (equals item.system.type 'Mundane')}}{{#if item.system.mundane.ofCourseICan}}
+                            </div>{{#if (or item.system.mundane.ofCourseICan item.system.mundane.substitutesFor item.system.supernatural.ability item.system.avatar.attributes item.system.avatar.symbols item.system.avatar.taboos (and (exceedsOrEquals item.system.percentage 1) item.system.avatar.channels.1-50) (and (exceedsOrEquals item.system.percentage 51) item.system.avatar.channels.51-70) (and (exceedsOrEquals item.system.percentage 71) item.system.avatar.channels.71-90) (and (exceedsOrEquals item.system.percentage 91) item.system.avatar.channels.91-98) (and (exceedsOrEquals item.system.percentage 99) item.system.avatar.channels.99-) item.system.adept.domain item.system.adept.taboos item.system.adept.generateCharge.minor item.system.adept.generateCharge.significant item.system.adept.generateCharge.major item.system.features.one item.system.features.two item.system.details)}}
+                            <div class="identity__lower-content">{{#if (equals item.system.type 'Mundane')}}{{#if item.system.mundane.ofCourseICan}}
                                 <span class="label">{{localize 'UA.OfCourseICan'}}:</span>
-                                <span>{{stripHTML item.system.mundane.ofCourseICan}}</span>{{/if}}{{/if}}{{#if (equals item.system.type 'Supernatural')}}
-                                {{/if}}
+                                <span>{{stripHTML item.system.mundane.ofCourseICan}}</span>{{/if}}{{/if}}
 {{!-- //HACK BELOW --}}
                                 {{#if (equals item.system.type 'Avatar')}}{{#if item.system.avatar.attributes}}<span class="label">{{localize 'UA.Attributes'}}:</span>
                                 <span>{{stripHTML item.system.avatar.attributes}}</span>{{/if}}
@@ -196,7 +194,7 @@
                             <div class="item-list__column">
                                 <button data-action="post-item"><i class="fas fa-message"></i></button>
                                 <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                <button data-action="destroy-item"><i class="fas fa-trash"></i></button>
+                                <button data-action="delete-item"><i class="fas fa-trash"></i></button>
                             </div>
                         </li>{{/if}}{{/each}}
                     </ul>
@@ -225,7 +223,7 @@
                             <div class="item-list__column">
                                 <button data-action="post-item"><i class="fas fa-message"></i></button>
                                 <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                <button data-action="destroy-item"><i class="fas fa-trash"></i></button>
+                                <button data-action="delete-item"><i class="fas fa-trash"></i></button>
                             </div>
                         </li>{{/if}}{{/each}}
                     </ul>
@@ -256,7 +254,7 @@
                             <div class="item-list__column">
                                 <button data-action="post-item"><i class="fas fa-message"></i></button>
                                 <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                <button data-action="destroy-item"><i class="fas fa-trash"></i></button>
+                                <button data-action="delete-item"><i class="fas fa-trash"></i></button>
                             </div>
                         </li>{{/if}}{{/each}}
                     </ul>
@@ -279,7 +277,7 @@
                             <div class="item-list__column">
                                 <button data-action="post-item"><i class="fas fa-message"></i></button>
                                 <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                <button data-action="destroy-item"><i class="fas fa-trash"></i></button>
+                                <button data-action="delete-item"><i class="fas fa-trash"></i></button>
                             </div>
                         </li>{{/if}}{{/each}}
                     </ul>

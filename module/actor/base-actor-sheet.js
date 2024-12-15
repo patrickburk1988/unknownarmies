@@ -22,15 +22,15 @@ export default class UABaseActorSheet extends ActorSheet
 
     activateListeners (html) {
         super.activateListeners(html);
+        html.find("[data-action='create-item']").on("click", this._onCreateItem.bind(this));
+        html.find("[data-action='delete-item']").on("click", this._onDeleteItem.bind(this));
+        html.find("[data-action='edit-item']").on("click", this._onEditItem.bind(this));
+        html.find("[data-action='post-item']").on("click", this._onPostItem.bind(this));
+        html.find("[data-action='roll']").on("click contextmenu", this._onRoll.bind(this));  // HACK Fix contextmenu
         html.find("input").on("keydown", this._onInputKeydown.bind(this));                   // TODO
         let showImage = html.find("[data-action='show-image']");                             // TODO
         showImage.on("click", this._onShowImage.bind(this));                                 // TODO
         showImage.prop("disabled", false);                                                   // TODO
-        html.find("[data-action='create-item']").on("click", this._onCreateItem.bind(this));
-        html.find("[data-action='post-item']").on("click", this._onPostItem.bind(this));
-        html.find("[data-action='edit-item']").on("click", this._onEditItem.bind(this));
-        html.find("[data-action='destroy-item']").on("click", this._onDestroyItem.bind(this));
-        html.find("[data-action='roll']").on("click contextmenu", this._onRoll.bind(this));  // HACK Fix contextmenu
         html.find(".editor-content--extra-small").parent().addClass("editor--extra-small");  // TODO
         html.find(".editor-content--small").parent().addClass("editor--small");              // TODO
         html.find(".editor-content--large").parent().addClass("editor--large");              // TODO
@@ -68,7 +68,7 @@ export default class UABaseActorSheet extends ActorSheet
         });                                                              // TODO
     }
 
-    _onDestroyItem (event) {
+    _onDeleteItem (event) {
         let item = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));                                                    // TODO
         Dialog.confirm({                                                 // TODO
             // TODO no render defaultYes rejectClose options             // TODO
