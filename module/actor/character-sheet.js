@@ -25,8 +25,8 @@ export default class UACharacterSheet extends UABaseActorSheet
     activateListeners (html) {
         super.activateListeners(html);
         html.find("[data-action='open-cabal']").on("click", this._onOpenCabal.bind(this));
+        html.find("[data-action='reset-failed-notches']").on("click", this._onResetFailedNotches.bind(this));
         // HACK BELOW
-        html.find("[data-action='reset-failed-notches']").on("click", this._onResetFailedNotches.bind(this));                                                     // TODO
         html.find("[data-action='select-identity-feature']").on("click", this._onSelectIdentityFeature.bind(this));                            // TODO contextmenu?
     }
 
