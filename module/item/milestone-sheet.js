@@ -22,23 +22,23 @@ export default class UAMilestoneSheet extends UABaseItemSheet
     async _onRoll (event) {
         event.preventDefault();
         const dataset = event.currentTarget.dataset;
-        const formula = dataset["rollFormula"];
+        const formula = dataset.rollFormula;
         const roll = await new Roll(formula).evaluate();
-        const rollTotal = parseInt(roll.total);
+        const total = parseInt(roll.total);
         const oldObjectivePercentage = this.actor.system.objective.percentage;
         await this.item.update({
-            "system.percentage": rollTotal
+            "system.percentage": total
         });
         let content = ``;
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;
-        content += `        <h4 class="dice-total">+${rollTotal}%</h4>`;
+        content += `        <h4 class="dice-total">+${total}%</h4>`;
         content += `        <div class="dice-tooltip">`;
         content += `            <section class="tooltip-part">`;
         content += `                <div class="dice">`;
         content += `                    <header class="part-header flexrow">`;
         content += `                        <span class="part-formula">${formula}</span>`;
-        content += `                        <span class="part-total">${rollTotal}</span>`;
+        content += `                        <span class="part-total">${total}</span>`;
         content += `                    </header>`;
         content += `                    <ol class="dice-rolls">`;
         for (let die of roll.dice[0].results) {
@@ -53,7 +53,7 @@ export default class UAMilestoneSheet extends UABaseItemSheet
         content += `</div>`;
         roll.toMessage({
             content: content,
-            flavor: dataset["rollLabel"],
+            flavor: dataset.rollLabel
         });
     }
 }

@@ -38,18 +38,16 @@ export default class UABaseItemSheet extends ItemSheet
         return data;
     }
 
-    setPosition (position) {                                             // TODO
-        if ($(this.form).hasClass("main-form--limited")) {               // TODO
-            // MAYBE Move this to identity sheet?                        // TODO
-            // MAYBE && position.width == 800 && position.height == 707  // TODO
-            position.width = 650;                                        // TODO
-            position.height = 600;                                       // TODO
-        }                                                                // TODO
-        super.setPosition(position);                                     // TODO
-    }                                                                    // TODO
+    setPosition (position) {
+        if ($(this.form).hasClass("main-form--limited")) {
+            position.width = 650;
+            position.height = 600;
+        }
+        super.setPosition(position);
+    }
 
     _onInputKeydown (event) {                                            // TODO
-        if (event.keyCode === 13) {                                      // TODO
+        if (event.keyCode == 13) {                                       // TODO
             event.preventDefault();                                      // TODO
             super.submit();                                              // TODO
             $(event.currentTarget)[0].blur();                            // TODO

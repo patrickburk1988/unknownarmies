@@ -1,5 +1,3 @@
-// FIX use data-item-id data-roll-type
-
 export default class UABaseActorSheet extends ActorSheet
 {
     static get defaultOptions() {
@@ -48,14 +46,13 @@ export default class UABaseActorSheet extends ActorSheet
         return data;
     }
 
-    setPosition (position) {                                             // TODO
-        if ($(this.form).hasClass("main-form--limited")) {               // TODO
-            // MAYBE && position.width == 800 && position.height == 905  // TODO
-            position.width = 650;                                        // TODO
-            position.height = 600;                                       // TODO
-        }                                                                // TODO
-        super.setPosition(position);                                     // TODO
-    }                                                                    // TODO
+    setPosition (position) {
+        if ($(this.form).hasClass("main-form--limited")) {
+            position.width = 650;
+            position.height = 600;
+        }
+        super.setPosition(position);
+    }
 
     _onCreateItem (event) {
         // FIX Use data-item-type
@@ -90,23 +87,11 @@ export default class UABaseActorSheet extends ActorSheet
     }
 
     _onInputKeydown (event) {                                            // TODO
-        if (event.keyCode === 13) {                                      // TODO
+        if (event.keyCode == 13) {                                       // TODO
             event.preventDefault();                                      // TODO
             super.submit();                                              // TODO
             $(event.currentTarget)[0].blur();                            // TODO
         }                                                                // TODO
-    }                                                                    // TODO
-
-    async _onModifyRoll () {                                             // TODO
-        let modifier = false;                                            // TODO
-        await Dialog.confirm({                                           // TODO
-            title: game.i18n.localize("UA.ModifyRoll"),                  // TODO
-            content: `<p>${game.i18n.localize("UA.ModifyRoll_Details")}: <input type="number" style="max-width: 80px; text-align: center" data-dtype="Number" value="0" min="0" max="100">%</p>`,                                            // TODO
-            yes: (prompt) => {                                           // TODO
-                modifier = prompt.find("input")[0].value;                // TODO
-            }                                                            // TODO
-        });                                                              // TODO
-        return modifier;                                                 // TODO
     }                                                                    // TODO
 
     _onPostItem (event) {
@@ -142,74 +127,86 @@ export default class UABaseActorSheet extends ActorSheet
         });                                                              // TODO
     }                                                                    // TODO
 
-    async _onRoll (event) {                                                    // TODO async
-        // FIX use data-roll-label, data-roll-target, data-roll-content-header
+    async _onRoll (event) {
         event.preventDefault();
-        let modifier = 0;                                                // TODO
-        if (event.which == 3 || event.shiftKey || event.ctrlKey || event.altKey) {// TODO
-            modifier = parseInt(await this._onModifyRoll());             // TODO
-            if (isNaN(modifier)) {                                       // TODO
+        let shift = 0;
+        if (event.which == 3 || event.altKey || event.ctrlKey || event.ShiftKey) {
+            shift = parseInt(await this._onShiftRoll());
+            if (isNaN(shift)) {                                          // TODO
                 return;                                                  // TODO
-            }                                                            // TODO
-        }                                                                // TODO
-        let dataset = event.currentTarget.dataset;                       // TODO
-        let roll = new Roll("1d100");                                    // TODO
-        await roll.evaluate();                                           // TODO
-        let rollResult = parseInt(roll.result);                          // TODO
-        let vs = game.i18n.localize("UA.Vs");                            // TODO
-        let rollTarget = parseInt(dataset["rollTarget"]) + modifier;     // TODO
-        let rollType = dataset["rollType"];                              // TODO
-        let outcome = "";                                                // TODO
-        switch (rollResult) {                                            // TODO
-            case 1:                                                      // TODO
-                if (rollType != "objective") {                           // TODO
-                    outcome = "Crit";                                    // TODO
-                    break;                                               // TODO
-                }                                                        // TODO
-            case 100:                                                    // TODO
-                if (rollType != "objective") {                           // TODO
-                    outcome = "Fumble";                                  // TODO
-                    break;                                               // TODO
-                }                                                        // TODO
-            default:                                                     // TODO
-                if (rollType != "objective" && rollResult > 10) {        // TODO
-                    let tensDigit = Math.floor(rollResult / 10);         // TODO
-                    if (tensDigit === rollResult - (tensDigit * 10)) {   // TODO
-                        outcome = "Matched ";                            // TODO
-                    }                                                    // TODO
-                }                                                        // TODO
-                outcome += rollResult <= rollTarget ? "Success" : "Failure";// TODO
-        }                                                                // TODO
-        outcome = game.i18n.localize("UA." + outcome.replace(/\s/g, ""));// TODO
-        let modifierString = modifier == 0 ? "" : (modifier > 0 ? " + " : " - ") + Math.abs(modifier) + `%`;                                                // TODO
+            }
+        }
+        const dataset = event.currentTarget.dataset;
+        const formula = dataset.rollFormula ?? "1d100";
+        const roll = await new Roll(formula).evaluate();
+        const result = parseInt(roll.result);
+        const target = (parseInt(dataset.rollTarget) || 0) + parseInt(shift) || 0;
+        const type = dataset.rollType;
+        let outcome = "";
+        switch (result) {
+            case 1:
+                if (type != "objective") {
+                    outcome = "Crit";
+                    break;
+                }
+            case 100:
+                if (type != "objective") {
+                    outcome = "Fumble";
+                    break;
+                }
+            default:
+                if (type != "objective" && result > 10) {
+                    const tensDigit = Math.floor(result / 10);
+                    if (tensDigit == result - tensDigit * 10) {
+                        outcome = "Matched";
+                    }
+                }
+                outcome += result <= target ? "Success" : "Failure";
+        }
+        outcome = game.i18n.localize("UA." + outcome.replace(" ", "")); // MAYBE /\s/g
         let content = (typeof dataset["rollContentHeader"] !== "undefined") ? `<h4 class="subheader">${dataset["rollContentHeader"]}</h4>` : "";    // TODO
-        content += `<div class="dice-roll">`;                            // TODO
-        content += `    <div class="dice-result">`;                      // TODO
-        content += `        <h4 class="dice-total">${rollResult} <span class="vs">${vs}</span> ${rollTarget}</h4>`;                                              // TODO
-        content += `        <div class="dice-tooltip">`;                 // TODO
-        content += `            <section class="tooltip-part">`;         // TODO
-        content += `                <div class="dice">`;                 // TODO
-        content += `                    <header class="part-header flexrow">`;// TODO
-        content += `                        <span class="part-formula">1d100</span>`;// TODO
-        content += `                        <span class="part-total">${rollResult}</span>`;// TODO
-        content += `                    </header>`;                      // TODO
-        content += `                    <ol class="dice-rolls">`;        // TODO
-        content += `                        <li class="roll die d100">${rollResult}</li>`;// TODO
-        content += `                    </ol>`;                          // TODO
-        content += `                </div>`;                             // TODO
-        content += `            </section>`;                             // TODO
-        content += `        </div>`;                                     // TODO
-        content += `        <div class="dice-formula">${outcome}</div>`; // TODO
-        content += `    </div>`;                                         // TODO
-        content += `</div>`;                                             // TODO
-        roll.toMessage({                                                 // TODO
-            content: content,                                            // TODO
-            flavor: dataset["rollLabel"] + modifierString,               // TODO
+        content += `<div class="dice-roll">`;
+        content += `    <div class="dice-result">`;
+        content += `        <h4 class="dice-total">${type != "objective" ? result : "+" + result + "%"}${target ? "" : ` <span class="vs">` + game.i18n.localize("UA.Vs") + `</span> ` + target}</h4>`;
+        content += `        <div class="dice-tooltip">`;
+        content += `            <section class="tooltip-part">`;
+        content += `                <div class="dice">`;
+        content += `                    <header class="part-header flexrow">`;
+        content += `                        <span class="part-formula">${formula}</span>`;
+        content += `                        <span class="part-total">${result}</span>`;
+        content += `                    </header>`;
+        content += `                    <ol class="dice-rolls">`;
+        for (let die of roll.dice[0].results) {
+            const faces = roll.dice[0].faces;
+            content += `                        <li class="roll die d${faces == 100 ? 10 : faces}">${die.result}</li>`;
+        }
+        content += `                    </ol>`;
+        content += `                </div>`;
+        content += `            </section>`;
+        content += `        </div>`;
+        content += `        <div class="dice-formula">${outcome}</div>`;
+        content += `    </div>`;
+        content += `</div>`;
+        roll.toMessage({
+            content: content,
+            flavor: dataset.rollLabel + (shift == 0 ? "" : (shift > 0 ? " + " : " - ") + Math.abs(shift) + "%"),
             speaker: {                                                   // TODO
                 actor: this.actor.id                                     // TODO
-            }                                                            // TODO
-        });                                                              // TODO
-    }                                                                    // TODO
+            }
+        });
+    }
+
+    async _onShiftRoll (event) {
+        let modifier = false;
+        await Dialog.confirm({
+            content: `<p>${game.i18n.localize("UA.ShiftRoll_Details")}: <input type="number" value="0" min="-100" max="100" step="10" data-dtype="Number" style="max-width: 80px; text-align: center">%</p>`,                                  // TODO
+            title: game.i18n.localize("UA.ShiftRoll"),
+            yes: (dialog) => {
+                modifier = dialog.find("input")[0].value; // MAYBE
+            }
+        });
+        return modifier;
+    }
 
     _onShowImage (event) {
         event.preventDefault();

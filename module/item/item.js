@@ -29,7 +29,7 @@ export default class UAItem extends Item
     _prepareDerivedIdentityData (identity) {
         for (let featureKey of Object.keys(identity.system.features)) {                       //TODO
             let featureValue = identity.system.features[featureKey];                          //TODO
-            if ((identity.system.type !== "Mundane" && !(featureValue === "Casts Rituals" || featureValue === "Use Gutter Magick")) || (!(game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures")) && (featureValue.includes("Alter") || featureValue.includes("Read") || featureValue.includes("Terrorize") || featureValue === "Totem"))) {                                                                                 //TODO
+            if ((identity.system.type != "Mundane" && !(featureValue == "Casts Rituals" || featureValue == "Use Gutter Magick")) || (!(game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures")) && (featureValue.includes("Alter") || featureValue.includes("Read") || featureValue.includes("Terrorize") || featureValue == "Totem"))) {                                                                                 //TODO
                 identity.system.features[featureKey] = "";                                    //TODO
             }                                                                                 //TODO
         }                                                                                     //TODO

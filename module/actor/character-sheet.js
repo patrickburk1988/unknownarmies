@@ -35,7 +35,7 @@ export default class UACharacterSheet extends UABaseActorSheet
         data.cabals = {
             "": ""
         };
-        for (let cabal of game.actors.filter(actor => actor.type === "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {                    // TODO
+        for (let cabal of game.actors.filter(actor => actor.type == "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {                    // TODO
             data.cabals[cabal._id] = cabal.name;                         // TODO
         }
         data.optionsFearShockMeter = UACharacterSheet.optionsFearShockMeter;
@@ -72,36 +72,36 @@ export default class UACharacterSheet extends UABaseActorSheet
                 break;                                                   // TODO
             case "Avatar":                                               // TODO
                 let percentage = identity.system.percentage;             // TODO
-                if (percentage >= 1 && identity.system.avatar.channels["1-50"] !== "") {     // TODO
+                if (percentage >= 1 && identity.system.avatar.channels["1-50"] != "") {      // TODO
                     features.push("Channel1-50%");                       // TODO
                 }                                                        // TODO
-                if (percentage >= 51 && identity.system.avatar.channels["51-70"] !== "") {   // TODO
+                if (percentage >= 51 && identity.system.avatar.channels["51-70"] != "") {    // TODO
                     features.push("Channel51-70%");                      // TODO
                 }                                                        // TODO
-                if (percentage >= 71 && identity.system.avatar.channels["71-90"] !== "") {   // TODO
+                if (percentage >= 71 && identity.system.avatar.channels["71-90"] != "") {    // TODO
                     features.push("Channel71-90%");                      // TODO
                 }                                                        // TODO
-                if (percentage >= 91 && identity.system.avatar.channels["91-98"] !== "") {   // TODO
+                if (percentage >= 91 && identity.system.avatar.channels["91-98"] != "") {    // TODO
                     features.push("Channel91-98%");                      // TODO
                 }                                                        // TODO
-                if (percentage >= 99 && identity.system.avatar.channels["99-"] !== "") {     // TODO
+                if (percentage >= 99 && identity.system.avatar.channels["99-"] != "") {      // TODO
                     features.push("Channel99%");                         // TODO
                 }                                                        // TODO
                 break;                                                   // TODO
             case "Mundane":                                              // TODO
                 let substitutesFor = identity.system.mundane.substitutesFor;                 // TODO
-                if (substitutesFor !== "") {                             // TODO
+                if (substitutesFor != "") {                              // TODO
                     features.push("Substitutes for " + substitutesFor);  // TODO
                 }                                                        // TODO
                 break;                                                   // TODO
             case "Supernatural":                                         // TODO
                 let supernaturalAbility = identity.system.supernatural.ability;              // TODO
-                if (supernaturalAbility !== "") {                        // TODO
+                if (supernaturalAbility != "") {                         // TODO
                     features.push(supernaturalAbility);                  // TODO
                 }                                                        // TODO
         }                                                                // TODO
         for (let feature of features.sort()) {                           // TODO
-            if (feature !== "") {                                        // TODO
+            if (feature != "") {                                         // TODO
                 let text = game.i18n.localize("UA." + feature.replaceAll(" for ", "For").replaceAll(" ", ""));                                              // TODO
                 content += `<button data-action="roll" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-content-header="${text}" data-roll-target="${identity.system.percentage}">${text}</button>`;                                     // TODO
             }                                                            // TODO

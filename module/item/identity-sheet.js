@@ -223,25 +223,25 @@ export default class UAIdentitySheet extends UABaseItemSheet
     async _onImprove (event) {
         event.preventDefault();
         const roll = await new Roll("1d5").evaluate();
-        const rollResult = parseInt(roll.result);
+        const result = parseInt(roll.result);
         const oldPercentage = this.object.system.percentage;
         await this.item.update({
             "system.hasExperience": false,
-            "system.percentage": oldPercentage + rollResult
+            "system.percentage": oldPercentage + result
         });
         let content = ``;
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;
-        content += `        <h4 class="dice-total">+${rollResult}%</h4>`;
+        content += `        <h4 class="dice-total">+${result}%</h4>`;
         content += `        <div class="dice-tooltip">`;
         content += `            <section class="tooltip-part">`;
         content += `                <div class="dice">`;
         content += `                    <header class="part-header flexrow">`;
         content += `                        <span class="part-formula">1d5</span>`;
-        content += `                        <span class="part-total">${rollResult}</span>`;
+        content += `                        <span class="part-total">${result}</span>`;
         content += `                    </header>`;
         content += `                    <ol class="dice-rolls">`;
-        content += `                        <li class="roll die d10">${rollResult}</li>`;
+        content += `                        <li class="roll die d10">${result}</li>`;
         content += `                    </ol>`;
         content += `                </div>`;
         content += `            </section>`;
@@ -251,7 +251,7 @@ export default class UAIdentitySheet extends UABaseItemSheet
         content += `</div>`;
         roll.toMessage({
             content: content,
-            flavor: event.currentTarget.dataset["rollLabel"]
+            flavor: event.currentTarget.dataset.rollLabel
         });
     }
 }
