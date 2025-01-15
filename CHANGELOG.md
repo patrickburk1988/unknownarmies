@@ -1,7 +1,9 @@
 ## v1.3.6
 
+- Added a setting for identity button style.
 - Tightened up artifact sheet logic.
 - Changed milestone button text.
+- Refactored item list layout.
 
 ## v1.3.5
 
