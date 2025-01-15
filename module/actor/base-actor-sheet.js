@@ -6,9 +6,9 @@ export default class UABaseActorSheet extends ActorSheet
                 dragSelector: ".item-list__item"
             }],
             tabs: [{
-                navSelector: ".tab-buttons",
                 contentSelector: ".tab-panels",
-                initial: "main"
+                initial: "main",
+                navSelector: ".tab-buttons"
             }],
             width: 800                                                   // TODO
         });
@@ -55,31 +55,28 @@ export default class UABaseActorSheet extends ActorSheet
     }
 
     _onCreateItem (event) {
-        // FIX Use data-item-type
-        let type = $(event.currentTarget).data("item-type");             // TODO
-        this.actor.createEmbeddedDocuments("Item", [{                    // TODO
-            name: game.i18n.localize("UA.New" + type.charAt(0).toUpperCase() + type.slice(1)),// TODO
-            type: type,                                                  // TODO
-        }]).then(item => {                                               // TODO
-            item[0].sheet.render(true);                                  // TODO
-        });                                                              // TODO
+        const type = event.currentTarget.dataset.itemType
+        this.actor.createEmbeddedDocuments("Item", [{
+            name: game.i18n.localize("UA.New" + type.charAt(0).toUpperCase() + type.slice(1)),
+            type: type
+        }]).then(item => {
+            item[0].sheet.render(true);
+        });
     }
 
     _onDeleteItem (event) {
-        let item = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));                                                    // TODO
-        Dialog.confirm({                                                 // TODO
-            // TODO no render defaultYes rejectClose options             // TODO
-            // TODO buttons default close                                // TODO
-            title: game.i18n.localize("UA.Delete" + item.type.charAt(0).toUpperCase() + item.type.slice(1)),                                                   // TODO
-            content: `<p>${game.i18n.format("UA.DeleteItem_Details", {   // TODO
-                name: item.name                                          // TODO
-            })}</p>`,                                                    // TODO
-            yes: () => {                                                 // TODO
-                this.actor.deleteEmbeddedDocuments("Item", [             // TODO
-                    item.id                                              // TODO
-                ]);                                                      // TODO
-            }                                                            // TODO
-        });                                                              // TODO
+        const item = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));
+        Dialog.confirm({
+            content: `<p>${game.i18n.format("UA.DeleteItem_Details", {
+                name: item.name
+            })}</p>`,
+            title: game.i18n.localize("UA.Delete" + item.type.charAt(0).toUpperCase() + item.type.slice(1)),
+            yes: () => {
+                this.actor.deleteEmbeddedDocuments("Item", [
+                    item.id
+                ]);
+            }
+        });
     }
 
     _onEditItem (event) {
@@ -95,37 +92,32 @@ export default class UABaseActorSheet extends ActorSheet
     }                                                                    // TODO
 
     _onPostItem (event) {
-        let item = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));                                                    // TODO
-        let content = `<div>`;                                           // TODO
-        content += `    <h3>${item.name}</h3>`;                          // TODO
-        switch (item.type) {                                             // TODO
-            case "artifact":                                             // TODO
-                // TODO power charges description                        // TODO
+        const item = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));
+        let content = `<div>`;
+        content += `    <h3>${item.name}</h3>`;
+        switch (item.type) {
+            case "artifact":                                             // TODO description power charges
                 content += `    ${item.system.effect}`;                  // TODO
-                break;                                                   // TODO
-            case "identity":                                             // TODO
-                // TODO PERCENTAGE type isObsession hasExperience ofCourseICan substitutesFor ability attributes symbols taboos channels domain taboos generateCharge features details                                                  // TODO
-                break;                                                   // TODO
-            case "item":                                                 // TODO
-                // TODO description                                      // TODO
+                break;
+            case "identity":                                             // TODO PERCENTAGE type isObsession hasExperience mundane supernatural avatar adept features details
+                break;
+            case "item":                                                 // TODO description
                 content += `    ${item.system.effect}`;                  // TODO
-                break;                                                   // TODO
+                break;
             case "milestone":                                            // TODO
                 content += `    ${item.system.percentage}%`;             // TODO
-                break;                                                   // TODO
-            case "ritual":                                               // TODO
-                // TODO cost action                                      // TODO
+                break;
+            case "ritual":                                               // TODO cost action
                 content += `    ${item.system.effect}`;                  // TODO
-                break;                                                   // TODO
-            case "spell":                                                // TODO
-                // TODO school cost                                      // TODO
+                break;
+            case "spell":                                                // TODO cost school
                 content += `    ${item.system.effect}`;                  // TODO
-        }                                                                // TODO
-        content += `</div>`;                                             // TODO
-        ChatMessage.create({                                             // TODO
-            content: content                                             // TODO
-        });                                                              // TODO
-    }                                                                    // TODO
+        }
+        content += `</div>`;
+        ChatMessage.create({
+            content: content
+        });
+    }
 
     async _onRoll (event) {
         event.preventDefault();
@@ -142,20 +134,21 @@ export default class UABaseActorSheet extends ActorSheet
         const result = parseInt(roll.result);
         const target = (parseInt(dataset.rollTarget) || 0) + parseInt(shift) || 0;
         const type = dataset.rollType;
+        const isObjective = type != "objective";
         let outcome = "";
         switch (result) {
             case 1:
-                if (type != "objective") {
+                if (isObjective) {
                     outcome = "Crit";
                     break;
                 }
             case 100:
-                if (type != "objective") {
+                if (isObjective) {
                     outcome = "Fumble";
                     break;
                 }
             default:
-                if (type != "objective" && result > 10) {
+                if (isObjective && result > 10) {
                     const tensDigit = Math.floor(result / 10);
                     if (tensDigit == result - tensDigit * 10) {
                         outcome = "Matched";
@@ -164,7 +157,7 @@ export default class UABaseActorSheet extends ActorSheet
                 outcome += result <= target ? "Success" : "Failure";
         }
         outcome = game.i18n.localize("UA." + outcome.replace(" ", "")); // MAYBE /\s/g
-        let content = (typeof dataset["rollContentHeader"] !== "undefined") ? `<h4 class="subheader">${dataset["rollContentHeader"]}</h4>` : "";    // TODO
+        let content = dataset.rollContentHeader !== undefined ? `<div>${dataset.rollContentHeader}</div>` : "";
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;
         content += `        <h4 class="dice-total">${type != "objective" ? result : "+" + result + "%"}${target ? "" : ` <span class="vs">` + game.i18n.localize("UA.Vs") + `</span> ` + target}</h4>`;
@@ -199,10 +192,11 @@ export default class UABaseActorSheet extends ActorSheet
     async _onShiftRoll (event) {
         let modifier = false;
         await Dialog.confirm({
-            content: `<p>${game.i18n.localize("UA.ShiftRoll_Details")}: <input type="number" value="0" min="-100" max="100" step="10" data-dtype="Number" style="max-width: 80px; text-align: center">%</p>`,                                  // TODO
+            content: `<p>${game.i18n.localize("UA.ShiftRoll_Details")}:</p>
+            <input type="number" value="0" min="-100" max="100" step="10" data-dtype="Number" style="max-width: 80px; text-align: center">%`,
             title: game.i18n.localize("UA.ShiftRoll"),
-            yes: (dialog) => {
-                modifier = dialog.find("input")[0].value; // MAYBE
+            yes: html => {
+                html.find("input")[0].value;
             }
         });
         return modifier;

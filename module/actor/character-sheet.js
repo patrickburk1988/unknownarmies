@@ -26,17 +26,16 @@ export default class UACharacterSheet extends UABaseActorSheet
         super.activateListeners(html);
         html.find("[data-action='open-cabal']").on("click", this._onOpenCabal.bind(this));
         html.find("[data-action='reset-failed-notches']").on("click", this._onResetFailedNotches.bind(this));
-        // HACK BELOW
         html.find("[data-action='select-identity-feature']").on("click", this._onSelectIdentityFeature.bind(this));                            // TODO contextmenu?
     }
 
     async getData (options) {
         const data = await super.getData(options);
-        data.cabals = {
+        data.cabalOptions = {
             "": ""
         };
-        for (let cabal of game.actors.filter(actor => actor.type == "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {                    // TODO
-            data.cabals[cabal._id] = cabal.name;                         // TODO
+        for (let cabal of game.actors.filter(actor => actor.type == "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {
+            data.cabalOptions[cabal._id] = cabal.name;
         }
         data.optionsFearShockMeter = UACharacterSheet.optionsFearShockMeter;
         data.enrichedAppearance = await TextEditor.enrichHTML(this.object.system.appearance, {
@@ -52,10 +51,11 @@ export default class UACharacterSheet extends UABaseActorSheet
     }
 
     _onOpenCabal (event) {
-        game.actors.get(this.actor.system.cabal).sheet.render(true);     // TODO
+        game.actors.get(this.actor.system.cabal).sheet.render(true);
     }
 
     _onResetFailedNotches (event) {
+        // HACK BELOW
         let key = "system.shockGauge." + $(event.currentTarget).data("shock-meter") + ".notches.failed";                                                         // TODO
         this.actor.update({                                              // TODO
             [key]: 0                                                     // TODO
@@ -63,63 +63,62 @@ export default class UACharacterSheet extends UABaseActorSheet
     }
 
     _onSelectIdentityFeature (event) {
-        event.preventDefault();                                          // TODO
-        let identity = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));                                                    // TODO
-        let content = `<p>${game.i18n.localize("UA.SelectIdentityFeature_Details")}</p><p><button data-action="roll" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage}">${game.i18n.localize("UA.None")}</button>`; // MAYBE <p>s not needed?        // TODO
-        let features = Object.values(identity.system.features);          // TODO
-        switch (identity.system.type) {                                  // TODO
-            case "Adept":                                                // TODO
-                break;                                                   // TODO
-            case "Avatar":                                               // TODO
-                let percentage = identity.system.percentage;             // TODO
-                if (percentage >= 1 && identity.system.avatar.channels["1-50"] != "") {      // TODO
-                    features.push("Channel1-50%");                       // TODO
-                }                                                        // TODO
-                if (percentage >= 51 && identity.system.avatar.channels["51-70"] != "") {    // TODO
-                    features.push("Channel51-70%");                      // TODO
-                }                                                        // TODO
-                if (percentage >= 71 && identity.system.avatar.channels["71-90"] != "") {    // TODO
-                    features.push("Channel71-90%");                      // TODO
-                }                                                        // TODO
-                if (percentage >= 91 && identity.system.avatar.channels["91-98"] != "") {    // TODO
-                    features.push("Channel91-98%");                      // TODO
-                }                                                        // TODO
-                if (percentage >= 99 && identity.system.avatar.channels["99-"] != "") {      // TODO
-                    features.push("Channel99%");                         // TODO
-                }                                                        // TODO
-                break;                                                   // TODO
-            case "Mundane":                                              // TODO
-                let substitutesFor = identity.system.mundane.substitutesFor;                 // TODO
-                if (substitutesFor != "") {                              // TODO
-                    features.push("Substitutes for " + substitutesFor);  // TODO
-                }                                                        // TODO
-                break;                                                   // TODO
-            case "Supernatural":                                         // TODO
-                let supernaturalAbility = identity.system.supernatural.ability;              // TODO
-                if (supernaturalAbility != "") {                         // TODO
-                    features.push(supernaturalAbility);                  // TODO
-                }                                                        // TODO
-        }                                                                // TODO
-        for (let feature of features.sort()) {                           // TODO
-            if (feature != "") {                                         // TODO
-                let text = game.i18n.localize("UA." + feature.replaceAll(" for ", "For").replaceAll(" ", ""));                                              // TODO
-                content += `<button data-action="roll" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-content-header="${text}" data-roll-target="${identity.system.percentage}">${text}</button>`;                                     // TODO
-            }                                                            // TODO
-        }                                                                // TODO
-        content += `</p>`; // MAYBE <p>s not needed?                     // TODO
-        let dialog = new Dialog({ // MAYBE const await?                  // TODO
-            title: game.i18n.localize("UA.SelectIdentityFeature"),       // TODO
-            content: content,                                            // TODO
-            buttons: {},                                                 // TODO
-            // default: // MAYBE                                         // TODO
-            render: html => {                                            // TODO
-                let buttons = html.find("[data-action='roll']");         // TODO
-                buttons.on("click contextmenu", this._onRoll.bind(this));// TODO
-                buttons.on("click", () => { // MAYBE contextmenu?        // TODO
-                    dialog.close();                                      // TODO
-                });                                                      // TODO
-            }                                                            // TODO
-            // close: // MAYBE                                           // TODO
-        }).render(true);                                                 // TODO
+        event.preventDefault();
+        const identity = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));
+        let content = `<p>${game.i18n.localize("UA.SelectIdentityFeature_Details")}</p>
+        <button data-action="roll" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage}">${game.i18n.localize("UA.None")}</button>`;
+        const features = Object.values(identity.system.features);
+        switch (identity.system.type) {
+            case "Adept":
+                break;
+            case "Avatar":
+                const percentage = identity.system.percentage;
+                const channels = identity.system.avatar.channels;
+                if (percentage >= 1 && channels["1-50"] != "") {
+                    features.push("Channel 1-50%");
+                }
+                if (percentage >= 51 && channels["51-70"] != "") {
+                    features.push("Channel 51-70%");
+                }
+                if (percentage >= 71 && channels["71-90"] != "") {
+                    features.push("Channel 71-90%");
+                }
+                if (percentage >= 91 && channels["91-98"] != "") {
+                    features.push("Channel 91-98%");
+                }
+                if (percentage >= 99 && channels["99-"] != "") {
+                    features.push("Channel 99%");
+                }
+                break;
+            case "Mundane":
+                const substitutesFor = identity.system.mundane.substitutesFor;
+                if (substitutesFor != "") {
+                    features.push("Substitutes for " + substitutesFor);
+                }
+                break;
+            case "Supernatural":
+                const ability = identity.system.supernatural.ability;
+                if (ability != "") {
+                    features.push(ability);
+                }
+        }
+        for (let feature of features.sort()) {
+            if (feature != "") {
+                const text = game.i18n.localize("UA." + feature.replaceAll(" for ", "For").replaceAll(" ", ""));
+                content += `<button data-action="roll" data-roll-content-header="<p>${text}</p>" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage}">${text}</button>`;
+            }
+        }
+        const dialog = new Dialog({
+            buttons: {},
+            content: content,
+            title: game.i18n.localize("UA.SelectIdentityFeature"),
+            render: html => {
+                const rollButtons = html.find("[data-action='roll']");
+                rollButtons.on("click contextmenu", this._onRoll.bind(this));
+                rollButtons.on("click", () => {
+                    dialog.close();
+                });
+            }
+        }).render(true);
     }
 }
