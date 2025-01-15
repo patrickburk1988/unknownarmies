@@ -49,6 +49,19 @@ Hooks.once("init", function() {
         scope: "world",
         type: Boolean
     });
+    game.settings.register("unknownarmies", "IdentitiesButtonStyle", {
+        choices: {
+            1: game.i18n.localize("UA.IdentityName"),
+            2: game.i18n.localize("UA.Die")
+        },
+        config: true,
+        default: 1,
+        hint: "UA.IdentitiesButtonStyle_Hint",
+        name: "UA.IdentitiesButtonStyle",
+        requiresReload: true,
+        scope: "client",
+        type: Number
+    });
     game.settings.register("unknownarmies", "IdentitiesSelectFeatureWhenRolling", {
         choices: {
             1: game.i18n.localize("UA.Disabled"),
@@ -180,41 +193,42 @@ Hooks.once("init", function() {
         return UAActor.shockGaugeSchema[meter][key];
     });
     Handlebars.registerHelper("sortFeatures", function (identity) {
-        let features = Object.values(identity.system.features);                             //TODO
-        switch (identity.system.type) {                                                     //TODO
-            case "Adept":                                                                   //TODO
-                break;                                                                      //TODO
-            case "Avatar":                                                                  //TODO
-                let percentage = identity.system.percentage;                                //TODO
-                if (percentage >= 1 && identity.system.avatar.channels["1-50"] != "") {     //TODO
-                    features.push("Channel1-50%");                                          //TODO
-                }                                                                           //TODO
-                if (percentage >= 51 && identity.system.avatar.channels["51-70"] != "") {   //TODO
-                    features.push("Channel51-70%");                                         //TODO
-                }                                                                           //TODO
-                if (percentage >= 71 && identity.system.avatar.channels["71-90"] != "") {   //TODO
-                    features.push("Channel71-90%");                                         //TODO
-                }                                                                           //TODO
-                if (percentage >= 91 && identity.system.avatar.channels["91-98"] != "") {   //TODO
-                    features.push("Channel91-98%");                                         //TODO
-                }                                                                           //TODO
-                if (percentage >= 99 && identity.system.avatar.channels["99-"] != "") {     //TODO
-                    features.push("Channel99%");                                            //TODO
-                }                                                                           //TODO
-                break;                                                                      //TODO
-            case "Mundane":                                                                 //TODO
-                let substitutesFor = identity.system.mundane.substitutesFor;                //TODO
-                if (substitutesFor != "") {                                                 //TODO
-                    features.push("Substitutes for " + substitutesFor);                     //TODO
-                }                                                                           //TODO
-                break;                                                                      //TODO
-            case "Supernatural":                                                            //TODO
-                let supernaturalAbility = identity.system.supernatural.ability;             //TODO
-                if (supernaturalAbility != "") {                                            //TODO
-                    features.push(supernaturalAbility);                                     //TODO
-                }                                                                           //TODO
-        }                                                                                   //TODO
-        return features.sort();                                                             //TODO
+        const features = Object.values(identity.system.features);
+        switch (identity.system.type) {
+            case "Adept":
+                break;
+            case "Avatar":
+                const percentage = identity.system.percentage;
+                const channels = identity.system.avatar.channels;
+                if (percentage >= 1 && channels["1-50"] != "") {
+                    features.push("Channel 1-50%");
+                }
+                if (percentage >= 51 && channels["51-70"] != "") {
+                    features.push("Channel 51-70%");
+                }
+                if (percentage >= 71 && channels["71-90"] != "") {
+                    features.push("Channel 71-90%");
+                }
+                if (percentage >= 91 && channels["91-98"] != "") {
+                    features.push("Channel 91-98%");
+                }
+                if (percentage >= 99 && channels["99-"] != "") {
+                    features.push("Channel 99%");
+                }
+                break;
+            case "Mundane":
+                const substitutesFor = identity.system.mundane.substitutesFor;
+                if (substitutesFor != "") {
+                    features.push("Substitutes for " + substitutesFor);
+                }
+                break;
+            case "Supernatural":
+                const ability = identity.system.supernatural.ability;
+                if (ability != "") {
+                    features.push(ability);
+                }
+        }
+        return features.sort();
     });
     Handlebars.registerHelper("stripHTML", function (html) {
         return jQuery(html).text().replaceAll(/([.!?])([^.!?])/g, "$1 $2");
