@@ -6,7 +6,7 @@
         </div>
         <div class="upper-content__section {{#if (not (isGM))}}upper-content__section--{{#if (not item.system.charges.isHidden)}}is-eternal-and-{{/if}}charges-only{{/if}}">
             <span class="label">{{localize 'UA.Name'}}:</span>
-            <input type="text" class="name" name="name" value="{{item.name}}" data-dtype="String">
+            <input type="text" name="name" value="{{item.name}}" data-dtype="String">
             <span class="label">{{localize 'UA.Power'}}:</span>
             <select name="system.power">{{selectOptions optionsPower selected=item.system.power localize=true}}</select>{{#if (isGM)}}
             <span class="label">{{localize 'UA.HideCharges'}}:</span>

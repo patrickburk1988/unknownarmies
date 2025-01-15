@@ -6,7 +6,7 @@
         </div>
         <div class="upper-content__section">
             <span class="label">{{localize 'UA.Name'}}:</span>
-            <input type="text" class="name" name="name" value="{{item.name}}" data-dtype="String">
+            <input type="text" name="name" value="{{item.name}}" data-dtype="String">
             <span class="label">{{localize 'UA.School'}}:</span>
             <input type="text" name="system.school" value="{{item.system.school}}" data-dtype="String">
             <span class="label">{{localize 'UA.Cost'}}:</span>
@@ -20,10 +20,10 @@
     </nav>
     <div class="tab-panels">
         <div class="tab lower-content" data-tab="main">
-           <div class="lower-content__section">
+            <div class="lower-content__section">
                 <h2>{{localize 'UA.Effect'}}:</h2>
                 {{editor enrichedEffect target="system.effect" engine="prosemirror" button=true class="editor-content--extra-large"}}
-           </div>
+            </div>
         </div>
         <div class="tab lower-content" data-tab="notes">
             <div class="lower-content__section">

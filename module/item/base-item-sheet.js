@@ -3,9 +3,9 @@ export default class UABaseItemSheet extends ItemSheet
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             tabs: [{
-                navSelector: ".tab-buttons",
                 contentSelector: ".tab-panels",
-                initial: "main"
+                initial: "main",
+                navSelector: ".tab-buttons"
             }]
         });
     }

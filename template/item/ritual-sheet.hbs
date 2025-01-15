@@ -6,7 +6,7 @@
         </div>
         <div class="upper-content__section">
             <span class="label">{{localize 'UA.Name'}}:</span>
-            <input type="text" class="name" name="name" value="{{item.name}}" data-dtype="String">
+            <input type="text" name="name" value="{{item.name}}" data-dtype="String">
             <span class="label">{{localize 'UA.Cost'}}:</span>
             <input type="number" name="system.cost.amount" value="{{item.system.cost.amount}}" min="0" data-dtype="Number">
             <select name="system.cost.type">{{#if (equals item.system.cost.amount 1)}}{{selectOptions optionsCostTypeSingular selected=item.system.cost.type localize=true}}{{else}}{{selectOptions optionsCostTypePlural selected=item.system.cost.type localize=true}}{{/if}}</select>
