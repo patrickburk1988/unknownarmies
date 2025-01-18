@@ -4,6 +4,7 @@
 - Tightened up artifact sheet logic.
 - Changed milestone button text.
 - Refactored item list layout.
+- Refactored character sheets to automatically uncheck used passions when burned out.
 
 ## v1.3.5
 
