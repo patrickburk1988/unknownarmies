@@ -20,7 +20,7 @@
 - Organized manifest and replaced outdated `gridUnits`.
 - Moved option maps from `utils.js` to their respective sheets.
 - Removed wound threshold maximum.
-- Minor Javascript and Handlebars tweaks.
+- Minor JavaScript and Handlebars tweaks.
 
 ## v1.3.2
 

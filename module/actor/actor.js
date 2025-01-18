@@ -76,9 +76,11 @@ export default class UAActor extends Actor
         }
         character.system.isBurnedOut = totalHardenedNotches >= 25;
         if (character.system.isBurnedOut) {
-            character.system.passions.rage.isUsed = false;
-            character.system.passions.noble.isUsed = false;
-            character.system.passions.fear.isUsed = false;
+            character.update({
+                "system.passions.rage.isUsed": false,
+                "system.passions.noble.isUsed": false,
+                "system.passions.fear.isUsed": false
+            });
         }
         const woundsRatio = character.system.wounds.suffered / character.system.wounds.threshold;
         character.system.wounds.severity = woundsRatio < 0.5 ? "" : woundsRatio < 0.75 ? "Injured" : woundsRatio < 0.9 ? "Badly Injured" : woundsRatio < 1 ? "Unconscious" : "Dead";
