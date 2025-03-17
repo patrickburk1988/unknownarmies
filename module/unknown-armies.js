@@ -166,9 +166,6 @@ Hooks.once("init", function() {
     Handlebars.registerHelper("isGM", function() {
         return game.user.isGM;
     });
-    Handlebars.registerHelper("lang", function() {
-        return game.i18n.lang;
-    });
     Handlebars.registerHelper("not", function (arg) {
         return !arg;
     });
@@ -236,7 +233,37 @@ Hooks.once("init", function() {
 });
 
 Hooks.once("ready", function() {
-    $(document.body).addClass(UAUtils.theme);
+    const lang = game.i18n.lang == "en" ? "" : game.i18n.lang;
+    $(document.body).addClass(UAUtils.theme).addClass(lang);
+    $(".chat-control-icon i").removeClass("fa-dice-d20").addClass("fa-dice-d10");
+    $(".chat-control-icon").on("click", async () => {
+        const formula = "1d100";
+        const roll = await new Roll(formula).evaluate();
+        const result = parseInt(roll.result);
+        let content = "";
+        content += `<div class="dice-roll">`;
+        content += `    <div class="dice-result">`;
+        content += `        <h4 class="dice-total">${result}</h4>`;
+        content += `        <div class="dice-tooltip">`;
+        content += `            <section class="tooltip-part">`;
+        content += `                <div class="dice">`;
+        content += `                    <header class="part-header flexrow">`;
+        content += `                        <span class="part-formula">${formula}</span>`;
+        content += `                        <span class="part-total">${result}</span>`;
+        content += `                    </header>`;
+        content += `                    <ol class="dice-rolls">`;
+        content += `                        <li class="roll die d10">${result}</li>`;
+        content += `                    </ol>`;
+        content += `                </div>`;
+        content += `            </section>`;
+        content += `        </div>`;
+        content += `    </div>`;
+        content += `</div>`;
+        roll.toMessage({
+            content: content,
+            flavor: formula
+        });
+    });
 });
 
 Hooks.on("renderDialog", (dialog, html, data) => {
@@ -249,38 +276,4 @@ Hooks.on("renderDialog", (dialog, html, data) => {
             i.remove();
         }
     });
-});
-
-Hooks.on("renderSidebarTab", (sidebarTab, html, data) => {
-    if (sidebarTab.tabName == "chat") {                                        //TODO
-        html.find(".chat-control-icon i").removeClass("fa-dice-d20").addClass("fa-dice-d10");//TODO
-        html.find(".chat-control-icon").on("click", async () => {               //TODO
-            let roll = new Roll("1d100");                                       //TODO
-            await roll.evaluate();                                              //TODO
-            let rollResult = parseInt(roll.result);                             //TODO
-            let content = "";                                                   //TODO
-            content += `<div class="dice-roll">`;                               //TODO
-            content += `    <div class="dice-result">`;                         //TODO
-            content += `        <h4 class="dice-total">${rollResult}</h4>`;     //TODO
-            content += `        <div class="dice-tooltip">`;                    //TODO
-            content += `            <section class="tooltip-part">`;            //TODO
-            content += `                <div class="dice">`;                    //TODO
-            content += `                    <header class="part-header flexrow">`;//TODO
-            content += `                        <span class="part-formula">1d100</span>`;//TODO
-            content += `                        <span class="part-total">${rollResult}</span>`;                                                             //TODO
-            content += `                    </header>`;                         //TODO
-            content += `                    <ol class="dice-rolls">`;           //TODO
-            content += `                        <li class="roll die d100">${rollResult}</li>`;//TODO
-            content += `                    </ol>`;                             //TODO
-            content += `                </div>`;                                //TODO
-            content += `            </section>`;                                //TODO
-            content += `        </div>`;                                        //TODO
-            content += `    </div>`;                                            //TODO
-            content += `</div>`;                                                //TODO
-            roll.toMessage({                                                    //TODO
-                content: content,                                               //TODO
-                flavor: "1d100"                                                 //TODO
-            });                                                                 //TODO
-        });                                                                     //TODO
-    }                                                                           //TODO
 });

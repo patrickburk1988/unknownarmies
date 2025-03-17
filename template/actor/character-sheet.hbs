@@ -17,8 +17,8 @@
             <select class="cabal" name="system.cabal">{{selectOptions cabalOptions selected=actor.system.cabal}}</select>
             <button data-action="open-cabal" {{disabled (not actor.system.cabal)}}>{{localize 'UA.OpenCabal'}}</button>
         </div>
-        <div class="upper-content__section {{#if (not (isGM))}}upper-content__section--wound-threshold-only{{/if}}">
-            <span class="label {{#if (isGM)}}label--wrap{{/if}}">{{localize 'UA.WoundThreshold'}}:</span>
+        <div class="upper-content__section wound-threshold {{#if (isGM)}}wound-threshold--wounds{{/if}}">
+            <span class="label">{{localize 'UA.WoundThreshold'}}:</span>
             <input type="number" name="system.wounds.threshold" value="{{actor.system.wounds.threshold}}" min="0" data-dtype="Number">{{#if (isGM)}}
             <span class="label">{{localize 'UA.Wounds'}}:</span>
             <input type="number" name="system.wounds.suffered" value="{{actor.system.wounds.suffered}}" min="0" max="{{actor.system.wounds.threshold}}" data-dtype="Number">{{/if}}
@@ -98,7 +98,7 @@
                         <input type="radio" {{#if (exceeds shockMeterData.notches.failed 3)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.failed" value="3" {{checked (equals shockMeterData.notches.failed 3)}}>
                         <input type="radio" {{#if (exceeds shockMeterData.notches.failed 4)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.failed" value="4" {{checked (equals shockMeterData.notches.failed 4)}}>
                         <input type="radio" name="system.shockGauge.{{shockMeterName}}.notches.failed" value="5" {{checked (equals shockMeterData.notches.failed 5)}}>
-                        <span class="label label--wrap">{{localize 'UA.OngoingMadness'}}:</span>
+                        <span class="label">{{localize 'UA.OngoingMadness'}}:</span>
                         <input type="text" name="system.shockGauge.{{shockMeterName}}.ongoingMadness" value="{{shockMeterData.ongoingMadness}}" data-dtype="String">
                     </div>
                 </div>{{/each}}
@@ -162,7 +162,7 @@
             <div class="lower-content__section lower-content__section--full-width charges">
                 <h2>{{localize 'UA.Charges'}}:</h2>
                 <div class="charges__wrapper">
-                    {{#each actor.system.charges as |chargeValue chargeName|}}<span class="label label--wrap">{{localize (concat 'UA.' (capitalize chargeName) 'Charges')}}:</span>
+                    {{#each actor.system.charges as |chargeValue chargeName|}}<span class="label">{{localize (concat 'UA.' (capitalize chargeName) 'Charges')}}:</span>
                     <input type="number" name="system.charges.{{chargeName}}" value="{{chargeValue}}" min="0" data-dtype="Number">{{/each}}
                 </div>
             </div>

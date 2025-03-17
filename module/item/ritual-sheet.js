@@ -18,7 +18,6 @@ export default class UARitualSheet extends UABaseItemSheet
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
-                "unknownarmies",
                 "sheet",
                 "ritual"
             ],

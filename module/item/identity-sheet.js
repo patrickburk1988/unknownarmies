@@ -146,7 +146,6 @@ export default class UAIdentitySheet extends UABaseItemSheet
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
-                "unknownarmies",
                 "sheet",
                 "identity"
             ],

@@ -5,6 +5,7 @@
 - Changed milestone button text.
 - Refactored item list layout.
 - Refactored character sheets to automatically uncheck used passions when burned out.
+- Refactored roll button in chat sidebar to no longer get re-bound upon switching tabs.
 
 ## v1.3.5
 

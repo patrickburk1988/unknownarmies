@@ -5,7 +5,6 @@ export default class UAItemSheet extends UABaseItemSheet
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
-                "unknownarmies",
                 "sheet",
                 "item"
             ],

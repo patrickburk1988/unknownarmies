@@ -3,15 +3,15 @@ export default class UAUtils
     static get theme() {
         switch (game.settings.get("unknownarmies", "Sheet&UITheme")) {
             case 1:
-                return "theme--blue";
+                return "color-theme color-theme--blue";
             case 2:
-                return "theme--green";
+                return "color-theme color-theme--green";
             case 3:
-                return "theme--grey";
+                return "color-theme color-theme--grey";
             case 4:
-                return "theme--purple";
+                return "color-theme color-theme--purple";
             case 5:
-                return "theme--red";
+                return "color-theme color-theme--red";
             default:
                 return "";
         }

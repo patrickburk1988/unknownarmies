@@ -134,21 +134,21 @@ export default class UABaseActorSheet extends ActorSheet
         const result = parseInt(roll.result);
         const target = (parseInt(dataset.rollTarget) || 0) + parseInt(shift) || 0;
         const type = dataset.rollType;
-        const isObjective = type != "objective";
+        const isNotObjective = type != "objective";
         let outcome = "";
         switch (result) {
             case 1:
-                if (isObjective) {
+                if (isNotObjective) {
                     outcome = "Crit";
                     break;
                 }
             case 100:
-                if (isObjective) {
+                if (isNotObjective) {
                     outcome = "Fumble";
                     break;
                 }
             default:
-                if (isObjective && result > 10) {
+                if (isNotObjective && result > 10) {
                     const tensDigit = Math.floor(result / 10);
                     if (tensDigit == result - tensDigit * 10) {
                         outcome = "Matched";
@@ -160,7 +160,7 @@ export default class UABaseActorSheet extends ActorSheet
         let content = dataset.rollContentHeader !== undefined ? `<div>${dataset.rollContentHeader}</div>` : "";
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;
-        content += `        <h4 class="dice-total">${type != "objective" ? result : "+" + result + "%"}${target ? "" : ` <span class="vs">` + game.i18n.localize("UA.Vs") + `</span> ` + target}</h4>`;
+        content += `        <h4 class="dice-total">${isNotObjective ? result : "+" + result + "%"}${target ? "" : ` <span class="vs">` + game.i18n.localize("UA.Vs") + `</span> ` + target}</h4>`;
         content += `        <div class="dice-tooltip">`;
         content += `            <section class="tooltip-part">`;
         content += `                <div class="dice">`;

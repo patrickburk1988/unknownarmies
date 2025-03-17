@@ -5,7 +5,6 @@ export default class UAMilestoneSheet extends UABaseItemSheet
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
-                "unknownarmies",
                 "sheet",
                 "milestone"
             ],
