@@ -1,14 +1,50 @@
 <form class="main-form {{cssClass}}">
     <div class="upper-content">
-        <div class="upper-content__section">
-            <input type="text" name="name" value="{{item.name}}" data-dtype="String">
-            <span class="sign">+</span>
-            <input type="number" name="system.percentage" value="{{item.system.percentage}}" min="0" max="100" data-dtype="Number">
-            <span class="percentage">%</span>
+        <div class="portrait">
+            <img class="portrait__image" data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
+            <button data-action="show-image"><i class="fas fa-image"></i></button>
         </div>
-        <div class="upper-content__section">
+        <div class="upper-content__section name-percentage">
+            <span class="label label--tall">{{localize 'UA.Name'}}:</span>
+            <input type="text" class="name" name="name" value="{{item.name}}" data-dtype="String">
+            <span class="label label--large">+</span>
+            <input type="number" class="percentage" name="system.percentage" value="{{item.system.percentage}}" min="0" max="100" data-dtype="Number">
+            <span class="label label--large">%</span>
+        </div>
+        <div class="upper-content__section buttons">
             <button data-action="roll" data-roll-formula="1d10+5" data-roll-label="{{localize 'UA.Milestone'}} ({{item.name}})">{{localize 'UA.PettyMilestone'}}</button>
             <button data-action="roll" data-roll-formula="2d10+10" data-roll-label="{{localize 'UA.Milestone'}} ({{item.name}})">{{localize 'UA.IntenseMilestone'}}</button>
+        </div>
+    </div>
+    <nav class="tab-buttons">
+        <button data-tab="main">{{localize 'UA.Main'}}</button>
+        <button data-tab="notes">{{localize 'UA.Notes'}}</button>
+        <button data-tab="options">{{localize 'UA.Options'}}</button>
+    </nav>
+    <div class="tab-panels">
+        <div class="tab lower-content" data-tab="main">
+            <h2>{{localize 'UA.Description'}}:</h2>{{!-- //FIX --}}
+            {{editor enrichedDescription target="system.description" engine="prosemirror" button=true class="editor-content--extra-small"}}
+        </div>
+        <div class="tab lower-content" data-tab="notes">
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.PublicNotes'}}:</h2>
+                {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true class="editor-content--extra-small"}}
+            </div>
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.PrivateNotes'}}:</h2>
+                {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true class="editor-content--extra-small"}}
+            </div>
+        </div>
+        <div class="tab lower-content" data-tab="options">
+            <div class="lower-content__section options">
+                <h2>{{localize 'UA.GeneralOptions'}}:</h2>
+                <p style="text-align: center">Coming soon.</p>{{!-- //FIX --}}
+            </div>{{#if (isGM)}}
+            <div class="lower-content__section options">
+                <h2>{{localize 'UA.GMOptions'}}:</h2>
+                <p style="text-align: center">Coming soon.</p>{{!-- //FIX --}}
+            </div>{{/if}}
         </div>
     </div>
 </form>

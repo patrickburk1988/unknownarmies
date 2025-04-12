@@ -1,7 +1,8 @@
 ## v1.3.6
 
-- Added an options tab to actor/item sheets. Actual functionality coming soon!
-- Added a setting for identity button style.
+- Added options tab to actor/item sheets. Actual functionality coming soon!
+- Added tabs to milestone sheet.
+- Added setting for identity button style.
 - Tightened up artifact sheet logic.
 - Changed milestone button text.
 - Refactored item list layout.
@@ -19,8 +20,8 @@
 ## v1.3.3
 
 - Tweaked README.
-- Organized manifest and replaced outdated `gridUnits`.
-- Moved option maps from `utils.js` to their respective sheets.
+- Organized manifest and replaced outdated grid units.
+- Moved option maps to their respective sheets.
 - Removed wound threshold maximum.
 - Minor JavaScript and Handlebars tweaks.
 
@@ -34,8 +35,8 @@
 - Added setting for sheet/UI theme.
 - Corrected default for "Identities: Select Feature When Rolling" setting.
 - Improved dialog styles.
-- Replaced mergeObject with foundry.utils.mergeObject for future compatibility.
-- Replaced {{#select}} with {{selectOptions}} for future compatibility.
+- Replaced deprecated API function for future compatibility.
+- Replaced deprecated Handlebars helper for future compatibility.
 
 ## v1.3.0
 
@@ -78,8 +79,8 @@
 
 ## v1.2.1
 
-- Moved common functions from actor sheets to `base-actor-sheet.js`.
-- Moved common functions from item sheets to `base-item-sheet.js`.
+- Moved common functions from actor sheets to base actor sheet.
+- Moved common functions from item sheets to base item sheet.
 - Added "post item to chat" buttons to character/cabal sheets.
 - Added effect tooltip to items in character/cabal sheets.
 
@@ -114,14 +115,14 @@
 - Added Russian localization (many thanks to alxnsk).
 - Tweaked some localization strings.
 - Fixed bug that occurred when resetting failed shock meter notches?
-- Added a button to roll for identity improvement.
-- Standardized the chat message when improving identities and objectives.
+- Added button to roll for identity improvement.
+- Standardized chat message when improving identities and objectives.
 
 ## v1.1.3
 
 - Aligned form elements with actor/item name input.
-- Added an option to hide artifact charges from players.
-- Add an items tab to the cabal sheet.
+- Added option to hide artifact charges from players.
+- Add items tab to the cabal sheet.
 
 ## v1.1.2
 
@@ -131,17 +132,17 @@
 ## v1.1.1
 
 - Fixed issue with milestones updating.
-- Hid identities from the document creation dialog.
+- Hid identities from document creation dialog.
 
 ## v1.1.0
 
 - Corrected misspellings.
-- Added objectives and milestones to the cabal sheet.
+- Added objectives and milestones to cabal sheet.
 
 ## v1.0.6
 
 - Moved text indent to paragraphs only.
-- Added a "show image" button to actor and item sheets.
+- Added "show image" button to actor and item sheets.
 - Corrected thumbnail object-fit.
 
 ## v1.0.5
@@ -163,7 +164,7 @@
 ## v1.0.1
 
 - Added cover photo for The Forge.
-- Moved character statuses to the top of the sheet.
+- Moved character statuses to top of the sheet.
 
 ## v1.0.0
 

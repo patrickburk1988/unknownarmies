@@ -8,7 +8,7 @@ export default class UAMilestoneSheet extends UABaseItemSheet
                 "sheet",
                 "milestone"
             ],
-            height: 123,                                                 // TODO
+            height: 650,                                                 // TODO Was 123
             width: 800                                                   // TODO
         });
     }
@@ -18,12 +18,21 @@ export default class UAMilestoneSheet extends UABaseItemSheet
         html.find("[data-action='roll']").on("click", this._onRoll.bind(this));
     }
 
+    async getData (options) {
+        const data = await super.getData(options);
+        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description, {
+            async: true
+        });
+        return data;
+    }
+
     async _onRoll (event) {
         event.preventDefault();
         const dataset = event.currentTarget.dataset;
         const formula = dataset.rollFormula;
         const roll = await new Roll(formula).evaluate();
         const total = parseInt(roll.total);
+        // TODO Return early if there is no actor owning it.
         const oldObjectivePercentage = this.actor.system.objective.percentage;
         await this.item.update({
             "system.percentage": total
