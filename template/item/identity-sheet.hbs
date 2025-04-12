@@ -1,18 +1,18 @@
-<form class="main-form {{cssClass}} {{lang}}">
+<form class="main-form {{cssClass}}">
     <div class="upper-content">
         <div class="portrait">
-            <img data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
+            <img class="portrait__image" data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
             <button data-action="show-image"><i class="fas fa-image"></i></button>
         </div>
         <div class="upper-content__section">
-            <span class="label">{{localize 'UA.Name'}}:</span>
-            <input type="text" name="name" value="{{item.name}}" data-dtype="String">
-            <input type="number" name="system.percentage" value="{{item.system.percentage}}" min="0" max="100" data-dtype="Number">
-            <span class="percentage">%</span>
+            <span class="label label--tall">{{localize 'UA.Name'}}:</span>
+            <input type="text" class="name" name="name" value="{{item.name}}" data-dtype="String">
+            <input type="number" class="percentage" name="system.percentage" value="{{item.system.percentage}}" min="0" max="100" data-dtype="Number">
+            <span class="label label--large">%</span>
             <span class="label">{{localize 'UA.Type'}}:</span>
             <select name="system.type">{{selectOptions optionsType selected=item.system.type localize=true}}</select>
             <span class="label">{{localize 'UA.Obsession'}}:</span>
-            <input type="checkbox" name="system.isObsession" data-dtype="Boolean" {{checked item.system.isObsession}}>
+            <input type="checkbox" class="obsession-checkbox" name="system.isObsession" data-dtype="Boolean" {{checked item.system.isObsession}}>
             <span class="label">{{localize 'UA.Experience'}}:</span>
             <input type="checkbox" name="system.hasExperience" data-dtype="Boolean" {{checked item.system.hasExperience}}>
             <button data-action="improve" data-roll-label="{{localize (concat 'UA.' item.system.type 'Identity')}} ({{item.name}})" {{disabled (not item.system.hasExperience)}}>{{localize 'UA.Improve'}}</button>
@@ -21,6 +21,7 @@
     <nav class="tab-buttons">
         <button data-tab="main">{{localize 'UA.Main'}}</button>
         <button data-tab="notes">{{localize 'UA.Notes'}}</button>
+        <button data-tab="options">{{localize 'UA.Options'}}</button>
     </nav>
     <div class="tab-panels">
         <div class="tab lower-content {{#if (not item.system.type)}}lower-content--details-only{{/if}}" data-tab="main">{{#if item.system.type}}
@@ -79,6 +80,16 @@
                 <h2>{{localize 'UA.PrivateNotes'}}:</h2>
                 {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true class="editor-content--medium"}}
             </div>
+        </div>
+        <div class="tab lower-content" data-tab="options">
+            <div class="lower-content__section options">
+                <h2>{{localize 'UA.GeneralOptions'}}:</h2>
+                <p style="text-align: center">Coming soon.</p>{{!-- //FIX --}}
+            </div>{{#if (isGM)}}
+            <div class="lower-content__section options">
+                <h2>{{localize 'UA.GMOptions'}}:</h2>
+                <p style="text-align: center">Coming soon.</p>{{!-- //FIX --}}
+            </div>{{/if}}
         </div>
     </div>
 </form>

@@ -1,5 +1,6 @@
 ## v1.3.6
 
+- Added an options tab to actor/item sheets. Actual functionality coming soon!
 - Added a setting for identity button style.
 - Tightened up artifact sheet logic.
 - Changed milestone button text.
