@@ -1,7 +1,7 @@
 <form class="main-form {{cssClass}}">
     <div class="upper-content">
         <div class="portrait">
-            <img class="portrait__image" data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
+            <img data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
             <button data-action="show-image"><i class="fas fa-image"></i></button>
         </div>
         <div class="upper-content__section">
@@ -25,46 +25,44 @@
     </nav>
     <div class="tab-panels">
         <div class="tab lower-content {{#if (not item.system.type)}}lower-content--details-only{{/if}}" data-tab="main">{{#if item.system.type}}
-            <div class="lower-content__section">
-                <div class="stats-features">{{#if (equals item.system.type 'Mundane')}}
-                    <span class="label">{{localize 'UA.OfCourseICan'}}:</span>
-                    {{editor enrichedOfCourseICan target="system.mundane.ofCourseICan" engine="prosemirror" button=true}}
-                    <span class="label">{{localize 'UA.SubstitutesFor'}}:</span>
-                    <select name="system.mundane.substitutesFor">{{selectOptions optionsSubstitutesFor selected=item.system.mundane.substitutesFor localize=true}}</select>
-                    <span class="stats-features__details">{{#if item.system.mundane.substitutesFor}}{{localize 'UA.SubstitutesForAbility_Details'}}{{/if}}</span>{{/if}}{{#if (equals item.system.type 'Supernatural')}}
-                    <span class="label">{{localize 'UA.SupernaturalAbility'}}:</span>
-                    <select name="system.supernatural.ability">{{selectOptions optionsSupernaturalAbility selected=item.system.supernatural.ability localize=true}}</select>
-                    <span class="stats-features__details">{{#if item.system.supernatural.ability}}{{#if (includes item.system.supernatural.ability 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Harm')}}{{localize 'UA.Harm_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Information')}}{{localize 'UA.Information_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Protection')}}{{localize 'UA.Protection_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{else}}{{localize (concat 'UA.' item.system.supernatural.ability '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/if}}{{#if (equals item.system.type 'Avatar')}}
-                    <span class="label">{{localize 'UA.Attributes'}}:</span>
-                    {{editor enrichedAttributes target="system.avatar.attributes" engine="prosemirror" button=true}}
-                    <span class="label">{{localize 'UA.Symbols'}}:</span>
-                    {{editor enrichedSymbols target="system.avatar.symbols" engine="prosemirror" button=true}}
-                    <span class="label">{{localize 'UA.Taboos'}}:</span>
-                    {{editor enrichedAvatarTaboos target="system.avatar.taboos" engine="prosemirror" button=true}}{{#if (exceedsOrEquals item.system.percentage 1)}}
-                    <span class="label">{{localize 'UA.Channel1-50%'}}:</span>
-                    {{editor enrichedChannel1-50 target="system.avatar.channels.1-50" engine="prosemirror" button=true}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 51)}}
-                    <span class="label">{{localize 'UA.Channel51-70%'}}:</span>
-                    {{editor enrichedChannel51-70 target="system.avatar.channels.51-70" engine="prosemirror" button=true}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 71)}}
-                    <span class="label">{{localize 'UA.Channel71-90%'}}:</span>
-                    {{editor enrichedChannel71-90 target="system.avatar.channels.71-90" engine="prosemirror" button=true}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 91)}}
-                    <span class="label">{{localize 'UA.Channel91-98%'}}:</span>
-                    {{editor enrichedChannel91-98 target="system.avatar.channels.91-98" engine="prosemirror" button=true}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 99)}}
-                    <span class="label">{{localize 'UA.Channel99%'}}:</span>
-                    {{editor enrichedChannel99 target="system.avatar.channels.99-" engine="prosemirror" button=true}}{{/if}}{{/if}}{{#if (equals item.system.type 'Adept')}}
-                    <span class="label">{{localize 'UA.Domain'}}:</span>
-                    {{editor enrichedDomain target="system.adept.domain" engine="prosemirror" button=true}}
-                    <span class="label">{{localize 'UA.Taboos'}}:</span>
-                    {{editor enrichedAdeptTaboos target="system.adept.taboos" engine="prosemirror" button=true}}
-                    <span class="label">{{localize 'UA.GenerateMinorCharge'}}:</span>
-                    {{editor enrichedGenerateMinorCharge target="system.adept.generateCharge.minor" engine="prosemirror" button=true}}
-                    <span class="label">{{localize 'UA.GenerateSignificantCharge'}}:</span>
-                    {{editor enrichedGenerateSignificantCharge target="system.adept.generateCharge.significant" engine="prosemirror" button=true}}
-                    <span class="label">{{localize 'UA.GenerateMajorCharge'}}:</span>
-                    {{editor enrichedGenerateMajorCharge target="system.adept.generateCharge.major" engine="prosemirror" button=true}}{{/if}}
-                    {{#each item.system.features as |featureValue featureName|}}<span class="label">{{localize 'UA.Feature'}}:</span>
-                    <select name="system.features.{{featureName}}">{{#if (equals ../item.system.type 'Mundane')}}{{selectOptions ../optionsFeatures selected=featureValue localize=true}}{{else}}{{selectOptions ../optionsFeaturesNotMundane selected=featureValue localize=true}}{{/if}}</select>
-                    <span class="stats-features__details">{{#if featureValue}}{{#if (includes featureValue 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes featureValue 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes featureValue 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes featureValue 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes featureValue 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{localize (concat 'UA.' (replaceAll featureValue ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/each}}
-                </div>
+            <div class="lower-content__section stats-features">{{#if (equals item.system.type 'Mundane')}}
+                <span class="label">{{localize 'UA.OfCourseICan'}}:</span>
+                {{editor enrichedOfCourseICan target="system.mundane.ofCourseICan" engine="prosemirror" button=true}}
+                <span class="label">{{localize 'UA.SubstitutesFor'}}:</span>
+                <select name="system.mundane.substitutesFor">{{selectOptions optionsSubstitutesFor selected=item.system.mundane.substitutesFor localize=true}}</select>
+                <span class="stats-features__details">{{#if item.system.mundane.substitutesFor}}{{localize 'UA.SubstitutesForAbility_Details'}}{{/if}}</span>{{/if}}{{#if (equals item.system.type 'Supernatural')}}
+                <span class="label">{{localize 'UA.SupernaturalAbility'}}:</span>
+                <select name="system.supernatural.ability">{{selectOptions optionsSupernaturalAbility selected=item.system.supernatural.ability localize=true}}</select>
+                <span class="stats-features__details">{{#if item.system.supernatural.ability}}{{#if (includes item.system.supernatural.ability 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Harm')}}{{localize 'UA.Harm_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Information')}}{{localize 'UA.Information_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Protection')}}{{localize 'UA.Protection_Details'}}{{else}}{{#if (includes item.system.supernatural.ability 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{else}}{{localize (concat 'UA.' item.system.supernatural.ability '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/if}}{{#if (equals item.system.type 'Avatar')}}
+                <span class="label">{{localize 'UA.Attributes'}}:</span>
+                {{editor enrichedAttributes target="system.avatar.attributes" engine="prosemirror" button=true}}
+                <span class="label">{{localize 'UA.Symbols'}}:</span>
+                {{editor enrichedSymbols target="system.avatar.symbols" engine="prosemirror" button=true}}
+                <span class="label">{{localize 'UA.Taboos'}}:</span>
+                {{editor enrichedAvatarTaboos target="system.avatar.taboos" engine="prosemirror" button=true}}{{#if (exceedsOrEquals item.system.percentage 1)}}
+                <span class="label">{{localize 'UA.Channel1-50%'}}:</span>
+                {{editor enrichedChannel1-50 target="system.avatar.channels.1-50" engine="prosemirror" button=true}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 51)}}
+                <span class="label">{{localize 'UA.Channel51-70%'}}:</span>
+                {{editor enrichedChannel51-70 target="system.avatar.channels.51-70" engine="prosemirror" button=true}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 71)}}
+                <span class="label">{{localize 'UA.Channel71-90%'}}:</span>
+                {{editor enrichedChannel71-90 target="system.avatar.channels.71-90" engine="prosemirror" button=true}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 91)}}
+                <span class="label">{{localize 'UA.Channel91-98%'}}:</span>
+                {{editor enrichedChannel91-98 target="system.avatar.channels.91-98" engine="prosemirror" button=true}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 99)}}
+                <span class="label">{{localize 'UA.Channel99%'}}:</span>
+                {{editor enrichedChannel99 target="system.avatar.channels.99-" engine="prosemirror" button=true}}{{/if}}{{/if}}{{#if (equals item.system.type 'Adept')}}
+                <span class="label">{{localize 'UA.Domain'}}:</span>
+                {{editor enrichedDomain target="system.adept.domain" engine="prosemirror" button=true}}
+                <span class="label">{{localize 'UA.Taboos'}}:</span>
+                {{editor enrichedAdeptTaboos target="system.adept.taboos" engine="prosemirror" button=true}}
+                <span class="label">{{localize 'UA.GenerateMinorCharge'}}:</span>
+                {{editor enrichedGenerateMinorCharge target="system.adept.generateCharge.minor" engine="prosemirror" button=true}}
+                <span class="label">{{localize 'UA.GenerateSignificantCharge'}}:</span>
+                {{editor enrichedGenerateSignificantCharge target="system.adept.generateCharge.significant" engine="prosemirror" button=true}}
+                <span class="label">{{localize 'UA.GenerateMajorCharge'}}:</span>
+                {{editor enrichedGenerateMajorCharge target="system.adept.generateCharge.major" engine="prosemirror" button=true}}{{/if}}
+                {{#each item.system.features as |featureValue featureName|}}<span class="label">{{localize 'UA.Feature'}}:</span>
+                <select name="system.features.{{featureName}}">{{#if (equals ../item.system.type 'Mundane')}}{{selectOptions ../optionsFeatures selected=featureValue localize=true}}{{else}}{{selectOptions ../optionsFeaturesNotMundane selected=featureValue localize=true}}{{/if}}</select>
+                <span class="stats-features__details">{{#if featureValue}}{{#if (includes featureValue 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes featureValue 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes featureValue 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes featureValue 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes featureValue 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{localize (concat 'UA.' (replaceAll featureValue ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/each}}
             </div>{{/if}}
             <div class="lower-content__section">
                 <h2>{{localize 'UA.Details'}}:</h2>

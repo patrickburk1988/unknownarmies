@@ -1,7 +1,7 @@
 <form class="main-form {{cssClass}}">
     <div class="upper-content">
         <div class="portrait">
-            <img class="portrait__image" data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
+            <img data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
             <button data-action="show-image"><i class="fas fa-image"></i></button>
         </div>
         <div class="upper-content__section name-percentage">
@@ -23,8 +23,10 @@
     </nav>
     <div class="tab-panels">
         <div class="tab lower-content" data-tab="main">
-            <h2>{{localize 'UA.Description'}}:</h2>{{!-- //FIX --}}
-            {{editor enrichedDescription target="system.description" engine="prosemirror" button=true class="editor-content--extra-small"}}
+            <div class="lower-content__section">
+                <h2>{{localize 'UA.Description'}}:</h2>{{!-- //FIX --}}
+                {{editor enrichedDescription target="system.description" engine="prosemirror" button=true class="editor-content--extra-large"}}{{!-- //FIX --}}
+            </div>
         </div>
         <div class="tab lower-content" data-tab="notes">
             <div class="lower-content__section">

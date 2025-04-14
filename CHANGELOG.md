@@ -1,6 +1,7 @@
 ## v1.3.6
 
 - Added options tab to actor/item sheets. Actual functionality coming soon!
+- Added Spanish localization (many thanks to Ellyjah).
 - Added tabs to milestone sheet.
 - Added setting for identity button style.
 - Tightened up artifact sheet logic.

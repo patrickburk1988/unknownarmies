@@ -31,8 +31,13 @@
             "path": "language/en.json"
         },
         {
+            "lang": "es",
+            "name": "Español",
+            "path": "language/es.json"
+        },
+        {
             "lang": "ru",
-            "name": "Russian",
+            "name": "Русский",
             "path": "language/ru.json"
         }
     ],
