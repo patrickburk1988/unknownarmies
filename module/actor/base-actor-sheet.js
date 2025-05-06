@@ -1,4 +1,4 @@
-export default class UABaseActorSheet extends ActorSheet
+export default class UABaseActorSheet extends foundry.appv1.sheets.ActorSheet
 {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
@@ -10,7 +10,7 @@ export default class UABaseActorSheet extends ActorSheet
                 initial: "main",
                 navSelector: ".tab-buttons"
             }],
-            width: 800                                                   // TODO
+            width: 850                                                   // TODO
         });
     }
 

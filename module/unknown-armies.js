@@ -79,58 +79,58 @@ Hooks.once("init", function() {
     // Sheet Registration ------------------------------------------------------
     CONFIG.Actor.documentClass = UAActor;
     CONFIG.Item.documentClass = UAItem;
-    Actors.unregisterSheet("core", ActorSheet);
-    Items.unregisterSheet("core", ItemSheet);
-    Actors.registerSheet("unknownarmies", UACabalSheet, {
+    foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
+    foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
+    foundry.documents.collections.Actors.registerSheet("unknownarmies", UACabalSheet, {
         label: "UA.CabalSheet",
         makeDefault: true,
         types: [
             "cabal"
         ]
     });
-    Actors.registerSheet("unknownarmies", UACharacterSheet, {
+    foundry.documents.collections.Actors.registerSheet("unknownarmies", UACharacterSheet, {
         label: "UA.CharacterSheet",
         makeDefault: true,
         types: [
             "character"
         ]
     });
-    Items.registerSheet("unknownarmies", UAArtifactSheet, {
+    foundry.documents.collections.Items.registerSheet("unknownarmies", UAArtifactSheet, {
         label: "UA.ArtifactSheet",
         makeDefault: true,
         types: [
             "artifact"
         ]
     });
-    Items.registerSheet("unknownarmies", UAIdentitySheet, {
+    foundry.documents.collections.Items.registerSheet("unknownarmies", UAIdentitySheet, {
         label: "UA.IdentitySheet",
         makeDefault: true,
         types: [
             "identity"
         ]
     });
-    Items.registerSheet("unknownarmies", UAItemSheet, {
+    foundry.documents.collections.Items.registerSheet("unknownarmies", UAItemSheet, {
         label: "UA.ItemSheet",
         makeDefault: true,
         types: [
             "item"
         ]
     });
-    Items.registerSheet("unknownarmies", UAMilestoneSheet, {
+    foundry.documents.collections.Items.registerSheet("unknownarmies", UAMilestoneSheet, {
         label: "UA.MilestoneSheet",
         makeDefault: true,
         types: [
             "milestone"
         ]
     });
-    Items.registerSheet("unknownarmies", UARitualSheet, {
+    foundry.documents.collections.Items.registerSheet("unknownarmies", UARitualSheet, {
         label: "UA.RitualSheet",
         makeDefault: true,
         types: [
             "ritual"
         ]
     });
-    Items.registerSheet("unknownarmies", UASpellSheet, {
+    foundry.documents.collections.Items.registerSheet("unknownarmies", UASpellSheet, {
         label: "UA.SpellSheet",
         makeDefault: true,
         types: [

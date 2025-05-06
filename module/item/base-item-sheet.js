@@ -1,4 +1,4 @@
-export default class UABaseItemSheet extends ItemSheet
+export default class UABaseItemSheet extends foundry.appv1.sheets.ItemSheet
 {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
