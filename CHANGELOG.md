@@ -1,5 +1,6 @@
 ## v1.3.6
 
+- Updated for Foundry v13!
 - Added options tab to actor/item sheets. Actual functionality coming soon!
 - Added Spanish localization (many thanks to Ellyjah).
 - Added tabs to milestone sheet.

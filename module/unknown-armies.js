@@ -277,3 +277,15 @@ Hooks.on("renderDialog", (dialog, html, data) => {
         }
     });
 });
+
+Hooks.on("renderDialogV2", (dialog, html, data) => {
+    const hiddenTypes = [
+        "identity",
+        "milestone"
+    ];
+    Array.from($(html).find("select[name='type'] option")).forEach(i => {
+        if (hiddenTypes.includes(i.value)) {
+            i.remove();
+        }
+    });
+});

@@ -133,6 +133,7 @@
     "UA.Medical":                                 "Medical",
     "UA.Mentor":                                  "Mentor",
     "UA.Milestone":                               "Milestone",
+    "UA.Milestones":                              "Milestones",
     "UA.MilestoneSheet":                          "Milestone Sheet",
     "UA.Minor":                                   "Minor",
     "UA.MinorCharge_Abbreviation":                "Min.",
