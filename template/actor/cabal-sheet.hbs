@@ -49,7 +49,7 @@
                     <div class="items__list-wrapper">
                         <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'milestone')}}
                             <li class="item items__row" data-item-id="{{item._id}}">
-                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!"><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
+                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!" disabled><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
                                 <div class="items__column">
                                     <span>{{item.name}}</span>
                                 </div>
@@ -79,7 +79,7 @@
                     <div class="items__list-wrapper">
                         <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'artifact')}}
                             <li class="item items__row" data-item-id="{{item._id}}">
-                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!"><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
+                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!" disabled><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
                                 <div class="items__column" title="{{stripHTML item.system.effect}}">
                                     <span>{{item.name}}</span>
                                 </div>
@@ -106,7 +106,7 @@
                     <div class="items__list-wrapper">
                         <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'item')}}
                             <li class="item items__row" data-item-id="{{item._id}}">
-                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!"><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
+                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!" disabled><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
                                 <div class="items__column" title="{{stripHTML item.system.effect}}">
                                     <span>{{item.name}}</span>
                                 </div>

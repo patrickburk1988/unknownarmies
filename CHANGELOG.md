@@ -1,3 +1,6 @@
+## v1.3.7
+- Disabled item roll buttons until properly implemented.
+
 ## v1.3.6
 
 - Updated for Foundry v14!
