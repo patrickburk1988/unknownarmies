@@ -1,5 +1,6 @@
 ## v1.3.7
 - Disabled item roll buttons until properly implemented.
+- CSS quick fix.
 
 ## v1.3.6
 

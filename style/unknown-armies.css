@@ -250,7 +250,7 @@
 }
 .sheet .sheet__basics-section{
     grid-template-columns:auto 1fr;
-    place-items:center;
+    place-items:center stretch;
 }
 .sheet .sheet__basics-section.sheet__basics-section--name{
     grid-template-columns:var(--ua-SHEET-BASICS-SECTION-NAME-COLUMNS);
@@ -1128,7 +1128,7 @@
     filter:brightness(3);
 }
 
-.sheet .sheet__form.sheet__form--limited,.sheet.sheet--character .sheet__form.sheet__form--limited{
+.sheet .sheet__form.sheet__form--limited{
     grid-template-rows:auto auto 1fr;
 }
 .sheet .sheet__form.sheet__form--limited h2{
@@ -1158,4 +1158,21 @@
     background-color:transparent;
     border:0;
     border-radius:0;
+}
+
+.sheet .shock-meter__abilities{
+    grid-template-columns:auto min-content min-content auto;
+}
+.sheet .identity__details{
+    text-transform:none;
+}
+.sheet .sheet__form.sheet__form--limited{
+    grid-template-rows:min-content auto 1fr;
+}
+.sheet .number-input{
+    place-self:center;
+}
+.sheet .number-percentage.number-percentage--pseudo-number{
+    width:-moz-fit-content;
+    width:fit-content;
 }
