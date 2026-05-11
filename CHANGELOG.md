@@ -1,15 +1,23 @@
 ## v1.3.6
 
-- Updated for Foundry v13!
-- Added options tab to actor/item sheets. Actual functionality coming soon!
-- Added Spanish localization (many thanks to Ellyjah).
-- Added tabs to milestone sheet.
+- Updated for Foundry v14!
+- Converted template into DataModel.
+- Added migration script.
 - Added setting for identity button style.
-- Tightened up artifact sheet logic.
-- Changed milestone button text.
+- Complete CSS structural redesign/overhaul.
+- Added fancy animations.
+- Added backgrounds for transparent portraits.
+- Converted button-input pairs into capsule style.
+- Restructured shock gauge.
+- Refactored identity cards (toggleable expansion).
 - Refactored item list layout.
+- Added options tab to actor/item sheets. Actual functionality coming soon!
+- Refactored objective percentage calculations.
+- Tightened up sheet logic.
+- Added tabs to milestone sheet.
 - Refactored character sheets to automatically uncheck used passions when burned out.
 - Refactored roll button in chat sidebar to no longer get re-bound upon switching tabs.
+- Added Spanish localization (many thanks to Ellyjah).
 
 ## v1.3.5
 

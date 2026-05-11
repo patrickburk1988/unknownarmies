@@ -13,10 +13,24 @@
     "version": "1.3.6",
     "compatibility": {
         "minimum": 11,
-        "verified": "13.344"
+        "verified": "14.361"
     },
     "grid": {
         "units": "ft"
+    },
+    "documentTypes": {
+        "Actor": {
+            "character": {},
+            "cabal": {}
+        },
+        "Item": {
+            "artifact": {},
+            "identity": {},
+            "item": {},
+            "milestone": {},
+            "ritual": {},
+            "spell": {}
+        }
     },
     "esmodules": [
         "module/unknown-armies.js"

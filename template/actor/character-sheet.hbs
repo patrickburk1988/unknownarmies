@@ -1,318 +1,363 @@
-<form class="main-form {{cssClass}}">
+<form class="sheet__form {{cssClass}}">
+    {{!-- //FIX BELOW --}}
+    {{!-- <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; gap: 5px; margin: 15px;">
+        <button class="button">Open Cabal</button>
+        <button class="button button--enlarge"><i class="button__icon fas fa-image"></i></button>
+        <button class="button button--navigate">Main Tab</button>
+        <button class="button button--navigate active">Magick Tab</button>
+        <button class="button button--manage"><i class="fas fa-plus"></i></button>
+        <button class="button button--roll">Relationship</button>
+        <button class="button" disabled>Open Cabal</button>
+        <button class="button button--enlarge" disabled><i class="button__icon fas fa-image"></i></button>
+        <button class="button button--navigate" disabled>Main Tab</button>
+        <button class="button button--navigate active" disabled>Magick Tab</button>
+        <button class="button button--manage" disabled><i class="fas fa-plus"></i></button>
+        <button class="button button--roll" disabled>Relationship</button>
+    </div> --}}
+    {{!-- //FIX ABOVE --}}
     <div class="statuses">{{#if actor.system.isBurnedOut}}
-        <span class="statuses__status">{{localize 'UA.BurnedOut'}}</span>{{/if}}{{#if actor.system.wounds.severity}}
-        <span class="statuses__status">{{localize (concat 'UA.' (replace actor.system.wounds.severity ' ' ''))}}</span>{{/if}}
+        <span class="statuses__status">{{localize 'UA.BurnedOut'}}</span>{{/if}}{{#if actor.system.wounds.severity}}<span class="statuses__status">{{localize (concat 'UA.' (replace actor.system.wounds.severity ' ' ''))}}</span>{{/if}}
     </div>
-    <div class="upper-content">
-        <div class="portrait">
-            <img data-edit="img" src="{{actor.img}}" alt="{{actor.name}} portrait">
-            <button data-action="show-image"><i class="fas fa-image"></i></button>
-        </div>
-        <div class="upper-content__section name-concept-cabal">
-            <span class="label label--tall">{{localize 'UA.Name'}}:</span>
-            <input type="text" class="name" name="name" value="{{actor.name}}" data-dtype="String">
-            <span class="label">{{localize 'UA.Concept'}}:</span>
-            <input type="text" name="system.concept" value="{{actor.system.concept}}" data-dtype="String">
-            <span class="label">{{localize 'UA.Cabal'}}:</span>
-            <select class="cabal" name="system.cabal">{{selectOptions cabalOptions selected=actor.system.cabal}}</select>
-            <button data-action="open-cabal" {{disabled (not actor.system.cabal)}}>{{localize 'UA.OpenCabal'}}</button>
-        </div>
-        <div class="upper-content__section wounds {{#if (isGM)}}wounds--show-suffered{{/if}}">
-            <span class="label">{{localize 'UA.WoundThreshold'}}:</span>
-            <input type="number" class="wounds__threshold" name="system.wounds.threshold" value="{{actor.system.wounds.threshold}}" min="0" data-dtype="Number">{{#if (isGM)}}
-            <span class="label">{{localize 'UA.Wounds'}}:</span>
-            <input type="number" name="system.wounds.suffered" value="{{actor.system.wounds.suffered}}" min="0" max="{{actor.system.wounds.threshold}}" data-dtype="Number">{{/if}}
-        </div>
-    </div>
-    <nav class="tab-buttons">
-        <button data-tab="main">{{localize 'UA.Main'}}</button>
-        <button data-tab="identities">{{localize 'UA.Identities'}}</button>
-        <button data-tab="magick">{{localize 'UA.Magick'}}</button>
-        <button data-tab="items">{{localize 'UA.Items'}}</button>
-        <button data-tab="biography">{{localize 'UA.Biography'}}</button>
-        <button data-tab="notes">{{localize 'UA.Notes'}}</button>
-        <button data-tab="options">{{localize 'UA.Options'}}</button>
-    </nav>
-    <div class="tab-panels">
-        <div class="tab lower-content lower-content--2-columns" data-tab="main">
-            <div class="lower-content__section obsession-passions">
-                <h2 class="obsession-passions__heading">{{localize 'UA.Obsession&Passions'}}:</h2>
-                <span class="label">{{localize 'UA.Obsession'}}:</span>
-                <input type="text" class="obsession-passions__name" name="system.obsession" value="{{actor.system.obsession}}" data-dtype="String">
-                <span class="label">{{localize 'UA.Used'}}</span>
-                {{#each actor.system.passions as |passionData passionName|}}<span class="label">{{localize (concat 'UA.' (capitalize passionName))}}:</span>
-                <input type="text" class="obsession-passions__name" name="system.passions.{{passionName}}.name" value="{{passionData.name}}" data-dtype="String">
-                <input type="checkbox" class="obsession-passions__is-used" name="system.passions.{{passionName}}.isUsed" {{#if ../actor.system.isBurnedOut}}title="{{localize 'UA.BurnedOut'}}"{{/if}} data-dtype="Boolean" {{checked passionData.isUsed}} {{disabled ../actor.system.isBurnedOut}}>{{/each}}
-                <span class="label">{{localize 'UA.FearShockMeter'}}:</span>
-                <select name="system.passions.fear.shockMeter">{{selectOptions optionsFearShockMeter selected=actor.system.passions.fear.shockMeter localize=true}}</select>
-            </div>
-            <div class="lower-content__section relationships">
-                <h2 class="relationships__heading">{{localize 'UA.Relationships'}}:</h2>
-                {{#each actor.system.relationships as |relationshipData relationshipName|}}<button data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize relationshipName))}}{{#if relationshipData.name}} ({{relationshipData.name}}){{/if}}" data-roll-target="{{relationshipData.percentage}}">{{localize (concat 'UA.' (capitalize relationshipName))}}</button>
-                <input type="text" name="system.relationships.{{relationshipName}}.name" value="{{relationshipData.name}}" data-dtype="String">
-                <input type="number" name="system.relationships.{{relationshipName}}.percentage" value="{{relationshipData.percentage}}" min="0" max="100" step="5" data-dtype="Number">
-                <span>%</span>{{/each}}
-            </div>
-            <div class="lower-content__section lower-content__section--full-width">
-                <h2>{{localize 'UA.ShockGauge'}}:</h2>
-                {{#each actor.system.shockGauge as |shockMeterData shockMeterName|}}<div class="shock-meter">
-                    <div class="shock-meter__name-coerce-resist">
-                        <h3>{{localize (concat 'UA.' (capitalize shockMeterName))}}</h3>
-                        <p class="shock-meter__coerce-resist-with">{{localize (concat 'UA.CoerceWith' (capitalize (shockGaugeSchema shockMeterName 'coerceWith')))}}</p>
-                        <p class="shock-meter__coerce-resist-with">{{localize (concat 'UA.ResistWith' (capitalize (shockGaugeSchema shockMeterName 'resistWith')))}}</p>
+    <header class="sheet__header">
+        <div class="sheet__basics">
+            <figure class="portrait">
+                <img class="portrait__image" data-edit="img" src="{{actor.img}}" alt="{{actor.name}} portrait">
+                <button class="button button--enlarge portrait__show-image" data-action="show-image"><i class="button__icon fas fa-image"></i></button>
+            </figure>
+            <section class="sheet__basics-section sheet__basics-section--name">
+                <label class="label" for="{{actor.id}}-name">{{localize 'UA.Name'}}:</label>
+                <input type="text" id="{{actor.id}}-name" class="sheet__name text-input text-input--large" name="name" value="{{actor.name}}" data-dtype="String" required>
+                <label class="label" for="{{actor.id}}-concept">{{localize 'UA.Concept'}}:</label>
+                <input type="text" id="{{actor.id}}-concept" class="text-input" name="system.concept" value="{{actor.system.concept}}" data-dtype="String">
+                <span></span>
+                <label class="label" for="{{actor.id}}-cabal">{{localize 'UA.Cabal'}}:</label>
+                <div class="capsule capsule--cabal">
+                    <div class="capsule__cell select">
+                        <select id="{{actor.id}}-cabal" class="select__inner" name="system.cabal">{{selectOptions cabalOptions selected=actor.system.cabal blank=""}}</select>
                     </div>
-                    <button class="shock-meter__upbeat-ability" data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterName 'upbeatAbility')))}}" data-roll-target="{{#each ../actor.system.abilities as |abilityValue abilityName|}}{{#if (equals abilityName (shockGaugeSchema shockMeterName 'upbeatAbility'))}}{{abilityValue}}{{/if}}{{/each}}">{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterName 'upbeatAbility')))}}</button>
-                    <div class="shock-meter__hardened-notches">
-                        <span class="shock-meter__percentage">60%</span>
-                        <span class="shock-meter__percentage">55%</span>
-                        <span class="shock-meter__percentage">50%</span>
-                        <span class="shock-meter__percentage">45%</span>
-                        <span class="shock-meter__percentage">40%</span>
-                        <span class="shock-meter__percentage">35%</span>
-                        <span class="shock-meter__percentage">30%</span>
-                        <span class="shock-meter__percentage">25%</span>
-                        <span class="shock-meter__percentage">20%</span>
-                        <input type="radio" class="radio-line{{#if (exceeds shockMeterData.notches.hardened 1)}} checked{{/if}}" name="system.shockGauge.{{shockMeterName}}.notches.hardened" value="1" {{checked (equals shockMeterData.notches.hardened 1)}}>
-                        <input type="radio" {{#if (exceeds shockMeterData.notches.hardened 2)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.hardened" value="2" {{checked (equals shockMeterData.notches.hardened 2)}}>
-                        <input type="radio" {{#if (exceeds shockMeterData.notches.hardened 3)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.hardened" value="3" {{checked (equals shockMeterData.notches.hardened 3)}}>
-                        <input type="radio" {{#if (exceeds shockMeterData.notches.hardened 4)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.hardened" value="4" {{checked (equals shockMeterData.notches.hardened 4)}}>
-                        <input type="radio" {{#if (exceeds shockMeterData.notches.hardened 5)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.hardened" value="5" {{checked (equals shockMeterData.notches.hardened 5)}}>
-                        <input type="radio" {{#if (exceeds shockMeterData.notches.hardened 6)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.hardened" value="6" {{checked (equals shockMeterData.notches.hardened 6)}}>
-                        <input type="radio" {{#if (exceeds shockMeterData.notches.hardened 7)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.hardened" value="7" {{checked (equals shockMeterData.notches.hardened 7)}}>
-                        <input type="radio" {{#if (exceeds shockMeterData.notches.hardened 8)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.hardened" value="8" {{checked (equals shockMeterData.notches.hardened 8)}}>
-                        <input type="radio" name="system.shockGauge.{{shockMeterName}}.notches.hardened" value="9" {{checked (equals shockMeterData.notches.hardened 9)}}>
-                        <span class="shock-meter__percentage">20%</span>
-                        <span class="shock-meter__percentage">25%</span>
-                        <span class="shock-meter__percentage">30%</span>
-                        <span class="shock-meter__percentage">35%</span>
-                        <span class="shock-meter__percentage">40%</span>
-                        <span class="shock-meter__percentage">45%</span>
-                        <span class="shock-meter__percentage">50%</span>
-                        <span class="shock-meter__percentage">55%</span>
-                        <span class="shock-meter__percentage">60%</span>
-                    </div>
-                    <button class="shock-meter__downbeat-ability" data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterName 'downbeatAbility')))}}" data-roll-target="{{#each ../actor.system.abilities as |abilityValue abilityName|}}{{#if (equals abilityName (shockGaugeSchema shockMeterName 'downbeatAbility'))}}{{abilityValue}}{{/if}}{{/each}}">{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterName 'downbeatAbility')))}}</button>
-                    <div class="shock-meter__failed-notches">
-                        <a class="label label--short" data-action="reset-failed-notches" data-shock-meter="{{shockMeterName}}">{{localize 'UA.Failed'}}:</a>
-                        <input type="radio" class="radio-line{{#if (exceeds shockMeterData.notches.failed 1)}} checked{{/if}}" name="system.shockGauge.{{shockMeterName}}.notches.failed" value="1" {{checked (equals shockMeterData.notches.failed 1)}}>
-                        <input type="radio" {{#if (exceeds shockMeterData.notches.failed 2)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.failed" value="2" {{checked (equals shockMeterData.notches.failed 2)}}>
-                        <input type="radio" {{#if (exceeds shockMeterData.notches.failed 3)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.failed" value="3" {{checked (equals shockMeterData.notches.failed 3)}}>
-                        <input type="radio" {{#if (exceeds shockMeterData.notches.failed 4)}}class="checked"{{/if}} name="system.shockGauge.{{shockMeterName}}.notches.failed" value="4" {{checked (equals shockMeterData.notches.failed 4)}}>
-                        <input type="radio" name="system.shockGauge.{{shockMeterName}}.notches.failed" value="5" {{checked (equals shockMeterData.notches.failed 5)}}>
-                        <span class="label">{{localize 'UA.OngoingMadness'}}:</span>
-                        <input type="text" class="shock-meter__ongoing-madness" name="system.shockGauge.{{shockMeterName}}.ongoingMadness" value="{{shockMeterData.ongoingMadness}}" data-dtype="String">
-                    </div>
-                </div>{{/each}}
-            </div>
+                    <button class="button capsule__cell" data-action="open-cabal" {{disabled (not actor.system.cabal)}}>{{localize 'UA.OpenCabal'}}</button>
+                </div>
+            </section>
+            <section class="sheet__basics-section{{#if (not (isGM))}} sheet__basics-section--vertical{{/if}}">
+                <label class="label{{#if (not (isGM))}} label--centered{{/if}}" for="{{actor.id}}-wound-threshold">{{localize 'UA.WoundThreshold'}}:</label>
+                <input type="number" id="{{actor.id}}-wound-threshold" class="number-input{{#if (not (isGM))}} number-input--large{{/if}}" name="system.wounds.threshold" value="{{actor.system.wounds.threshold}}" min="0" data-dtype="Number">{{#if (isGM)}}
+                <label class="label" for="{{actor.id}}-wounds-suffered">{{localize 'UA.Wounds'}}:</label>
+                <input type="number" id="{{actor.id}}-wounds-suffered" class="number-input" name="system.wounds.suffered" value="{{actor.system.wounds.suffered}}" min="0" max="{{actor.system.wounds.threshold}}" data-dtype="Number">{{/if}}
+            </section>
         </div>
-        <div class="tab lower-content" data-tab="identities">
-            <div class="lower-content__section identities">
-                <h2>{{localize 'UA.Identities'}}:</h2>
-                <div class="item-list">
-                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'identity')}}
-                        <li class="item-list__item identity" data-item-id="{{item.id}}">
-                            <div class="identity__upper-content">{{#if item.system.type}}
-                                <span class="identity__type">{{localize (concat 'UA.' item.system.type 'Identity')}}</span>{{/if}}{{#if (or item.system.isObsession item.system.hasExperience)}}
-                                <div class="identity__obsession-experience">{{#if item.system.isObsession}}
-                                    <span>{{localize 'UA.Obsession'}}</span>{{/if}}{{#if item.system.hasExperience}}
-                                    <span>{{localize 'UA.Experience'}}</span>{{/if}}
+        <nav class="sheet__navigation">
+            <button class="button button--navigate" data-tab="main">{{localize 'UA.Main'}}</button>
+            <button class="button button--navigate" data-tab="identities">{{localize 'UA.Identities'}}</button>
+            <button class="button button--navigate" data-tab="magick">{{localize 'UA.Magick'}}</button>
+            <button class="button button--navigate" data-tab="items">{{localize 'UA.Items'}}</button>
+            <button class="button button--navigate" data-tab="biography">{{localize 'UA.Biography'}}</button>
+            <button class="button button--navigate" data-tab="notes">{{localize 'UA.Notes'}}</button>
+            <button class="button button--navigate" data-tab="options">{{localize 'UA.Options'}}</button>
+        </nav>
+    </header>
+    <div class="sheet__body">
+        <div class="tab tab--2-columns tab--short-first-row" data-tab="main">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Obsession&Passions'}}:</h2>
+                <div class="obsession-passions">
+                    <label class="label" for="{{actor.id}}-obsession">{{localize 'UA.Obsession'}}:</label>
+                    <input type="text" id="{{actor.id}}-obsession" class="text-input obsession-passions__name" name="system.obsession" value="{{actor.system.obsession}}" data-dtype="String">
+                    {{#each actor.system.passions as |passionData passionName|}}{{#if (equals passionName 'rage')}}
+                    <span></span>{{/if}}
+                    <label class="label" for="{{../actor.id}}-{{passionName}}">{{localize (concat 'UA.' (capitalize passionName))}}:</label>
+                    <input type="text" id="{{../actor.id}}-{{passionName}}" class="text-input obsession-passions__name" name="system.passions.{{passionName}}.name" value="{{passionData.name}}" data-dtype="String">
+                    <input type="checkbox" class="checkbox-input" name="system.passions.{{passionName}}.isUsed"{{#if ../actor.system.isBurnedOut}} title="{{localize 'UA.BurnedOut'}}"{{/if}} data-dtype="Boolean" {{checked passionData.isUsed}} {{disabled ../actor.system.isBurnedOut}}>{{/each}}
+                    <span></span>
+                    {{!-- <span></span> --}}
+                    <label class="label" for="{{actor.id}}-fear-shock-meter">{{localize 'UA.FearShockMeter'}}:</label>
+                    <div class="select">
+                        <select id="{{actor.id}}-fear-shock-meter" class="select__inner" name="system.passions.fear.shockMeter">{{selectOptions optionsFearShockMeter selected=actor.system.passions.fear.shockMeter localize=true blank=""}}</select>
+                    </div>
+                </div>
+            </section>
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Relationships'}}:</h2>
+                <div class="relationships">
+                    {{#each actor.system.relationships as |relationshipData relationshipName|}}<div class="capsule capsule--relationship">
+                        <button class="button button--roll capsule__cell" data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize relationshipName))}}{{#if relationshipData.name}} ({{relationshipData.name}}){{/if}}" data-roll-target="{{relationshipData.percentage}}">{{localize (concat 'UA.' (capitalize relationshipName))}}</button>
+                        <input type="text" class="capsule__cell text-input" name="system.relationships.{{relationshipName}}.name" value="{{relationshipData.name}}" data-dtype="String">
+                        <div class="capsule__cell number-percentage">
+                            <input type="number" class="capsule__cell number-input" name="system.relationships.{{relationshipName}}.percentage" value="{{relationshipData.percentage}}" min="0" max="100" step="5" data-dtype="Number">
+                            <span class="capsule__cell number-percentage__percentage">%</span>
+                        </div>
+                    </div>{{/each}}
+                </div>
+            </section>
+            <section class="tab__section tab__section--wide">
+                <h2 class="heading">{{localize 'UA.ShockGauge'}}:</h2>
+                <div class="shock-gauge">
+                    {{#each actor.system.shockGauge as |shockMeterData shockMeterName|}}<div class="shock-meter">
+                        <div class="shock-meter__section">
+                            <h3 class="heading">{{localize (concat 'UA.' (capitalize shockMeterName))}}</h3>
+                            <p class="shock-meter__coerce-resist"><i class="fas fa-sword shock-meter__icon"></i>{{localize (concat 'UA.CoerceWith' (capitalize (shockGaugeSchema shockMeterName 'coerceWith')))}}</p>
+                            <p class="shock-meter__coerce-resist"><i class="fas fa-shield shock-meter__icon"></i>{{localize (concat 'UA.ResistWith' (capitalize (shockGaugeSchema shockMeterName 'resistWith')))}}</p>
+                        </div>
+                        <div class="shock-meter__section">
+                            <fieldset class="shock-meter__notches shock-meter__notches--hardened">
+                                <legend class="shock-meter__legend">{{localize 'UA.HardenedNotches'}}:</legend>
+                                {{#for 9}}<input type="radio" class="radio-input{{#if (exceeds shockMeterData.notches.hardened this)}} radio-input--checked{{/if}}" name="system.shockGauge.{{shockMeterName}}.notches.hardened" value="{{this}}" aria-label="{{this}}" {{checked (equals shockMeterData.notches.hardened this)}}>{{/for}}
+                            </fieldset>
+                            <div class="shock-meter__abilities">
+                                <div class="capsule capsule--upbeat-ability">
+                                    <button class="button button--roll capsule__cell shock-meter__ability" data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterName 'upbeatAbility')))}}" data-roll-target="{{#each ../actor.system.abilities as |abilityValue abilityName|}}{{#if (equals abilityName (shockGaugeSchema shockMeterName 'upbeatAbility'))}}{{abilityValue}}{{/if}}{{/each}}">{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterName 'upbeatAbility')))}}</button>
+                                    <div class="capsule__cell number-percentage number-percentage--pseudo-number">
+                                        <span>{{#each ../actor.system.abilities as |abilityValue abilityName|}}{{#if (equals abilityName (shockGaugeSchema shockMeterName 'upbeatAbility'))}}{{abilityValue}}{{/if}}{{/each}}</span>
+                                        <span class="number-percentage__percentage">%</span>
+                                    </div>
+                                </div>
+                                <div class="capsule capsule--downbeat-ability">
+                                    <div class="capsule__cell number-percentage number-percentage--pseudo-number">
+                                        <span>{{#each ../actor.system.abilities as |abilityValue abilityName|}}{{#if (equals abilityName (shockGaugeSchema shockMeterName 'downbeatAbility'))}}{{abilityValue}}{{/if}}{{/each}}</span>
+                                        <span class="number-percentage__percentage">%</span>
+                                    </div>
+                                    <button class="button button--roll capsule__cell shock-meter__ability" data-action="roll" data-roll-label="{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterName 'downbeatAbility')))}}" data-roll-target="{{#each ../actor.system.abilities as |abilityValue abilityName|}}{{#if (equals abilityName (shockGaugeSchema shockMeterName 'downbeatAbility'))}}{{abilityValue}}{{/if}}{{/each}}">{{localize (concat 'UA.' (capitalize (shockGaugeSchema shockMeterName 'downbeatAbility')))}}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="shock-meter__section">
+                            <fieldset class="shock-meter__notches shock-meter__notches--failed">
+                                <legend class="shock-meter__legend">{{localize 'UA.FailedNotches'}}:{{#if (exceeds shockMeterData.notches.failed 0)}} <button class="button button--text shock-meter__reset-failed-notches" data-action="reset-failed-notches" data-shock-meter="{{shockMeterName}}">&circlearrowleft;</button>{{/if}}</legend>
+                                {{#for 5}}<input type="radio" class="radio-input{{#if (exceeds shockMeterData.notches.failed this)}} radio-input--checked{{/if}}" name="system.shockGauge.{{shockMeterName}}.notches.failed" value="{{this}}" aria-label="{{this}}" {{checked (equals shockMeterData.notches.failed this)}}>{{/for}}
+                            </fieldset>
+                            <div class="shock-meter__ongoing-madness">
+                                <label class="label" for="{{../actor.id}}-{{shockMeterName}}-madness">{{localize 'UA.Madness'}}:</label>
+                                <input type="text" id="{{../actor.id}}-{{shockMeterName}}-madness" class="text-input" name="system.shockGauge.{{shockMeterName}}.ongoingMadness" value="{{shockMeterData.ongoingMadness}}" data-dtype="String">
+                            </div>
+                        </div>
+                    </div>{{/each}}
+                </div>
+            </section>
+        </div>
+        <div class="tab" data-tab="identities">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Identities'}}:</h2>
+                <div class="items items--identities">
+                    <div class="items__list-wrapper">
+                        <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'identity')}}
+                            <li class="identity{{#if (equals (setting 'IdentitiesButtonStyle') 2)}} identity--die{{/if}} item item--card items__row" data-item-id="{{item._id}}">
+                                <div class="identity__header">{{#if item.system.type}}
+                                    <p class="identity__type">{{localize (concat 'UA.' item.system.type 'Identity')}}</p>{{/if}}{{#if (or item.system.isObsession item.system.hasExperience)}}
+                                    <div class="identity__obsession-experience">{{#if item.system.isObsession}}
+                                        <span class="identity__tag">{{localize 'UA.Obsession'}}</span>{{/if}}{{#if item.system.hasExperience}}<span class="identity__tag">{{localize 'UA.Experience'}}</span>{{/if}}
+                                    </div>{{/if}}
+                                    <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
+                                    <div class="capsule capsule--identity-name-{{#if (equals (setting 'IdentitiesButtonStyle') 1)}}button{{else}}text{{/if}}">
+                                        <button class="button button--roll capsule__cell item__button item__button--roll{{#if (equals (setting 'IdentitiesButtonStyle') 2)}} item__button--square{{/if}}" data-action="{{#if (equals (setting 'IdentitiesSelectFeatureWhenRolling') 2)}}select-identity-feature{{else}}roll{{/if}}" data-roll-label="{{item.name}}{{#if item.system.type}} ({{localize (concat 'UA.' item.system.type 'Identity')}}){{/if}}" data-roll-target="{{item.system.percentage}}">{{#if (equals (setting 'IdentitiesButtonStyle') 1)}}{{item.name}}{{else}}<i class="button__icon fas fa-dice-d10"></i>{{/if}}</button>{{!-- //FIX --}}{{#if (equals (setting 'IdentitiesButtonStyle') 2)}}
+                                        <span class="capsule__cell identity__name">{{item.name}}</span>{{/if}}
+                                        <div class="capsule__cell number-percentage number-percentage--pseudo-number">
+                                            <span>{{item.system.percentage}}</span>
+                                            <span class="number-percentage__percentage">%</span>
+                                        </div>
+                                    </div>
+                                </div>{{#if (or item.system.mundane.ofCourseICan item.system.mundane.substitutesFor item.system.supernatural.ability item.system.avatar.attributes item.system.avatar.symbols item.system.avatar.taboos (and (exceedsOrEquals item.system.percentage 1) item.system.avatar.channels.1-50) (and (exceedsOrEquals item.system.percentage 51) item.system.avatar.channels.51-70) (and (exceedsOrEquals item.system.percentage 71) item.system.avatar.channels.71-90) (and (exceedsOrEquals item.system.percentage 91) item.system.avatar.channels.91-98) (and (exceedsOrEquals item.system.percentage 99) item.system.avatar.channels.99-) item.system.adept.domain item.system.adept.taboos item.system.adept.generateCharge.minor item.system.adept.generateCharge.significant item.system.adept.generateCharge.major item.system.features.one item.system.features.two item.system.details)}}
+                                <div class="identity__body pseudo-editors">{{#if (and (equals item.system.type 'Mundane') item.system.mundane.ofCourseICan)}}
+                                    <div class="pseudo-editors__label">
+                                        <span class="label">{{localize 'UA.OfCourseICan'}}:</span>
+                                    </div>
+                                    <div class="identity__details-wrapper pseudo-editors__editor">
+                                        <div class="identity__details">{{{item.system.mundane.ofCourseICan}}}</div>
+                                    </div>{{/if}}{{#if (equals item.system.type 'Avatar')}}{{#if item.system.avatar.attributes}}
+                                    <div class="pseudo-editors__label">
+                                        <span class="label">{{localize 'UA.Attributes'}}:</span>
+                                    </div>
+                                    <div class="identity__details-wrapper pseudo-editors__editor">
+                                        <div class="identity__details">{{{item.system.avatar.attributes}}}</div>
+                                    </div>{{/if}}{{#if item.system.avatar.symbols}}
+                                    <div class="pseudo-editors__label">
+                                        <span class="label">{{localize 'UA.Symbols'}}:</span>
+                                    </div>
+                                    <div class="identity__details-wrapper pseudo-editors__editor">
+                                        <div class="identity__details">{{{item.system.avatar.symbols}}}</div>
+                                    </div>{{/if}}{{#if item.system.avatar.taboos}}
+                                    <div class="pseudo-editors__label">
+                                        <span class="label">{{localize 'UA.Taboos'}}:</span>
+                                    </div>
+                                    <div class="identity__details-wrapper pseudo-editors__editor">
+                                        <div class="identity__details">{{{item.system.avatar.taboos}}}</div>
+                                    </div>{{/if}}{{/if}}{{#if (equals item.system.type 'Adept')}}{{#if item.system.adept.domain}}
+                                    <div class="pseudo-editors__label">
+                                        <span class="label">{{localize 'UA.Domain'}}:</span>
+                                    </div>
+                                    <div class="identity__details-wrapper pseudo-editors__editor">
+                                        <div class="identity__details">{{{item.system.adept.domain}}}</div>
+                                    </div>{{/if}}{{#if item.system.adept.taboos}}
+                                    <div class="pseudo-editors__label">
+                                        <span class="label">{{localize 'UA.Taboos'}}:</span>
+                                    </div>
+                                    <div class="identity__details-wrapper pseudo-editors__editor">
+                                        <div class="identity__details">{{{item.system.adept.taboos}}}</div>
+                                    </div>{{/if}}{{#if item.system.adept.generateCharge.minor}}
+                                    <div class="pseudo-editors__label">
+                                        <span class="label">{{localize 'UA.GenerateMinorCharge'}}:</span>
+                                    </div>
+                                    <div class="identity__details-wrapper pseudo-editors__editor">
+                                        <div class="identity__details">{{{item.system.adept.generateCharge.minor}}}</div>
+                                    </div>{{/if}}{{#if item.system.adept.generateCharge.significant}}
+                                    <div class="pseudo-editors__label">
+                                        <span class="label">{{localize 'UA.GenerateSignificantCharge'}}:</span>
+                                    </div>
+                                    <div class="identity__details-wrapper pseudo-editors__editor">
+                                        <div class="identity__details">{{{item.system.adept.generateCharge.significant}}}</div>
+                                    </div>{{/if}}{{#if item.system.adept.generateCharge.major}}
+                                    <div class="pseudo-editors__label">
+                                        <span class="label">{{localize 'UA.GenerateMajorCharge'}}:</span>
+                                    </div>
+                                    <div class="identity__details-wrapper pseudo-editors__editor">
+                                        <div class="identity__details">{{{item.system.adept.generateCharge.major}}}</div>
+                                    </div>{{/if}}{{/if}}
+                                    {{#each (sortFeatures item) as |feature|}}{{#if feature}}{{#if (equals (setting 'IdentitiesSelectFeatureWhenRolling') 3)}}<button class="button button--roll identity__roll-button" data-action="roll" data-roll-content-header="{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}" data-roll-label="{{item.name}}{{#if item.system.type}} ({{localize (concat 'UA.' item.system.type 'Identity')}}){{/if}}" data-roll-target="{{item.system.percentage}}">{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</button>{{else}}<span class="label">{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</span>{{/if}}
+                                    <div class="identity__details-wrapper pseudo-editors__editor">
+                                        <div class="identity__details">{{#if (includes feature 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes feature 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes feature 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes feature 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes feature 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{#if (includes feature 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{else}}{{#if (includes feature 'Harm')}}{{localize 'UA.Harm_Details'}}{{else}}{{#if (includes feature 'Information')}}{{localize 'UA.Information_Details'}}{{else}}{{#if (includes feature 'Protection')}}{{localize 'UA.Protection_Details'}}{{else}}{{#if (includes feature 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{else}}{{#if (includes feature '1-50')}}{{{item.system.avatar.channels.first}}}{{else}}{{#if (includes feature '51-70')}}{{{item.system.avatar.channels.second}}}{{else}}{{#if (includes feature '71-90')}}{{{item.system.avatar.channels.third}}}{{else}}{{#if (includes feature '91-98')}}{{{item.system.avatar.channels.fourth}}}{{else}}{{#if (includes feature '99')}}{{{item.system.avatar.channels.godwalker}}}{{else}}{{localize (concat 'UA.' (replaceAll feature ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</div>
+                                    </div>{{/if}}{{/each}}{{#if item.system.details}}
+                                    <div class="pseudo-editors__label">
+                                        <span class="label">{{localize 'UA.Details'}}:</span>
+                                    </div>
+                                    <div class="identity__details-wrapper pseudo-editors__editor">
+                                        <div class="identity__details">{{{item.system.details}}}</div>
+                                    </div>{{/if}}
                                 </div>{{/if}}
-                                <div class="identity__name-percentage">
-                                    <button data-action="{{#if (equals (setting 'IdentitiesSelectFeatureWhenRolling') 2)}}select-identity-feature{{else}}roll{{/if}}" data-roll-label="{{item.name}}{{#if item.system.type}} ({{localize (concat 'UA.' item.system.type 'Identity')}}){{/if}}" data-roll-target="{{item.system.percentage}}">{{#if (equals (setting 'IdentitiesButtonStyle') 1)}}{{item.name}}{{else}}<i class="fas fa-dice-d10"></i>{{/if}}</button>{{#if (equals (setting 'IdentitiesButtonStyle') 2)}}
-                                    <span>{{item.name}}</span>{{/if}}
-                                    <span>{{item.system.percentage}}%</span>
-                                </div>
-                                <div class="identity__edit-delete">
-                                    <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                    <button data-action="delete-item"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </div>{{#if (or item.system.mundane.ofCourseICan item.system.mundane.substitutesFor item.system.supernatural.ability item.system.avatar.attributes item.system.avatar.symbols item.system.avatar.taboos (and (exceedsOrEquals item.system.percentage 1) item.system.avatar.channels.1-50) (and (exceedsOrEquals item.system.percentage 51) item.system.avatar.channels.51-70) (and (exceedsOrEquals item.system.percentage 71) item.system.avatar.channels.71-90) (and (exceedsOrEquals item.system.percentage 91) item.system.avatar.channels.91-98) (and (exceedsOrEquals item.system.percentage 99) item.system.avatar.channels.99-) item.system.adept.domain item.system.adept.taboos item.system.adept.generateCharge.minor item.system.adept.generateCharge.significant item.system.adept.generateCharge.major item.system.features.one item.system.features.two item.system.details)}}
-                            <div class="identity__lower-content">{{#if (and (equals item.system.type 'Mundane') item.system.mundane.ofCourseICan)}}
-                                <span class="label">{{localize 'UA.OfCourseICan'}}:</span>
-                                <span>{{stripHTML item.system.mundane.ofCourseICan}}</span>{{/if}}{{#if (equals item.system.type 'Avatar')}}{{#if item.system.avatar.attributes}}
-                                <span class="label">{{localize 'UA.Attributes'}}:</span>
-                                <span>{{stripHTML item.system.avatar.attributes}}</span>{{/if}}{{#if item.system.avatar.symbols}}
-                                <span class="label">{{localize 'UA.Symbols'}}:</span>
-                                <span>{{stripHTML item.system.avatar.symbols}}</span>{{/if}}{{#if item.system.avatar.taboos}}
-                                <span class="label">{{localize 'UA.Taboos'}}:</span>
-                                <span>{{stripHTML item.system.avatar.taboos}}</span>{{/if}}{{/if}}{{#if (equals item.system.type 'Adept')}}{{#if item.system.adept.domain}}
-                                <span class="label">{{localize 'UA.Domain'}}:</span>
-                                <span>{{stripHTML item.system.adept.domain}}</span>{{/if}}{{#if item.system.adept.taboos}}
-                                <span class="label">{{localize 'UA.Taboos'}}:</span>
-                                <span>{{stripHTML item.system.adept.taboos}}</span>{{/if}}{{#if item.system.adept.generateCharge.minor}}
-                                <span class="label">{{localize 'UA.GenerateMinorCharge'}}:</span>
-                                <span>{{stripHTML item.system.adept.generateCharge.minor}}</span>{{/if}}{{#if item.system.adept.generateCharge.significant}}
-                                <span class="label">{{localize 'UA.GenerateSignificantCharge'}}:</span>
-                                <span>{{stripHTML item.system.adept.generateCharge.significant}}</span>{{/if}}{{#if item.system.adept.generateCharge.major}}
-                                <span class="label">{{localize 'UA.GenerateMajorCharge'}}:</span>
-                                <span>{{stripHTML item.system.adept.generateCharge.major}}</span>{{/if}}{{/if}}
-                                {{#each (sortFeatures item) as |feature|}}{{#if feature}}{{#if (equals (setting 'IdentitiesSelectFeatureWhenRolling') 3)}}<button data-action="roll" data-roll-content-header="{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}" data-roll-label="{{item.name}}{{#if item.system.type}} ({{localize (concat 'UA.' item.system.type 'Identity')}}){{/if}}" data-roll-target="{{item.system.percentage}}">{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</button>{{else}}<span class="label">{{localize (concat 'UA.' (replaceAll (replaceAll feature ' for ' 'For') ' ' ''))}}</span>{{/if}}
-                                <span>{{#if (includes feature 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes feature 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes feature 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes feature 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes feature 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{#if (includes feature 'Alter')}}{{localize 'UA.AlterPassion_Details'}}{{else}}{{#if (includes feature 'Harm')}}{{localize 'UA.Harm_Details'}}{{else}}{{#if (includes feature 'Information')}}{{localize 'UA.Information_Details'}}{{else}}{{#if (includes feature 'Protection')}}{{localize 'UA.Protection_Details'}}{{else}}{{#if (includes feature 'Terrorize')}}{{localize 'UA.TerrorizeMeter_Details'}}{{else}}{{#if (includes feature '1-50')}}{{stripHTML item.system.avatar.channels.1-50}}{{else}}{{#if (includes feature '51-70')}}{{stripHTML item.system.avatar.channels.51-70}}{{else}}{{#if (includes feature '71-90')}}{{stripHTML item.system.avatar.channels.71-90}}{{else}}{{#if (includes feature '91-98')}}{{stripHTML item.system.avatar.channels.91-98}}{{else}}{{#if (includes feature '99')}}{{stripHTML item.system.avatar.channels.99-}}{{else}}{{localize (concat 'UA.' (replaceAll feature ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/if}}{{/each}}{{#if item.system.details}}
-                                <span class="label">{{localize 'UA.Details'}}:</span>
-                                <span>{{stripHTML item.system.details}}</span>{{/if}}
-                            </div>{{/if}}
-                        </li>{{/if}}{{/each}}
-                    </ul>
-                    <div class="item-list__footer">
-                        <button data-action="create-item" data-item-type="identity"><i class="fas fa-plus"></i></button>
+                            </li>{{/if}}{{/each}}
+                        </ul>
+                    </div>
+                    <div class="items__row items__row--footer">
+                        <button class="button button--manage items__create-button items__create-button--footer" data-action="create-item" data-item-type="identity"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-        <div class="tab lower-content lower-content--2-columns" data-tab="magick">
-            <div class="lower-content__section lower-content__section--full-width charges">
-                <h2>{{localize 'UA.Charges'}}:</h2>
-                <div class="charges__box">
-                    {{#each actor.system.charges as |chargeValue chargeName|}}<span class="label label--tall">{{localize (concat 'UA.' (capitalize chargeName) 'Charges')}}:</span>
-                    <input type="number" class="charges__number" name="system.charges.{{chargeName}}" value="{{chargeValue}}" min="0" data-dtype="Number">{{/each}}
-                </div>
-            </div>
-            <div class="lower-content__section rituals">
-                <h2>{{localize 'UA.Rituals'}}:</h2>
-                <div class="item-list">
-                    <div class="item-list__header">
-                        <div class="item-list__column">
-                            <span>{{localize 'UA.Ritual'}}</span>
-                        </div>
-                        <div class="item-list__column">
-                            <span>{{localize 'UA.Cost'}}</span>
-                        </div>
-                        <button data-action="create-item" data-item-type="ritual"><i class="fas fa-plus"></i></button>
+        <div class="tab tab--2-columns tab--short-last-row" data-tab="magick">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Rituals'}}:</h2>
+                <div class="items items--rituals">
+                    <div class="items__row items__row--header">
+                        <span></span>
+                        <div class="items__column">{{localize 'UA.Ritual'}}</div>
+                        <div class="items__column">{{localize 'UA.Cost'}}</div>
+                        <button class="button button--manage items__create-button" data-action="create-item" data-item-type="ritual"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'ritual')}}
-                        <li class="item-list__item" data-item-id="{{item.id}}">
-                            <div class="item-list__column">
-                                <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>
-                            </div>
-                            <div class="item-list__column">
-                                <span>{{item.system.cost.amount}}{{#if item.system.cost.type}}{{localize (concat 'UA.' (replace item.system.cost.type ' ' '') '_Abbreviation')}}{{/if}}</span>
-                            </div>
-                            <div class="item-list__column">
-                                <button data-action="post-item"><i class="fas fa-message"></i></button>
-                                <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                <button data-action="delete-item"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </li>{{/if}}{{/each}}
-                    </ul>
-                </div>
-            </div>
-            <div class="lower-content__section spells">
-                <h2>{{localize 'UA.Spells'}}:</h2>
-                <div class="item-list">
-                    <div class="item-list__header">
-                        <div class="item-list__column">
-                            <span>{{localize 'UA.Spell'}}</span>
-                        </div>
-                        <div class="item-list__column">
-                            <span>{{localize 'UA.Cost'}}</span>
-                        </div>
-                        <button data-action="create-item" data-item-type="spell"><i class="fas fa-plus"></i></button>
+                    <div class="items__list-wrapper">
+                        <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'ritual')}}
+                            <li class="item items__row" data-item-id="{{item._id}}">
+                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!"><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
+                                <div class="items__column" title="{{stripHTML item.system.effect}}">{{item.name}}</div>
+                                <div class="items__column">{{item.system.cost.amount}}{{#if item.system.cost.type}} {{localize (concat 'UA.' (replace item.system.cost.type ' ' '') '_Abbreviation')}}{{/if}}</div>
+                                <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
+                            </li>{{/if}}{{/each}}
+                        </ul>
                     </div>
-                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'spell')}}
-                        <li class="item-list__item" data-item-id="{{item.id}}">
-                            <div class="item-list__column">
-                                <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>
-                            </div>
-                            <div class="item-list__column">
-                                <span>{{item.system.cost.amount}}{{#if item.system.cost.type}}{{localize (concat 'UA.' (replace item.system.cost.type ' ' '') '_Abbreviation')}}{{/if}}</span>
-                            </div>
-                            <div class="item-list__column">
-                                <button data-action="post-item"><i class="fas fa-message"></i></button>
-                                <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                <button data-action="delete-item"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </li>{{/if}}{{/each}}
-                    </ul>
                 </div>
-            </div>
-        </div>
-        <div class="tab lower-content lower-content--2-columns" data-tab="items">
-            <div class="lower-content__section artifacts">
-                <h2>{{localize 'UA.Artifacts'}}:</h2>
-                <div class="item-list">
-                    <div class="item-list__header">
-                        <div class="item-list__column">
-                            <span>{{localize 'UA.Artifact'}}</span>
-                        </div>
-                        <div class="item-list__column">
-                            <span>{{localize 'UA.Charges'}}</span>
-                        </div>
-                        <button data-action="create-item" data-item-type="artifact"><i class="fas fa-plus"></i></button>
+            </section>
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Spells'}}:</h2>
+                <div class="items items--spells">
+                    <div class="items__row items__row--header">
+                        <span></span>
+                        <div class="items__column">{{localize 'UA.Spell'}}</div>
+                        <div class="items__column">{{localize 'UA.Cost'}}</div>
+                        <button class="button button--manage items__create-button" data-action="create-item" data-item-type="spell"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'artifact')}}
-                        <li class="item-list__item" data-item-id="{{item.id}}">
-                            <div class="item-list__column">
-                                <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>
-                            </div>
-                            <div class="item-list__column">
-                                <span>{{#if item.system.charges.isHidden}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</span>
-                            </div>
-                            <div class="item-list__column">
-                                <button data-action="post-item"><i class="fas fa-message"></i></button>
-                                <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                <button data-action="delete-item"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </li>{{/if}}{{/each}}
-                    </ul>
-                </div>
-            </div>
-            <div class="lower-content__section items">
-                <h2>{{localize 'UA.OtherItems'}}:</h2>
-                <div class="item-list">
-                    <div class="item-list__header">
-                        <div class="item-list__column">
-                            <span>{{localize 'UA.Item'}}</span>
-                        </div>
-                        <button data-action="create-item" data-item-type="item"><i class="fas fa-plus"></i></button>
+                    <div class="items__list-wrapper">
+                        <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'spell')}}
+                            <li class="item items__row" data-item-id="{{item._id}}">
+                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!"><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
+                                <div class="items__column" title="{{stripHTML item.system.effect}}">{{item.name}}</div>
+                                <div class="items__column">{{item.system.cost.amount}}{{#if item.system.cost.type}} {{localize (concat 'UA.' (replace item.system.cost.type ' ' '') '_Abbreviation')}}{{/if}}</div>
+                                <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
+                            </li>{{/if}}{{/each}}
+                        </ul>
                     </div>
-                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'item')}}
-                        <li class="item-list__item" data-item-id="{{item.id}}">
-                            <div class="item-list__column">
-                                <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>
-                            </div>
-                            <div class="item-list__column">
-                                <button data-action="post-item"><i class="fas fa-message"></i></button>
-                                <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                <button data-action="delete-item"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </li>{{/if}}{{/each}}
-                    </ul>
                 </div>
-            </div>
+            </section>
+            <section class="tab__section tab__section--wide">
+                <h2 class="heading">{{localize 'UA.Charges'}}:</h2>
+                <div class="charges">
+                    {{#each actor.system.charges as |chargeValue chargeName|}}{{#if (or (equals chargeName 'significant') (equals chargeName 'major'))}}
+                    <span></span>{{/if}}
+                    <label class="label" for="{{../actor.id}}-{{chargeName}}-charges">{{localize (concat 'UA.' (capitalize chargeName) 'Charges')}}:</label>
+                    <input type="number" id="{{../actor.id}}-{{chargeName}}-charges" class="number-input number-input--large" name="system.charges.{{chargeName}}" value="{{chargeValue}}" min="0" data-dtype="Number">{{/each}}
+                </div>
+            </section>
         </div>
-        <div class="tab lower-content" data-tab="biography">
-            <div class="lower-content__section">
-                <h2>{{localize 'UA.Appearance'}}:</h2>
-                {{editor enrichedAppearance target="system.appearance" engine="prosemirror" button=true class="editor-content--small"}}
-            </div>
-            <div class="lower-content__section">
-                <h2>{{localize 'UA.Personality'}}:</h2>
-                {{editor enrichedPersonality target="system.personality" engine="prosemirror" button=true class="editor-content--small"}}
-            </div>
-            <div class="lower-content__section">
-                <h2>{{localize 'UA.Background'}}:</h2>
-                {{editor enrichedBackground target="system.background" engine="prosemirror" button=true class="editor-content--small"}}
-            </div>
+        <div class="tab tab--2-columns" data-tab="items">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Artifacts'}}:</h2>
+                <div class="items items--artifacts">
+                    <div class="items__row items__row--header">
+                        <span></span>
+                        <div class="items__column">{{localize 'UA.Artifact'}}</div>
+                        <div class="items__column">{{localize 'UA.Charges'}}</div>
+                        <button class="button button--manage items__create-button" data-action="create-item" data-item-type="artifact"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <div class="items__list-wrapper">
+                        <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'artifact')}}
+                            <li class="item items__row" data-item-id="{{item._id}}">
+                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!"><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
+                                <div class="items__column" title="{{stripHTML item.system.effect}}">{{item.name}}</div>
+                                <div class="items__column">{{#if item.system.charges.isHidden}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</div>
+                                <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
+                            </li>{{/if}}{{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </section>
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.OtherItems'}}:</h2>
+                <div class="items items--items">
+                    <div class="items__row items__row--header">
+                        <span></span>
+                        <div class="items__column">{{localize 'UA.Item'}}</div>
+                        <button class="button button--manage items__create-button" data-action="create-item" data-item-type="item"><i class="fas fa-plus"></i></button>
+                    </div>
+                    <div class="items__list-wrapper">
+                        <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'item')}}
+                            <li class="item items__row" data-item-id="{{item._id}}">
+                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!"><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
+                                <div class="items__column" title="{{stripHTML item.system.effect}}">{{item.name}}</div>
+                                <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
+                            </li>{{/if}}{{/each}}
+                        </ul>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="tab lower-content" data-tab="notes">
-            <div class="lower-content__section">
-                <h2>{{localize 'UA.PublicNotes'}}:</h2>
-                {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true class="editor-content--large"}}
-            </div>
-            <div class="lower-content__section">
-                <h2>{{localize 'UA.PrivateNotes'}}:</h2>
-                {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true class="editor-content--large"}}
-            </div>
+        <div class="tab" data-tab="biography">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Appearance'}}:</h2>
+                {{editor enrichedAppearance target="system.appearance" engine="prosemirror" button=true}}
+            </section>
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Personality'}}:</h2>
+                {{editor enrichedPersonality target="system.personality" engine="prosemirror" button=true}}
+            </section>
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Background'}}:</h2>
+                {{editor enrichedBackground target="system.background" engine="prosemirror" button=true}}
+            </section>
         </div>
-        <div class="tab lower-content" data-tab="options">
-            <div class="lower-content__section options">
-                <h2>{{localize 'UA.GeneralOptions'}}:</h2>
+        <div class="tab" data-tab="notes">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.PublicNotes'}}:</h2>
+                {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true}}
+            </section>
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.PrivateNotes'}}:</h2>
+                {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true}}
+            </section>
+        </div>
+        <div class="tab" data-tab="options">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.GeneralOptions'}}:</h2>
                 <p style="text-align: center">Coming soon.</p>{{!-- //FIX --}}
-            </div>{{#if (isGM)}}
-            <div class="lower-content__section options">
-                <h2>{{localize 'UA.GMOptions'}}:</h2>
+            </section>{{#if (isGM)}}
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.GMOptions'}}:</h2>
                 <p style="text-align: center">Coming soon.</p>{{!-- //FIX --}}
-            </div>{{/if}}
+            </section>{{/if}}
         </div>
     </div>
 </form>

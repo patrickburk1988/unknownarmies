@@ -1,19 +1,17 @@
-export default class UAUtils
+export class UAUtils
 {
-    static get theme() {
-        switch (game.settings.get("unknownarmies", "Sheet&UITheme")) {
-            case 1:
-                return "color-theme color-theme--blue";
-            case 2:
-                return "color-theme color-theme--green";
-            case 3:
-                return "color-theme color-theme--grey";
-            case 4:
-                return "color-theme color-theme--purple";
-            case 5:
-                return "color-theme color-theme--red";
-            default:
-                return "";
+    static #scrollbarWidth = null;
+
+    static get scrollbarWidth() {
+        // MAYBE Integrate into onRenderActorSheet()?
+        // Returns 0 for browsers with overlay scrollbars (e.g. macOS Safari/Chrome).
+        if (this.#scrollbarWidth === null) {
+            const el = document.createElement("div");
+            el.style.cssText = "overflow: scroll; position: absolute; visibility: hidden;"
+            document.body.appendChild(el);
+            this.#scrollbarWidth = el.offsetWidth - el.clientWidth;
+            el.remove();
         }
+        return this.#scrollbarWidth;
     }
 }

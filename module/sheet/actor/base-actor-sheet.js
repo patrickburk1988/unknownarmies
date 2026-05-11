@@ -1,53 +1,58 @@
-export default class UABaseActorSheet extends foundry.appv1.sheets.ActorSheet
+import { UABaseSheet } from "../base-sheet.js";
+
+export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorSheet)
 {
     static get defaultOptions() {
+        // height?: string | number | null; id?: string; left?: number | null; minimizable?: boolean; popOut?: boolean; resizable?: boolean; scale?: number | null; scrollY?: string[]; template?: string | null; title?: string; top?: number | null; width?: number | null; //TODO
+        // classes?: string[]; dragDrop: DragDropConfiguration[]; tabs?: TabsConfiguration[]; 
         return foundry.utils.mergeObject(super.defaultOptions, {
             dragDrop: [{
-                dragSelector: ".item-list__item"
+                dragSelector: ".item"
             }],
+            width: 780, //FORNOW
             tabs: [{
-                contentSelector: ".tab-panels",
+                contentSelector: ".sheet__body",
                 initial: "main",
-                navSelector: ".tab-buttons"
-            }],
-            width: 850                                                   // TODO
+                navSelector: ".sheet__navigation"
+            }]
         });
     }
 
     get template() {
-        return "systems/unknownarmies/template/actor/" + (game.user.isGM || !this.actor.limited ? "" : "limited-") + this.constructor.name.replaceAll(/UA|Sheet/g, "").toLowerCase() + "-sheet.hbs";
+        return `systems/unknownarmies/template/actor/${game.user.isGM || !this.actor.limited ? "" : "limited-"}${this.constructor.name.replace(/UA|Sheet/g, "").toLowerCase() + "-sheet.hbs"}`;
     }
 
     activateListeners (html) {
         super.activateListeners(html);
         html.find("[data-action='create-item']").on("click", this._onCreateItem.bind(this));
-        html.find("[data-action='delete-item']").on("click", this._onDeleteItem.bind(this));
-        html.find("[data-action='edit-item']").on("click", this._onEditItem.bind(this));
-        html.find("[data-action='post-item']").on("click", this._onPostItem.bind(this));
         html.find("[data-action='roll']").on("click contextmenu", this._onRoll.bind(this));  // HACK Fix contextmenu
-        html.find("input").on("keydown", this._onInputKeydown.bind(this));                   // TODO
-        let showImage = html.find("[data-action='show-image']");                             // TODO
-        showImage.on("click", this._onShowImage.bind(this));                                 // TODO
-        showImage.prop("disabled", false);                                                   // TODO
-        html.find(".editor-content--extra-small").parent().addClass("editor--extra-small");  // TODO
-        html.find(".editor-content--small").parent().addClass("editor--small");              // TODO
-        html.find(".editor-content--large").parent().addClass("editor--large");              // TODO
-    }
-
-    async getData (options) {
-        const data = await super.getData(options);
-        data.items = this.actor.items.contents.sort((a, b) => a.sort - b.sort);           // TODO
-        data.enrichedPublicNotes = await TextEditor.enrichHTML(this.object.system.notes.public, {
-            async: true
+        new ContextMenu(html, "[data-action='manage-item']", [ //MAYBE classes, condition, group //TODOfixcontextmenu
+            // classes?: string; group?: string; label: string; onClick?: ContextMenuCallback; visible?: boolean | ContextMenuCondition; //TODO // MAYBE Does name do anything? Is callback valid?
+            {
+                name: game.i18n.localize("UA.PostItem"),
+                icon: `<i class="fas fa-message"></i>`,
+                callback: element => this._onPostItem(element)
+            },
+            {
+                name: game.i18n.localize("UA.EditItem"), //MAYBE Move to top?
+                icon: `<i class="fas fa-edit"></i>`,
+                callback: element => this._onEditItem(element)
+            },
+            {
+                name: game.i18n.localize("UA.DeleteItem"),
+                icon: `<i class="fas fa-trash"></i>`,
+                callback: element => this._onDeleteItem(element)
+            }
+        ], {
+            // closeOnSelect?: boolean; jQuery?: boolean; onClose?: ContextMenuCallback; onOpen?: ContextMenuCallback; relative?: "target" | "cursor"; //TODO
+            eventName: "click", //MAYBE
+            fixed: true //MAYBE
         });
-        data.enrichedPrivateNotes = await TextEditor.enrichHTML(this.object.system.notes.private, {
-            async: true
-        });
-        return data;
     }
 
     setPosition (position) {
-        if ($(this.form).hasClass("main-form--limited")) {
+        // HACK Re-examine below
+        if ($(this.form).hasClass("sheet__form--limited")) {
             position.width = 650;
             position.height = 600;
         }
@@ -55,17 +60,21 @@ export default class UABaseActorSheet extends foundry.appv1.sheets.ActorSheet
     }
 
     _onCreateItem (event) {
-        const type = event.currentTarget.dataset.itemType
+        // HACK Re-examine below
+        const type = event.currentTarget.dataset.itemType;
+        const maxSort = this.actor.items.filter(item => item.type === type).reduce((max, item) => Math.max(max, item.sort ?? 0), 0);
         this.actor.createEmbeddedDocuments("Item", [{
             name: game.i18n.localize("UA.New" + type.charAt(0).toUpperCase() + type.slice(1)),
+            sort: maxSort + CONST.SORT_INTEGER_DENSITY,
             type: type
         }]).then(item => {
             item[0].sheet.render(true);
         });
     }
 
-    _onDeleteItem (event) {
-        const item = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));
+    _onDeleteItem (element) {
+        // HACK Re-examine below
+        const item = this.actor.items.get($(element).parents(".item").data("item-id")); //MAYBE element.dataset?.itemId
         Dialog.confirm({
             content: `<p>${game.i18n.format("UA.DeleteItem_Details", {
                 name: item.name
@@ -79,39 +88,36 @@ export default class UABaseActorSheet extends foundry.appv1.sheets.ActorSheet
         });
     }
 
-    _onEditItem (event) {
-        this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id")).sheet.render(true);                                              // TODO
+    _onEditItem (element) {
+        // HACK Re-evaluate below
+        this.actor.items.get($(element).parents(".item").data("item-id")).sheet.render(true); //MAYBE this.actor.items.get($(event.currentTarget).parents(".item").data("item-id")).sheet.render(true);
     }
 
-    _onInputKeydown (event) {                                            // TODO
-        if (event.keyCode == 13) {                                       // TODO
-            event.preventDefault();                                      // TODO
-            super.submit();                                              // TODO
-            $(event.currentTarget)[0].blur();                            // TODO
-        }                                                                // TODO
-    }                                                                    // TODO
-
-    _onPostItem (event) {
-        const item = this.actor.items.get($(event.currentTarget).parents(".item-list__item").data("item-id"));
+    _onPostItem (element) {
+        // HACK Re-evaluate below
+        const item = this.actor.items.get($(element).parents(".item").data("item-id"));
         let content = `<div>`;
         content += `    <h3>${item.name}</h3>`;
         switch (item.type) {
-            case "artifact":                                             // TODO description power charges
-                content += `    ${item.system.effect}`;                  // TODO
+            case "artifact": // TODO description power charges
+                content += `    ${item.system.effect}`;
                 break;
-            case "identity":                                             // TODO PERCENTAGE type isObsession hasExperience mundane supernatural avatar adept features details
+            case "identity": // TODO PERCENTAGE type isObsession hasExperience mundane supernatural avatar adept features details
                 break;
-            case "item":                                                 // TODO description
-                content += `    ${item.system.effect}`;                  // TODO
+            case "item": // TODO description
+                content += `    ${item.system.effect}`;
                 break;
-            case "milestone":                                            // TODO
-                content += `    ${item.system.percentage}%`;             // TODO
+            case "milestone":
+                content += `    ${item.system.percentage}%`;
                 break;
-            case "ritual":                                               // TODO cost action
-                content += `    ${item.system.effect}`;                  // TODO
+            case "ritual": // TODO cost action
+                content += `    ${item.system.effect}`;
                 break;
-            case "spell":                                                // TODO cost school
-                content += `    ${item.system.effect}`;                  // TODO
+            case "spell": // TODO cost school
+                content += `    ${item.system.effect}`;
+                break;
+            default:
+                throw new Error("!!"); // TODO throw error
         }
         content += `</div>`;
         ChatMessage.create({
@@ -120,6 +126,7 @@ export default class UABaseActorSheet extends foundry.appv1.sheets.ActorSheet
     }
 
     async _onRoll (event) {
+        // HACK Re-evaluate below
         event.preventDefault();
         let shift = 0;
         if (event.which == 3 || event.altKey || event.ctrlKey || event.ShiftKey) {
@@ -135,6 +142,7 @@ export default class UABaseActorSheet extends foundry.appv1.sheets.ActorSheet
         const target = (parseInt(dataset.rollTarget) || 0) + parseInt(shift) || 0;
         const type = dataset.rollType;
         const isNotObjective = type != "objective";
+        console.log(isNotObjective);
         let outcome = "";
         switch (result) {
             case 1:
@@ -160,7 +168,7 @@ export default class UABaseActorSheet extends foundry.appv1.sheets.ActorSheet
         let content = dataset.rollContentHeader !== undefined ? `<div>${dataset.rollContentHeader}</div>` : "";
         content += `<div class="dice-roll">`;
         content += `    <div class="dice-result">`;
-        content += `        <h4 class="dice-total">${isNotObjective ? result : "+" + result + "%"}${target ? "" : ` <span class="vs">` + game.i18n.localize("UA.Vs") + `</span> ` + target}</h4>`;
+        content += `        <h4 class="dice-total">${isNotObjective ? result : "+" + result + "%"}${target || target === 0 ? ` <span class="vs">` + game.i18n.localize("UA.Vs") + `</span> ` + target : ""}</h4>`;
         content += `        <div class="dice-tooltip">`;
         content += `            <section class="tooltip-part">`;
         content += `                <div class="dice">`;
@@ -190,22 +198,16 @@ export default class UABaseActorSheet extends foundry.appv1.sheets.ActorSheet
     }
 
     async _onShiftRoll (event) {
+        // HACK Re-examine below
         let modifier = false;
         await Dialog.confirm({
             content: `<p>${game.i18n.localize("UA.ShiftRoll_Details")}:</p>
-            <input type="number" value="0" min="-100" max="100" step="10" data-dtype="Number" style="max-width: 80px; text-align: center">%`,
+            <input type="number" value="0" min="-100" max="100" step="10" data-dtype="Number" style="max-width: 80px; text-align: center">%`, //FIX
             title: game.i18n.localize("UA.ShiftRoll"),
             yes: html => {
-                html.find("input")[0].value;
+                modifier = html.find("input")[0].value;
             }
         });
         return modifier;
-    }
-
-    _onShowImage (event) {
-        event.preventDefault();
-        new ImagePopout(this.actor.img, {
-            title: this.actor.name
-        }).render(true);
     }
 }

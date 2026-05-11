@@ -1,15 +1,15 @@
-import UABaseItemSheet from "./base-item-sheet.js";
+import { UABaseItemSheet } from "./base-item-sheet.js";
 
-export default class UAItemSheet extends UABaseItemSheet
+export class UAItemSheet extends UABaseItemSheet
 {
     static get defaultOptions() {
+        // height?: string | number | null; id?: string; left?: number | null; minimizable?: boolean; popOut?: boolean; resizable?: boolean; scale?: number | null; scrollY?: string[]; tabs?: TabsConfiguration[]; template?: string | null; title?: string; top?: number | null; width?: number | null; //TODO
+        // dragDrop: DragDropConfiguration[]; 
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
                 "sheet",
-                "item"
-            ],
-            height: 600,                                                 // TODO
-            width: 650                                                   // TODO
+                "sheet--item"
+            ]
         });
     }
 

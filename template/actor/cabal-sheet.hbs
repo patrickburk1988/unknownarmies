@@ -1,131 +1,143 @@
-<form class="main-form {{cssClass}}">
-    <div class="upper-content">
-        <div class="portrait">
-            <img data-edit="img" src="{{actor.img}}" alt="{{actor.name}} portrait">
-            <button data-action="show-image"><i class="fas fa-image"></i></button>
+<form class="sheet__form {{cssClass}}">
+    <header class="sheet__header">
+        <div class="sheet__basics">
+            <figure class="portrait">
+                <img class="portrait__image" data-edit="img" src="{{actor.img}}" alt="{{actor.name}} portrait">
+                <button class="button button--enlarge portrait__show-image" data-action="show-image"><i class="button__icon fas fa-image"></i></button>
+            </figure>
+            <section class="sheet__basics-section sheet__basics-section--name">
+                <label class="label" for="{{actor.id}}-name">{{localize 'UA.Name'}}:</label>
+                <input type="text" id="{{actor.id}}-name" class="sheet__name text-input text-input--large" name="name" value="{{actor.name}}" data-dtype="String" required>
+                <span></span>
+                <div class="capsule capsule--objective">
+                    <button class="button button--roll capsule__cell" data-action="roll" data-roll-label="{{localize 'UA.Objective'}} ({{actor.system.objective.name}})" data-roll-target="{{actor.system.objective.percentage}}" data-roll-type="objective">{{localize 'UA.Objective'}}</button>
+                    <input type="text" class="capsule__cell text-input" name="system.objective.name" value="{{actor.system.objective.name}}" data-dtype="String">
+                    <div class="capsule__cell number-percentage number-percentage--pseudo-number">
+                        <span>{{actor.system.objective.percentage}}</span>
+                        <span class="number-percentage__percentage">%</span>
+                    </div>
+                </div>
+                <span></span>
+                <label class="label" for="{{actor.id}}-scale">{{localize 'UA.Scale'}}:</label>
+                <div class="select">
+                    <select id="{{actor.id}}-scale" class="select__inner" name="system.objective.scale">{{selectOptions optionsObjectiveScale selected=actor.system.objective.scale localize=true blank=""}}</select>
+                </div>
+            </section>
         </div>
-        <div class="upper-content__section">
-            <span class="label label--tall">{{localize 'UA.Name'}}:</span>
-            <input type="text" class="name" name="name" value="{{actor.name}}" data-dtype="String">
-        </div>
-    </div>
-    <nav class="tab-buttons">
-        <button data-tab="main">{{localize 'UA.Main'}}</button>
-        <button data-tab="items">{{localize 'UA.Items'}}</button>
-        <button data-tab="notes">{{localize 'UA.Notes'}}</button>
-        <button data-tab="options">{{localize 'UA.Options'}}</button>
-    </nav>
-    <div class="tab-panels">
-        <div class="tab lower-content" data-tab="main">
-            <div class="lower-content__section objective">
-                <button data-action="roll" data-roll-label="{{localize 'UA.Objective'}} ({{actor.system.objective.name}})" data-roll-target="{{actor.system.objective.percentage}}" data-roll-type="objective">{{localize 'UA.Objective'}}</button>
-                <input type="text" name="system.objective.name" value="{{actor.system.objective.name}}" data-dtype="String">
-                <span>{{actor.system.objective.percentage}}%</span>
-                <span class="label">{{localize 'UA.Scale'}}:</span>
-                <select name="system.objective.scale">{{selectOptions optionsObjectiveScale selected=actor.system.objective.scale localize=true}}</select>
-            </div>
-            <div class="lower-content__section milestones">
-                <div class="item-list">
-                    <div class="item-list__header">
-                        <div class="item-list__column">
+        <nav class="sheet__navigation">
+            <button class="button button--navigate" data-tab="main">{{localize 'UA.Main'}}</button>
+            <button class="button button--navigate" data-tab="items">{{localize 'UA.Items'}}</button>
+            <button class="button button--navigate" data-tab="notes">{{localize 'UA.Notes'}}</button>
+            <button class="button button--navigate" data-tab="options">{{localize 'UA.Options'}}</button>
+        </nav>
+    </header>
+    <div class="sheet__body">
+        <div class="tab" data-tab="main">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Milestones'}}:</h2>
+                <div class="items items--milestones">
+                    <div class="items__row items__row--header">
+                        <span></span>
+                        <div class="items__column">
                             <span>{{localize 'UA.Milestone'}}</span>
                         </div>
-                        <div class="item-list__column">
+                        <div class="items__column">
                             <span>{{localize 'UA.Percentage'}}</span>
                         </div>
-                        <button data-action="create-item" data-item-type="milestone"><i class="fas fa-plus"></i></button>
+                        <button class="button button--manage items__create-button" data-action="create-item" data-item-type="milestone"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'milestone')}}
-                        <li class="item-list__item" data-item-id="{{item.id}}">
-                            <div class="item-list__column">
-                                <span>{{item.name}}</span>
-                            </div>
-                            <div class="item-list__column">
-                                <span>+{{item.system.percentage}}%</span>
-                            </div>
-                            <div class="item-list__column">
-                                <button data-action="post-item"><i class="fas fa-message"></i></button>
-                                <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                <button data-action="delete-item"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </li>{{/if}}{{/each}}
-                    </ul>
+                    <div class="items__list-wrapper">
+                        <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'milestone')}}
+                            <li class="item items__row" data-item-id="{{item._id}}">
+                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!"><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
+                                <div class="items__column">
+                                    <span>{{item.name}}</span>
+                                </div>
+                                <div class="items__column">
+                                    <span>+{{item.system.percentage}}%</span>
+                                </div>
+                                    <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
+                            </li>{{/if}}{{/each}}
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
-        <div class="tab lower-content lower-content--2-columns" data-tab="items">
-            <div class="lower-content__section artifacts">
-                <h2>{{localize 'UA.Artifacts'}}:</h2>
-                <div class="item-list">
-                    <div class="item-list__header">
-                        <div class="item-list__column">
+        <div class="tab tab--2-columns" data-tab="items">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Artifacts'}}:</h2>
+                <div class="items items--artifacts">
+                    <div class="{{!-- //HACK capsule capsule--item --}} items__row items__row--header">
+                        <div class="items__column">
                             <span>{{localize 'UA.Artifact'}}</span>
                         </div>
-                        <div class="item-list__column">
+                        <div class="items__column">
                             <span>{{localize 'UA.Charges'}}</span>
                         </div>
-                        <button data-action="create-item" data-item-type="artifact"><i class="fas fa-plus"></i></button>
+                        <button class="button button--manage items__create-button" data-action="create-item" data-item-type="artifact"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'artifact')}}
-                        <li class="item-list__item" data-item-id="{{item.id}}">
-                            <div class="item-list__column">
-                                <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>
-                            </div>
-                            <div class="item-list__column">
-                                <span>{{#if item.system.charges.isHidden}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</span>
-                            </div>
-                            <div class="item-list__column">
-                                <button data-action="post-item"><i class="fas fa-message"></i></button>
-                                <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                <button data-action="delete-item"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </li>{{/if}}{{/each}}
-                    </ul>
+                    <div class="items__list-wrapper">
+                        <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'artifact')}}
+                            <li class="item items__row" data-item-id="{{item._id}}">
+                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!"><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
+                                <div class="items__column" title="{{stripHTML item.system.effect}}">
+                                    <span>{{item.name}}</span>
+                                </div>
+                                <div class="items__column">
+                                    <span>{{#if item.system.charges.isHidden}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</span>
+                                </div>
+                                <div class="items__column">
+                                    <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
+                                </div>
+                            </li>{{/if}}{{/each}}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="lower-content__section items">
-                <h2>{{localize 'UA.OtherItems'}}:</h2>
-                <div class="item-list">
-                    <div class="item-list__header">
-                        <div class="item-list__column">
+            </section>
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.OtherItems'}}:</h2>
+                <div class="items items--items">
+                    <div class="items__row items__row--header">
+                        <div class="items__column">
                             <span>{{localize 'UA.Item'}}</span>
                         </div>
-                        <button data-action="create-item" data-item-type="item"><i class="fas fa-plus"></i></button>
+                        <button class="button button--manage items__create-button" data-action="create-item" data-item-type="item"><i class="fas fa-plus"></i></button>
                     </div>
-                    <ul class="item-list__list">{{#each items as |item itemId|}}{{#if (equals item.type 'item')}}
-                        <li class="item-list__item" data-item-id="{{item.id}}">
-                            <div class="item-list__column">
-                                <span title="{{stripHTML item.system.effect}}">{{item.name}}</span>
-                            </div>
-                            <div class="item-list__column">
-                                <button data-action="post-item"><i class="fas fa-message"></i></button>
-                                <button data-action="edit-item"><i class="fas fa-edit"></i></button>
-                                <button data-action="delete-item"><i class="fas fa-trash"></i></button>
-                            </div>
-                        </li>{{/if}}{{/each}}
-                    </ul>
+                    <div class="items__list-wrapper">
+                        <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'item')}}
+                            <li class="item items__row" data-item-id="{{item._id}}">
+                                <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!"><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
+                                <div class="items__column" title="{{stripHTML item.system.effect}}">
+                                    <span>{{item.name}}</span>
+                                </div>
+                                <div class="items__column">
+                                    <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
+                                </div>
+                            </li>{{/if}}{{/each}}
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </section>
         </div>
-        <div class="tab lower-content" data-tab="notes">
-            <div class="lower-content__section">
-                <h2>{{localize 'UA.PublicNotes'}}:</h2>
-                {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true class="editor-content--extra-small"}}
-            </div>
-            <div class="lower-content__section">
-                <h2>{{localize 'UA.PrivateNotes'}}:</h2>
-                {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true class="editor-content--extra-small"}}
-            </div>
+        <div class="tab" data-tab="notes">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.PublicNotes'}}:</h2>
+                {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true}}
+            </section>
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.PrivateNotes'}}:</h2>
+                {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true}}
+            </section>
         </div>
-        <div class="tab lower-content" data-tab="options">
-            <div class="lower-content__section options">
-                <h2>{{localize 'UA.GeneralOptions'}}:</h2>
+        <div class="tab" data-tab="options">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.GeneralOptions'}}:</h2>
                 <p style="text-align: center">Coming soon.</p>{{!-- //FIX --}}
-            </div>{{#if (isGM)}}
-            <div class="lower-content__section options">
-                <h2>{{localize 'UA.GMOptions'}}:</h2>
+            </section>{{#if (isGM)}}
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.GMOptions'}}:</h2>
                 <p style="text-align: center">Coming soon.</p>{{!-- //FIX --}}
-            </div>{{/if}}
+            </section>{{/if}}
         </div>
     </div>
 </form>

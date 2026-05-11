@@ -1,15 +1,16 @@
-import UABaseItemSheet from "./base-item-sheet.js";
+import { UABaseItemSheet } from "./base-item-sheet.js";
 
-export default class UAMilestoneSheet extends UABaseItemSheet
+export class UAMilestoneSheet extends UABaseItemSheet
 {
     static get defaultOptions() {
+        // height?: string | number | null; id?: string; left?: number | null; minimizable?: boolean; popOut?: boolean; resizable?: boolean; scale?: number | null; scrollY?: string[]; tabs?: TabsConfiguration[]; template?: string | null; title?: string; top?: number | null; width?: number | null; //TODO
+        // dragDrop: DragDropConfiguration[]; 
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
                 "sheet",
-                "milestone"
+                "sheet--milestone"
             ],
-            height: 650,                                                 // TODO Was 123
-            width: 800                                                   // TODO
+            width: 780 //FORNOW 650
         });
     }
 
@@ -27,13 +28,17 @@ export default class UAMilestoneSheet extends UABaseItemSheet
     }
 
     async _onRoll (event) {
+        // HACK Re-examine below
         event.preventDefault();
         const dataset = event.currentTarget.dataset;
         const formula = dataset.rollFormula;
         const roll = await new Roll(formula).evaluate();
         const total = parseInt(roll.total);
         // TODO Return early if there is no actor owning it.
-        const oldObjectivePercentage = this.actor.system.objective.percentage;
+        console.log(this);
+        console.log(this.actor);
+        console.log(this.actor.system);
+        const oldObjectivePercentage = this.actor.system.objective.percentage; //FIX What if it has no actor?
         await this.item.update({
             "system.percentage": total
         });

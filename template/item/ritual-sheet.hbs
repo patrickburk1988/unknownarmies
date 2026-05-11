@@ -1,52 +1,58 @@
-<form class="main-form {{cssClass}}">
-    <div class="upper-content">
-        <div class="portrait">
-            <img data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
-            <button data-action="show-image"><i class="fas fa-image"></i></button>
+<form class="sheet__form {{cssClass}}">
+    <header class="sheet__header">
+        <div class="sheet__basics">
+            <figure class="portrait">
+                <img class="portrait__image" data-edit="img" src="{{item.img}}" alt="{{item.name}} portrait">
+                <button class="button button--enlarge portrait__show-image" data-action="show-image"><i class="button__icon fas fa-image"></i></button>
+            </figure>
+            <section class="sheet__basics-section sheet__basics-section--name">
+                <label class="label" for="{{item.id}}-name">{{localize 'UA.Name'}}:</label>
+                <input type="text" id="{{item.id}}-name" class="sheet__name text-input text-input--large" name="name" value="{{item.name}}" data-dtype="String" required>
+                <label class="label" for="{{item.id}}-cost">{{localize 'UA.Cost'}}:</label>
+                <div class="capsule capsule--ritual-cost">
+                    <input type="number" id="{{item.id}}-cost" class="capsule__cell number-input" name="system.cost.amount" value="{{item.system.cost.amount}}" min="0" data-dtype="Number">
+                    <div class="capsule__cell select">
+                        <select class="select__inner" name="system.cost.type">{{selectOptions optionsCostType selected=item.system.cost.type localize=true blank=""}}</select>
+                    </div>
+                </div>
+            </section>
         </div>
-        <div class="upper-content__section">
-            <span class="label label--tall">{{localize 'UA.Name'}}:</span>
-            <input type="text" class="name" name="name" value="{{item.name}}" data-dtype="String">
-            <span class="label">{{localize 'UA.Cost'}}:</span>
-            <input type="number" name="system.cost.amount" value="{{item.system.cost.amount}}" min="0" data-dtype="Number">
-            <select name="system.cost.type">{{#if (equals item.system.cost.amount 1)}}{{selectOptions optionsCostTypeSingular selected=item.system.cost.type localize=true}}{{else}}{{selectOptions optionsCostTypePlural selected=item.system.cost.type localize=true}}{{/if}}</select>
+        <nav class="sheet__navigation">
+            <button class="button button--navigate" data-tab="main">{{localize 'UA.Main'}}</button>
+            <button class="button button--navigate" data-tab="notes">{{localize 'UA.Notes'}}</button>
+            <button class="button button--navigate" data-tab="options">{{localize 'UA.Options'}}</button>
+        </nav>
+    </header>
+    <div class="sheet__body">
+        <div class="tab" data-tab="main">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.RitualAction'}}:</h2>
+                {{editor enrichedRitualAction target="system.action" engine="prosemirror" button=true}}
+            </section>
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Effect'}}:</h2>
+                {{editor enrichedEffect target="system.effect" engine="prosemirror" button=true}}
+            </section>
         </div>
-    </div>
-    <nav class="tab-buttons">
-        <button data-tab="main">{{localize 'UA.Main'}}</button>
-        <button data-tab="notes">{{localize 'UA.Notes'}}</button>
-        <button data-tab="options">{{localize 'UA.Options'}}</button>
-    </nav>
-    <div class="tab-panels">
-        <div class="tab lower-content" data-tab="main">
-            <div class="lower-content__section">
-                <h2>{{localize 'UA.RitualAction'}}:</h2>
-                {{editor enrichedRitualAction target="system.action" engine="prosemirror" button=true class="editor-content--extra-small"}}
-            </div>
-            <div class="lower-content__section">
-                <h2>{{localize 'UA.Effect'}}:</h2>
-                {{editor enrichedEffect target="system.effect" engine="prosemirror" button=true class="editor-content--extra-small"}}
-            </div>
+        <div class="tab" data-tab="notes">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.PublicNotes'}}:</h2>
+                {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true}}
+            </section>
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.PrivateNotes'}}:</h2>
+                {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true}}
+            </section>
         </div>
-        <div class="tab lower-content" data-tab="notes">
-            <div class="lower-content__section">
-                <h2>{{localize 'UA.PublicNotes'}}:</h2>
-                {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true class="editor-content--extra-small"}}
-            </div>
-            <div class="lower-content__section">
-                <h2>{{localize 'UA.PrivateNotes'}}:</h2>
-                {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true class="editor-content--extra-small"}}
-            </div>
-        </div>
-        <div class="tab lower-content" data-tab="options">
-            <div class="lower-content__section options">
-                <h2>{{localize 'UA.GeneralOptions'}}:</h2>
+        <div class="tab" data-tab="options">
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.GeneralOptions'}}:</h2>
                 <p style="text-align: center">Coming soon.</p>{{!-- //FIX --}}
-            </div>{{#if (isGM)}}
-            <div class="lower-content__section options">
-                <h2>{{localize 'UA.GMOptions'}}:</h2>
+            </section>{{#if (isGM)}}
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.GMOptions'}}:</h2>
                 <p style="text-align: center">Coming soon.</p>{{!-- //FIX --}}
-            </div>{{/if}}
+            </section>{{/if}}
         </div>
     </div>
 </form>

@@ -1,9 +1,9 @@
-<form class="main-form main-form--limited {{cssClass}}">
-    <div class="portrait">
-        <img src="{{actor.img}}" alt="{{actor.name}} portrait">
-        <button data-action="show-image"><i class="fas fa-image"></i></button>
-    </div>
-    <h2>{{actor.name}}</h2>
+<form class="sheet__form sheet__form--limited {{cssClass}}">
+    <figure class="portrait">
+        <img class="portrait__image" src="{{actor.img}}" alt="{{actor.name}} portrait">
+        <button class="button button--enlarge portrait__show-image" data-action="show-image"><i class="button__icon fas fa-image"></i></button>
+    </figure>
+    <h2 class="heading">{{actor.name}}</h2>
     <div class="editor-wrapper">
         {{editor enrichedPublicNotes}}
     </div>
