@@ -1,3 +1,6 @@
+## v1.3.8
+- Moved shared identity feature sorting logic to identity data.
+
 ## v1.3.7
 - Disabled item roll buttons until properly implemented.
 - CSS quick fix.

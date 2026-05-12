@@ -48,6 +48,15 @@ export class UACharacterSheet extends UABaseActorSheet
         for (let cabal of game.actors.filter(actor => actor.type == "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {
             data.cabalOptions[cabal._uuid] = cabal.name;
         }
+        data.items = this.actor.items.contents.map(item => {
+            return item.type !== "identity" ? item.toObject() : {
+                ...item.toObject(),
+                system: {
+                    ...item.toObject().system,
+                    featureList: item.system.featureList
+                }
+            };
+        });
         data.optionsFearShockMeter = this.actor.system.schema.fields.passions.fields.fear.fields.shockMeter.choices;
         data.enrichedAppearance = await TextEditor.enrichHTML(this.object.system.appearance, {
             async: true
@@ -79,46 +88,7 @@ export class UACharacterSheet extends UABaseActorSheet
         const identity = this.actor.items.get($(event.currentTarget).parents(".item").data("item-id"));
         let content = `<p>${game.i18n.localize("UA.SelectIdentityFeature_Details")}</p>
         <button data-action="roll" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage ?? 0}">${game.i18n.localize("UA.None")}</button>`;
-        const features = Object.values(identity.system.features);
-        switch (identity.system.type) {
-            case "Adept": {
-                break;
-            }
-            case "Avatar": {
-                const percentage = identity.system.percentage;
-                const channels = identity.system.avatar.channels;
-                if (percentage >= 1 && channels["1-50"] != "") {
-                    features.push("Channel 1-50%");
-                }
-                if (percentage >= 51 && channels["51-70"] != "") {
-                    features.push("Channel 51-70%");
-                }
-                if (percentage >= 71 && channels["71-90"] != "") {
-                    features.push("Channel 71-90%");
-                }
-                if (percentage >= 91 && channels["91-98"] != "") {
-                    features.push("Channel 91-98%");
-                }
-                if (percentage >= 99 && channels["99-"] != "") {
-                    features.push("Channel 99%");
-                }
-                break;
-            }
-            case "Mundane": {
-                const substitutesFor = identity.system.mundane.substitutesFor;
-                if (substitutesFor != "") {
-                    features.push("Substitutes for " + substitutesFor);
-                }
-                break;
-            }
-            case "Supernatural": {
-                const ability = identity.system.supernatural.ability;
-                if (ability != "") {
-                    features.push(ability);
-                }
-            }
-        }
-        for (let feature of features.sort()) {
+        for (let feature of identity.system.featureList.sort()) {
             if (feature) { // MAYBE feature != "" && feature != undefined
                 const text = game.i18n.localize("UA." + feature.replaceAll(" for ", "For").replaceAll(" ", ""));
                 content += `<button data-action="roll" data-roll-content-header="<p>${text}</p>" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage ?? 0}">${text}</button>`;

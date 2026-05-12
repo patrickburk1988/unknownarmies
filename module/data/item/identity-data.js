@@ -2,6 +2,50 @@ import { NotesFields, PercentageField } from "../shared-data.js";
 
 export class UAIdentityData extends foundry.abstract.TypeDataModel
 {
+    get featureList() {
+        const features = Object.values(this.features) ?? [];
+        switch (this.type) {
+            case "":
+                break;
+            case "Adept":
+                break;
+            case "Avatar":
+                const channels = this.avatar.channels; //MAYBE null check?
+                const percentage = this.percentage;
+                if (percentage >= 1 && channels.first !== "") {
+                    features.push("Channel 1-50%");
+                }
+                if (percentage >= 51 && channels.second !== "") {
+                    features.push("Channel 51-70%");
+                }
+                if (percentage >= 71 && channels.third !== "") {
+                    features.push("Channel 71-90%");
+                }
+                if (percentage >= 91 && channels.fourth !== "") {
+                    features.push("Channel 91-98%");
+                }
+                if (percentage >= 99 && channels.godwalker !== "") {
+                    features.push("Channel 99%");
+                }
+                break;
+            case "Mundane":
+                const substitutesFor = this.mundane?.substitutesFor;
+                if (substitutesFor) {
+                    features.push("Substitutes for " + substitutesFor);
+                }
+                break;
+            case "Supernatural":
+                const ability = this.supernatural?.ability;
+                if (ability) {
+                    features.push(ability);
+                }
+                break;
+            default:
+                throw new Error(`Unknown Armies | Invalid identity type: ${this.type}`);
+        }
+        return features;
+    }
+
     static optionsMMY = new Set([ //MAYBE Move to sheet file?
         "Alter Fear",
         "Alter Noble",

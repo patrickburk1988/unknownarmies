@@ -179,71 +179,12 @@ function registerHandlebarsHelpers() {
         return UACharacterData.shockGaugeSchema[meter][key];
     });
     Handlebars.registerHelper("sortFeatures", function (identity) {
-        let features = [];
-        const type = identity.system.type;
-        switch (type) {
-            case "":
-                break;
-            case "Adept":
-                break;
-            case "Avatar":
-                const channels = identity.system.avatar.channels;
-                const percentage = identity.system.percentage;
-                if (percentage >= 1 && channels.first !== "") {
-                    features.push("Channel 1-50%");
-                }
-                if (percentage >= 51 && channels.second !== "") {
-                    features.push("Channel 51-70%");
-                }
-                if (percentage >= 71 && channels.third !== "") {
-                    features.push("Channel 71-90%");
-                }
-                if (percentage >= 91 && channels.fourth !== "") {
-                    features.push("Channel 91-98%");
-                }
-                if (percentage >= 99 && channels.godwalker !== "") {
-                    features.push("Channel 99%");
-                }
-                break;
-            case "Mundane":
-                const substitutesFor = identity.system.mundane?.substitutesFor;
-                if (substitutesFor) {
-                    features.push("Substitutes for " + substitutesFor);
-                }
-                break;
-            case "Supernatural":
-                const ability = identity.system.supernatural?.ability;
-                if (ability) {
-                    features.push(ability);
-                }
-                break;
-            default:
-                throw new Error(`Unknown Armies | Invalid identity type: ${identity}`); //TODO
-        }
-        features = [...features, ...Object.values(identity.system.features).sort()];
-        if (type === "Mundane") {
+        const features = [...(identity.system.featureList ?? [])];
+        if (identity.system.type === "Mundane") {
             features.sort();
         }
         return features;
     });
-    // Handlebars.registerHelper("stripHTML", function (html) {
-    //     console.log(html);
-    //     if (!html) {
-    //         console.log("AHH");
-    //         return "";
-    //     }
-    //     // return new Handlebars.SafeString(String(html));
-    //     const nodes = $.parseHTML(String(html), document, false);
-    //     const text = $("<div>").append(nodes).text();
-    //     return text.replace(/\s+/g, " ").replace(/([.!?])(?=\S)/g, "$1 ").trim();
-    //     // console.log(html);
-    //     // console.log(jQuery(html));
-    //     // console.log(jQuery.parseHTML(html));
-    //     // return jQuery.parseHTML(jQuery(html));
-    //     // return jQuery(html);
-    //     // return jQuery(html).text().replaceAll(/([.!?])([^.!?])/g, "$1 $2");
-    //     // return jQuery(html).text().replaceAll(/([.!?])([^.!?])/g, "$1 $2"); //FIX
-    // });
     Handlebars.registerHelper("stripHTML", function (html) {
         // HACK Re-examine below.
         if (!html) return "";
@@ -251,14 +192,6 @@ function registerHandlebarsHelpers() {
         const nodes = $.parseHTML(spaced, document, false);
         const text = $("<div>").append(nodes).text();
         return text.replace(/\s+/g, " ").trim();
-        // console.log(html);
-        // if (!html) {
-        //     return "";
-        // }
-        // // return new Handlebars.SafeString(String(html));
-        // const nodes = $.parseHTML(String(html), document, false);
-        // const text = $("<div>").append(nodes).text();
-        // return text.replace(/\s+/g, " ").replace(/([.!?])(?=\S)/g, "$1 ").trim();
     });
 }
 

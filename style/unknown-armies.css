@@ -1176,3 +1176,6 @@
     width:-moz-fit-content;
     width:fit-content;
 }
+.sheet .shock-meter__legend{
+    width:100%;
+}
