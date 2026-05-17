@@ -1,14 +1,14 @@
 const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 export const optionsCostTypePlural = {
-    "major":       "UA.MinorCharges",
-    "minor":       "UA.SignificantCharges",
-    "significant": "UA.MajorCharges"
+    "minor":       "UA.MinorCharges",
+    "significant": "UA.SignificantCharges",
+    "major":       "UA.MajorCharges"
 }
 export const optionsCostTypeSingular = {
-    "major":       "UA.MinorCharge",
-    "minor":       "UA.SignificantCharge",
-    "significant": "UA.MajorCharge"
+    "minor":       "UA.MinorCharge",
+    "significant": "UA.SignificantCharge",
+    "major":       "UA.MajorCharge"
 }
 
 export function CostFields() {

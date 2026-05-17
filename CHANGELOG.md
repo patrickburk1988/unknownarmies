@@ -1,5 +1,7 @@
+
 ## v1.3.8
 - Moved shared identity feature sorting logic to identity data.
+- Fixed bug with ritual/spell cost options and their localization.
 
 ## v1.3.7
 - Disabled item roll buttons until properly implemented.
