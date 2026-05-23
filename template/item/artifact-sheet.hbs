@@ -12,7 +12,7 @@
                 <div class="select">
                     <select id="{{item.id}}-power" class="select__inner" name="system.power">{{selectOptions optionsPower selected=item.system.power localize=true blank=""}}</select>
                 </div>
-                <span></span>{{#if (or (isGM) (not item.system.charges.isHidden))}}
+                <span></span>{{#if (or (isGM) (not item.system.options.hideCharges))}}
                 <label class="label" for="{{item.id}}-eternal">{{localize 'UA.Eternal'}}:</label>
                 <input type="checkbox" id="{{item.id}}-eternal" class="checkbox-input" name="system.charges.isEternal" data-dtype="Boolean" {{checked item.system.charges.isEternal}}>{{else}}
                 <span></span>

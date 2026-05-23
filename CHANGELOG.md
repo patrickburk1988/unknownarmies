@@ -1,4 +1,7 @@
 
+## v1.3.9
+- Hotfix to correct hidden artifact charges showing.
+
 ## v1.3.8
 - Moved shared identity feature sorting logic to identity data.
 - Fixed bug with ritual/spell cost options and their localization.

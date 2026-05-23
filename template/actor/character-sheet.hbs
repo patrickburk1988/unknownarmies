@@ -298,7 +298,7 @@
                             <li class="item items__row" data-item-id="{{item._id}}">
                                 <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!" disabled><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
                                 <div class="items__column" title="{{stripHTML item.system.effect}}">{{item.name}}</div>
-                                <div class="items__column">{{#if item.system.charges.isHidden}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</div>
+                                <div class="items__column">{{#if item.system.options.hideCharges}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</div>
                                 <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
                             </li>{{/if}}{{/each}}
                         </ul>

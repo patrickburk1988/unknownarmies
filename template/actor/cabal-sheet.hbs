@@ -84,7 +84,7 @@
                                     <span>{{item.name}}</span>
                                 </div>
                                 <div class="items__column">
-                                    <span>{{#if item.system.charges.isHidden}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</span>
+                                    <span>{{#if item.system.options.hideCharges}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</span>
                                 </div>
                                 <div class="items__column">
                                     <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
