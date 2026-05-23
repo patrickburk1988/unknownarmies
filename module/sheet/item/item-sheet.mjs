@@ -1,4 +1,4 @@
-import { UABaseItemSheet } from "./base-item-sheet.js";
+import { UABaseItemSheet } from "./base-item-sheet.mjs";
 
 export class UAItemSheet extends UABaseItemSheet
 {

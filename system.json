@@ -33,7 +33,7 @@
         }
     },
     "esmodules": [
-        "module/unknown-armies.js"
+        "module/unknown-armies.mjs"
     ],
     "styles": [
         "style/unknown-armies.css"

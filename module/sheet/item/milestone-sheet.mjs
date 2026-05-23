@@ -1,4 +1,4 @@
-import { UABaseItemSheet } from "./base-item-sheet.js";
+import { UABaseItemSheet } from "./base-item-sheet.mjs";
 
 export class UAMilestoneSheet extends UABaseItemSheet
 {
@@ -28,17 +28,14 @@ export class UAMilestoneSheet extends UABaseItemSheet
     }
 
     async _onRoll (event) {
-        // HACK Re-examine below
+        // TODO Return early if there is no actor owning it.
         event.preventDefault();
         const dataset = event.currentTarget.dataset;
         const formula = dataset.rollFormula;
         const roll = await new Roll(formula).evaluate();
         const total = parseInt(roll.total);
-        // TODO Return early if there is no actor owning it.
-        console.log(this);
-        console.log(this.actor);
-        console.log(this.actor.system);
         const oldObjectivePercentage = this.actor.system.objective.percentage; //FIX What if it has no actor?
+        //BUG Re-examine below
         await this.item.update({
             "system.percentage": total
         });

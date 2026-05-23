@@ -1,23 +1,23 @@
-import { migrate }          from "./util/migrate.js";
-import { UAActor }          from "./actor.js";
-import { UAArtifactData }   from "./data/item/artifact-data.js";
-import { UAArtifactSheet }  from "./sheet/item/artifact-sheet.js";
-import { UACabalData }      from "./data/actor/cabal-data.js";
-import { UACabalSheet }     from "./sheet/actor/cabal-sheet.js";
-import { UACharacterData }  from "./data/actor/character-data.js";
-import { UACharacterSheet } from "./sheet/actor/character-sheet.js";
-import { UAIdentityData }   from "./data/item/identity-data.js";
-import { UAIdentitySheet }  from "./sheet/item/identity-sheet.js";
-import { UAItem }           from "./item.js";
-import { UAItemData }       from "./data/item/item-data.js";
-import { UAItemSheet }      from "./sheet/item/item-sheet.js";
-import { UAMilestoneData }  from "./data/item/milestone-data.js";
-import { UAMilestoneSheet } from "./sheet/item/milestone-sheet.js";
-import { UARitualData }     from "./data/item/ritual-data.js";
-import { UARitualSheet }    from "./sheet/item/ritual-sheet.js";
-import { UASpellData }      from "./data/item/spell-data.js";
-import { UASpellSheet }     from "./sheet/item/spell-sheet.js";
-import { UAUtils }          from "./utils.js";
+import { migrate }          from "./util/migrate.mjs";
+import { UAActor }          from "./actor.mjs";
+import { UAArtifactData }   from "./data/item/artifact-data.mjs";
+import { UAArtifactSheet }  from "./sheet/item/artifact-sheet.mjs";
+import { UACabalData }      from "./data/actor/cabal-data.mjs";
+import { UACabalSheet }     from "./sheet/actor/cabal-sheet.mjs";
+import { UACharacterData }  from "./data/actor/character-data.mjs";
+import { UACharacterSheet } from "./sheet/actor/character-sheet.mjs";
+import { UAIdentityData }   from "./data/item/identity-data.mjs";
+import { UAIdentitySheet }  from "./sheet/item/identity-sheet.mjs";
+import { UAItem }           from "./item.mjs";
+import { UAItemData }       from "./data/item/item-data.mjs";
+import { UAItemSheet }      from "./sheet/item/item-sheet.mjs";
+import { UAMilestoneData }  from "./data/item/milestone-data.mjs";
+import { UAMilestoneSheet } from "./sheet/item/milestone-sheet.mjs";
+import { UARitualData }     from "./data/item/ritual-data.mjs";
+import { UARitualSheet }    from "./sheet/item/ritual-sheet.mjs";
+import { UASpellData }      from "./data/item/spell-data.mjs";
+import { UASpellSheet }     from "./sheet/item/spell-sheet.mjs";
+import { UAUtils }          from "./utils.mjs";
 
 const hiddenTypes = new Set([
     "identity",

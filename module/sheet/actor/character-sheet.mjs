@@ -1,4 +1,4 @@
-import { UABaseActorSheet } from "./base-actor-sheet.js";
+import { UABaseActorSheet } from "./base-actor-sheet.mjs";
 
 export class UACharacterSheet extends UABaseActorSheet
 {

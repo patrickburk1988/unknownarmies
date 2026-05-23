@@ -18,7 +18,7 @@ export class UAActor extends Actor
     }
 
     async _preUpdateCharacter (changed) {
-        // HACK Re-examine below
+        // BUG Re-examine below
         let willBeBurnedOut;
         if (!changed?.system?.shockGauge) {
             willBeBurnedOut = this.system.isBurnedOut;

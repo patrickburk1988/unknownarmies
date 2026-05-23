@@ -1,4 +1,4 @@
-import { UABaseSheet } from "../base-sheet.js";
+import { UABaseSheet } from "../base-sheet.mjs";
 
 export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorSheet)
 {

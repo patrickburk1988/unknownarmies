@@ -1,5 +1,5 @@
-import { UABaseSheet } from "../base-sheet.js";
-import { optionsCostTypePlural, optionsCostTypeSingular } from "../../data/shared-data.js"
+import { UABaseSheet } from "../base-sheet.mjs";
+import { optionsCostTypePlural, optionsCostTypeSingular } from "../../data/shared-data.mjs"
 
 export class UABaseItemSheet extends UABaseSheet(foundry.appv1.sheets.ItemSheet)
 {

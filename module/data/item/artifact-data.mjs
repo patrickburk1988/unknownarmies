@@ -1,4 +1,4 @@
-import { DescriptionField, EffectField, NotesFields } from "../shared-data.js";
+import { DescriptionField, EffectField, NotesFields } from "../shared-data.mjs";
 
 export class UAArtifactData extends foundry.abstract.TypeDataModel
 {

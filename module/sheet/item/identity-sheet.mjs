@@ -1,5 +1,5 @@
-import { UABaseItemSheet } from "./base-item-sheet.js";
-import { UAIdentityData }  from "../../data/item/identity-data.js"
+import { UABaseItemSheet } from "./base-item-sheet.mjs";
+import { UAIdentityData }  from "../../data/item/identity-data.mjs"
 
 export class UAIdentitySheet extends UABaseItemSheet
 {

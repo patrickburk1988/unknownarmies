@@ -1,4 +1,4 @@
-import { NotesFields, PercentageField } from "../shared-data.js";
+import { NotesFields, PercentageField } from "../shared-data.mjs";
 
 export class UACabalData extends foundry.abstract.TypeDataModel
 {

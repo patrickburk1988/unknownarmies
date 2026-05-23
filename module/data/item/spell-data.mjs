@@ -1,4 +1,4 @@
-import { CostFields, EffectField, NotesFields, migrateCostType } from "../shared-data.js";
+import { CostFields, EffectField, NotesFields, migrateCostType } from "../shared-data.mjs";
 
 export class UASpellData extends foundry.abstract.TypeDataModel
 {
