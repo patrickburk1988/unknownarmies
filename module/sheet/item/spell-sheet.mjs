@@ -7,6 +7,7 @@ export class UASpellSheet extends UABaseItemSheet
         // dragDrop: DragDropConfiguration[]; 
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
+                "default",
                 "sheet",
                 "sheet--spell"
             ]

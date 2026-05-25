@@ -1,3 +1,4 @@
+// import { postRoll } from "../../util/post-roll.mjs";
 import { UABaseItemSheet } from "./base-item-sheet.mjs";
 
 export class UAMilestoneSheet extends UABaseItemSheet
@@ -7,6 +8,7 @@ export class UAMilestoneSheet extends UABaseItemSheet
         // dragDrop: DragDropConfiguration[]; 
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
+                "default",
                 "sheet",
                 "sheet--milestone"
             ],

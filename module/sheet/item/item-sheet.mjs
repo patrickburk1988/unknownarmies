@@ -7,6 +7,7 @@ export class UAItemSheet extends UABaseItemSheet
         // dragDrop: DragDropConfiguration[]; 
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
+                "default",
                 "sheet",
                 "sheet--item"
             ]

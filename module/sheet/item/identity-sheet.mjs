@@ -9,6 +9,7 @@ export class UAIdentitySheet extends UABaseItemSheet
         return foundry.utils.mergeObject(super.defaultOptions, {
             height: 700, //TODO 707
             classes: [
+                "default",
                 "sheet",
                 "sheet--identity"
             ],

@@ -7,6 +7,7 @@ export class UACabalSheet extends UABaseActorSheet
         // dragDrop: DragDropConfiguration[]; 
         return foundry.utils.mergeObject(super.defaultOptions, {
             classes: [
+                "default",
                 "sheet",
                 "sheet--cabal"
             ],
