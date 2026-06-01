@@ -1,6 +1,7 @@
 ## v1.4.1
 
 - Consolidated common roll logic.
+- Fixed bug with shift + roll.
 
 ## v1.4.0
 

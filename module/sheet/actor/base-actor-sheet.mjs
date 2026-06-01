@@ -129,7 +129,7 @@ export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorShee
     async _onRoll (event) {
         event.preventDefault();
         let shift = 0;
-        if (event.which === 3 || event.altKey || event.ctrlKey || event.ShiftKey) {
+        if (event.which === 3 || event.altKey || event.ctrlKey || event.shiftKey) {
             shift = parseInt(await this._onShiftRoll());
             if (isNaN(shift)) {                                          // TODO
                 return;                                                  // TODO
