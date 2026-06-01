@@ -1,3 +1,4 @@
+import { postRoll } from "../../util/roll.mjs";
 import { UABaseItemSheet } from "./base-item-sheet.mjs";
 import { UAIdentityData }  from "../../data/item/identity-data.mjs"
 
@@ -93,37 +94,24 @@ export class UAIdentitySheet extends UABaseItemSheet
     }
 
     async _onImprove (event) {
-        // HACK Re-examine below
+        // MAYBE Return early if there is no actor owning it?
         event.preventDefault();
-        const roll = await new Roll("1d5").evaluate();
-        const result = parseInt(roll.result);
+        const formula = "1d5";
+        const roll = await new Roll(formula).evaluate();
+        const total = parseInt(roll.result); //MAYBE roll.total
         const oldPercentage = this.object.system.percentage;
         await this.item.update({
             "system.hasExperience": false,
-            "system.percentage": oldPercentage + result
+            "system.percentage": oldPercentage + total
         });
-        let content = ``;
-        content += `<div class="dice-roll">`;
-        content += `    <div class="dice-result">`;
-        content += `        <h4 class="dice-total">+${result}%</h4>`;
-        content += `        <div class="dice-tooltip">`;
-        content += `            <section class="tooltip-part">`;
-        content += `                <div class="dice">`;
-        content += `                    <header class="part-header flexrow">`;
-        content += `                        <span class="part-formula">1d5</span>`;
-        content += `                        <span class="part-total">${result}</span>`;
-        content += `                    </header>`;
-        content += `                    <ol class="dice-rolls">`;
-        content += `                        <li class="roll die d10">${result}</li>`;
-        content += `                    </ol>`;
-        content += `                </div>`;
-        content += `            </section>`;
-        content += `        </div>`;
-        content += `        <div class="dice-formula">${game.i18n.localize("UA.IdentityImproved") + ": " + oldPercentage + '% <span class="arrow">▶</span> ' + this.item.system.percentage + "%"}</div>`;
-        content += `    </div>`;
-        content += `</div>`;
-        roll.toMessage({
-            content: content,
+        await postRoll(roll, {
+            dice: roll.dice[0].results,
+            faces: 10,
+            footer: `${game.i18n.localize("UA.IdentityImproved")}: ${oldPercentage}% <span class="arrow">▶</span> ${this.item.system.percentage}%`,
+            formula,
+            result: `${total >= 0 ? "+" : "-"}${total}%`,
+            total
+        }, {
             flavor: event.currentTarget.dataset.rollLabel
         });
     }

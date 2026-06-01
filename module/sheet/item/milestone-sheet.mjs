@@ -1,4 +1,4 @@
-// import { postRoll } from "../../util/post-roll.mjs";
+import { postRoll } from "../../util/roll.mjs";
 import { UABaseItemSheet } from "./base-item-sheet.mjs";
 
 export class UAMilestoneSheet extends UABaseItemSheet
@@ -37,34 +37,17 @@ export class UAMilestoneSheet extends UABaseItemSheet
         const roll = await new Roll(formula).evaluate();
         const total = parseInt(roll.total);
         const oldObjectivePercentage = this.actor.system.objective.percentage; //FIX What if it has no actor?
-        //BUG Re-examine below
         await this.item.update({
             "system.percentage": total
         });
-        let content = ``;
-        content += `<div class="dice-roll">`;
-        content += `    <div class="dice-result">`;
-        content += `        <h4 class="dice-total">+${total}%</h4>`;
-        content += `        <div class="dice-tooltip">`;
-        content += `            <section class="tooltip-part">`;
-        content += `                <div class="dice">`;
-        content += `                    <header class="part-header flexrow">`;
-        content += `                        <span class="part-formula">${formula}</span>`;
-        content += `                        <span class="part-total">${total}</span>`;
-        content += `                    </header>`;
-        content += `                    <ol class="dice-rolls">`;
-        for (let die of roll.dice[0].results) {
-            content += `                        <li class="roll die d10">${die.result}</li>`;
-        }
-        content += `                    </ol>`;
-        content += `                </div>`;
-        content += `            </section>`;
-        content += `        </div>`;
-        content += `        <div class="dice-formula">${game.i18n.localize("UA.ObjectiveImproved") + ": " + oldObjectivePercentage + '% <span class="arrow">▶</span> ' + this.actor.system.objective.percentage + "%"}</div>`;
-        content += `    </div>`;
-        content += `</div>`;
-        roll.toMessage({
-            content: content,
+        await postRoll(roll, {
+            dice: roll.dice[0].results,
+            faces: 10,
+            footer: `${game.i18n.localize("UA.ObjectiveImproved")}: ${oldObjectivePercentage}% <span class="arrow">▶</span> ${this.actor.system.objective.percentage}%`,
+            formula,
+            result: `${total >= 0 ? "+" : "-"}${total}%`,
+            total
+        }, {
             flavor: dataset.rollLabel
         });
     }

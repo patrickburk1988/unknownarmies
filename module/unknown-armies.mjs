@@ -1,4 +1,5 @@
 import { migrate }          from "./util/migrate.mjs";
+import { postRoll }         from "./util/roll.mjs";
 import { UAActor }          from "./actor.mjs";
 import { UAArtifactData }   from "./data/item/artifact-data.mjs";
 import { UAArtifactSheet }  from "./sheet/item/artifact-sheet.mjs";
@@ -48,31 +49,18 @@ Hooks.once("ready", async function() {
     if (chatControlIcon) {
         chatControlIcon.classList.replace("fa-dice-d20", "fa-dice-d10");
         chatControlIcon.addEventListener("click", async ()=> {
+            //MAYBE event.preventDefault();
             const formula = "1d100";
             const roll = await new Roll(formula).evaluate();
             const result = parseInt(roll.result);
-            const content = `
-                <div class="dice-roll">
-                    <div class="dice-result">
-                        <h4 class="dice-total">${result}</h4>
-                        <div class="dice-tooltip">
-                            <section class="tooltip-part">
-                                <div class="dice">
-                                    <header class="part-header flexrow">
-                                        <span class="part-formula">${formula}</span>
-                                        <span class="part-total">${result}</span>
-                                    </header>
-                                    <ol class="dice-rolls">
-                                        <li class="roll die d10">${result}</li>
-                                    </ol>
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>`;
-            roll.toMessage({
-                content: content,
-                flavor: formula
+            await postRoll(roll, {
+                dice: roll.dice[0].results,
+                faces: 10,
+                formula,
+                result,
+                total: result
+            }, {
+                flavor: formula //MAYBE
             });
         });
     }

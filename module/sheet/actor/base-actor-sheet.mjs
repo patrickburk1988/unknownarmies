@@ -1,3 +1,4 @@
+import { computeRollOutcome, postRoll } from "../../util/roll.mjs";
 import { UABaseSheet } from "../base-sheet.mjs";
 
 export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorSheet)
@@ -126,71 +127,30 @@ export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorShee
     }
 
     async _onRoll (event) {
-        // HACK Re-evaluate below
         event.preventDefault();
         let shift = 0;
-        if (event.which == 3 || event.altKey || event.ctrlKey || event.ShiftKey) {
+        if (event.which === 3 || event.altKey || event.ctrlKey || event.ShiftKey) {
             shift = parseInt(await this._onShiftRoll());
             if (isNaN(shift)) {                                          // TODO
                 return;                                                  // TODO
             }
         }
         const dataset = event.currentTarget.dataset;
-        const formula = dataset.rollFormula ?? "1d100";
+        const formula = dataset.rollFormula ?? "1d100"; //MAYBE
         const roll = await new Roll(formula).evaluate();
-        const result = parseInt(roll.result);
-        const target = (parseInt(dataset.rollTarget) || 0) + parseInt(shift) || 0;
-        const type = dataset.rollType;
-        const isNotObjective = type != "objective";
-        console.log(isNotObjective);
-        let outcome = "";
-        switch (result) {
-            case 1:
-                if (isNotObjective) {
-                    outcome = "Crit";
-                    break;
-                }
-            case 100:
-                if (isNotObjective) {
-                    outcome = "Fumble";
-                    break;
-                }
-            default:
-                if (isNotObjective && result > 10) {
-                    const tensDigit = Math.floor(result / 10);
-                    if (tensDigit == result - tensDigit * 10) {
-                        outcome = "Matched";
-                    }
-                }
-                outcome += result <= target ? "Success" : "Failure";
-        }
-        outcome = game.i18n.localize("UA." + outcome.replace(" ", "")); // MAYBE /\s/g
-        let content = dataset.rollContentHeader !== undefined ? `<div>${dataset.rollContentHeader}</div>` : "";
-        content += `<div class="dice-roll">`;
-        content += `    <div class="dice-result">`;
-        content += `        <h4 class="dice-total">${isNotObjective ? result : "+" + result + "%"}${target || target === 0 ? ` <span class="vs">` + game.i18n.localize("UA.Vs") + `</span> ` + target : ""}</h4>`;
-        content += `        <div class="dice-tooltip">`;
-        content += `            <section class="tooltip-part">`;
-        content += `                <div class="dice">`;
-        content += `                    <header class="part-header flexrow">`;
-        content += `                        <span class="part-formula">${formula}</span>`;
-        content += `                        <span class="part-total">${result}</span>`;
-        content += `                    </header>`;
-        content += `                    <ol class="dice-rolls">`;
-        for (let die of roll.dice[0].results) {
-            const faces = roll.dice[0].faces;
-            content += `                        <li class="roll die d${faces == 100 ? 10 : faces}">${die.result}</li>`;
-        }
-        content += `                    </ol>`;
-        content += `                </div>`;
-        content += `            </section>`;
-        content += `        </div>`;
-        content += `        <div class="dice-formula">${outcome}</div>`;
-        content += `    </div>`;
-        content += `</div>`;
-        roll.toMessage({
-            content: content,
-            flavor: dataset.rollLabel + (shift == 0 ? "" : (shift > 0 ? " + " : " - ") + Math.abs(shift) + "%"),
+        const total = parseInt(roll.total);
+        const target = (parseInt(dataset.rollTarget) || 0) + (shift || 0);
+        const faces = roll.dice[0].faces;
+        await postRoll(roll, {
+            dice: roll.dice[0].results,
+            faces: faces === 100 ? 10 : faces,
+            footer: computeRollOutcome(total, target, dataset.rollType === "objective"),
+            formula,
+            header: dataset.rollHeader,
+            result: `${total} <span class="vs">${game.i18n.localize("UA.Vs")}</span> ${target}`,
+            total
+        }, {
+            flavor: dataset.rollLabel + (shift === 0? "" : (shift > 0 ? " + " : " - ") + Math.abs(shift) + "%"),
             speaker: {                                                   // TODO
                 actor: this.actor.id                                     // TODO
             }

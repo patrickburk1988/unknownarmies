@@ -1,3 +1,7 @@
+## v1.4.1
+
+- Consolidated common roll logic.
+
 ## v1.4.0
 
 - Hotfix for Carolingian UI.

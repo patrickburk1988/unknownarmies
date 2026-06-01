@@ -1,0 +1,22 @@
+{{#if header}}<div class="dice-header">{{{header}}}</div>{{/if}}
+<div class="dice-roll" data-action="expandRoll">
+    <div class="dice-result">
+        <h4 class="dice-total">{{{result}}}</h4>
+        <div class="dice-tooltip">
+            <div class="wrapper">
+                <section class="tooltip-part">
+                    <div class="dice">
+                        <header class="part-header flexrow">
+                            <span class="part-formula">{{formula}}</span>
+                            <span class="part-total">{{total}}</span>
+                        </header>
+                        <ol class="dice-rolls">{{#each dice}}
+                            <li class="roll die d{{../faces}}">{{this.result}}</li>{{/each}}
+                        </ol>
+                    </div>
+                </section>
+            </div>
+        </div>
+        {{#if footer}}<div class="dice-footer dice-formula">{{{footer}}}</div>{{/if}}
+    </div>
+</div>
