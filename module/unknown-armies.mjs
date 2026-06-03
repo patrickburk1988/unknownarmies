@@ -118,7 +118,7 @@ function registerHandlebarsHelpers() {
         return string.charAt(0).toUpperCase() + string.slice(1);
     });
     Handlebars.registerHelper("equals", function (arg1, arg2) {
-        return arg1 == arg2;
+        return arg1 === arg2;
     });
     Handlebars.registerHelper("exceeds", function (arg1, arg2) {
         return arg1 > arg2;
@@ -134,9 +134,7 @@ function registerHandlebarsHelpers() {
         return result;
     });
     Handlebars.registerHelper("includes", function (arg1, arg2) {
-        if (typeof arg1 == "string" || arg1 instanceof Array) { //FIX
-            return arg1.includes(arg2);
-        }
+        return (typeof arg1 === "string" || Array.isArray(arg1)) && arg1.includes(arg2);
     });
     Handlebars.registerHelper("isGM", function() {
         return game.user.isGM;
