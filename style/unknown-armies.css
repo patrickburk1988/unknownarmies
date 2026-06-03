@@ -642,6 +642,9 @@
 .sheet .items__row.items__row--footer{
     margin:0 auto;
 }
+.sheet .items__row.items__row--header{
+    margin:0 var(--ua-SCROLLBAR-WIDTH);
+}
 .sheet .items.items--artifacts{
     --ua-ROW-COLUMNS:32px 1fr var(--ua-CHARGES-COLUMN-WIDTH) auto;
 }

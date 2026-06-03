@@ -4,6 +4,7 @@
 - Fixed bug with shift + roll.
 - Fixed bug with new identities not having a type.
 - Added default of 0 for percentage values.
+- Set item list header scrollbar offset via CSS property.
 
 ## v1.4.0
 

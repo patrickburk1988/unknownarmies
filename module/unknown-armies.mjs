@@ -40,6 +40,7 @@ Hooks.once("ready", async function() {
     if (!theme) {
         throw new Error(`Unknown Armies | Invalid "Sheet & UI Theme" setting value: ${themeSetting}`);
     }
+    document.documentElement.style.setProperty("--ua-SCROLLBAR-WIDTH", `${UAUtils.scrollbarWidth}px`);
     document.body.classList.add(
         ...("language" + (lang === "en" ? "" : " language--" + lang)).split(" "),
         "theme",
@@ -80,12 +81,6 @@ Hooks.on("renderDialogV2", function (dialog, html, data) {
         if (hiddenTypes.has(i.value)) {
             i.remove();
         }
-    });
-});
-
-Hooks.on("renderActorSheet", function (sheet, html, data) {
-    html[0].querySelectorAll(".items__row--header").forEach(el => {
-        el.style.margin = `0 ${UAUtils.scrollbarWidth}px`;
     });
 });
 
