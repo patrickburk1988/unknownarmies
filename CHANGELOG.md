@@ -3,6 +3,7 @@
 - Consolidated common roll logic.
 - Fixed bug with shift + roll.
 - Fixed bug with new identities not having a type.
+- Added default of 0 for percentage values.
 
 ## v1.4.0
 

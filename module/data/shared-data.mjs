@@ -66,7 +66,8 @@ export function NotesFields() {
 export function PercentageField() {
     return {
         percentage: new NumberField({
-            // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; initial?: any; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string; //TODO INITIAL 0
+            // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string;
+            initial: 0,
             integer: true
         })
     };
