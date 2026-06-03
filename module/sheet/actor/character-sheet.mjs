@@ -46,7 +46,7 @@ export class UACharacterSheet extends UABaseActorSheet
         data.cabalOptions = {
             "": ""
         };
-        for (let cabal of game.actors.filter(actor => actor.type == "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {
+        for (let cabal of game.actors.filter(actor => actor.type === "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {
             data.cabalOptions[cabal._uuid] = cabal.name;
         }
         data.items = this.actor.items.contents.map(item => {

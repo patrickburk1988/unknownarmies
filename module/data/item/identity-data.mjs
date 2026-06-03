@@ -4,7 +4,7 @@ export class UAIdentityData extends foundry.abstract.TypeDataModel
 {
     get featureList() {
         const features = Object.values(this.features) ?? [];
-        switch (this.type) {
+        switch (this.type ?? "") {
             case "":
                 break;
             case "Adept":

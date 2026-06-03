@@ -87,7 +87,7 @@ export const UABaseSheet = (BaseSheet) => class extends BaseSheet
 
     _onInputKeydown (event) {
         // HACK Re-examine below
-        if (event.keyCode == 13) {
+        if (event.keyCode === 13) {
             event.preventDefault();
             super.submit();
             $(event.currentTarget)[0].blur();

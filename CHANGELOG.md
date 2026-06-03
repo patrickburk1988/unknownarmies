@@ -2,6 +2,7 @@
 
 - Consolidated common roll logic.
 - Fixed bug with shift + roll.
+- Fixed bug with new identities not having a type.
 
 ## v1.4.0
 
