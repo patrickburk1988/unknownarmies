@@ -1,4 +1,4 @@
-import { NotesFields, PercentageField } from "../shared-data.mjs";
+import { NotesFields, OptionsFields, PercentageField } from "../shared-data.mjs";
 
 export class UACharacterData extends foundry.abstract.TypeDataModel
 {
@@ -39,14 +39,14 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
         const { BooleanField, DocumentUUIDField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
         const passionSchema = (extraFields = {}) => new SchemaField({
             // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-            ...extraFields,
             isUsed: new BooleanField(
                 // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
             ),
             name: new StringField(
                 // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
                 //FIX UNDEFINED
-            )
+            ),
+            ...extraFields
         });
         const relationshipSchema = () => new SchemaField({
             // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
@@ -119,6 +119,7 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
                 // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
                 //FIX UNDEFINED
             ),
+            ...OptionsFields(),
             passions: new SchemaField({
                 // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
                 rage: passionSchema(),
@@ -196,7 +197,8 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
             this.abilities[UACharacterData.shockGaugeSchema[shockMeterKey]["downbeatAbility"]] = 15 + hardenedNotchesx5;
         }
         this.isBurnedOut = totalHardenedNotches >= 25;
-        const woundsRatio = this.wounds.suffered / this.wounds.threshold;
+        const suffered = this.wounds.suffered;
+        const woundsRatio = suffered === 0 || suffered === null ? 0 : suffered / this.wounds.threshold;
         this.wounds.severity = woundsRatio < 0.5 ? "" : woundsRatio < 0.75 ? "Injured" : woundsRatio < 0.9 ? "Badly Injured" : woundsRatio < 1 ? "Unconscious" : "Dead"; //MAYBE Make better
     }
 }

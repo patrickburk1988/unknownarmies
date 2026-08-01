@@ -1,4 +1,4 @@
-import { DescriptionField, NotesFields, PercentageField } from "../shared-data.mjs";
+import { DescriptionField, NotesFields, OptionsFields, PercentageField } from "../shared-data.mjs";
 
 export class UAMilestoneData extends foundry.abstract.TypeDataModel
 {
@@ -6,6 +6,7 @@ export class UAMilestoneData extends foundry.abstract.TypeDataModel
         return {
             ...DescriptionField(),
             ...NotesFields(),
+            ...OptionsFields(),
             ...PercentageField()
         };
     }

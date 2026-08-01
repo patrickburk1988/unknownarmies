@@ -1,4 +1,4 @@
-const { HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 export const optionsCostTypePlural = {
     "minor":       "UA.MinorCharges",
@@ -63,10 +63,23 @@ export function NotesFields() {
     };
 }
 
+export function OptionsFields (extraFields = {}) {
+    return {
+        options: new SchemaField({
+            // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+            hideName: new BooleanField(
+                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+            ),
+            ...extraFields
+        })
+    }
+}
+
 export function PercentageField() {
     return {
         percentage: new NumberField({
             // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string;
+            // MAYBE percentage: new NumberField({min: 0, max: 100 }),
             initial: 0,
             integer: true
         })

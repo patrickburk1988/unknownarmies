@@ -1,4 +1,4 @@
-import { NotesFields, PercentageField } from "../shared-data.mjs";
+import { NotesFields, OptionsFields, PercentageField } from "../shared-data.mjs";
 
 export class UAIdentityData extends foundry.abstract.TypeDataModel
 {
@@ -214,6 +214,7 @@ export class UAIdentityData extends foundry.abstract.TypeDataModel
                 })
             }),
             ...NotesFields(),
+            ...OptionsFields(),
             ...PercentageField(),
             supernatural: new SchemaField({
                 // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO

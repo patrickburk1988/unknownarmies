@@ -11,7 +11,7 @@ export class UACharacterSheet extends UABaseActorSheet
                 "sheet",
                 "sheet--character"
             ],
-            height: 894, //TEST
+            height: 898, //TEST
         });
     }
 

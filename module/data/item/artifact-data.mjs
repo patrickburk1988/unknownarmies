@@ -1,4 +1,4 @@
-import { DescriptionField, EffectField, NotesFields } from "../shared-data.mjs";
+import { DescriptionField, EffectField, NotesFields, OptionsFields } from "../shared-data.mjs";
 
 export class UAArtifactData extends foundry.abstract.TypeDataModel
 {
@@ -18,8 +18,7 @@ export class UAArtifactData extends foundry.abstract.TypeDataModel
             ...DescriptionField(),
             ...EffectField(),
             ...NotesFields(),
-            options: new SchemaField({
-                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+            ...OptionsFields({
                 hideCharges: new BooleanField(
                     // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
                 )

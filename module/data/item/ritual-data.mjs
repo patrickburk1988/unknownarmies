@@ -1,4 +1,4 @@
-import { CostFields, EffectField, NotesFields, migrateCostType } from "../shared-data.mjs";
+import { CostFields, EffectField, NotesFields, OptionsFields, migrateCostType } from "../shared-data.mjs";
 
 export class UARitualData extends foundry.abstract.TypeDataModel
 {
@@ -10,7 +10,8 @@ export class UARitualData extends foundry.abstract.TypeDataModel
             ),
             ...CostFields(),
             ...EffectField(),
-            ...NotesFields()
+            ...NotesFields(),
+            ...OptionsFields()
         };
     }
 

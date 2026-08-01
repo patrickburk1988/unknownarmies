@@ -1,3 +1,10 @@
+## v1.4.2
+
+- Updated and corrected Russian localization (many thanks to alxnsk).
+- Increased min-height of editors being edited.
+- Fixed bug with identity details covering other info.
+- Fixed bug with new characters showing as dead.
+
 ## v1.4.1
 
 - Consolidated common roll logic.

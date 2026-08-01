@@ -338,6 +338,7 @@
 .sheet .button.button--enlarge{
     height:24px;
     margin:3px;
+    text-shadow:none;
     width:24px;
 }
 .sheet .button.button--manage{
@@ -490,7 +491,7 @@
 }
 .sheet .editor.prosemirror{
     gap:0;
-    min-height:106px;
+    min-height:138px;
 }
 .sheet .fas{
     margin-right:0;
@@ -940,10 +941,10 @@
     grid-template-columns:1fr 1fr;
 }
 .sheet .tab.tab--short-first-row{
-    grid-template-rows:auto 1fr;
+    grid-template-rows:max-content minmax(max-content, 1fr);
 }
 .sheet .tab.tab--short-last-row{
-    grid-template-rows:1fr auto;
+    grid-template-rows:minmax(max-content, 1fr) max-content;
 }
 .sheet .text-input{
     font-size:15px;

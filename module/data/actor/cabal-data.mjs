@@ -1,4 +1,4 @@
-import { NotesFields, PercentageField } from "../shared-data.mjs";
+import { NotesFields, OptionsFields, PercentageField } from "../shared-data.mjs";
 
 export class UACabalData extends foundry.abstract.TypeDataModel
 {
@@ -11,11 +11,13 @@ export class UACabalData extends foundry.abstract.TypeDataModel
                 name: new StringField(
                     // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
                     //FIX UNDEFINED
+                    // MAYBE name:       new StringField({ initial: "", blank: true }),
                 ),
                 ...PercentageField(), //TODO 0
                 scale: new StringField({
                     // gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
                     //FIX UNDEFINED
+                    // MAYBE scale:      new StringField({ initial: "", blank: true }),
                     blank: true,
                     choices: {
                         "Local":   "UA.Local",
@@ -23,7 +25,8 @@ export class UACabalData extends foundry.abstract.TypeDataModel
                         "Cosmic":  "UA.Cosmic"
                     }
                 })
-            })
+            }),
+            ...OptionsFields()
         };
     }
 

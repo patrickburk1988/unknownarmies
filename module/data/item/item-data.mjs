@@ -1,4 +1,4 @@
-import { DescriptionField, EffectField, NotesFields } from "../shared-data.mjs";
+import { DescriptionField, EffectField, NotesFields, OptionsFields } from "../shared-data.mjs";
 
 export class UAItemData extends foundry.abstract.TypeDataModel
 {
@@ -6,7 +6,8 @@ export class UAItemData extends foundry.abstract.TypeDataModel
         return {
             ...DescriptionField(),
             ...EffectField(),
-            ...NotesFields()
+            ...NotesFields(),
+            ...OptionsFields()
         };
     }
 }
