@@ -28,17 +28,17 @@
     </header>
     <div class="sheet__body">
         <div class="tab" data-tab="main">
-            <section class="tab__section">
+            <section class="tab__section tab__section--editor">
                 <h2 class="heading">{{localize 'UA.Description'}}:</h2>{{!-- //FIX --}}
                 {{editor enrichedDescription target="system.description" engine="prosemirror" button=true}}{{!-- //FIX --}}
             </section>
         </div>
         <div class="tab" data-tab="notes">
-            <section class="tab__section">
+            <section class="tab__section tab__section--editor">
                 <h2 class="heading">{{localize 'UA.PublicNotes'}}:</h2>
                 {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true}}
             </section>
-            <section class="tab__section">
+            <section class="tab__section tab__section--editor">
                 <h2 class="heading">{{localize 'UA.PrivateNotes'}}:</h2>
                 {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true}}
             </section>

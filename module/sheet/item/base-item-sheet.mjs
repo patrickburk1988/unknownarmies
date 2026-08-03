@@ -7,7 +7,7 @@ export class UABaseItemSheet extends UABaseSheet(foundry.appv1.sheets.ItemSheet)
         // height?: string | number | null; id?: string; left?: number | null; minimizable?: boolean; popOut?: boolean; resizable?: boolean; scale?: number | null; scrollY?: string[]; template?: string | null; title?: string; top?: number | null; width?: number | null; //TODO
         // classes?: string[]; dragDrop: DragDropConfiguration[]; tabs?: TabsConfiguration[]; 
         return foundry.utils.mergeObject(super.defaultOptions, {
-            height: 500, //FORNOW
+            height: 577, //FORNOW
             tabs: [{
                 contentSelector: ".sheet__body",
                 initial: "main",

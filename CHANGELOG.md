@@ -1,6 +1,7 @@
 ## v1.4.3
 
 - Fixed missing columns on cabal artifact and item lists.
+- Fixed editor section height.
 
 ## v1.4.2
 

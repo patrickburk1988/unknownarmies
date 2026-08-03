@@ -930,6 +930,9 @@
     min-height:102px;
     padding:4px;
 }
+.sheet .tab__section.tab__section--editor{
+    min-height:166px;
+}
 .sheet .tab__section.tab__section--headerless{
     grid-template-rows:auto;
 }

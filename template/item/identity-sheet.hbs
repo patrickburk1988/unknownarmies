@@ -116,17 +116,17 @@
                     <span class="stats-features__details">{{#if featureValue}}{{#if (includes featureValue 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes featureValue 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes featureValue 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes featureValue 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes featureValue 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{localize (concat 'UA.' (replaceAll featureValue ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/each}}
                 </div>
             </section>{{/if}}
-            <section class="tab__section">
+            <section class="tab__section tab__section--editor">
                 <h2 class="heading">{{localize 'UA.Details'}}:</h2>
                 {{editor enrichedDetails target="system.details" engine="prosemirror" button=true}}
             </section>
         </div>
         <div class="tab" data-tab="notes">
-            <section class="tab__section">
+            <section class="tab__section tab__section--editor">
                 <h2 class="heading">{{localize 'UA.PublicNotes'}}:</h2>
                 {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true}}
             </section>
-            <section class="tab__section">
+            <section class="tab__section tab__section--editor">
                 <h2 class="heading">{{localize 'UA.PrivateNotes'}}:</h2>
                 {{editor enrichedPrivateNotes target="system.notes.private" engine="prosemirror" button=true}}
             </section>

@@ -18,17 +18,17 @@
     </header>
     <div class="sheet__body">
         <div class="tab" data-tab="main">
-            <section class="tab__section">
+            <section class="tab__section tab__section--editor">
                 <h2 class="heading">{{localize 'UA.Description'}}:</h2>
                 {{editor enrichedDescription target="system.description" engine="prosemirror" button=true}}
             </section>
-            <section class="tab__section">
+            <section class="tab__section tab__section--editor">
                 <h2 class="heading">{{localize 'UA.Effect'}}:</h2>
                 {{editor enrichedEffect target="system.effect" engine="prosemirror" button=true}}
             </section>
         </div>
         <div class="tab" data-tab="notes">
-            <section class="tab__section">
+            <section class="tab__section tab__section--editor">
                 <h2 class="heading">{{localize 'UA.PublicNotes'}}:</h2>
                 {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true}}
             </section>
@@ -38,7 +38,7 @@
             </section>
         </div>
         <div class="tab" data-tab="options">
-            <section class="tab__section">
+            <section class="tab__section tab__section--editor">
                 <h2 class="heading">{{localize 'UA.GeneralOptions'}}:</h2>
                 <p style="text-align: center">Coming soon.</p>{{!-- //FIX --}}
             </section>{{#if (isGM)}}
