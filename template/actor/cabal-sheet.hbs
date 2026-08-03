@@ -68,27 +68,18 @@
                 <h2 class="heading">{{localize 'UA.Artifacts'}}:</h2>
                 <div class="items items--artifacts">
                     <div class="{{!-- //HACK capsule capsule--item --}} items__row items__row--header">
-                        <div class="items__column">
-                            <span>{{localize 'UA.Artifact'}}</span>
-                        </div>
-                        <div class="items__column">
-                            <span>{{localize 'UA.Charges'}}</span>
-                        </div>
+                        <span></span>
+                        <div class="items__column">{{localize 'UA.Artifact'}}</div>
+                        <div class="items__column">{{localize 'UA.Charges'}}</div>
                         <button class="button button--manage items__create-button" data-action="create-item" data-item-type="artifact"><i class="fas fa-plus"></i></button>
                     </div>
                     <div class="items__list-wrapper">
                         <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'artifact')}}
                             <li class="item items__row" data-item-id="{{item._id}}">
                                 <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!" disabled><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
-                                <div class="items__column" title="{{stripHTML item.system.effect}}">
-                                    <span>{{item.name}}</span>
-                                </div>
-                                <div class="items__column">
-                                    <span>{{#if item.system.options.hideCharges}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</span>
-                                </div>
-                                <div class="items__column">
-                                    <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
-                                </div>
+                                <div class="items__column" title="{{stripHTML item.system.effect}}">{{item.name}}</div>
+                                <div class="items__column">{{#if item.system.options.hideCharges}}&quest;{{else}}{{#if item.system.charges.isEternal}}&infin;{{else}}{{item.system.charges.amount}}{{/if}}{{/if}}</div>
+                                <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
                             </li>{{/if}}{{/each}}
                         </ul>
                     </div>
@@ -98,21 +89,16 @@
                 <h2 class="heading">{{localize 'UA.OtherItems'}}:</h2>
                 <div class="items items--items">
                     <div class="items__row items__row--header">
-                        <div class="items__column">
-                            <span>{{localize 'UA.Item'}}</span>
-                        </div>
+                        <span></span>
+                        <div class="items__column">{{localize 'UA.Item'}}</div>
                         <button class="button button--manage items__create-button" data-action="create-item" data-item-type="item"><i class="fas fa-plus"></i></button>
                     </div>
                     <div class="items__list-wrapper">
                         <ul class="items__list">{{#each items as |item itemId|}}{{#if (equals item.type 'item')}}
                             <li class="item items__row" data-item-id="{{item._id}}">
                                 <button class="button button--roll item__button item__button--roll item__button--square" data-action="roll" data-roll-label="{{item.name}}" data-roll-target="" title="Functionality coming soon!" disabled><i class="button__icon fas fa-dice-d10"></i></button>{{!-- //FIX --}}
-                                <div class="items__column" title="{{stripHTML item.system.effect}}">
-                                    <span>{{item.name}}</span>
-                                </div>
-                                <div class="items__column">
-                                    <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
-                                </div>
+                                <div class="items__column" title="{{stripHTML item.system.effect}}">{{item.name}}</div>
+                                <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
                             </li>{{/if}}{{/each}}
                         </ul>
                     </div>
@@ -120,7 +106,7 @@
             </section>
         </div>
         <div class="tab" data-tab="notes">
-            <section class="tab__section">
+            <section class="tab__section tab__section--editor">
                 <h2 class="heading">{{localize 'UA.PublicNotes'}}:</h2>
                 {{editor enrichedPublicNotes target="system.notes.public" engine="prosemirror" button=true}}
             </section>

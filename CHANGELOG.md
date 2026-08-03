@@ -1,3 +1,7 @@
+## v1.4.3
+
+- Fixed missing columns on cabal artifact and item lists.
+
 ## v1.4.2
 
 - Updated and corrected Russian localization (many thanks to alxnsk).
