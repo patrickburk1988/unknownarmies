@@ -205,6 +205,19 @@ function registerSettings() {
         scope: "world", //MAYBE
         type: Number
     });
+    game.settings.register("unknownarmies", "ArtifactsDefaultChargeVisibility", {
+        choices: {
+            1: game.i18n.localize("UA.Visible"),
+            2: game.i18n.localize("UA.Hidden"),
+        },
+        config: false, //FIX
+        default: 1,
+        hint: "UA.ArtifactsDefaultChargeVisibility_Hint",
+        name: "UA.ArtifactsDefaultChargeVisibility",
+        requiresReload: true, //MAYBE
+        scope: "world",
+        type: Number
+    });
     game.settings.register("unknownarmies", "IdentitiesAllowMM&YFeatures", {
         config: true,
         default: false, //MAYBE
