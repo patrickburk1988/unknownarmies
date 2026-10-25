@@ -49,7 +49,7 @@ export class UACharacterSheet extends UABaseActorSheet
         for (let cabal of game.actors.filter(actor => actor.type === "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {
             data.cabalOptions[cabal._uuid] = cabal.name;
         }
-        data.items = this.actor.items.contents.map(item => {
+        data.items = this.actor.items.contents.sort((a, b) => a.sort - b.sort).map(item => {
             return item.type !== "identity" ? item.toObject() : {
                 ...item.toObject(),
                 system: {
