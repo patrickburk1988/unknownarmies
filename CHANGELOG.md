@@ -4,6 +4,7 @@
 - Fixed leftover old avatar channel keys displaying on character sheets.
 - Fixed drag-and-drop for character sheet items.
 - Fixed pre-updates to skip unrecognized actor/item types rather than throwing an error.
+- Fixed "Casts Rituals" feature clearing when changing identity type.
 - Synchronized and simplified "burned out" threshold logic.
 
 ## v1.4.3

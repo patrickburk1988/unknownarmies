@@ -41,7 +41,7 @@ export class UAItem extends Item
             if (!value) {
                 continue;
             }
-            const isMagickFeature = value === "Cast Rituals" || value === "Use Gutter Magick";
+            const isMagickFeature = value === "Casts Rituals" || value === "Use Gutter Magick";
             const isMMYFeature = value === "Totem" || value.includes("Alter") || value.includes("Read") || value.includes("Terrorize");
             if ((newType !== "Mundane" && !isMagickFeature) || game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures") && !isMMYFeature) {
                 featureUpdates[key] = "";
