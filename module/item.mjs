@@ -1,3 +1,5 @@
+import { UAIdentityData } from "./data/item/identity-data.mjs";
+
 export class UAItem extends Item
 {
     async _preUpdate (changed, options, user) {
@@ -31,28 +33,19 @@ export class UAItem extends Item
     }
 
     async _preUpdateIdentity (changed) {
-        // HACK Re-examine below
         const newType = changed.system?.type;
         if (!newType || newType === this.system.type) {
             return;
         }
-        const featureUpdates = {};
-        for (const [key, value] of Object.entries(this.system.features)) {
-            if (!value) {
-                continue;
-            }
-            const isMagickFeature = value === "Casts Rituals" || value === "Use Gutter Magick";
-            const isMMYFeature = value === "Totem" || value.includes("Alter") || value.includes("Read") || value.includes("Terrorize");
-            if ((newType !== "Mundane" && !isMagickFeature) || game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures") && !isMMYFeature) {
-                featureUpdates[key] = "";
+        const allowMMYFeatures = game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures");
+        const features = foundry.utils.mergeObject(this.system.toObject().features, changed.system.features ?? {});
+        for (const [key, value] of Object.entries(features)) {
+            if (value && !isAllowed(value)) {
+                foundry.utils.setProperty(changed, `system.features.${key}`, "");
             }
         }
-        if (Object.keys(featureUpdates).length > 0) {
-            foundry.utils.mergeObject(changed, {
-                system: {
-                    features: featureUpdates
-                }
-            });
+        function isAllowed (feature) {
+            return newType === "Mundane" ? allowMMYFeatures || !UAIdentityData.optionsMMY.has(feature) : feature in UAIdentityData.optionsNonMundaneFeatures;
         }
     }
 

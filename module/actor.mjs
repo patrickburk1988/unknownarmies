@@ -21,7 +21,7 @@ export class UAActor extends Actor
     }
 
     async _preUpdateCharacter (changed) {
-        const shockGauge = foundry.utils.mergeObject(this.system.toObject().shockGauge, changed?.system?.shockGauge ?? {});
+        const shockGauge = foundry.utils.mergeObject(this.system.toObject().shockGauge, changed.system?.shockGauge ?? {});
         const totalHardenedNotches = Object.values(shockGauge).reduce((total, shockMeter) => total + (shockMeter.notches.hardened ?? 0), 0);
         if (totalHardenedNotches >= UACharacterData.burnedOutThreshold) {
             foundry.utils.mergeObject(changed, {
