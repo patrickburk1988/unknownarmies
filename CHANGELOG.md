@@ -1,3 +1,7 @@
+## v1.4.4
+
+- Fixed old avatar channel values taking precedence over newer edits.
+
 ## v1.4.3
 
 - Fixed missing columns on cabal artifact and item lists.

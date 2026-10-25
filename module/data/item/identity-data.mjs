@@ -260,11 +260,12 @@ export class UAIdentityData extends foundry.abstract.TypeDataModel
         const oldChannels = source.avatar?.channels;
         if (oldChannels && ["1-50", "51-70", "71-90", "91-98", "99-"].some(key => key in oldChannels)) {
             source.avatar.channels = {
-                first:     oldChannels["1-50"]  ?? "",
-                second:    oldChannels["51-70"] ?? "",
-                third:     oldChannels["71-90"] ?? "",
-                fourth:    oldChannels["91-98"] ?? "",
-                godwalker: oldChannels["99-"]   ?? "",
+                // New keys take precedence.
+                first:     oldChannels.first     ?? oldChannels["1-50"]  ?? "",
+                second:    oldChannels.second    ?? oldChannels["51-70"] ?? "",
+                third:     oldChannels.third     ?? oldChannels["71-90"] ?? "",
+                fourth:    oldChannels.fourth    ?? oldChannels["91-98"] ?? "",
+                godwalker: oldChannels.godwalker ?? oldChannels["99-"]   ?? "",
             };
         }
         return super.migrateData(source);
