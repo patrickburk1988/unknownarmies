@@ -1,6 +1,7 @@
 ## v1.4.4
 
 - Fixed old avatar channel values taking precedence over newer edits.
+- Fixed leftover old avatar channel keys displaying on character sheets.
 
 ## v1.4.3
 
