@@ -3,6 +3,7 @@
 - Fixed old avatar channel values taking precedence over newer edits.
 - Fixed leftover old avatar channel keys displaying on character sheets.
 - Fixed drag-and-drop for character sheet items.
+- Fixed pre-updates to skip unrecognized actor/item types rather than throwing an error.
 
 ## v1.4.3
 

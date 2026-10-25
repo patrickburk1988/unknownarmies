@@ -21,7 +21,8 @@ export class UAItem extends Item
                 await this._preUpdateSpell(changed);
                 break;
             default:
-                throw new Error(`Unknown Armies | Invalid item type: ${this}`);
+                console.warn(`Unknown Armies | Skipped pre-update for unrecognized item type: ${this}`);
+                break;
         }
         await super._preUpdate(changed, options, user);
     }

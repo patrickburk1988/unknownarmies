@@ -9,7 +9,8 @@ export class UAActor extends Actor
                 await this._preUpdateCharacter(changed);
                 break;
             default:
-                throw new Error(`Unknown Armies | Invalid actor type: ${this}`); //TODO make sure this doesn't stop the game
+                console.warn(`Unknown Armies | Skipped pre-update for unrecognized actor type: ${this}`);
+                break;
         }
         await super._preUpdate(changed, options, user);
     }
