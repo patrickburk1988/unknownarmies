@@ -21,10 +21,10 @@ export class UAItem extends Item
                 await this._preUpdateSpell(changed);
                 break;
             default:
-                console.warn(`Unknown Armies | Skipped pre-update for unrecognized item type: ${this}`);
+                console.warn(`Unknown Armies | Skipped pre-update for unrecognized item type \`${this.type}\`: ${this.name}`);
                 break;
         }
-        await super._preUpdate(changed, options, user);
+        return super._preUpdate(changed, options, user);
     }
 
     async _preUpdateArtifact (changed) {

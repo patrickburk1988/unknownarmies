@@ -1,3 +1,5 @@
+import { UACharacterData } from "./data/actor/character-data.mjs";
+
 export class UAActor extends Actor
 {
     async _preUpdate (changed, options, user) {
@@ -9,34 +11,25 @@ export class UAActor extends Actor
                 await this._preUpdateCharacter(changed);
                 break;
             default:
-                console.warn(`Unknown Armies | Skipped pre-update for unrecognized actor type: ${this}`);
+                console.warn(`Unknown Armies | Skipped pre-update for unrecognized actor type \`${this.type}\`: ${this.name}`);
                 break;
         }
-        await super._preUpdate(changed, options, user);
+        return super._preUpdate(changed, options, user);
     }
 
     async _preUpdateCabal (changed) {
     }
 
     async _preUpdateCharacter (changed) {
-        // BUG Re-examine below
-        let willBeBurnedOut;
-        if (!changed?.system?.shockGauge) {
-            willBeBurnedOut = this.system.isBurnedOut;
-        } else {
-            let totalHardenedNotches = 0;
-            for (let key of Object.keys(this.system.shockGauge)) {
-                totalHardenedNotches += parseInt(changed.system.shockGauge[key]?.notches?.hardened ?? this.system.shockGauge[key].notches.hardened);
-            }
-            willBeBurnedOut = totalHardenedNotches >= 25;
-        }
-        if (willBeBurnedOut) {
+        const shockGauge = foundry.utils.mergeObject(this.system.toObject().shockGauge, changed?.system?.shockGauge ?? {});
+        const totalHardenedNotches = Object.values(shockGauge).reduce((total, shockMeter) => total + (shockMeter.notches.hardened ?? 0), 0);
+        if (totalHardenedNotches >= UACharacterData.burnedOutThreshold) {
             foundry.utils.mergeObject(changed, {
                 system: {
                     passions: {
-                        rage:   { isUsed: false },
-                        noble:  { isUsed: false },
-                        fear:   { isUsed: false }
+                        rage:  { isUsed: false },
+                        noble: { isUsed: false },
+                        fear:  { isUsed: false }
                     }
                 }
             });

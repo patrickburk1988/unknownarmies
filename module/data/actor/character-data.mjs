@@ -2,6 +2,7 @@ import { NotesFields, OptionsFields, PercentageField } from "../shared-data.mjs"
 
 export class UACharacterData extends foundry.abstract.TypeDataModel
 {
+    static burnedOutThreshold = 25;
     static shockGaugeSchema = {
         "helplessness": {
             "coerceWith": "connect",
@@ -196,7 +197,7 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
             this.abilities[UACharacterData.shockGaugeSchema[shockMeterKey]["upbeatAbility"]] = 65 - hardenedNotchesx5;
             this.abilities[UACharacterData.shockGaugeSchema[shockMeterKey]["downbeatAbility"]] = 15 + hardenedNotchesx5;
         }
-        this.isBurnedOut = totalHardenedNotches >= 25;
+        this.isBurnedOut = totalHardenedNotches >= UACharacterData.burnedOutThreshold;
         const suffered = this.wounds.suffered;
         const woundsRatio = suffered === 0 || suffered === null ? 0 : suffered / this.wounds.threshold;
         this.wounds.severity = woundsRatio < 0.5 ? "" : woundsRatio < 0.75 ? "Injured" : woundsRatio < 0.9 ? "Badly Injured" : woundsRatio < 1 ? "Unconscious" : "Dead"; //MAYBE Make better
