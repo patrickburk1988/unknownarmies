@@ -1,6 +1,7 @@
 ## v1.4.5
 
 - Tweaked data schema options.
+- Converted Google Fonts to local fonts.
 
 ## v1.4.4
 
