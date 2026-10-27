@@ -167,7 +167,7 @@
 }
 
 .sheet .number-input,.sheet .number-percentage,.sheet .select,.sheet .text-input{
-    font-family:Fira Sans,sans-serif;
+    font-family:Fira Sans,Mendl Sans VF Dusk,Signika,system-ui,sans-serif;
 }
 
 .sheet .number-input.number-input--large,.sheet .text-input.text-input--large{
@@ -471,7 +471,7 @@
     min-height:32px;
 }
 .sheet .editor-content{
-    font-family:Mendl Sans VF Dusk,Calluna Sans,Cabin,sans-serif;
+    font-family:Mendl Sans VF Dusk,Fira Sans,Signika,system-ui,sans-serif;
     font-size:15px;
     padding:.6em 1em;
     text-transform:none;
@@ -970,7 +970,7 @@
 .language{
     --ua-CHARGES-COLUMN-WIDTH:48px;
     --ua-COST-COLUMN-WIDTH:40px;
-    --ua-FONT-FAMILY-MAIN:"Alatsi", sans-serif;
+    --ua-FONT-FAMILY-MAIN:"Alatsi", "Alegreya Sans", "Signika", system-ui, sans-serif;
     --ua-PERCENTAGE-COLUMN-WIDTH:66px;
     --ua-SHOCK-METER-BUTTON-WIDTH:90px;
 }
@@ -983,7 +983,7 @@
 .language.language--ru{
     --ua-CHARGES-COLUMN-WIDTH:44px;
     --ua-COST-COLUMN-WIDTH:66px;
-    --ua-FONT-FAMILY-MAIN:"Alegreya Sans", sans-serif;
+    --ua-FONT-FAMILY-MAIN:"Alegreya Sans", "Alatsi", "Signika", system-ui, sans-serif;
     --ua-PERCENTAGE-COLUMN-WIDTH:52px;
     --ua-SHOCK-METER-BUTTON-WIDTH:94px;
 }
@@ -1016,91 +1016,22 @@
     content:url(../image/pause.png);
 }
 @font-face{
-    font-family:Calluna Sans;
-    src:url(../font/calluna-sans-regular.woff2) format(woff2), url(../font/calluna-sans-regular.woff) format(woff);
+    font-family:Alatsi;
+    src:url(../font/alatsi-regular.woff2) format(woff2);
+}
+@font-face{
+    font-family:Alegreya Sans;
+    src:url(../font/alegreya-sans-regular.woff2) format(woff2);
+    unicode-range:u+0301, u+0400-052f, u+1c80-1c8a, u+20b4, u+2116, u+2de0-2dff, u+a640-a69f, u+fe2e-fe2f;
+}
+@font-face{
+    font-family:Fira Sans;
+    src:url(../font/fira-sans-regular.woff2) format(woff2);
 }
 @font-face{
     font-family:Mendl Sans VF Dusk;
     font-weight:100 900;
-    src:url(../font/mendl-sans-vf-dusk-semibold.woff2) format(woff2), url(../font/mendl-sans-vf-dusk-semibold.woff) format(woff);
-}
-@font-face{
-    font-display:swap;
-    font-family:Alatsi;
-    src:url(https://fonts.gstatic.com/s/alatsi/v14/TK3iWkUJAxQ2nLN2FD8Ghe4.woff2) format(woff2);
-    unicode-range:u+0460-052f, u+1c80-1c8a, u+20b4, u+2de0-2dff, u+a640-a69f, u+fe2e-fe2f;
-}
-@font-face{
-    font-display:swap;
-    font-family:Alatsi;
-    src:url(https://fonts.gstatic.com/s/alatsi/v14/TK3iWkUJAxQ2nLN2Fz8Ghe4.woff2) format(woff2);
-    unicode-range:u+0100-02ba, u+02bd-02c5, u+02c7-02cc, u+02ce-02d7, u+02dd-02ff, u+0304, u+0308, u+0329, u+1d00-1dbf, u+1e00-1e9f, u+1ef2-1eff, u+2020, u+20a0-20ab, u+20ad-20c0, u+2113, u+2c60-2c7f, u+a720-a7ff;
-}
-@font-face{
-    font-display:swap;
-    font-family:Alatsi;
-    src:url(https://fonts.gstatic.com/s/alatsi/v14/TK3iWkUJAxQ2nLN2GT8G.woff2) format(woff2);
-    unicode-range:u+00??, u+0131, u+0152-0153, u+02bb-02bc, u+02c6, u+02da, u+02dc, u+0304, u+0308, u+0329, u+2000-206f, u+20ac, u+2122, u+2191, u+2193, u+2212, u+2215, u+feff, u+fffd;
-}
-@font-face{
-    font-display:swap;
-    font-family:Alatsi;
-    src:url(https://fonts.gstatic.com/s/alatsi/v14/TK3iWkUJAxQ2nLN2Fj8Ghe4.woff2) format(woff2);
-    unicode-range:u+0102-0103, u+0110-0111, u+0128-0129, u+0168-0169, u+01a0-01a1, u+01af-01b0, u+0300-0301, u+0303-0304, u+0308-0309, u+0323, u+0329, u+1ea0-1ef9, u+20ab;
-}
-@font-face{
-    font-display:swap;
-    font-family:Alegreya Sans;
-    src:url(https://fonts.gstatic.com/s/alegreyasans/v26/5aUz9_-1phKLFgshYDvh6Vwt7VdtvXVX.woff2) format(woff2);
-    unicode-range:u+0460-052f, u+1c80-1c8a, u+20b4, u+2de0-2dff, u+a640-a69f, u+fe2e-fe2f;
-}
-@font-face{
-    font-display:swap;
-    font-family:Alegreya Sans;
-    src:url(https://fonts.gstatic.com/s/alegreyasans/v26/5aUz9_-1phKLFgshYDvh6Vwt7V5tvXVX.woff2) format(woff2);
-    unicode-range:u+0301, u+0400-045f, u+0490-0491, u+04b0-04b1, u+2116;
-}
-@font-face{
-    font-display:swap;
-    font-family:Fira Sans;
-    src:url(https://fonts.gstatic.com/s/firasans/v18/va9E4kDNxMZdWfMOD5VvmojLeTY.woff2) format(woff2);
-    unicode-range:u+0460-052f, u+1c80-1c8a, u+20b4, u+2de0-2dff, u+a640-a69f, u+fe2e-fe2f;
-}
-@font-face{
-    font-display:swap;
-    font-family:Fira Sans;
-    src:url(https://fonts.gstatic.com/s/firasans/v18/va9E4kDNxMZdWfMOD5Vvk4jLeTY.woff2) format(woff2);
-    unicode-range:u+0301, u+0400-045f, u+0490-0491, u+04b0-04b1, u+2116;
-}
-@font-face{
-    font-display:swap;
-    font-family:Fira Sans;
-    src:url(https://fonts.gstatic.com/s/firasans/v18/va9E4kDNxMZdWfMOD5Vvm4jLeTY.woff2) format(woff2);
-    unicode-range:u+1f??;
-}
-@font-face{
-    font-display:swap;
-    font-family:Fira Sans;
-    src:url(https://fonts.gstatic.com/s/firasans/v18/va9E4kDNxMZdWfMOD5VvlIjLeTY.woff2) format(woff2);
-    unicode-range:u+0370-0377, u+037a-037f, u+0384-038a, u+038c, u+038e-03a1, u+03a3-03ff;
-}
-@font-face{
-    font-display:swap;
-    font-family:Fira Sans;
-    src:url(https://fonts.gstatic.com/s/firasans/v18/va9E4kDNxMZdWfMOD5VvmYjLeTY.woff2) format(woff2);
-    unicode-range:u+0100-02ba, u+02bd-02c5, u+02c7-02cc, u+02ce-02d7, u+02dd-02ff, u+0304, u+0308, u+0329, u+1d00-1dbf, u+1e00-1e9f, u+1ef2-1eff, u+2020, u+20a0-20ab, u+20ad-20c0, u+2113, u+2c60-2c7f, u+a720-a7ff;
-}
-@font-face{
-    font-display:swap;
-    font-family:Fira Sans;
-    src:url(https://fonts.gstatic.com/s/firasans/v18/va9E4kDNxMZdWfMOD5Vvl4jL.woff2) format(woff2);
-    unicode-range:u+00??, u+0131, u+0152-0153, u+02bb-02bc, u+02c6, u+02da, u+02dc, u+0304, u+0308, u+0329, u+2000-206f, u+20ac, u+2122, u+2191, u+2193, u+2212, u+2215, u+feff, u+fffd;
-}
-@font-face{
-    font-display:swap;
-    font-family:Fira Sans;
-    src:url(https://fonts.gstatic.com/s/firasans/v18/va9E4kDNxMZdWfMOD5VvmIjLeTY.woff2) format(woff2);
-    unicode-range:u+0102-0103, u+0110-0111, u+0128-0129, u+0168-0169, u+01a0-01a1, u+01af-01b0, u+0300-0301, u+0303-0304, u+0308-0309, u+0323, u+0329, u+1ea0-1ef9, u+20ab;
+    src:url(../font/mendl-sans-vf-dusk-semibold.woff2) format(woff2);
 }
 .sheet .button.button--navigate.active:hover,.sheet .button:not(.button--enlarge,.button--manage,.button--navigate,.button--text){
     position:relative;
