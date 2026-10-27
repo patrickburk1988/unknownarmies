@@ -10,10 +10,10 @@
     "url": "https://github.com/patrickburk1988/unknownarmies",
     "manifest": "https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/system.json",
     "download": "https://github.com/patrickburk1988/unknownarmies/releases/latest/download/unknownarmies.zip",
-    "version": "1.4.4",
+    "version": "1.4.5",
     "compatibility": {
-        "minimum": 11,
-        "verified": "14.365"
+        "minimum": 13,
+        "verified": "14.369"
     },
     "grid": {
         "units": "ft"
