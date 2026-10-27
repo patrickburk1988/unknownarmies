@@ -6,13 +6,16 @@ export class UAArtifactData extends foundry.abstract.TypeDataModel
         const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
         return {
             charges: new SchemaField({
-                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
                 amount: new NumberField({
-                    // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; initial?: any; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string; //TODO
-                    integer: true
+                    //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
+                    initial: 0, //MAYBE
+                    integer: true,
+                    min: 0,
+                    nullable: false
                 }),
                 isEternal: new BooleanField(
-                    // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                    //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
                 )
             }),
             ...DescriptionField(),
@@ -20,17 +23,18 @@ export class UAArtifactData extends foundry.abstract.TypeDataModel
             ...NotesFields(),
             ...OptionsFields({
                 hideCharges: new BooleanField(
-                    // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                    //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; initial?: any; 
                 )
             }),
             power: new StringField({
-                // gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; textSearch?: boolean;
                 blank: true,
                 choices: {
                     "Minor":       "UA.Minor",
                     "Significant": "UA.Significant",
                     "Major":       "UA.Major"
-                }
+                },
+                initial: ""
             })
         };
     }

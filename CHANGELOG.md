@@ -1,3 +1,7 @@
+## v1.4.5
+
+- Tweaked data schema options.
+
 ## v1.4.4
 
 - Fixed old avatar channel values taking precedence over newer edits.

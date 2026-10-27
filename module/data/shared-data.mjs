@@ -14,19 +14,19 @@ export const optionsCostTypeSingular = {
 export function CostFields() {
     return {
         cost: new SchemaField({
-            // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+            //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
             amount: new NumberField({
-                // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; initial?: any; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string; //TODO
-                integer: true
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
+                initial: 0,
+                integer: true,
+                min: 0,
+                nullable: false
             }),
             type: new StringField({
-                // gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; textSearch?: boolean; 
                 blank: true,
-                choices: [
-                    "major",
-                    "minor",
-                    "significant"
-                ]
+                choices: Object.keys(optionsCostTypeSingular),
+                initial: ""
             })
         })
     };
@@ -35,8 +35,7 @@ export function CostFields() {
 export function DescriptionField() {
     return {
         description: new HTMLField(
-            // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-            // FIX required false, blank true, initial ""
+            //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
         )
     };
 }
@@ -44,7 +43,7 @@ export function DescriptionField() {
 export function EffectField() {
     return {
         effect: new HTMLField(
-            // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+            //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
         )
     };
 }
@@ -52,12 +51,12 @@ export function EffectField() {
 export function NotesFields() {
     return {
         notes: new SchemaField({
-            // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+            //FORNOW label?: string; validate?: DataFieldValidator; validationError?: string;
             private: new HTMLField(
-                // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
             ),
             public: new HTMLField(
-                // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
             )
         })
     };
@@ -66,22 +65,25 @@ export function NotesFields() {
 export function OptionsFields (extraFields = {}) {
     return {
         options: new SchemaField({
-            // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+            //FORNOW label?: string; validate?: DataFieldValidator; validationError?: string;
             hideName: new BooleanField(
-                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
             ),
             ...extraFields
         })
     }
 }
 
-export function PercentageField() {
+export function PercentageField(options = {}) {
     return {
         percentage: new NumberField({
-            // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string;
-            // MAYBE percentage: new NumberField({min: 0, max: 100 }),
+            //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
             initial: 0,
-            integer: true
+            integer: true,
+            max: 100,
+            min: 0,
+            nullable: false,
+            ...options
         })
     };
 }

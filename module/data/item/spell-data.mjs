@@ -9,9 +9,10 @@ export class UASpellData extends foundry.abstract.TypeDataModel
             ...EffectField(),
             ...NotesFields(),
             ...OptionsFields(),
-            school: new StringField(
-                // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-            )
+            school: new StringField({
+                //FORNOW hint?: string; label?: string; placeholder?: string; textSearch?: boolean; validate?: DataFieldValidator; validationError?: string;
+                initial: ""
+            })
         };
     }
 

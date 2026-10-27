@@ -45,7 +45,7 @@ export class UAMilestoneSheet extends UABaseItemSheet
             faces: 10,
             footer: `${game.i18n.localize("UA.ObjectiveImproved")}: ${oldObjectivePercentage}% <span class="arrow">▶</span> ${this.actor.system.objective.percentage}%`,
             formula,
-            result: `${total >= 0 ? "+" : "-"}${total}%`,
+            result: `${total >= 0 ? "+" : ""}${total}%`,
             total
         }, {
             flavor: dataset.rollLabel

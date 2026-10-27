@@ -109,7 +109,7 @@ export class UAIdentitySheet extends UABaseItemSheet
             faces: 10,
             footer: `${game.i18n.localize("UA.IdentityImproved")}: ${oldPercentage}% <span class="arrow">▶</span> ${this.item.system.percentage}%`,
             formula,
-            result: `${total >= 0 ? "+" : "-"}${total}%`,
+            result: `${total >= 0 ? "+" : ""}${total}%`,
             total
         }, {
             flavor: event.currentTarget.dataset.rollLabel

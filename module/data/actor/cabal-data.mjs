@@ -7,23 +7,23 @@ export class UACabalData extends foundry.abstract.TypeDataModel
         return {
             ...NotesFields(),
             objective: new SchemaField({
-                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-                name: new StringField(
-                    // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-                    //FIX UNDEFINED
-                    // MAYBE name:       new StringField({ initial: "", blank: true }),
-                ),
-                ...PercentageField(), //TODO 0
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
+                name: new StringField({
+                    //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; textSearch?: boolean;
+                    initial: ""
+                }),
+                ...PercentageField({
+                    persisted: false
+                }),
                 scale: new StringField({
-                    // gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-                    //FIX UNDEFINED
-                    // MAYBE scale:      new StringField({ initial: "", blank: true }),
+                    //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; textSearch?: boolean;
                     blank: true,
                     choices: {
                         "Local":   "UA.Local",
                         "Weighty": "UA.Weighty",
                         "Cosmic":  "UA.Cosmic"
-                    }
+                    },
+                    initial: ""
                 })
             }),
             ...OptionsFields()

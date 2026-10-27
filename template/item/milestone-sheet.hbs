@@ -10,7 +10,7 @@
                 <div class="capsule capsule--milestone">
                     <input type="text" id="{{item.id}}-name" class="capsule__cell sheet__name text-input text-input--large" name="name" value="{{item.name}}" data-dtype="String" required>
                     <div class="capsule__cell number-percentage number-percentage--large">
-                        <input type="number" class="capsule__cell number-input number-input--large" name="system.percentage" value="{{item.system.percentage}}" min="0" max="100" data-dtype="Number">
+                        <input type="number" class="capsule__cell number-input number-input--large" name="system.percentage" value="{{item.system.percentage}}" min="-100" max="100" data-dtype="Number">
                         <span class="capsule__cell number-percentage__percentage">%</span>
                     </div>
                 </div>

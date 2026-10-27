@@ -39,96 +39,103 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
     static defineSchema() {
         const { BooleanField, DocumentUUIDField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
         const passionSchema = (extraFields = {}) => new SchemaField({
-            // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+            //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
             isUsed: new BooleanField(
-                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
             ),
-            name: new StringField(
-                // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-                //FIX UNDEFINED
-            ),
+            name: new StringField({
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; textSearch?: boolean;
+                initial: ""
+            }),
             ...extraFields
         });
         const relationshipSchema = () => new SchemaField({
-            // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-            name: new StringField(
-                // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-                //FIX UNDEFINED
-            ),
-            ...PercentageField() //TODO 0
-            // percentage: new NumberField({ //MAYBE Extend Percentage
-            //     // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; initial?: any; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string; //TODO
-            //     //FIX UNDEFINED
-            // })
-            // HACK
+            //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
+            name: new StringField({
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; textSearch?: boolean;
+                initial: ""
+            }),
+            ...PercentageField()
         });
         const shockMeterSchema = () => new SchemaField({
-            // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+            //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
             notches: new SchemaField({
-                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
                 failed: new NumberField({
-                    // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; initial?: any; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string; //TODO
-                    integer: true
-                    //FIX UNDEFINED
+                    //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
+                    initial: 0,
+                    integer: true,
+                    max: 5,
+                    min: 0,
+                    nullable: false
                 }),
                 hardened: new NumberField({
-                    // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string; //TODO
+                    //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
                     initial: 1,
-                    integer: true
+                    integer: true,
+                    max: 9,
+                    min: 1,
+                    nullable: false
                 })
             }),
-            ongoingMadness: new StringField(
-                // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-                //FIX UNDEFINED
-            )
+            ongoingMadness: new StringField({
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; textSearch?: boolean;
+                initial: ""
+            })
         });
         return {
             appearance: new HTMLField(
-                // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
             ),
             background: new HTMLField(
-                // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
             ),
             cabal: new DocumentUUIDField({
-                // embedded?: boolean; relative?: boolean; type?: string; //TODO
-                //FIX UNDEFINED
+                //FORNOW blank?: boolean; hint?: string; initial?: any; label?: string; nullable?: boolean; placeholder?: string; textSearch?: boolean; validate?: DataFieldValidator; validationError?: string
+                embedded: false, //MAYBE Is this the default?
+                type: "Actor"
             }),
             charges: new SchemaField({
-                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
                 minor: new NumberField({
-                    // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; initial?: any; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string; //TODO
-                    integer: true
-                    //FIX UNDEFINED
+                    //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
+                    initial: 0,
+                    integer: true,
+                    min: 0,
+                    nullable: false
                 }),
                 significant: new NumberField({
-                    // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; initial?: any; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string; //TODO
-                    integer: true
-                    //FIX UNDEFINED
+                    //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
+                    initial: 0,
+                    integer: true,
+                    min: 0,
+                    nullable: false
                 }),
                 major: new NumberField({
-                    // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; initial?: any; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string; //TODO
-                    integer: true
-                    //FIX UNDEFINED
+                    //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
+                    initial: 0,
+                    integer: true,
+                    min: 0,
+                    nullable: false
                 })
             }),
-            concept: new StringField(
-                // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-                //FIX UNDEFINED
-            ),
+            concept: new StringField({
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; textSearch?: boolean;
+                initial: ""
+            }),
             ...NotesFields(),
-            obsession: new StringField(
-                // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-                //FIX UNDEFINED
-            ),
+            obsession: new StringField({
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; textSearch?: boolean; 
+                initial: ""
+            }),
             ...OptionsFields(),
             passions: new SchemaField({
-                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
                 rage: passionSchema(),
                 noble: passionSchema(),
                 fear: passionSchema({
                     shockMeter: new StringField({
-                        // gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
-                        // FIX UNDEFINED
+                        //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
                         blank: true,
                         choices: {
                             "Helplessness": "UA.Helplessness",
@@ -136,15 +143,16 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
                             "Self":         "UA.Self",
                             "Unnatural":    "UA.Unnatural",
                             "Violence":     "UA.Violence"
-                        }
+                        },
+                        initial: ""
                     })
                 })
             }),
             personality: new HTMLField(
-                // blank?:boolean; choices?:object|Function|string[]; gmOnly?:boolean; hint?:string; initial?:any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; textSearch?: boolean; trim?: boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
             ),
             relationships: new SchemaField({
-                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
                 protege: relationshipSchema(),
                 favorite: relationshipSchema(),
                 responsibility: relationshipSchema(),
@@ -152,7 +160,7 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
                 mentor: relationshipSchema()
             }),
             shockGauge: new SchemaField({
-                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
                 helplessness: shockMeterSchema(),
                 isolation: shockMeterSchema(),
                 self: shockMeterSchema(),
@@ -160,16 +168,20 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
                 violence: shockMeterSchema()
             }),
             wounds: new SchemaField({
-                // gmOnly?: boolean; hint?: string; initial?: any; label?:string; nullable?:boolean; persisted?:boolean; placeholder?:string; readonly?:boolean; required?:boolean; validate?: DataFieldValidator; validationError?: string; //TODO
+                //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
                 suffered: new NumberField({
-                    // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; initial?: any; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string; //TODO
-                    integer: true
-                    //FIX UNDEFINED
+                    //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; gmOnly?: boolean; 
+                    initial: 0,
+                    integer: true,
+                    min: 0,
+                    nullable: false
                 }),
                 threshold: new NumberField({
-                    // choices?: object | Function | number[]; gmOnly?: boolean; hint?: string; initial?: any; label?: string; max?: number; min?: number; nullable?: boolean; persisted?: boolean; placeholder?: string; positive?: boolean; readonly?: boolean; required?: boolean; step?: number; validate?: DataFieldValidator; validationError?: string; //TODO
-                    integer: true
-                    //FIX UNDEFINED
+                    //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; max?: number; 
+                    initial: 50,
+                    integer: true,
+                    min: 0,
+                    nullable: false
                 })
             })
         };
@@ -192,14 +204,14 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
         let totalHardenedNotches = 0;
         for (let shockMeterKey of Object.keys(shockMeters)) {
             const hardenedNotches = shockMeters[shockMeterKey].notches.hardened;
-            totalHardenedNotches += parseInt(hardenedNotches);
+            totalHardenedNotches += hardenedNotches;
             const hardenedNotchesx5 = hardenedNotches * 5;
             this.abilities[UACharacterData.shockGaugeSchema[shockMeterKey]["upbeatAbility"]] = 65 - hardenedNotchesx5;
             this.abilities[UACharacterData.shockGaugeSchema[shockMeterKey]["downbeatAbility"]] = 15 + hardenedNotchesx5;
         }
         this.isBurnedOut = totalHardenedNotches >= UACharacterData.burnedOutThreshold;
         const suffered = this.wounds.suffered;
-        const woundsRatio = suffered === 0 || suffered === null ? 0 : suffered / this.wounds.threshold;
+        const woundsRatio = suffered === 0 ? 0 : suffered / this.wounds.threshold;
         this.wounds.severity = woundsRatio < 0.5 ? "" : woundsRatio < 0.75 ? "Injured" : woundsRatio < 0.9 ? "Badly Injured" : woundsRatio < 1 ? "Unconscious" : "Dead"; //MAYBE Make better
     }
 }

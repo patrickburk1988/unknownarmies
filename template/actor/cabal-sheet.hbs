@@ -54,7 +54,7 @@
                                     <span>{{item.name}}</span>
                                 </div>
                                 <div class="items__column">
-                                    <span>+{{item.system.percentage}}%</span>
+                                    <span>{{#if (exceedsOrEquals item.system.percentage 0)}}+{{/if}}{{item.system.percentage}}%</span>
                                 </div>
                                     <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
                             </li>{{/if}}{{/each}}

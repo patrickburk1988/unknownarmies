@@ -7,7 +7,9 @@ export class UAMilestoneData extends foundry.abstract.TypeDataModel
             ...DescriptionField(),
             ...NotesFields(),
             ...OptionsFields(),
-            ...PercentageField()
+            ...PercentageField({
+                min: -100
+            })
         };
     }
 }
