@@ -66,27 +66,12 @@
                     <div class="pseudo-editors__label">
                         <span class="label">{{localize 'UA.Taboos'}}:</span>
                     </div>
-                    {{editor enrichedAvatarTaboos target="system.avatar.taboos" engine="prosemirror" button=true class="editor-content--small"}}{{#if (exceedsOrEquals item.system.percentage 1)}}
+                    {{editor enrichedAvatarTaboos target="system.avatar.taboos" engine="prosemirror" button=true class="editor-content--small"}}
+                    {{#each channels as |channel|}}{{#if channel.isUnlocked}}
                     <div class="pseudo-editors__label">
-                        <span class="label">{{localize 'UA.Channel1-50%'}}:</span>
+                        <span class="label">{{localize channel.label}}:</span>
                     </div>
-                    {{editor enrichedChannel1-50 target="system.avatar.channels.first" engine="prosemirror" button=true class="editor-content--small"}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 51)}}
-                    <div class="pseudo-editors__label">
-                        <span class="label">{{localize 'UA.Channel51-70%'}}:</span>
-                    </div>
-                    {{editor enrichedChannel51-70 target="system.avatar.channels.second" engine="prosemirror" button=true class="editor-content--small"}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 71)}}
-                    <div class="pseudo-editors__label">
-                        <span class="label">{{localize 'UA.Channel71-90%'}}:</span>
-                    </div>
-                    {{editor enrichedChannel71-90 target="system.avatar.channels.third" engine="prosemirror" button=true class="editor-content--small"}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 91)}}
-                    <div class="pseudo-editors__label">
-                        <span class="label">{{localize 'UA.Channel91-98%'}}:</span>
-                    </div>
-                    {{editor enrichedChannel91-98 target="system.avatar.channels.fourth" engine="prosemirror" button=true class="editor-content--small"}}{{/if}}{{#if (exceedsOrEquals item.system.percentage 99)}}
-                    <div class="pseudo-editors__label">
-                        <span class="label">{{localize 'UA.Channel99%'}}:</span>
-                    </div>
-                    {{editor enrichedChannel99 target="system.avatar.channels.godwalker" engine="prosemirror" button=true class="editor-content--small"}}{{/if}}{{/if}}{{#if (equals item.system.type 'Adept')}}
+                    {{editor channel.enriched target=(concat "system.avatar.channels." channel.name) engine="prosemirror" button=true class="editor-content--small"}}{{/if}}{{/each}}{{/if}}{{#if (equals item.system.type 'Adept')}}
                     <div class="pseudo-editors__label">
                         <span class="label">{{localize 'UA.Domain'}}:</span>
                     </div>
@@ -107,10 +92,8 @@
                         <span class="label">{{localize 'UA.GenerateMajorCharge'}}:</span>
                     </div>
                     {{editor enrichedGenerateMajorCharge target="system.adept.generateCharge.major" engine="prosemirror" button=true class="editor-content--small"}}{{/if}}
-                    {{!-- {{#each item.system.features as |featureValue featureName|}}<label class="label" for="{{../item.id}}-feature-{{featureName}}">{{localize 'UA.Feature'}}:</label> --}}
                     {{#each features as |featureValue featureName|}}<label class="label" for="{{../item.id}}-feature-{{featureName}}">{{localize 'UA.Feature'}}:</label>
                     <div class="select">
-                        {{!-- <select id="{{../item.id}}-feature-{{featureName}}" class="select__inner" name="system.features.{{featureName}}">{{#if (equals ../item.system.type 'Mundane')}}{{selectOptions ../optionsFeatures selected=featureValue localize=true blank=""}}{{else}}{{selectOptions ../optionsFeaturesNotMundane selected=featureValue localize=true blank=""}}{{/if}}</select> --}}
                         <select id="{{../item.id}}-feature-{{featureName}}" class="select__inner" name="system.features.{{featureName}}">{{selectOptions ../optionsFeaturesForType selected=featureValue localize=true blank=""}}</select>
                     </div>
                     <span class="stats-features__details">{{#if featureValue}}{{#if (includes featureValue 'Coerces')}}{{localize 'UA.CoercesMeter_Details'}}{{else}}{{#if (includes featureValue 'Evaluates')}}{{localize 'UA.EvaluatesMeter_Details'}}{{else}}{{#if (includes featureValue 'Reads')}}{{localize 'UA.ReadsObsession/Passion_Details'}}{{else}}{{#if (includes featureValue 'Resists')}}{{localize 'UA.ResistsMeter_Details'}}{{else}}{{#if (includes featureValue 'Substitutes')}}{{localize 'UA.SubstitutesForAbility_Details'}}{{else}}{{localize (concat 'UA.' (replaceAll featureValue ' ' '') '_Details')}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}{{/if}}</span>{{/each}}

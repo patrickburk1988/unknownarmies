@@ -3,50 +3,48 @@ import { NotesFields, OptionsFields, PercentageField } from "../shared-data.mjs"
 export class UAIdentityData extends foundry.abstract.TypeDataModel
 {
     get featureList() {
-        const features = Object.values(this.features) ?? [];
-        switch (this.type ?? "") {
+        const leadingFeatures = [];
+        const features = Object.values(this.features).map(feature => UAIdentityData.optionsMundaneFeatures[feature]).filter(Boolean);
+        switch (this.type) {
             case "":
                 break;
             case "Adept":
                 break;
             case "Avatar":
-                const channels = this.avatar.channels; //MAYBE null check?
-                const percentage = this.percentage;
-                if (percentage >= 1 && channels.first !== "") {
-                    features.push("Channel 1-50%");
-                }
-                if (percentage >= 51 && channels.second !== "") {
-                    features.push("Channel 51-70%");
-                }
-                if (percentage >= 71 && channels.third !== "") {
-                    features.push("Channel 71-90%");
-                }
-                if (percentage >= 91 && channels.fourth !== "") {
-                    features.push("Channel 91-98%");
-                }
-                if (percentage >= 99 && channels.godwalker !== "") {
-                    features.push("Channel 99%");
+                for (const channel of UAIdentityData.avatarChannels) {
+                    if (this.percentage >= channel.percentage && this.avatar.channels[channel.name] !== "") {
+                        leadingFeatures.push(channel.label);
+                    }
                 }
                 break;
             case "Mundane":
-                const substitutesFor = this.mundane?.substitutesFor;
+                const substitutesFor = this.mundane.substitutesFor;
                 if (substitutesFor) {
-                    features.push("Substitutes for " + substitutesFor);
+                    features.push(UAIdentityData.optionsMundaneFeatures["Substitutes for " + substitutesFor]);
                 }
                 break;
             case "Supernatural":
-                const ability = this.supernatural?.ability;
+                const ability = this.supernatural.ability;
                 if (ability) {
-                    features.push(ability);
+                    leadingFeatures.push(this.schema.fields.supernatural.fields.ability.choices[ability]);
                 }
                 break;
             default:
                 throw new Error(`Unknown Armies | Invalid identity type: ${this.type}`);
         }
-        return features;
+        const collator = new Intl.Collator(game.i18n.lang);
+        features.sort((a, b) => collator.compare(game.i18n.localize(a), game.i18n.localize(b)));
+        return [...leadingFeatures, ...features];
     }
 
-    static optionsMMY = new Set([ //MAYBE Move to sheet file?
+    static avatarChannels = [
+        { label: "UA.Channel1-50%",  name: "first",     percentage: 1  },
+        { label: "UA.Channel51-70%", name: "second",    percentage: 51 },
+        { label: "UA.Channel71-90%", name: "third",     percentage: 71 },
+        { label: "UA.Channel91-98%", name: "fourth",    percentage: 91 },
+        { label: "UA.Channel99%",    name: "godwalker", percentage: 99 }
+    ];
+    static optionsMMY = new Set([
         "Alter Fear",
         "Alter Noble",
         "Alter Rage",
@@ -105,9 +103,9 @@ export class UAIdentityData extends foundry.abstract.TypeDataModel
         "Use Gutter Magick":         "UA.UseGutterMagick",
         "Weaponized Physique":       "UA.WeaponizedPhysique"
     };
-    static optionsNonMundaneFeatures = { //MAYBE Move to sheet file?
-        "Casts Rituals":             "UA.CastsRituals",
-        "Use Gutter Magick":         "UA.UseGutterMagick"
+    static optionsNonMundaneFeatures = {
+        "Casts Rituals":     "UA.CastsRituals",
+        "Use Gutter Magick": "UA.UseGutterMagick"
     };
 
     static defineSchema() {
@@ -120,7 +118,7 @@ export class UAIdentityData extends foundry.abstract.TypeDataModel
                 ),
                 generateCharge: new SchemaField({
                     //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
-                    // FIX reorder?
+                    //FORNOW Reorder? Order doesn't matter anywhere, though.
                     major: new HTMLField(
                         //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
                     ),
@@ -141,8 +139,8 @@ export class UAIdentityData extends foundry.abstract.TypeDataModel
                     //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
                 ),
                 channels: new SchemaField({
-                    // FIX Reorder?
                     //FORNOW hint?: string; label?: string; validate?: DataFieldValidator; validationError?: string;
+                    //FORNOW Reorder? Order doesn't matter anywhere, though.
                     first: new HTMLField(
                         //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string;
                     ),
@@ -259,13 +257,12 @@ export class UAIdentityData extends foundry.abstract.TypeDataModel
     static migrateData (source) {
         const oldChannels = source.avatar?.channels;
         if (oldChannels && ["1-50", "51-70", "71-90", "91-98", "99-"].some(key => key in oldChannels)) {
-            source.avatar.channels = {
-                // New keys take precedence.
-                first:     oldChannels.first     ?? oldChannels["1-50"]  ?? "",
-                second:    oldChannels.second    ?? oldChannels["51-70"] ?? "",
-                third:     oldChannels.third     ?? oldChannels["71-90"] ?? "",
-                fourth:    oldChannels.fourth    ?? oldChannels["91-98"] ?? "",
-                godwalker: oldChannels.godwalker ?? oldChannels["99-"]   ?? "",
+            source.avatar.channels = { // New keys take precedence.
+                first: oldChannels.first ?? oldChannels["1-50"] ?? "",
+                second: oldChannels.second ?? oldChannels["51-70"] ?? "",
+                third: oldChannels.third ?? oldChannels["71-90"] ?? "",
+                fourth: oldChannels.fourth ?? oldChannels["91-98"] ?? "",
+                godwalker: oldChannels.godwalker ?? oldChannels["99-"] ?? "",
             };
         }
         return super.migrateData(source);

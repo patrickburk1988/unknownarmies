@@ -30,10 +30,10 @@ export class UAIdentitySheet extends UABaseItemSheet
     async getData (options) {
         const data = await super.getData(options);
         // TODO Sort allFeatures, etc. to prevent non-English options from being out of order.
-        const allFeatures = this.item.system.schema.fields.features?.fields?.one?.choices ?? {}; //MAYBE const allFeatures = UAIdentityData.optionsFeatures;
+        const allFeatures = UAIdentityData.optionsMundaneFeatures;
         const allowMMY = game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures");
-        const allSupernaturalAbilities = this.item.system.schema.fields.supernatural?.fields?.ability?.choices ?? {};
-        const type = this.item.system.type ?? "";
+        const allSupernaturalAbilities = this.item.system.schema.fields.supernatural.fields.ability.choices;
+        const type = this.item.system.type;
         if (type === "Adept" || type === "Avatar" || type === "Supernatural") {
             data.optionsFeaturesForType = UAIdentityData.optionsNonMundaneFeatures;
         } else if (allowMMY) {
@@ -41,9 +41,9 @@ export class UAIdentitySheet extends UABaseItemSheet
         } else {
             data.optionsFeaturesForType = Object.fromEntries(Object.entries(allFeatures).filter(([key]) => !UAIdentityData.optionsMMY.has(key)));
         }
-        data.optionsSubstitutesFor = this.item.system.schema.fields.mundane?.fields?.substitutesFor?.choices ?? {};
+        data.optionsSubstitutesFor = this.item.system.schema.fields.mundane.fields.substitutesFor.choices;
         data.optionsSupernaturalAbility = allowMMY ? allSupernaturalAbilities : Object.fromEntries(Object.entries(allSupernaturalAbilities).filter(([key]) => !UAIdentityData.optionsMMY.has(key)));
-        data.optionsType = this.item.system.schema.fields.type?.choices ?? {};
+        data.optionsType = this.item.system.schema.fields.type.choices;
         data.enrichedOfCourseICan = await TextEditor.enrichHTML(this.object.system.mundane.ofCourseICan, {
             async: true
         });
@@ -56,21 +56,13 @@ export class UAIdentitySheet extends UABaseItemSheet
         data.enrichedAvatarTaboos = await TextEditor.enrichHTML(this.object.system.avatar.taboos, {
             async: true
         });
-        data["enrichedChannel1-50"] = await TextEditor.enrichHTML(this.object.system.avatar.channels.first, {
-            async: true
-        });
-        data["enrichedChannel51-70"] = await TextEditor.enrichHTML(this.object.system.avatar.channels.second, {
-            async: true
-        });
-        data["enrichedChannel71-90"] = await TextEditor.enrichHTML(this.object.system.avatar.channels.third, {
-            async: true
-        });
-        data["enrichedChannel91-98"] = await TextEditor.enrichHTML(this.object.system.avatar.channels.fourth, {
-            async: true
-        });
-        data.enrichedChannel99 = await TextEditor.enrichHTML(this.object.system.avatar.channels.godwalker, {
-            async: true
-        });
+        data.channels = await Promise.all(UAIdentityData.avatarChannels.map(async channel => ({
+            ...channel,
+            enriched: await TextEditor.enrichHTML(this.item.system.avatar.channels[channel.name], {
+                async: true
+            }),
+            isUnlocked: this.item.system.percentage >= channel.percentage
+        })));
         data.enrichedDomain = await TextEditor.enrichHTML(this.object.system.adept.domain, {
             async: true
         });

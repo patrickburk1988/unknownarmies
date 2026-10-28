@@ -89,11 +89,9 @@ export class UACharacterSheet extends UABaseActorSheet
         const identity = this.actor.items.get($(event.currentTarget).parents(".item").data("item-id"));
         let content = `<p>${game.i18n.localize("UA.SelectIdentityFeature_Details")}</p>
         <button data-action="roll" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage ?? 0}">${game.i18n.localize("UA.None")}</button>`;
-        for (let feature of identity.system.featureList.sort()) {
-            if (feature) { // MAYBE feature != "" && feature != undefined
-                const text = game.i18n.localize("UA." + feature.replaceAll(" for ", "For").replaceAll(" ", ""));
-                content += `<button data-action="roll" data-roll-content-header="<p>${text}</p>" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage ?? 0}">${text}</button>`;
-            }
+        for (let feature of identity.system.featureList) {
+            const text = game.i18n.localize("UA." + feature.replaceAll(" for ", "For").replaceAll(" ", ""));
+            content += `<button data-action="roll" data-roll-content-header="<p>${text}</p>" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage ?? 0}">${text}</button>`;
         }
         const dialog = new Dialog({
             buttons: {},

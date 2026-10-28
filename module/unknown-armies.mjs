@@ -159,13 +159,6 @@ function registerHandlebarsHelpers() {
     Handlebars.registerHelper("shockGaugeSchema", function (meter, key) {
         return UACharacterData.shockGaugeSchema[meter][key];
     });
-    Handlebars.registerHelper("sortFeatures", function (identity) {
-        const features = [...(identity.system.featureList ?? [])];
-        if (identity.system.type === "Mundane") {
-            features.sort();
-        }
-        return features;
-    });
     Handlebars.registerHelper("stripHTML", function (html) {
         // HACK Re-examine below.
         if (!html) return "";
