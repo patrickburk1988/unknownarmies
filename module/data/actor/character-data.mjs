@@ -5,36 +5,42 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
     static burnedOutThreshold = 25;
     static shockGaugeSchema = {
         "helplessness": {
-            "coerceWith": "connect",
-            "resistWith": "status",
-            "upbeatAbility": "fitness",
+            "coerceWith":      "connect",
+            "resistWith":      "status",
+            "upbeatAbility":   "fitness",
             "downbeatAbility": "dodge"
         },
         "isolation": {
-            "coerceWith": "status",
-            "resistWith": "connect",
-            "upbeatAbility": "status",
+            "coerceWith":      "status",
+            "resistWith":      "connect",
+            "upbeatAbility":   "status",
             "downbeatAbility": "pursuit"
         },
         "self": {
-            "coerceWith": "knowledge",
-            "resistWith": "notice",
-            "upbeatAbility": "knowledge",
+            "coerceWith":      "knowledge",
+            "resistWith":      "notice",
+            "upbeatAbility":   "knowledge",
             "downbeatAbility": "lie"
         },
         "unnatural": {
-            "coerceWith": "secrecy",
-            "resistWith": "knowledge",
-            "upbeatAbility": "notice",
+            "coerceWith":      "secrecy",
+            "resistWith":      "knowledge",
+            "upbeatAbility":   "notice",
             "downbeatAbility": "secrecy"
         },
         "violence": {
-            "coerceWith": "struggle",
-            "resistWith": "fitness",
-            "upbeatAbility": "connect",
+            "coerceWith":      "struggle",
+            "resistWith":      "fitness",
+            "upbeatAbility":   "connect",
             "downbeatAbility": "struggle"
         }
     }
+    static woundSeverities = [
+        { label: "UA.Dead",         ratio: 1    },
+        { label: "UA.Unconscious",  ratio: 0.9  },
+        { label: "UA.BadlyInjured", ratio: 0.75 },
+        { label: "UA.Injured",      ratio: 0.5  }
+    ];
 
     static defineSchema() {
         const { BooleanField, DocumentUUIDField, HTMLField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -92,7 +98,7 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
             ),
             cabal: new DocumentUUIDField({
                 //FORNOW blank?: boolean; hint?: string; initial?: any; label?: string; nullable?: boolean; placeholder?: string; textSearch?: boolean; validate?: DataFieldValidator; validationError?: string
-                embedded: false, //MAYBE Is this the default?
+                embedded: false,
                 type: "Actor"
             }),
             charges: new SchemaField({
@@ -188,16 +194,16 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
     }
 
     prepareDerivedData() {
-        this.abilities = { //MAYBE alphabetize?
-            fitness: 0,
+        this.abilities = {
+            connect: 0,
             dodge: 0,
-            status: 0,
-            pursuit: 0,
+            fitness: 0,
             knowledge: 0,
             lie: 0,
             notice: 0,
+            pursuit: 0,
             secrecy: 0,
-            connect: 0,
+            status: 0,
             struggle: 0
         }
         const shockMeters = this.shockGauge;
@@ -212,6 +218,6 @@ export class UACharacterData extends foundry.abstract.TypeDataModel
         this.isBurnedOut = totalHardenedNotches >= UACharacterData.burnedOutThreshold;
         const suffered = this.wounds.suffered;
         const woundsRatio = suffered === 0 ? 0 : suffered / this.wounds.threshold;
-        this.wounds.severity = woundsRatio < 0.5 ? "" : woundsRatio < 0.75 ? "Injured" : woundsRatio < 0.9 ? "Badly Injured" : woundsRatio < 1 ? "Unconscious" : "Dead"; //MAYBE Make better
+        this.wounds.severity = UACharacterData.woundSeverities.find(severity => woundsRatio >= severity.ratio)?.label ?? "";
     }
 }
