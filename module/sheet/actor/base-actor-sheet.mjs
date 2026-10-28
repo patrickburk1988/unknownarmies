@@ -129,7 +129,7 @@ export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorShee
         const dataset = event.currentTarget.dataset;
         const formula = dataset.rollFormula ?? "1d100"; //MAYBE
         const roll = await new Roll(formula).evaluate();
-        const total = parseInt(roll.total);
+        const total = roll.total;
         const target = (parseInt(dataset.rollTarget) || 0) + (shift || 0);
         const faces = roll.dice[0].faces;
         await postRoll(roll, {

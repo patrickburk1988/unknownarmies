@@ -7,6 +7,7 @@
 - Moved avatar channels and supernatural abilities before other features on character sheets.
 - Allowed limited sheet resizing.
 - Sorted localized identity feature options correctly.
+- Set identity improvement chat message speaker as identity owner when possible.
 
 ## v1.4.4
 

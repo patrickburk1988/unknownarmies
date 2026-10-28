@@ -85,12 +85,11 @@ export class UAIdentitySheet extends UABaseItemSheet
     }
 
     async _onImprove (event) {
-        // MAYBE Return early if there is no actor owning it?
         event.preventDefault();
         const formula = "1d5";
         const roll = await new Roll(formula).evaluate();
-        const total = parseInt(roll.result); //MAYBE roll.total
-        const oldPercentage = this.object.system.percentage;
+        const total = roll.total;
+        const oldPercentage = this.item.system.percentage;
         await this.item.update({
             "system.hasExperience": false,
             "system.percentage": oldPercentage + total
@@ -103,7 +102,8 @@ export class UAIdentitySheet extends UABaseItemSheet
             result: `${total >= 0 ? "+" : ""}${total}%`,
             total
         }, {
-            flavor: event.currentTarget.dataset.rollLabel
+            flavor: event.currentTarget.dataset.rollLabel,
+            speaker: this.item.actor ? ChatMessage.getSpeaker({actor: this.item.actor}) : undefined
         });
     }
 }
