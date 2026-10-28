@@ -32,13 +32,4 @@ export class UABaseItemSheet extends UABaseSheet(foundry.appv1.sheets.ItemSheet)
         }
         return data;
     }
-
-    setPosition (position) {
-        // HACK Re-examine below
-        if ($(this.form).hasClass("sheet__form--limited")) {
-            position.width = 650;
-            position.height = 600;
-        }
-        super.setPosition(position);
-    }
 }

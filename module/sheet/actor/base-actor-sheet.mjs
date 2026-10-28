@@ -51,15 +51,6 @@ export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorShee
         });
     }
 
-    setPosition (position) {
-        // HACK Re-examine below
-        if ($(this.form).hasClass("sheet__form--limited")) {
-            position.width = 650;
-            position.height = 600;
-        }
-        super.setPosition(position);
-    }
-
     _onCreateItem (event) {
         // HACK Re-examine below
         const type = event.currentTarget.dataset.itemType;

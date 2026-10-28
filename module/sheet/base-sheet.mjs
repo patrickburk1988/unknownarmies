@@ -1,5 +1,13 @@
 export const UABaseSheet = (BaseSheet) => class extends BaseSheet
 {
+    constructor (...args) {
+        super(...args);
+        if (!game.user.isGM && this.document.limited) {
+            this.position.width = 650; //TEST
+            this.position.height = 600; //TEST
+        }
+    }
+
     activateListeners (html) {
         // HACK Re-evaluate below
         super.activateListeners(html);

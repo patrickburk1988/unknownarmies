@@ -5,6 +5,7 @@
 - Improved font stacks.
 - Clamped objectives between 0% and 100%.
 - Moved avatar channels and supernatural abilities before other features on character sheets.
+- Allowed limited sheet resizing.
 
 ## v1.4.4
 
