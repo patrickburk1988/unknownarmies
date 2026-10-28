@@ -30,25 +30,27 @@ export class UAMilestoneSheet extends UABaseItemSheet
     }
 
     async _onRoll (event) {
-        // TODO Return early if there is no actor owning it.
         event.preventDefault();
         const dataset = event.currentTarget.dataset;
         const formula = dataset.rollFormula;
         const roll = await new Roll(formula).evaluate();
-        const total = parseInt(roll.total);
-        const oldObjectivePercentage = this.actor.system.objective.percentage; //FIX What if it has no actor?
+        const total = roll.total;
+        const actor = this.item.actor;
+        const isActorCabal = actor?.type === "cabal";
+        const oldObjectivePercentage = isActorCabal ? actor.system.objective.percentage : null;
         await this.item.update({
             "system.percentage": total
         });
         await postRoll(roll, {
             dice: roll.dice[0].results,
             faces: 10,
-            footer: `${game.i18n.localize("UA.ObjectiveImproved")}: ${oldObjectivePercentage}% <span class="arrow">▶</span> ${this.actor.system.objective.percentage}%`,
+            footer: isActorCabal ? `${game.i18n.localize("UA.ObjectiveImproved")}: ${oldObjectivePercentage}% <span class="arrow">▶</span> ${actor.system.objective.percentage}%` : undefined,
             formula,
             result: `${total >= 0 ? "+" : ""}${total}%`,
             total
         }, {
-            flavor: dataset.rollLabel
+            flavor: dataset.rollLabel,
+            speaker: actor ? ChatMessage.getSpeaker({actor}) : undefined
         });
     }
 }
