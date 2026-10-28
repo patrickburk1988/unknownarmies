@@ -243,7 +243,7 @@ export class UAIdentityData extends foundry.abstract.TypeDataModel
             type: new StringField({
                 //FORNOW hint?: string; label?: string; placeholder?: string; validate?: DataFieldValidator; validationError?: string; textSearch?: boolean;
                 blank: true,
-                choices: {
+                choices: { //MAYBE reorder/alphabetize?
                     "Mundane":      "UA.Mundane",
                     "Supernatural": "UA.Supernatural",
                     "Avatar":       "UA.Avatar",

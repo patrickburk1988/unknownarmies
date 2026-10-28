@@ -8,7 +8,7 @@ export class UAIdentitySheet extends UABaseItemSheet
         // height?: string | number | null; id?: string; left?: number | null; minimizable?: boolean; popOut?: boolean; resizable?: boolean; scale?: number | null; scrollY?: string[]; tabs?: TabsConfiguration[]; template?: string | null; title?: string; top?: number | null; width?: number | null; //TODO
         // dragDrop: DragDropConfiguration[]; 
         return foundry.utils.mergeObject(super.defaultOptions, {
-            height: 700, //TODO 707
+            height: 700, //TEST 707
             classes: [
                 "default",
                 "sheet",
@@ -29,7 +29,6 @@ export class UAIdentitySheet extends UABaseItemSheet
 
     async getData (options) {
         const data = await super.getData(options);
-        // TODO Sort allFeatures, etc. to prevent non-English options from being out of order.
         const allFeatures = UAIdentityData.optionsMundaneFeatures;
         const allowMMY = game.settings.get("unknownarmies", "IdentitiesAllowMM&YFeatures");
         const allSupernaturalAbilities = this.item.system.schema.fields.supernatural.fields.ability.choices;
