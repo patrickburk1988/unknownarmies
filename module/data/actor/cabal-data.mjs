@@ -31,11 +31,12 @@ export class UACabalData extends foundry.abstract.TypeDataModel
     }
 
     prepareDerivedData() {
-        this.objective.percentage = 0;
+        let percentage = 0;
         for (const item of (this.parent?.items ?? [])) {
             if (item.type === "milestone") {
-                this.objective.percentage += item.system.percentage ?? 0;
+                percentage += item.system.percentage;
             }
         }
+        this.objective.percentage = Math.clamp(percentage, 0, 100);
     }
 }

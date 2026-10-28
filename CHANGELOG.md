@@ -3,6 +3,7 @@
 - Tweaked data schema options.
 - Converted Google Fonts to local fonts.
 - Improved font stacks.
+- Clamped objectives between 0% and 100%.
 
 ## v1.4.4
 
