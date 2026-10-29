@@ -135,7 +135,7 @@ export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorShee
         await postRoll(roll, {
             dice: roll.dice[0].results,
             faces: faces === 100 ? 10 : faces,
-            footer: computeRollOutcome(total, target, dataset.rollType === "objective"),
+            footer: computeRollOutcome(total, target, dataset.rollType !== "objective"), //MAYBE change objective to improvement
             formula,
             header: dataset.rollHeader,
             result: `${total} <span class="vs">${game.i18n.localize("UA.Vs")}</span> ${target}`,

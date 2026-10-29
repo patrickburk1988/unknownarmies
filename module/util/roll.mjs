@@ -1,6 +1,6 @@
-export function computeRollOutcome (result, target, isObjective = false) { //MAYBE Refactor isObjective
+export function computeRollOutcome (result, target, allowSpecialOutcomes = true) {
     let outcome = "";
-    if (!isObjective) {
+    if (allowSpecialOutcomes) {
         if (result === 1) {
             return game.i18n.localize("UA.Crit");
         } else if (result === 100) {
