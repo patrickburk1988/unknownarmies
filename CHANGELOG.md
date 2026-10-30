@@ -11,6 +11,7 @@
 - Sorted localized identity feature options correctly.
 - Refactored chat messages for identity/milestone improvements to use owner as speaker.
 - Handled milestone improvements when not owned by a cabal.
+- Refactored manifest to allow installation of old versions.
 
 ## v1.4.4
 
