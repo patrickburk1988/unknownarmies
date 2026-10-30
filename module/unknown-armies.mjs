@@ -46,25 +46,26 @@ Hooks.once("ready", async function() {
         "theme",
         "theme--" + theme
     );
-    const chatControlIcon = document.querySelector(".chat-control-icon i");
-    if (chatControlIcon) {
-        chatControlIcon.classList.replace("fa-dice-d20", "fa-dice-d10");
-        chatControlIcon.addEventListener("click", async ()=> {
-            //MAYBE event.preventDefault();
-            const formula = "1d100";
-            const roll = await new Roll(formula).evaluate();
-            const result = parseInt(roll.result);
-            await postRoll(roll, {
-                dice: roll.dice[0].results,
-                faces: 10,
-                formula,
-                result,
-                total: result
-            }, {
-                flavor: formula //MAYBE
-            });
-        });
-    }
+    //MAYBE Re-implement the chat control icon using renderChatInput?
+    // const chatControlIcon = document.querySelector(".chat-control-icon i");
+    // if (chatControlIcon) {
+    //     chatControlIcon.classList.replace("fa-dice-d20", "fa-dice-d10");
+    //     chatControlIcon.addEventListener("click", async ()=> {
+    //         //MAYBE event.preventDefault();
+    //         const formula = "1d100";
+    //         const roll = await new Roll(formula).evaluate();
+    //         const result = parseInt(roll.result);
+    //         await postRoll(roll, {
+    //             dice: roll.dice[0].results,
+    //             faces: 10,
+    //             formula,
+    //             result,
+    //             total: result
+    //         }, {
+    //             flavor: formula //MAYBE
+    //         });
+    //     });
+    // }
     await migrate();
 });
 

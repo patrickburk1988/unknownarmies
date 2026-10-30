@@ -10,7 +10,7 @@ Unknown Armies is the property of Atlas Games. For more information about Atlas 
 
 On the Foundry home screen, navigate to **Game Systems** -> **Install System**, paste `https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/system.json` as the **Manifest URL**, and then press **Install**.
 
-To install a specific version (1.4.5 or later), replace `main` in the URL with the desired version number (e.g. `https://raw.githubusercontent.com/patrickburk1988/unknownarmies/1.4.5/system.json`).
+To install a specific version (1.4.5 or later), replace `main` in the URL with the desired version's tag (e.g. `https://raw.githubusercontent.com/patrickburk1988/unknownarmies/v1.4.5/system.json`).
 
 ## Progress & Feedback
 

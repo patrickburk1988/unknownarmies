@@ -1,6 +1,8 @@
 ## v1.4.5
 
-- Fixed bug where migration wasn't running (and it would have been disastrous if it had).
+- Fixed migration not running (and it would have been disastrous if it had).
+- Fixed artifacts' Hide Charges option reverting after reload.
+- Fixed feature dialog showing raw keys and losing the chosen feature.
 - Added limited milestone sheet.
 - Added installation instructions to README.
 - Tweaked data schema options.

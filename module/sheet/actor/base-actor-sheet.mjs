@@ -29,6 +29,7 @@ export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorShee
         html.find("[data-action='roll']").on("click contextmenu", this._onRoll.bind(this));  // HACK Fix contextmenu
         new foundry.applications.ux.ContextMenu.implementation(html[0], "[data-action='manage-item']", [ //MAYBE classes, condition, group //TODOfixcontextmenu
             // classes?: string; group?: string; label: string; onClick?: ContextMenuCallback; visible?: boolean | ContextMenuCondition; //TODO // MAYBE Does name do anything? Is callback valid?
+            //TODO Fix these for AppV2 (name->label, callback->onClick). This breaks v13, though?
             {
                 name: game.i18n.localize("UA.PostItem"),
                 icon: `<i class="fas fa-message"></i>`,

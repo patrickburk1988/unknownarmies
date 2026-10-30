@@ -84,8 +84,8 @@ export class UACharacterSheet extends UABaseActorSheet
         let content = `<p>${game.i18n.localize("UA.SelectIdentityFeature_Details")}</p>
         <button data-action="roll" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage ?? 0}">${game.i18n.localize("UA.None")}</button>`;
         for (let feature of identity.system.featureList) {
-            const text = game.i18n.localize(feature.replaceAll(" for ", "For").replaceAll(" ", ""));
-            content += `<button data-action="roll" data-roll-header="<p>${text}</p>" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage ?? 0}">${text}</button>`;
+            const text = game.i18n.localize(feature); //MAYBE const text = game.i18n.localize(feature.replaceAll(" for ", "For").replaceAll(" ", ""));
+            content += `<button data-action="roll" data-roll-header="${text}" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage ?? 0}">${text}</button>`; // MAYBE <p>${text}</p>
         }
         const dialog = new Dialog({
             buttons: {},
