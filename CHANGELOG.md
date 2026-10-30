@@ -2,6 +2,7 @@
 
 - Fixed bug where migration wasn't running (and it would have been disastrous if it had).
 - Added limited milestone sheet.
+- Added installation instructions to README.
 - Tweaked data schema options.
 - Converted Google Fonts to local fonts.
 - Improved font stacks.

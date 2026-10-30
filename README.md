@@ -6,6 +6,12 @@ An unofficial Unknown Armies rule system for Foundry VTT. Unknown Armies is an o
 
 Unknown Armies is the property of Atlas Games. For more information about Atlas Games and their products, please visit [their website](https://www.atlas-games.com).
 
+## Installation
+
+On the Foundry home screen, navigate to **Game Systems** -> **Install System**, paste `https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/system.json` as the **Manifest URL**, and then press **Install**.
+
+To install a specific version (1.4.5 or later), replace `main` in the URL with the desired version number (e.g. `https://raw.githubusercontent.com/patrickburk1988/unknownarmies/1.4.5/system.json`).
+
 ## Progress & Feedback
 
 Please note that this system is incomplete, and there is ample work remaining. If you have any suggestions or feedback, please [create a new issue](https://github.com/patrickburk1988/unknownarmies/issues/new) or contact the developer via Discord.
