@@ -1,6 +1,7 @@
 ## v1.4.5
 
 - Fixed bug where migration wasn't running (and it would have been disastrous if it had).
+- Added limited milestone sheet.
 - Tweaked data schema options.
 - Converted Google Fonts to local fonts.
 - Improved font stacks.
