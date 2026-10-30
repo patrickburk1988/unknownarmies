@@ -42,7 +42,7 @@ export class UAArtifactData extends foundry.abstract.TypeDataModel
     static migrateData (source) {
         if (source.charges?.isHidden !== undefined) {
             source.options ??= {};
-            source.options.hideCharges = source.charges.isHidden;
+            source.options.hideCharges ??= source.charges.isHidden;
             delete source.charges.isHidden;
         }
         return super.migrateData(source);

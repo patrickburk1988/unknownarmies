@@ -257,7 +257,7 @@ export class UAIdentityData extends foundry.abstract.TypeDataModel
     static migrateData (source) {
         const oldChannels = source.avatar?.channels;
         if (oldChannels && ["1-50", "51-70", "71-90", "91-98", "99-"].some(key => key in oldChannels)) {
-            source.avatar.channels = { // New keys take precedence.
+            source.avatar.channels = {
                 first: oldChannels.first ?? oldChannels["1-50"] ?? "",
                 second: oldChannels.second ?? oldChannels["51-70"] ?? "",
                 third: oldChannels.third ?? oldChannels["71-90"] ?? "",
