@@ -23,9 +23,7 @@ export class UAMilestoneSheet extends UABaseItemSheet
 
     async getData (options) {
         const data = await super.getData(options);
-        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description, {
-            async: true
-        });
+        data.enrichedDescription = await this._enrich(this.object.system.description);
         return data;
     }
 

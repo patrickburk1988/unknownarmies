@@ -17,6 +17,6 @@ export function computeRollOutcome (result, target, allowSpecialOutcomes = true)
 }
 
 export async function postRoll (roll, renderData, messageData) {
-    const content = await renderTemplate("systems/unknownarmies/template/other/roll.hbs", renderData);
+    const content = await foundry.applications.handlebars.renderTemplate("systems/unknownarmies/template/other/roll.hbs", renderData);
     return roll.toMessage({...messageData, content});
 }

@@ -47,7 +47,7 @@ export class UACharacterSheet extends UABaseActorSheet
             "": ""
         };
         for (let cabal of game.actors.filter(actor => actor.type === "cabal" && actor.testUserPermission(game.user, "OBSERVER"))) {
-            data.cabalOptions[cabal._uuid] = cabal.name;
+            data.cabalOptions[cabal.uuid] = cabal.name;
         }
         data.items = this.actor.items.contents.sort((a, b) => a.sort - b.sort).map(item => {
             return item.type !== "identity" ? item.toObject() : {
@@ -59,15 +59,9 @@ export class UACharacterSheet extends UABaseActorSheet
             };
         });
         data.optionsFearShockMeter = this.actor.system.schema.fields.passions.fields.fear.fields.shockMeter.choices;
-        data.enrichedAppearance = await TextEditor.enrichHTML(this.object.system.appearance, {
-            async: true
-        });
-        data.enrichedPersonality = await TextEditor.enrichHTML(this.object.system.personality, {
-            async: true
-        });
-        data.enrichedBackground = await TextEditor.enrichHTML(this.object.system.background, {
-            async: true
-        });
+        data.enrichedAppearance = await this._enrich(this.object.system.appearance);
+        data.enrichedPersonality = await this._enrich(this.object.system.personality);
+        data.enrichedBackground = await this._enrich(this.object.system.background);
         return data;
     }
 
@@ -90,8 +84,8 @@ export class UACharacterSheet extends UABaseActorSheet
         let content = `<p>${game.i18n.localize("UA.SelectIdentityFeature_Details")}</p>
         <button data-action="roll" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage ?? 0}">${game.i18n.localize("UA.None")}</button>`;
         for (let feature of identity.system.featureList) {
-            const text = game.i18n.localize("UA." + feature.replaceAll(" for ", "For").replaceAll(" ", ""));
-            content += `<button data-action="roll" data-roll-content-header="<p>${text}</p>" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage ?? 0}">${text}</button>`;
+            const text = game.i18n.localize(feature.replaceAll(" for ", "For").replaceAll(" ", ""));
+            content += `<button data-action="roll" data-roll-header="<p>${text}</p>" data-roll-label="${identity.name} (${game.i18n.localize("UA." + identity.system.type + "Identity")})" data-roll-target="${identity.system.percentage ?? 0}">${text}</button>`;
         }
         const dialog = new Dialog({
             buttons: {},

@@ -16,9 +16,7 @@ export class UASpellSheet extends UABaseItemSheet
 
     async getData (options) {
         const data = await super.getData(options);
-        data.enrichedEffect = await TextEditor.enrichHTML(this.object.system.effect, {
-            async: true
-        });
+        data.enrichedEffect = await this._enrich(this.object.system.effect);
         return data;
     }
 }

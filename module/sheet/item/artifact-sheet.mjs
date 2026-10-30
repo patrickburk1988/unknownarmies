@@ -17,12 +17,8 @@ export class UAArtifactSheet extends UABaseItemSheet
     async getData (options) {
         const data = await super.getData(options);
         data.optionsPower = this.item.system.schema.fields.power.choices;
-        data.enrichedDescription = await TextEditor.enrichHTML(this.object.system.description, {
-            async: true
-        });
-        data.enrichedEffect = await TextEditor.enrichHTML(this.object.system.effect, {
-            async: true
-        });
+        data.enrichedDescription = await this._enrich(this.object.system.description);
+        data.enrichedEffect = await this._enrich(this.object.system.effect);
         return data;
     }
 }

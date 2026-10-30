@@ -27,7 +27,7 @@ export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorShee
         super.activateListeners(html);
         html.find("[data-action='create-item']").on("click", this._onCreateItem.bind(this));
         html.find("[data-action='roll']").on("click contextmenu", this._onRoll.bind(this));  // HACK Fix contextmenu
-        new ContextMenu(html, "[data-action='manage-item']", [ //MAYBE classes, condition, group //TODOfixcontextmenu
+        new foundry.applications.ux.ContextMenu.implementation(html[0], "[data-action='manage-item']", [ //MAYBE classes, condition, group //TODOfixcontextmenu
             // classes?: string; group?: string; label: string; onClick?: ContextMenuCallback; visible?: boolean | ContextMenuCondition; //TODO // MAYBE Does name do anything? Is callback valid?
             {
                 name: game.i18n.localize("UA.PostItem"),
@@ -47,7 +47,8 @@ export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorShee
         ], {
             // closeOnSelect?: boolean; jQuery?: boolean; onClose?: ContextMenuCallback; onOpen?: ContextMenuCallback; relative?: "target" | "cursor"; //TODO
             eventName: "click", //MAYBE
-            fixed: true //MAYBE
+            fixed: true, //MAYBE
+            jQuery: false
         });
     }
 

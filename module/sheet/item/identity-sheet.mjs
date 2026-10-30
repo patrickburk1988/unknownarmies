@@ -43,43 +43,21 @@ export class UAIdentitySheet extends UABaseItemSheet
         data.optionsSubstitutesFor = this.item.system.schema.fields.mundane.fields.substitutesFor.choices;
         data.optionsSupernaturalAbility = allowMMY ? allSupernaturalAbilities : Object.fromEntries(Object.entries(allSupernaturalAbilities).filter(([key]) => !UAIdentityData.optionsMMY.has(key)));
         data.optionsType = this.item.system.schema.fields.type.choices;
-        data.enrichedOfCourseICan = await TextEditor.enrichHTML(this.object.system.mundane.ofCourseICan, {
-            async: true
-        });
-        data.enrichedAttributes = await TextEditor.enrichHTML(this.object.system.avatar.attributes, {
-            async: true
-        });
-        data.enrichedSymbols = await TextEditor.enrichHTML(this.object.system.avatar.symbols, {
-            async: true
-        });
-        data.enrichedAvatarTaboos = await TextEditor.enrichHTML(this.object.system.avatar.taboos, {
-            async: true
-        });
+        data.enrichedOfCourseICan = await this._enrich(this.object.system.mundane.ofCourseICan);
+        data.enrichedAttributes = await this._enrich(this.object.system.avatar.attributes);
+        data.enrichedSymbols = await this._enrich(this.object.system.avatar.symbols);
+        data.enrichedAvatarTaboos = await this._enrich(this.object.system.avatar.taboos);
         data.channels = await Promise.all(UAIdentityData.avatarChannels.map(async channel => ({
             ...channel,
-            enriched: await TextEditor.enrichHTML(this.item.system.avatar.channels[channel.name], {
-                async: true
-            }),
+            enriched: await this._enrich(this.item.system.avatar.channels[channel.name]),
             isUnlocked: this.item.system.percentage >= channel.percentage
         })));
-        data.enrichedDomain = await TextEditor.enrichHTML(this.object.system.adept.domain, {
-            async: true
-        });
-        data.enrichedAdeptTaboos = await TextEditor.enrichHTML(this.object.system.adept.taboos, {
-            async: true
-        });
-        data.enrichedGenerateMinorCharge = await TextEditor.enrichHTML(this.object.system.adept.generateCharge.minor, {
-            async: true
-        });
-        data.enrichedGenerateSignificantCharge = await TextEditor.enrichHTML(this.object.system.adept.generateCharge.significant, {
-            async: true
-        });
-        data.enrichedGenerateMajorCharge = await TextEditor.enrichHTML(this.object.system.adept.generateCharge.major, {
-            async: true
-        });
-        data.enrichedDetails = await TextEditor.enrichHTML(this.object.system.details, {
-            async: true
-        });
+        data.enrichedDomain = await this._enrich(this.object.system.adept.domain);
+        data.enrichedAdeptTaboos = await this._enrich(this.object.system.adept.taboos);
+        data.enrichedGenerateMinorCharge = await this._enrich(this.object.system.adept.generateCharge.minor);
+        data.enrichedGenerateSignificantCharge = await this._enrich(this.object.system.adept.generateCharge.significant);
+        data.enrichedGenerateMajorCharge = await this._enrich(this.object.system.adept.generateCharge.major);
+        data.enrichedDetails = await this._enrich(this.object.system.details);
         data.features = this.item.system.toObject().features;
         return data;
     }

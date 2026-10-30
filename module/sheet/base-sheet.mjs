@@ -8,6 +8,10 @@ export const UABaseSheet = (BaseSheet) => class extends BaseSheet
         }
     }
 
+    _enrich (content) {
+        return foundry.applications.ux.TextEditor.implementation.enrichHTML(content);
+    }
+
     activateListeners (html) {
         // HACK Re-evaluate below
         super.activateListeners(html);
@@ -84,12 +88,8 @@ export const UABaseSheet = (BaseSheet) => class extends BaseSheet
 
     async getData (options) {
         const data = await super.getData(options);
-        data.enrichedPublicNotes = await TextEditor.enrichHTML(this.object.system.notes.public, {
-            async: true
-        });
-        data.enrichedPrivateNotes = await TextEditor.enrichHTML(this.object.system.notes.private, {
-            async: true
-        });
+        data.enrichedPublicNotes = await this._enrich(this.object.system.notes.public);
+        data.enrichedPrivateNotes = await this._enrich(this.object.system.notes.private);
         return data;
     }
 
@@ -105,7 +105,7 @@ export const UABaseSheet = (BaseSheet) => class extends BaseSheet
     _onShowImage (event) {
         // HACK Re-examine below
         event.preventDefault();
-        new ImagePopout(this.document.img, {
+        new foundry.applications.apps.ImagePopout(this.document.img, {
             title: this.document.name
         }).render(true);
     }

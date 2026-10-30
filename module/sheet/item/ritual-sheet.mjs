@@ -16,12 +16,8 @@ export class UARitualSheet extends UABaseItemSheet
 
     async getData (options) {
         const data = await super.getData(options);
-        data.enrichedRitualAction = await TextEditor.enrichHTML(this.object.system.action, {
-            async: true
-        });
-        data.enrichedEffect = await TextEditor.enrichHTML(this.object.system.effect, {
-            async: true
-        });
+        data.enrichedRitualAction = await this._enrich(this.object.system.action);
+        data.enrichedEffect = await this._enrich(this.object.system.effect);
         return data;
     }
 }
