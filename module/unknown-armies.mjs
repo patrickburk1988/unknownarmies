@@ -1,5 +1,4 @@
 import { migrate }          from "./util/migrate.mjs";
-import { postRoll }         from "./util/roll.mjs";
 import { UAActor }          from "./actor.mjs";
 import { UAArtifactData }   from "./data/item/artifact-data.mjs";
 import { UAArtifactSheet }  from "./sheet/item/artifact-sheet.mjs";
