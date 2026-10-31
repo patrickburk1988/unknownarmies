@@ -6,6 +6,19 @@ An unofficial Unknown Armies rule system for Foundry VTT. Unknown Armies is an o
 
 Unknown Armies is the property of Atlas Games. For more information about Atlas Games and their products, please visit [their website](https://www.atlas-games.com).
 
+<details>
+<summary>Screenshots</summary>
+
+![Character sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-character.jpg)
+![Cabal sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-cabal.jpg)
+![Artifact sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-artifact.jpg)
+![Identity sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-identity.jpg)
+![Ritual sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-ritual.jpg)
+![Spell sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-spell.jpg)
+![Milestone sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-milestone.jpg)
+![Item sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-item.jpg)
+</details>
+
 ## Installation
 
 On the Foundry home screen, navigate to **Game Systems** -> **Install System**, paste `https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/system.json` as the **Manifest URL**, and then press **Install**.
