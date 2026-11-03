@@ -1,4 +1,4 @@
-const MIGRATION_VERSION = "1.4.5";
+const MIGRATION_VERSION = "1.4.6";
 
 export async function migrate() {
     if (!game.users.activeGM?.isSelf || !foundry.utils.isNewerVersion(MIGRATION_VERSION, game.settings.get("unknownarmies", "SystemVersion"))) {

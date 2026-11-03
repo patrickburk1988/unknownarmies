@@ -1,3 +1,7 @@
+## v1.4.6
+
+- Updated localizations.
+
 ## v1.4.5
 
 - Fixed migration not running (and it would have been disastrous if it had).
