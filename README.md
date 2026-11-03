@@ -1,6 +1,6 @@
 ![Unknown Armies](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/system-background.webp)
 
-![Foundry](https://img.shields.io/endpoint?url=https%3A%2F%2Ffoundryshields.com%2Fversion%3Fstyle%3Dflat%26url%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fpatrickburk1988%2Funknownarmies%2Fmain%2Fsystem.json?label=Foundry&prefix=v) ![System Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpatrickburk1988%2Funknownarmies%2Fmain%2Fsystem.json&query=%24.version&style=flat&label=System%20Version) ![GitHub Downloads)](https://img.shields.io/github/downloads/patrickburk1988/unknownarmies/total?style=flat&label=Downloads)
+![Foundry](https://img.shields.io/endpoint?url=https%3A%2F%2Ffoundryshields.com%2Fversion%3Fstyle%3Dflat%26url%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2Fpatrickburk1988%2Funknownarmies%2Fmain%2Fsystem.json&label=Foundry) ![System Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpatrickburk1988%2Funknownarmies%2Fmain%2Fsystem.json&query=%24.version&style=flat&label=System%20Version) ![GitHub Downloads](https://img.shields.io/github/downloads/patrickburk1988/unknownarmies/total?style=flat&label=Downloads)
 
 An unofficial Unknown Armies rule system for Foundry VTT. Unknown Armies is an occult game about broken people conspiring to fix the world.
 
@@ -9,14 +9,21 @@ Unknown Armies is the property of Atlas Games. For more information about Atlas 
 <details>
 <summary>Screenshots</summary>
 
-![Character sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-character.jpg)
-![Cabal sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-cabal.jpg)
-![Artifact sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-artifact.jpg)
-![Identity sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-identity.jpg)
-![Ritual sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-ritual.jpg)
-![Spell sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-spell.jpg)
-![Milestone sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-milestone.jpg)
-![Item sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/refs/heads/main/image/screenshot-item.jpg)
+![Character sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/screenshot-character.jpg)
+
+![Cabal sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/screenshot-cabal.jpg)
+
+![Artifact sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/screenshot-artifact.jpg)
+
+![Identity sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/screenshot-identity.jpg)
+
+![Ritual sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/screenshot-ritual.jpg)
+
+![Spell sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/screenshot-spell.jpg)
+
+![Milestone sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/screenshot-milestone.jpg)
+
+![Item sheet](https://raw.githubusercontent.com/patrickburk1988/unknownarmies/main/image/screenshot-item.jpg)
 </details>
 
 ## Installation
