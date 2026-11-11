@@ -1,6 +1,7 @@
 ## v1.4.6
 
 - Updated localizations.
+- Fixed the "Magick" tab incorrectly overflowing.
 
 ## v1.4.5
 

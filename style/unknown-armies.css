@@ -632,6 +632,9 @@
     overflow:auto;
     padding:0;
 }
+.sheet .items__list.items__list--horizontal{
+    display:flex;
+}
 .sheet .items__list-wrapper{
     overflow:auto;
     scrollbar-gutter:stable both-edges;
@@ -717,6 +720,8 @@
     background-image:url(../image/portrait-background.webp);
     display:grid;
     margin:0 auto;
+    max-width:-moz-fit-content;
+    max-width:fit-content;
     overflow:hidden;
     place-items:end;
 }
@@ -947,7 +952,7 @@
     grid-template-rows:max-content minmax(max-content, 1fr);
 }
 .sheet .tab.tab--short-last-row{
-    grid-template-rows:minmax(max-content, 1fr) max-content;
+    grid-template-rows:1fr max-content;
 }
 .sheet .text-input{
     font-size:15px;
