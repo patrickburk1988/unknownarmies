@@ -26,6 +26,7 @@ export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorShee
     activateListeners (html) {
         super.activateListeners(html);
         html.find("[data-action='create-item']").on("click", this._onCreateItem.bind(this));
+        html.find("[data-action='open-actor']").on("click", this._onOpenActor.bind(this));
         html.find("[data-action='roll']").on("click contextmenu", this._onRoll.bind(this));  // HACK Fix contextmenu
         new foundry.applications.ux.ContextMenu.implementation(html[0], "[data-action='manage-item']", [ //MAYBE classes, condition, group //TODOfixcontextmenu
             // classes?: string; group?: string; label: string; onClick?: ContextMenuCallback; visible?: boolean | ContextMenuCondition; //TODO // MAYBE Does name do anything? Is callback valid?
@@ -43,6 +44,7 @@ export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorShee
             {
                 name: game.i18n.localize("UA.DeleteItem"),
                 icon: `<i class="fas fa-trash"></i>`,
+                condition: () => this.isEditable,
                 callback: element => this._onDeleteItem(element)
             }
         ], {
@@ -85,6 +87,12 @@ export class UABaseActorSheet extends UABaseSheet(foundry.appv1.sheets.ActorShee
     _onEditItem (element) {
         // HACK Re-evaluate below
         this.actor.items.get($(element).parents(".item").data("item-id")).sheet.render(true); //MAYBE this.actor.items.get($(event.currentTarget).parents(".item").data("item-id")).sheet.render(true);
+        //BUG should this use UUID?
+    }
+
+    _onOpenActor (event) {
+        event.preventDefault();
+        fromUuidSync(event.currentTarget.closest("[data-actor-uuid]").dataset.actorUuid)?.sheet.render(true); //BUG
     }
 
     _onPostItem (element) {

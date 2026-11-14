@@ -87,11 +87,11 @@
     border:1px solid color-mix(in srgb, #0c0d0f 35%, transparent);
 }
 
-.sheet .button,.sheet .capsule,.sheet .charges,.sheet .checkbox-input,.sheet .editor,.sheet .identity__details-wrapper,.sheet .items__row,.sheet .number-input,.sheet .portrait,.sheet .select,.sheet .sheet__body,.sheet .shock-meter,.sheet .text-input,.sheet img{
+.sheet .button,.sheet .capsule,.sheet .charges,.sheet .checkbox-input,.sheet .editor,.sheet .identity__details-wrapper,.sheet .items__row,.sheet .member,.sheet .number-input,.sheet .portrait,.sheet .select,.sheet .sheet__body,.sheet .shock-meter,.sheet .text-input,.sheet img{
     border-radius:5px;
 }
 
-.sheet .capsule,.sheet .items__row{
+.sheet .capsule,.sheet .items__row,.sheet .member{
     outline:1px solid color-mix(in srgb, #0c0d0f 35%, transparent);
     outline-offset:-1px;
     overflow:hidden;
@@ -186,7 +186,7 @@
     text-align:center;
 }
 
-.sheet .editor-content,.sheet .identity__details.identity__details--expanded,.sheet .items__list-wrapper,.sheet .tab{
+.sheet .editor-content,.sheet .identity__details.identity__details--expanded,.sheet .items__list-wrapper,.sheet .items__list.items__list--horizontal,.sheet .tab{
     scrollbar-color:var(--ua-COLOR-ACCENT-DARK) transparent;
 }
 
@@ -340,6 +340,15 @@
     margin:3px;
     text-shadow:none;
     width:24px;
+}
+.sheet .button.button--image{
+    border:0;
+    height:auto;
+    padding:0;
+    width:auto;
+}
+.sheet .button.button--image:not(:disabled):hover{
+    outline:5px solid #dfff00;
 }
 .sheet .button.button--manage{
     background-color:color-mix(in srgb, #0c0d0f 15%, transparent);
@@ -634,6 +643,7 @@
 }
 .sheet .items__list.items__list--horizontal{
     display:flex;
+    justify-content:safe center;
 }
 .sheet .items__list-wrapper{
     overflow:auto;
@@ -658,6 +668,9 @@
 .sheet .items.items--items{
     --ua-ROW-COLUMNS:32px 1fr auto;
 }
+.sheet .items.items--members{
+    grid-template-rows:auto;
+}
 .sheet .items.items--milestones{
     --ua-ROW-COLUMNS:32px 1fr var(--ua-PERCENTAGE-COLUMN-WIDTH) auto;
 }
@@ -675,6 +688,18 @@
     justify-self:center;
     text-align:center;
     white-space:normal;
+}
+.sheet .member{
+    max-width:176px;
+    min-width:176px;
+    position:relative;
+}
+.sheet .member__name{
+    margin:5px 0 -2.5px;
+    overflow:hidden;
+    text-align:center;
+    text-overflow:ellipsis;
+    text-wrap:nowrap;
 }
 .sheet .number-input{
     height:32px;

@@ -1,5 +1,6 @@
 ## v1.4.6
 
+- Added "Members" section to cabal sheets.
 - Re-enabled certain buttons on sheets with "Observer" permissions.
 - Fixed the "Magick" tab incorrectly overflowing.
 - Updated localizations.

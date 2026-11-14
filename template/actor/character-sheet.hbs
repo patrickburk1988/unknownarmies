@@ -35,7 +35,7 @@
                     <div class="capsule__cell select">
                         <select id="{{actor.id}}-cabal" class="select__inner" name="system.cabal">{{selectOptions cabalOptions selected=actor.system.cabal blank=""}}</select>
                     </div>
-                    <button class="button capsule__cell" data-action="open-cabal" {{disabled (not actor.system.cabal)}}>{{localize 'UA.OpenCabal'}}</button>
+                    <button class="button capsule__cell" data-action="open-actor" data-actor-uuid="{{actor.system.cabal}}" {{disabled (not actor.system.cabal)}}>{{localize 'UA.OpenCabal'}}</button>
                 </div>
             </section>
             <section class="sheet__basics-section{{#if (not (isGM))}} sheet__basics-section--vertical{{/if}}">

@@ -32,7 +32,7 @@
         </nav>
     </header>
     <div class="sheet__body">
-        <div class="tab" data-tab="main">
+        <div class="tab tab--short-last-row" data-tab="main">
             <section class="tab__section">
                 <h2 class="heading">{{localize 'UA.Milestones'}}:</h2>
                 <div class="items items--milestones">
@@ -56,10 +56,24 @@
                                 <div class="items__column">
                                     <span>{{#if (exceedsOrEquals item.system.percentage 0)}}+{{/if}}{{item.system.percentage}}%</span>
                                 </div>
-                                    <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
+                                <button class="button button--manage item__button item__button--manage" data-action="manage-item"><i class="fas fa-ellipsis"></i></button>
                             </li>{{/if}}{{/each}}
                         </ul>
                     </div>
+                </div>
+            </section>
+            <section class="tab__section">
+                <h2 class="heading">{{localize 'UA.Members'}}:</h2>
+                <div class="items items--members">
+                    <ul class="items__list items__list--horizontal">{{#each members as |member memberId|}}
+                        <li class="item item--card member" data-actor-uuid="{{member.uuid}}">
+                            <button class="button button--manage item__button item__button--manage" data-action="manage-character"><i class="fas fa-ellipsis"></i></button>
+                            <figure class="portrait">
+                                <button class="button button--image" data-action="open-actor"><img class="portrait__image" src="{{member.img}}" alt="{{member.name}} portrait"></button>{{!-- //TODO disable? --}}
+                            </figure>
+                            <p class="member__name">{{member.name}}</p>
+                        </li>{{/each}}
+                    </ul>
                 </div>
             </section>
         </div>
