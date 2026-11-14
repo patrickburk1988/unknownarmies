@@ -1,3 +1,11 @@
+const VIEW_NAVIGATE_ONLY_BUTTONS = [ // These stay usable on sheets with Observer permission.
+    "button[data-tab]",
+    "button[data-action='manage-character']",
+    "button[data-action='manage-item']",
+    "button[data-action='open-actor']",
+    "button[data-action='show-image']"
+].join(", ");
+
 export const UABaseSheet = (BaseSheet) => class extends BaseSheet
 {
     constructor (...args) {
@@ -6,6 +14,15 @@ export const UABaseSheet = (BaseSheet) => class extends BaseSheet
             this.position.width = 650; //TEST
             this.position.height = 600; //TEST
         }
+    }
+
+    _disableFields (form) {
+        const nonDisabledButtons = [...form.querySelectorAll(VIEW_NAVIGATE_ONLY_BUTTONS)].filter(button => !button.disabled);
+        super._disableFields(form);
+        for (const button of nonDisabledButtons) {
+            button.disabled = false;
+        }
+        form.onsubmit = event => event.preventDefault(); // Foundry skips the submit handler on non-editable sheets; without this, the page is reloaded.
     }
 
     _enrich (content) {
@@ -40,7 +57,6 @@ export const UABaseSheet = (BaseSheet) => class extends BaseSheet
         html.find("option").addClass("option");
         const $showImage = this.element.find("[data-action='show-image']"); //MAYBE button class
         $showImage.on("click", this._onShowImage.bind(this));
-        $showImage.prop("disabled", false);
         if (!this._hoveredCheckboxes) {
             this._hoveredCheckboxes = new Set();
         }

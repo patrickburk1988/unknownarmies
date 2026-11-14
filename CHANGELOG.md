@@ -1,7 +1,8 @@
 ## v1.4.6
 
-- Updated localizations.
+- Re-enabled certain buttons on sheets with "Observer" permissions.
 - Fixed the "Magick" tab incorrectly overflowing.
+- Updated localizations.
 
 ## v1.4.5
 
